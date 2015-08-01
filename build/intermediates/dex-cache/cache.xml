@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/headrun/Documents/Buzzinga/app/libs/gson-1.7.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7291c9de7f574b15502f73f0ac2ae6d3af36c751">
+        <dex dex="/home/headrun/Documents/Buzzinga/app/build/intermediates/pre-dexed/debug/gson-1.7.1-52d885eeaa5b3ef6834ed2092ea4a1104aec763c.jar" />
+    </item>
+
+</items>

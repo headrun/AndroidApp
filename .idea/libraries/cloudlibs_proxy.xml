@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cloudlibs-proxy">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/cloudlibs-proxy.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
