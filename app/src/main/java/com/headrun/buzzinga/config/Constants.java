@@ -11,6 +11,8 @@ public class Constants {
 
     public static String scroolid="1";
     public static String FIRSTURL="";
+    public static boolean swipedata=false;
+    public static boolean finddata=false;
     public static ArrayList<SearchDetails> listdetails=new ArrayList<SearchDetails>();
 
 }
