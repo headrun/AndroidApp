@@ -69,6 +69,7 @@ public class HomeScreen extends Activity implements CompoundButton.OnCheckedChan
     public ArrayList<String> slistmitem = new ArrayList<String>();  //// Selected sources are added to list
     public ArrayList<String> sourcesel = new ArrayList<String>();   //// xtags are added
     public static StringBuilder sourcequery = new StringBuilder();  //// from the Elstics search query
+    //PullToRefreshListView pullToRefreshView;
 
 
     @Override
@@ -82,6 +83,7 @@ public class HomeScreen extends Activity implements CompoundButton.OnCheckedChan
 
         listview = (ListView) findViewById(R.id.listView);
         // listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+       // pullToRefreshView = (PullToRefreshListView) findViewById(R.id.pull_to_refresh_listview);
         display_data = (ListView) findViewById(R.id.result_listview);
         menu_source = (ImageView) findViewById(R.id.menu_source);
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -169,13 +171,13 @@ public class HomeScreen extends Activity implements CompoundButton.OnCheckedChan
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                if (lastIndexInScreen >= totalItemCount && !Config.isLoading) {
+                if (lastIndexInScreen >= totalItemCount-5 && !Config.isLoading) {
+                    Log.i("Log_tag","start the fetching data");
                     Config.isLoading = true;
                     searchscroolquery();
                 }
             }
         });
-
 
         swipeRefreshLayout.setColorSchemeColors(
                 Color.parseColor("#ff0000"),
@@ -184,15 +186,38 @@ public class HomeScreen extends Activity implements CompoundButton.OnCheckedChan
                 Color.parseColor("#f234ab"));
 
 
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
 
         {
             @Override
             public void onRefresh() {
+                Constants.swipedata=true;
+                Log.i("Log_tag","swipedata is "+Constants.swipedata);
                 searchquery(false);
             }
         });
 
+/*
+        pullToRefreshView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                // Do work to refresh the list here.
+               // new GetDataTask().execute();
+                searchquery(false);
+            }
+        });
+
+        private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+            ...
+            @Override
+            protected void onPostExecute(String[] result) {
+                // Call onRefreshComplete when the list has been refreshed.
+                pullToRefreshView.onRefreshComplete();
+                super.onPostExecute(result);
+            }
+        }
+*/
     }
 
     ///// Add the source to listview
