@@ -1,5 +1,5 @@
--injars /home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/multi-dex/debug/allclasses.jar
--outjars /home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/multi-dex/debug/componentClasses.jar
+-injars /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/debug/allclasses.jar
+-outjars /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/debug/componentClasses.jar
 
 -libraryjars /home/headrun/Android/Sdk/build-tools/22.0.1/lib/shrinkedAndroid.jar
 
@@ -8,7 +8,7 @@
 -dontobfuscate
 -dontpreverify
 -dontwarn
--printconfiguration /home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/multi-dex/debug/components.flags
+-printconfiguration /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/debug/components.flags
 
 
 -keep class null {
@@ -24,7 +24,15 @@
     <init>();
 }
 
+-keep class com.headrun.buzzinga.activities.Searchable {
+    <init>();
+}
+
 -keep class com.headrun.buzzinga.activities.TwitterLogin {
+    <init>();
+}
+
+-keep class com.headrun.buzzinga.activities.Filtering {
     <init>();
 }
 

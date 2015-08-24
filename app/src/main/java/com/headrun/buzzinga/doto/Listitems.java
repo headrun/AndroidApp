@@ -6,11 +6,32 @@ package com.headrun.buzzinga.doto;
 public class Listitems {
 
     String sourcename;
-    boolean selectd = false;
+    boolean selectd;
+    String xtag;
+
+    public Listitems(String xtag, String sourcename) {
+        super();
+        this.sourcename = sourcename;
+        this.xtag=xtag;
+    }
+
+    public Listitems(String xtag, String sourcename,boolean selected) {
+        super();
+        this.sourcename = sourcename;
+        this.xtag=xtag;
+        this.selectd=selected;
+    }
 
     public Listitems(String sourcename) {
         super();
         this.sourcename = sourcename;
+    }
+    public String getXtag() {
+        return xtag;
+    }
+
+    public void setXtag(String xtag) {
+        this.xtag = xtag;
     }
 
     public String getSourcename() {

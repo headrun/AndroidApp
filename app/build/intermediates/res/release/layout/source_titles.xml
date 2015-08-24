@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="3dp"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/titleimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"/>
+
+    <TextView
+        android:id="@+id/texttilte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="1dp"
+        android:layout_below="@+id/titleimage"
+        android:textColor="#ffffff" />
+</RelativeLayout>
+<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/source_titles.xml -->

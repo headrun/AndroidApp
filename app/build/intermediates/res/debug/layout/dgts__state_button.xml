@@ -44,4 +44,4 @@
         android:layout_toLeftOf="@+id/dgts__state_button"
         android:contentDescription="@string/dgts__success_desc"
         android:src="@drawable/dgts__ic_success"/>
-</merge><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/layout/dgts__state_button.xml --><!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/layout/dgts__state_button.xml -->
+</merge><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/layout/dgts__state_button.xml --><!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/layout/dgts__state_button.xml -->

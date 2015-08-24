@@ -1,18 +1,22 @@
 buildscript {
     repositories {
+        jcenter();
         maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
     }
+
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 repositories {
+    jcenter();
     maven { url 'https://maven.fabric.io/public' }
 }
+
 
 
 android {
@@ -25,7 +29,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "0.9"
         multiDexEnabled true
 
     }
@@ -47,6 +51,7 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
         exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 }
 
@@ -57,16 +62,7 @@ dependencies {
         transitive = true;
     }
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile files('app/libs/click-1.5-M2.jar')
-    compile files('app/libs/cloudlibs-proxy.jar')
-    compile files('app/libs/commons-logging-1.1.1.jar')
-    compile files('app/libs/httpclient-4.1.2.jar')
-    compile files('app/libs/httpcore-4.1.2.jar')
-    compile files('app/libs/httpmime-4.1.2.jar')
-    compile files('app/libs/signpost-commonshttp4-1.2.1.2.jar')
-    compile files('app/libs/signpost-core-1.2.1.2.jar')
-    compile files('app/libs/gson-1.7.1.jar')
-    compile 'com.navercorp.pulltorefresh:library:3.2.0@aar'
+    compile 'com.jakewharton:butterknife:7.0.1'
     //compile 'com.google.android.gms:play-services:7.0+'
 
 }

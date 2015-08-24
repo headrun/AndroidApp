@@ -27,21 +27,29 @@ public class Test {
 
     public void buzzdata(String searchstring, String sources, String fromdate, String todate) {
 
-        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
+        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) +" AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]','fields':['title', 'text'],'use_dis_max':true}},'sort':[{'dt_added':{'order':'desc'}}],'size':6}";
         which_funn = "query";
         callserver(userQuery, which_funn);
+    }
+
+    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate) {
+
+        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
+        which_funn = "query";
+        Log.i("query is",userQuery);
+       callserver(userQuery, which_funn);
     }
 
     public void buzzdata(String scroolid) {
         if (!scroolid.equals("1")) {
             userQuery = scroolid;
             which_funn = "scrool";
+            Log.i("query is",userQuery);
             callserver(userQuery, which_funn);
         }
     }
 
     private void callserver(String query, String which_funn) {
-
         querydisplay(userQuery);
         if (ConnectionSettings.isConnected(context)) {
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -62,6 +70,7 @@ public class Test {
     private class buzztask extends AsyncTask<String, Void, String> {
 
         Object response;
+
         /*
                 @Override
                 protected void onPreExecute() {
@@ -85,11 +94,11 @@ public class Test {
             String query_params = "{'scroll':'15m'}";
 
             if (data[1].equals("query")) {
-                response= testProxy.fn("search").set("query",
+                response = testProxy.fn("search").set("query",
                         parseJson(userQuery)).set("indices", "socialdata").set(
                         "doc_types", "item").set("query_params", parseJson(query_params)).call();
             } else if (data[1].equals("scrool")) {
-                response= testProxy.fn("search_scroll").set("scroll_id", userQuery).set("scroll_timeout", "15m").call();
+                response = testProxy.fn("search_scroll").set("scroll_id", userQuery).set("scroll_timeout", "15m").call();
             }
 
             String jsonOutput = gson.toJson(response);
@@ -147,4 +156,18 @@ public class Test {
             return todate;
         return toCurrentDate();
     }
+
+    private String check_gender(String gender) {
+        if (!gender.equals("1"))
+            return " AND (" + gender + ")";
+        return "";
+
+    }
+
+    private String check_sentiment(String sentiment) {
+        if (!sentiment.equals("1"))
+            return " AND (" + sentiment + ")";
+        return "";
+    }
+
 }

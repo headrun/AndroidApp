@@ -9,6 +9,7 @@ import android.util.Log;
 import com.headrun.buzzinga.R;
 import com.headrun.buzzinga.UserSession;
 import com.headrun.buzzinga.config.Config;
+import com.headrun.buzzinga.config.Constants;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
@@ -44,7 +45,31 @@ public class SplashActivity extends Activity {
 
             }
         }, Config.SPLASH_DISPLAY_LENGTH);
+
+        Constants.sourceslist.add("fbpages_sourcetype_manual");
+        Constants.sourceslist.add("twitter_search_sourcetype_manual");
+        Constants.sourceslist.add("googleplus_search_sourcetype_manual");
+        Constants.sourceslist.add("news_sourcetype_manual_parent");
+        Constants.sourceslist.add("blogs_sourcetype_manual_parent");
+        Constants.sourceslist.add("forums_sourcetype_manual_parent");
+        Constants.sourceslist.add("youtube_search_sourcetype_manual");
+        Constants.sourceslist.add("flickr_search_sourcetype_manual");
+        Constants.sourceslist.add("instagram_search_sourcetype_manual");
+        Constants.sourceslist.add("tumblr_search_sourcetype_manual");
+        Constants.sourceslist.add("linkedin_search_sourcetype_manual");
+        Constants.sourceslist.add("quora_sourcetype_manual_parent");
+
+        Constants.sentimentlist.add("positive_sentiment_final");
+        Constants.sentimentlist.add("negative_sentiment_final");
+        Constants.sentimentlist.add("neutral_sentiment_final");
+
+        Constants.genderlist.add("male_gender_final");
+        Constants.genderlist.add("female_gender_final");
+        Constants.genderlist.add("unclassified_gender_final");
+
     }
+
+
 
     public void checkSession() {
 

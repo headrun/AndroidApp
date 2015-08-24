@@ -32,6 +32,25 @@
     </string-array>
 
     <string name="missongsearch">Unable search the given keyword</string>
+     <string name="Filter">Filter</string>
 
+    <string-array name="filtertitles">
+        <item>Sources</item>
+        <item>Sentiment</item>
+        <item>Gender</item>
+        <item>Location</item>
+        <item>Language</item>
+    </string-array>
 
+    <string-array name="titleimages">
+        <item>@drawable/sources</item>
+        <item>@drawable/sentiment</item>
+        <item>@drawable/gender</item>
+        <item>@drawable/location</item>
+        <item>@drawable/language</item>
+    </string-array>
+
+    <string name="clearfilter">Clear Filter</string>
+    <string name="applyfilter">Apply Filter</string>
+    <string name="search">Search By Keyword</string>
 </resources>

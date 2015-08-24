@@ -3,77 +3,234 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-        <include
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activitybar"
-            layout="@layout/actionbar" />
-
-<!--
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pull_to_refresh_listview"
-        android:layout_below="@+id/activitybar"
+    <RelativeLayout
+        android:id="@+id/content_lay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ptr:ptrAnimationStyle="rotate"
-        />
--->
+        android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_below="@+id/activitybar"
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ListView
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:id="@+id/filterbuttons"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/result_listview"
+            android:weightSum="2"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/filtersource_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/rightborder">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/filter"
+                   />
+                <TextView
+                    android:id="@+id/filtersource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FILTER" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/filterdate_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal|center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sort" />
+
+                <TextView
+                    android:id="@+id/filterdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="2dp"
+                    android:text="FILTER BY DATE" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filterbuttons"
             >
-        </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+
+            <ListView
+                android:id="@+id/result_listview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="7dp"
+                android:padding="5dp"
+                android:background="@drawable/articletextround"></ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
 
 
     <RelativeLayout
-        android:id="@+id/list_layout"
+        android:id="@+id/filterpanel"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#80000000" />
+        android:background="#80000000">
 
         <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="170dp"
+
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/white">
 
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
 
-                android:layout_weight="0.3"
-                android:background="#ce000000"
-                android:choiceMode="singleChoice"
-                android:dividerHeight="10dp" />
+            <ImageView
+                android:id="@+id/closebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+
+                android:src="@drawable/close" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/fromdate"
+                android:layout_alignStart="@+id/fromdate"
+                android:layout_below="@+id/closebtn"
+                android:gravity="center_horizontal"
+                android:text="Articles Filter By Date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fromdate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/statusText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundborder"
+                android:gravity="start|center"
+                android:hint="From date" />
+
+            <TextView
+                android:id="@+id/todate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/fromdate"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/roundborder"
+                android:gravity="start|center"
+                android:hint="To date" />
+
+
+            <Button
+                android:id="@+id/bydatefilter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/todate"
+                android:layout_marginTop="45dp"
+                android:text="Filter" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/webview_lay"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/browserheader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/closebrowser"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/closebrowser" />
+
+            <TextView
+                android:id="@+id/browsertitle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/closebrowser"
+                android:gravity="start|center"
+                android:maxLines="1" />
+
+            <ProgressBar
+                android:id="@+id/browserprogress"
+                android:layout_width="fill_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/browsertitle" />
         </RelativeLayout>
 
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/browserheader">
 
+        </WebView>
+
+
+        <!--
+            <RelativeLayout
+                android:id="@+id/list_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#80000000" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+
+                        android:layout_weight="0.3"
+                        android:background="#ce000000"
+                        android:choiceMode="singleChoice"
+                        android:dividerHeight="10dp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+            -->
     </RelativeLayout>
-</RelativeLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -82,12 +239,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone"
-     >
-    </ProgressBar>
+        android:visibility="gone"></ProgressBar>
 
 
 </RelativeLayout>
+
 
 
 

@@ -15,14 +15,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by headrun on 10/7/15.
- */
+
 public class JsonData {
+
     Context context;
     public ArrayList<SearchDetails> swipelist;
+    String title, url, text, date, author, sentiment, gender, article_type;
+    String TAG = JsonData.this.getClass().getSimpleName();
 
     // File fileWithinMyDir;
+
     public JsonData(Context context, String data) {
         this.context = context;
         logLargeString(data);
@@ -34,30 +36,40 @@ public class JsonData {
             JSONObject jobj = new JSONObject(data);
             if (jobj.getString("error").equals("0")) {
 
-
                 JSONObject jobj_result = new JSONObject(jobj.getString("result"));
                 JSONObject jobj_hit = new JSONObject(jobj_result.getString("hits"));
                 JSONArray jobj_hits = new JSONArray(jobj_hit.getString("hits"));
+                Log.i("Log_tag", "json result length " + jobj_hits.length());
+                if (jobj_hits.length() > 0) {
+                    for (int hits = 0; hits < jobj_hits.length(); hits++) {
+                        JSONObject jobj_data = jobj_hits.getJSONObject(hits);
+                        JSONObject jobj_source = new JSONObject(jobj_data.getString("_source"));
 
-                for (int hits = 0; hits < jobj_hits.length(); hits++) {
-                    JSONObject jobj_data = jobj_hits.getJSONObject(hits);
-                    JSONObject jobj_source = new JSONObject(jobj_data.getString("_source"));
+                        title = jobj_source.getString("title");
+                        url = jobj_source.getString("url");
+                        text = jobj_source.getString("text");
+                        date = jobj_source.getString("_added");
+                        JSONArray json_xtags = jobj_source.getJSONArray("xtags");
+                        JSONObject json_author = jobj_source.getJSONObject("author");
 
-                    String title = jobj_source.getString("title");
-                    String url = jobj_source.getString("url");
-                    // Log.i("Log_tag", "url is" + url);
-                    String text = jobj_source.getString("text");
-                    String date = jobj_source.getString("_added");
-                    //String author = jobj_source.getJSONObject("author").getString("name");
-                    String author = "1";
-                    // Log.i("Log_tag","author is"+author);
-                    if (Constants.swipedata) {
-                        swipelist.add(new SearchDetails(title, url, text, date, author));
+                        if (json_author.length() > 0)
+                            author = json_author.getString("name");
 
-                    } else {
+                        xtags_separate(json_xtags);
 
-                        Constants.listdetails.add(new SearchDetails(title, url, text, date, author));
+                        Log.i("Log_tag", "data is \ntitle" + title + "\nurl" + url + "\ntext" + text + "\ndate" + date + "\nauthor" + author + "\nsentiment" + sentiment + "\narticle_type" + article_type + "gender" + gender);
+
+                        if (Constants.swipedata) {
+                            swipelist.add(new SearchDetails(title, url, text, date, author, "positive_sentiment_final", "fbpages_sourcetype_manual"));
+
+                        } else {
+
+                            Constants.listdetails.add(new SearchDetails(title, url, text, date, author, "positive_sentiment_final", "fbpages_sourcetype_manual"));
+                        }
                     }
+                    Constants.scroolid = jobj_result.getString("_scroll_id");
+                } else {
+                    Constants.scroolid = "1";
                 }
                 if (!swipelist.isEmpty()) {
 
@@ -66,37 +78,40 @@ public class JsonData {
                         if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
                             searchpos = i;
                             Constants.finddata = true;
+                            Constants.swipedata = false;
                             Log.i("Log_tag", "search pos is" + searchpos);
                         }
                     }
-                    if (Constants.finddata && searchpos!=0)
+                    if (Constants.finddata)
                         for (int j = 0; j <= searchpos; j++) {
                             Constants.listdetails.add(j, swipelist.get(j));
                         }
 
                 }
-                checkdata();
-                Constants.scroolid = jobj_result.getString("_scroll_id");
+                //checkdata();
+
                 resultadapter = new SearchListData(context, Constants.listdetails);
-                HomeScreen.display_data.setAdapter(resultadapter);
                 resultadapter.notifyDataSetChanged();
-                HomeScreen.display_data.setVisibility(View.VISIBLE);
+                HomeScreen.display_data.setAdapter(resultadapter);
+                HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
                 Config.isLoading = false;
                 // Log.i("Log_tag", "data fetched");
 
             } else {
+                Constants.scroolid = "1";
                 Constants.listdetails.add(new SearchDetails());
                 resultadapter = new SearchListData(context, Constants.listdetails);
                 resultadapter.notifyDataSetChanged();
                 HomeScreen.display_data.setAdapter(resultadapter);
-                HomeScreen.display_data.setVisibility(View.VISIBLE);
+                HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
                 Config.isLoading = false;
             }
             HomeScreen.swipeRefreshLayout.setRefreshing(false);
         } catch (JSONException e) {
-                e.printStackTrace();
+            Log.i("Log_tag", "exception" + e);
+            e.printStackTrace();
         }
 
     }
@@ -111,20 +126,54 @@ public class JsonData {
             Log.i("", str);
     }
 
-    public void checkdata() {
-        if (Constants.FIRSTURL.equals(Constants.listdetails.get(0).getUrl())) {
+    private void xtags_separate(JSONArray xtags) {
 
-            Constants.FIRSTURL = Constants.listdetails.get(0).getUrl();
+        Log.i(TAG, "source list size is" + Constants.sourceslist.size() +
+                "sentiment list size is" + Constants.sentimentlist.size() +
+                "gender list size is" + Constants.genderlist.size());
+        for (int i = 0; i < xtags.length(); i++) {
 
-        } else {
-            Constants.FIRSTURL = Constants.listdetails.get(0).getUrl();
-
+            try {
+                Log.i(TAG, "source compared" + xtags.get(i).toString());
+                if (Constants.sourceslist.contains(xtags.get(i).toString())) {
+                    Log.i(TAG, " matched" + xtags.get(i).toString());
+                    sentiment = xtags.get(i).toString();
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
+        for (int i = 0; i < xtags.length(); i++) {
+
+            try {
+                Log.i(TAG, "senment" + xtags.get(i).toString());
+                if (Constants.sentimentlist.contains(xtags.get(i).toString())) {
+                    Log.i(TAG, " matched" + xtags.get(i).toString());
+                    article_type = xtags.get(i).toString();
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        for (int i = 0; i < xtags.length(); i++) {
+
+            try {
+                Log.i(TAG, "gender" + xtags.get(i).toString());
+                if (Constants.genderlist.contains(xtags.get(i).toString())) {
+                    Log.i(TAG, " matched" + xtags.get(i).toString());
+                    gender = xtags.get(i).toString();
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
-
-
-
-

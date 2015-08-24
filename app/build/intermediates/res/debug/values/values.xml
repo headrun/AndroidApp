@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string-array name="filtertitles">
+        <item>Sources</item>
+        <item>Sentiment</item>
+        <item>Gender</item>
+        <item>Location</item>
+        <item>Language</item>
+    </string-array>
     <string-array name="sourecselection">
         <item>news_sourcetype_manual_parent</item>
         <item>blogs_sourcetype_manual_parent</item>
@@ -17,10 +24,17 @@
         <item>tumblr_search_sourcetype_manual</item>
         <item>quora_sourcetype_manual_parent</item>
     </string-array>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <string-array name="titleimages">
+        <item>@drawable/sources</item>
+        <item>@drawable/sentiment</item>
+        <item>@drawable/gender</item>
+        <item>@drawable/location</item>
+        <item>@drawable/language</item>
+    </string-array>
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference|color" name="dgts__accentColor"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -51,7 +65,7 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <color name="dgts__default_accent">#5baaf4</color>
     <color name="dgts__default_logo_name">#56626d</color>
@@ -59,7 +73,7 @@
     <color name="dgts__purple_pressed">#553788</color>
     <color name="dgts__text_dark">#ff030303</color>
     <color name="dgts__text_light">#ffffff</color>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
@@ -94,7 +108,7 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <color name="tw__blue_default">#FF5BAAF4</color>
     <color name="tw__blue_pressed">#FF4186C8</color>
@@ -103,7 +117,7 @@
     <color name="tw__medium_gray">#8899a6</color>
     <color name="tw__solid_white">#FFFFFFFF</color>
     <color name="tw__transparent">#00000000</color>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <color name="tw__tweet_action_color">#55acee</color>
     <color name="tw__tweet_container_border">#1a000000</color>
@@ -129,7 +143,6 @@
     <declare-styleable name="MenuView"><attr name="android:itemTextAppearance"/><attr name="android:horizontalDivider"/><attr name="android:verticalDivider"/><attr name="android:headerBackground"/><attr name="android:itemBackground"/><attr name="android:windowAnimationStyle"/><attr name="android:itemIconDisabledAlpha"/><attr format="boolean" name="preserveIconSpacing"/></declare-styleable>
     <declare-styleable name="PopupWindow"><attr format="boolean" name="overlapAnchor"/><attr name="android:popupBackground"/></declare-styleable>
     <declare-styleable name="PopupWindowBackgroundState"><attr format="boolean" name="state_above_anchor"/></declare-styleable>
-    <declare-styleable name="PullToRefresh"><attr format="reference|color" name="ptrRefreshableViewBackground"/><attr format="reference|color" name="ptrHeaderBackground"/><attr format="reference|color" name="ptrHeaderTextColor"/><attr format="reference|color" name="ptrHeaderSubTextColor"/><attr name="ptrMode"><flag name="disabled" value="0x0"/><flag name="pullFromStart" value="0x1"/><flag name="pullFromEnd" value="0x2"/><flag name="both" value="0x3"/><flag name="manualOnly" value="0x4"/><flag name="google" value="0x5"/><flag name="pullDownFromTop" value="0x1"/><flag name="pullUpFromBottom" value="0x2"/></attr><attr format="reference|boolean" name="ptrShowIndicator"/><attr format="reference" name="ptrDrawable"/><attr format="reference" name="ptrDrawableStart"/><attr format="reference" name="ptrDrawableEnd"/><attr format="reference|boolean" name="ptrOverScroll"/><attr format="reference" name="ptrHeaderTextAppearance"/><attr format="reference" name="ptrSubHeaderTextAppearance"/><attr format="string" name="ptrAnimationStyle"/><attr format="string" name="ptrIndicatorStyle"/><attr format="string" name="ptrGoogleViewStyle"/><attr format="string" name="ptrGoogleProgressStyle"/><attr format="string" name="ptrPullLabel"/><attr format="string" name="ptrRefreshLabel"/><attr format="string" name="ptrReleaseLabel"/><attr format="float" name="ptrFriction" value="2.0"/><attr format="integer" name="ptrSmoothScrollDuration" value="200"/><attr format="integer" name="ptrSmoothScrollLongDuration" value="325"/><attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrListViewExtrasEnabled"/><attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/><attr format="reference|boolean" name="ptrSetGoogleViewLayoutSizeToActionbarHeight"/><attr format="reference|boolean" name="ptrShowGoogleStyleViewAnimationEnabled"/><attr format="reference|boolean" name="ptrHideRefeshableViewWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrViewRefeshableViewProgressBarOnCenterWhileRefreshingEnabled"/><attr format="integer" name="ptrShowGoogleStyleViewAnimationDuration" value="100"/><attr format="integer" name="ptrHideRefeshableViewWhileRefreshingDuration" value="500"/><attr format="integer" name="ptrViewRefeshableViewProgressBarOnCenterWhileRefreshingDuration" value="200"/><attr format="integer" name="ptrRefeshableViewProgressBarOnCenterWidth" value="200"/><attr format="integer" name="ptrRefeshableViewProgressBarOnCenterHeight" value="200"/><attr format="reference|color" name="ptrAdapterViewBackground"/><attr format="reference" name="ptrDrawableTop"/><attr format="reference" name="ptrDrawableBottom"/></declare-styleable>
     <declare-styleable name="SearchView"><attr format="reference" name="layout"/><attr format="boolean" name="iconifiedByDefault"/><attr name="android:maxWidth"/><attr format="string" name="queryHint"/><attr format="string" name="defaultQueryHint"/><attr name="android:imeOptions"/><attr name="android:inputType"/><attr format="reference" name="closeIcon"/><attr format="reference" name="goIcon"/><attr format="reference" name="searchIcon"/><attr format="reference" name="searchHintIcon"/><attr format="reference" name="voiceIcon"/><attr format="reference" name="commitIcon"/><attr format="reference" name="suggestionRowLayout"/><attr format="reference" name="queryBackground"/><attr format="reference" name="submitBackground"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="Spinner"><attr format="reference" name="prompt"/><attr format="enum" name="spinnerMode"><enum name="dialog" value="0"/><enum name="dropdown" value="1"/></attr><attr name="android:dropDownSelector"/><attr name="android:popupBackground"/><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/><attr name="android:dropDownWidth"/><attr format="reference" name="popupPromptView"/><attr name="android:gravity"/><attr format="boolean" name="disableChildrenWhenDisabled"/><attr name="android:background"/></declare-styleable>
     <declare-styleable name="StateButton"><attr format="string" name="finishStateText"/><attr format="string" name="progressStateText"/><attr format="string" name="startStateText"/><attr format="reference" name="dgts__StateButtonStyle"/></declare-styleable>
@@ -142,7 +155,7 @@
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <declare-styleable name="tw__AspectRatioImageView"><attr format="float" name="tw__image_aspect_ratio"/><attr format="enum" name="tw__image_dimension_to_adjust"><enum name="height" value="0"/><enum name="width" value="1"/></attr></declare-styleable>
     <declare-styleable name="tw__TweetView"><attr format="string" name="tw__tweet_id"/><attr format="color" name="tw__container_bg_color"/><attr format="color" name="tw__primary_text_color"/><attr format="color" name="tw__action_color"/><attr format="boolean" name="tw__tweet_actions_enabled"/></declare-styleable>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -204,11 +217,11 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <dimen name="dgts__country_code_margin_bottom">1dp</dimen>
     <dimen name="dgts__margin_bottom">16dp</dimen>
@@ -218,7 +231,7 @@
     <dimen name="dgts__progress_bar_side_length">28dp</dimen>
     <dimen name="dgts__terms_text_size">12sp</dimen>
     <dimen name="dgts__title_text_size">22sp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -226,26 +239,19 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.navercorp.pulltorefresh/library/3.2.0/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="header_footer_left_right_padding">24dp</dimen>
-    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
-    <dimen name="indicator_corner_radius">12dp</dimen>
-    <dimen name="indicator_internal_padding">4dp</dimen>
-    <dimen name="indicator_right_padding">10dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="navigation_drawer_width">240dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__btn_bar_margin_left">8dp</dimen>
     <dimen name="tw__btn_bar_margin_right">8dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__compact_tweet_attribution_line_margin_right">36dp</dimen>
     <dimen name="tw__compact_tweet_avatar_margin_left">12dp</dimen>
@@ -278,13 +284,13 @@
     <dimen name="tw__login_btn_radius">5dp</dimen>
     <dimen name="tw__login_btn_right_padding">12dp</dimen>
     <dimen name="tw__login_btn_text_size">14sp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__padding_permission_horizontal_container">24dp</dimen>
     <dimen name="tw__padding_permission_vertical_container">24dp</dimen>
     <dimen name="tw__permission_description_text_size">16sp</dimen>
     <dimen name="tw__permission_title_text_size">24sp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__text_size_large">16dp</dimen>
     <dimen name="tw__text_size_medium">14dp</dimen>
@@ -318,39 +324,24 @@
     <dimen name="tw__tweet_timestamp_padding_left">4dp</dimen>
     <dimen name="tw__tweet_verified_check_padding_left">3dp</dimen>
     <dimen name="tw__tweet_verified_margin_bottom">3dp</dimen>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.navercorp.pulltorefresh/library/3.2.0/res/values/values.xml -->
-    <eat-comment/>
-    <item name="gridview" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
-    <eat-comment/>
     <item name="home" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.navercorp.pulltorefresh/library/3.2.0/res/values/values.xml -->
-    <eat-comment/>
-    <item name="scrollview" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
-    <eat-comment/>
     <item name="split_action_bar" type="id"/>
     <item name="up" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.navercorp.pulltorefresh/library/3.2.0/res/values/values.xml -->
-    <eat-comment/>
-    <item name="webview" type="id"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
-    <eat-comment/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1h</item>
@@ -364,7 +355,10 @@
         <item quantity="one">1s</item>
         <item quantity="other">%ds</item>
     </plurals>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="Filter">Filter</string>
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
@@ -383,12 +377,14 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">Buzzinga</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <string name="applyfilter">Apply Filter</string>
+    <string name="clearfilter">Clear Filter</string>
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Cancel</string>
     <string name="dgts__communication_error">Communication Error</string>
@@ -437,71 +433,64 @@
     <string name="dgts_pin_code_terms">You have previously set a 2-step verification code on digits.com</string>
     <string name="dgts_verify">Verify</string>
     <string name="dgts_verifying">Verifying</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="kit_name">Twitter</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="missongsearch">Unable search the given keyword</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.navercorp.pulltorefresh/library/3.2.0/res/values/values.xml -->
-    <eat-comment/>
-    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
-    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
-    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
-    <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
-    <string name="pull_to_refresh_refreshing_label">Loading…</string>
-    <string name="pull_to_refresh_release_label">Release to refresh…</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <string name="search">Search By Keyword</string>
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="subtitle">Quantify the Social</string>
     <string name="title_section1">Search</string>
     <string name="title_section2">Facebook</string>
     <string name="title_section3">Google +</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Allow</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__favorite_tweet">Favorite Tweet</string>
     <string name="tw__favorited_tweet">Favorited Tweet</string>
     <string name="tw__loading_tweet">Loading Tweet</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Log in with Twitter</string>
     <string name="tw__not_now_btn_txt">Not now</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">MM/dd/yy</string>
     <string name="tw__relative_date_format_short">MMM dd</string>
     <string name="tw__retweeted_by_format">Retweeted by %1$s</string>
     <string name="tw__share_content_format">Check out @%1$s\'s Tweet: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Get updates and other information from %1$s when you allow
         them access to your email on your Twitter account \@%2$s</string>
     <string name="tw__share_email_title">Share your email address</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Tweet from %1$s (@%2$s)</string>
     <string name="tw__share_tweet">Share Tweet</string>
     <string name="tw__tweet_content_description">%1$s. %2$s. %3$s.</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -1417,12 +1406,12 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <style name="Digits_default" parent="@android:style/Theme.Light">
         <item name="dgts__accentColor">@color/dgts__default_accent</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
@@ -1750,7 +1739,7 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <style name="dgts__ButtonText">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
@@ -1771,7 +1760,7 @@
         <item name="android:textSize">@dimen/dgts__title_text_size</item>
         <item name="android:layout_marginBottom">24dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__ActionButton">
         <item name="android:layout_width">wrap_content</item>
@@ -1787,7 +1776,7 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__Button">
         <item name="android:background">@drawable/tw__login_btn</item>
@@ -1807,7 +1796,7 @@
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingBottom">0dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__CompactAttributionLine" ns1:ignore="NewApi">
         <item name="android:layout_width">wrap_content</item>
@@ -1820,7 +1809,7 @@
         <item name="android:paddingTop">@dimen/tw__compact_tweet_container_padding_top</item>
         <item name="android:paddingBottom">@dimen/tw__compact_tweet_container_padding_bottom</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__Permission_Container">
         <item name="android:paddingLeft">@dimen/tw__padding_permission_horizontal_container</item>
@@ -1838,7 +1827,7 @@
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginTop">30dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__TweetAction" ns1:ignore="NewApi">
         <item name="android:layout_width">wrap_content</item>

@@ -2,6 +2,13 @@
 <resources xmlns:ns1="http://schemas.android.com/tools">
     <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string-array name="filtertitles">
+        <item>Sources</item>
+        <item>Sentiment</item>
+        <item>Gender</item>
+        <item>Location</item>
+        <item>Language</item>
+    </string-array>
     <string-array name="sourecselection">
         <item>news_sourcetype_manual_parent</item>
         <item>blogs_sourcetype_manual_parent</item>
@@ -16,6 +23,13 @@
         <item>instagram_search_sourcetype_manual</item>
         <item>tumblr_search_sourcetype_manual</item>
         <item>quora_sourcetype_manual_parent</item>
+    </string-array>
+    <string-array name="titleimages">
+        <item>@drawable/sources</item>
+        <item>@drawable/sentiment</item>
+        <item>@drawable/gender</item>
+        <item>@drawable/location</item>
+        <item>@drawable/language</item>
     </string-array>
     <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
@@ -341,6 +355,9 @@
         <item quantity="one">1s</item>
         <item quantity="other">%ds</item>
     </plurals>
+    <!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="Filter">Filter</string>
     <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -365,6 +382,8 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">Buzzinga</string>
+    <string name="applyfilter">Apply Filter</string>
+    <string name="clearfilter">Clear Filter</string>
     <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Cancel</string>
@@ -422,6 +441,7 @@
     <string name="missongsearch">Unable search the given keyword</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="search">Search By Keyword</string>
     <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>

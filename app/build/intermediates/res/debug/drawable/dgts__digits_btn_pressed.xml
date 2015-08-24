@@ -26,4 +26,4 @@
              android:topRightRadius="@dimen/tw__login_btn_radius"/>
 
     <size android:height="@dimen/tw__login_btn_height"/>
-</shape><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/drawable/dgts__digits_btn_pressed.xml --><!-- From: file:/home/headrun/Documents/Buzzinga/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/drawable/dgts__digits_btn_pressed.xml -->
+</shape><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/drawable/dgts__digits_btn_pressed.xml --><!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/drawable/dgts__digits_btn_pressed.xml -->

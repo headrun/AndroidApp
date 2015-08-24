@@ -10,16 +10,36 @@ public class SearchDetails {
     public String text;
     public String articledate;
     public String author;
+    public String sentiment;
+    public String article_type;
 
     public SearchDetails() {
     }
 
-    public SearchDetails(String title, String url, String text, String articledate,String author) {
+    public SearchDetails(String title, String url, String text, String articledate,String author,String sentiment,String article_type ) {
         this.title = title;
         this.url = url;
         this.text = text;
         this.articledate = articledate;
         this.author=author;
+        this.article_type=article_type;
+        this.sentiment=sentiment;
+    }
+
+    public String getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(String sentiment) {
+        this.sentiment = sentiment;
+    }
+
+    public String getArticle_type() {
+        return article_type;
+    }
+
+    public void setArticle_type(String article_type) {
+        this.article_type = article_type;
     }
 
     public String getTitle() {
