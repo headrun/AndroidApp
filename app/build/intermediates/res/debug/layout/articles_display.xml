@@ -9,4 +9,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/result_listview">
     </ListView>
-</android.support.v4.widget.SwipeRefreshLayout><!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/articles_display.xml -->
+</android.support.v4.widget.SwipeRefreshLayout><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/articles_display.xml -->

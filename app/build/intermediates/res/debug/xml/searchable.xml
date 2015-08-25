@@ -3,4 +3,4 @@
     android:hint="@string/search"
     android:label="@string/app_name" />
 
-<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/xml/searchable.xml -->
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/xml/searchable.xml -->

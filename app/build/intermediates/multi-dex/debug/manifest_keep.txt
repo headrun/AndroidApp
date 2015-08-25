@@ -7,8 +7,6 @@
 -keep class com.headrun.buzzinga.activities.Searchable { <init>(); }
 -keep class com.headrun.buzzinga.activities.TwitterLogin { <init>(); }
 -keep class com.headrun.buzzinga.activities.Filtering { <init>(); }
--keep class com.twitter.sdk.android.core.identity.OAuthActivity { <init>(); }
--keep class com.twitter.sdk.android.core.identity.ShareEmailActivity { <init>(); }
 -keep class com.digits.sdk.android.PhoneNumberActivity { <init>(); }
 -keep class com.digits.sdk.android.ConfirmationCodeActivity { <init>(); }
 -keep class com.digits.sdk.android.LoginCodeActivity { <init>(); }
@@ -22,6 +20,8 @@
 -keep class com.digits.sdk.android.ContactsActionBarActivity { <init>(); }
 -keep class com.digits.sdk.android.PinCodeActionBarActivity { <init>(); }
 -keep class com.digits.sdk.android.ContactsUploadService { <init>(); }
+-keep class com.twitter.sdk.android.core.identity.OAuthActivity { <init>(); }
+-keep class com.twitter.sdk.android.core.identity.ShareEmailActivity { <init>(); }
 -keep public class * extends android.app.backup.BackupAgent {
     <init>();
 }

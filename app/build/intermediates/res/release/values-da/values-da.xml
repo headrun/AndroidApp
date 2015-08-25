@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1t</item>
@@ -14,7 +14,7 @@
         <item quantity="one">1s</item>
         <item quantity="other">%ds</item>
     </plurals>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-da/values-da.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Naviger hjem"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Naviger op"</string>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Stemmesøgning"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Del med"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Del med %s"</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Annuller</string>
     <string name="dgts__communication_error">Kommunikationsfejl</string>
@@ -75,27 +75,27 @@
     <string name="dgts_pin_code_terms">Du har tidligere sat en 2-trins-bekræftelseskode på digits.com</string>
     <string name="dgts_verify">Verificer</string>
     <string name="dgts_verifying">Verificerer</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Tillad</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">Indlæser tweet</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Log ind med Twitter</string>
     <string name="tw__not_now_btn_txt">Ikke nu</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">d/M/y</string>
     <string name="tw__relative_date_format_short">d. MMM</string>
     <string name="tw__retweeted_by_format">Retweetet af %1$s</string>
     <string name="tw__share_content_format">Tjek \@%1$s\s tweet: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Få opdateringer og andre informationer fra %1$s, når du giver dem adgang til din e-mail på din Twitter-konto \@%2$s</string>
     <string name="tw__share_email_title">Del din e-mailadresse</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-da/values-da.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Tweet fra %1$s (\@%2$s)</string>
     <string name="tw__share_tweet">Del tweet</string>

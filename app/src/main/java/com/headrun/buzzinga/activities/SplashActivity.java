@@ -12,13 +12,15 @@ import com.headrun.buzzinga.config.Config;
 import com.headrun.buzzinga.config.Constants;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-
 import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by headrun on 7/7/15.
  */
 public class SplashActivity extends Activity {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "Tabj139fabGgqyg8pOBSnw";
@@ -29,8 +31,10 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
+
         setContentView(R.layout.splashscren);
 
         if (Config.SPLASH)

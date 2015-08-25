@@ -1,43 +1,65 @@
 package com.headrun.buzzinga.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.headrun.buzzinga.R;
+import com.headrun.buzzinga.config.Constants;
 import com.headrun.buzzinga.doto.Listitems;
 
 import java.util.ArrayList;
 
+public class ListViewAdapter extends BaseAdapter implements Filterable {
 
-public class ListViewAdapter extends ArrayAdapter<Listitems> implements Filterable {
-
+    String TAG=ListViewAdapter.this.getClass().getSimpleName();
     // Declare Variables
     Context context;
     //String[] source;
-    ArrayList<Listitems> source;
+    ArrayList<Listitems> source = null;
+    ArrayList<Listitems> selectlist = null;
     LayoutInflater inflater;
-    ArrayList<Listitems> selectlist = new ArrayList<Listitems>();
-    // ValueFilter valueFilter;
+
+    ValueFilter valueFilter = new ValueFilter();
 
     public ListViewAdapter(Context context, ArrayList<Listitems> source) {
-
-        super(context, R.layout.source_layout, source);
         this.context = context;
-        this.source = new ArrayList<Listitems>();
-        this.source.addAll(source);
+        this.source = source;
+        Log.i(TAG,"size is"+source.size()+"list 1 is"+source.get(1).getSourcename());
+        //this.source.addAll(source);
+        this.selectlist = source;
+    }
 
-        selectlist = source;
+    @Override
+    public Filter getFilter() {
+        return valueFilter;
     }
 
     private static class listholder {
         public CheckBox filtercheckbox;
         public TextView filtertext;
+    }
+
+    @Override
+    public int getCount() {
+        return source.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return source.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -82,14 +104,6 @@ public class ListViewAdapter extends ArrayAdapter<Listitems> implements Filterab
         return convertView;
     }
 
-  /*  @Override
-    public Filter getFilter() {
-        if (valueFilter == null) {
-            valueFilter = new ValueFilter();
-        }
-        return valueFilter;
-    }
-
 
     public class ValueFilter extends Filter {
 
@@ -99,32 +113,27 @@ public class ListViewAdapter extends ArrayAdapter<Listitems> implements Filterab
 
             FilterResults results = new FilterResults();
 
-            if (constraint != null && constraint.length() > 0) {
 
-                ArrayList<Listitems> filterList = new ArrayList<Listitems>();
-                for (int i = 0; i < selectlist.size(); i++) {
-                    if ((selectlist.get(i).getSourcename().toUpperCase())
-                            .contains(constraint.toString().toUpperCase())) {
-
-                        Listitems item = new Listitems(selectlist.get(i).getXtag(), selectlist.get(i).getSourcename(), selectlist.get(i).isSelectd());
-
-                        filterList.add(item);
-                    }
+           Constants.filterList = new ArrayList<Listitems>(selectlist.size());
+            for (int i = 0; i < selectlist.size(); i++) {
+                Log.i(TAG,"source list string"+selectlist.get(i).getSourcename().toUpperCase()+" comparde strin "+constraint.toString().toUpperCase());
+                if ((selectlist.get(i).getSourcename().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                    Constants.filterList.add(selectlist.get(i));
                 }
-                results.count = filterList.size();
-                results.values = filterList;
-            } else {
-                results.count = selectlist.size();
-                results.values = selectlist;
             }
+            results.count = Constants.filterList.size();
+            results.values = Constants.filterList;
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+
             source = (ArrayList<Listitems>) results.values;
             notifyDataSetChanged();
         }
+
     }
-    */
+
+
 }

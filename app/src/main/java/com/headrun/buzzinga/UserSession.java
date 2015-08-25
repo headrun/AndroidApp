@@ -40,25 +40,6 @@ public class UserSession {
         editor.commit();
     }
 
-    public void setpickerfromdate(String pickerdate) {
-        editor.putString(PICKERFROMDATE, pickerdate);
-        editor.commit();
-    }
-
-    public String getpickerfromdate() {
-        return pref.getString(PICKERFROMDATE, "null");
-    }
-
-    public void setpickertodate(String pickerdate) {
-        editor.putString(PICKERFROMDATE, pickerdate);
-        editor.commit();
-    }
-
-    public String getpickertodate() {
-        return pref.getString(PICKERFROMDATE, "null");
-    }
-
-
 
 }
 

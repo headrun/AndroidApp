@@ -88,9 +88,13 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
 
         holder.url.setText(item.getUrl());
 
-        if (!item.getText().equals("null"))
+        if (item.getText()!=null) {
             holder.text.setText(item.getText());
-        if (!item.getAuthor().equals("null"))
+           // holder.text.setBackgroundResource(R.drawable.roundborder);
+            holder.text.setVisibility(View.VISIBLE);
+        }
+
+        if (item.getAuthor() !=null)
             holder.author.setText("By - " + item.getAuthor());
 
         holder.sentimentcolor.setBackgroundColor(Color.parseColor("#5cb85c"));

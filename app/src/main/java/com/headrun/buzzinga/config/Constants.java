@@ -2,6 +2,7 @@ package com.headrun.buzzinga.config;
 
 import com.headrun.buzzinga.doto.Listitems;
 import com.headrun.buzzinga.doto.SearchDetails;
+import com.twitter.sdk.android.core.TwitterAuthToken;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public class Constants {
     public static boolean swipedata = false;
     public static boolean finddata = false;
     public static String SEARCHSTRING;
+    public static String USERNAME;
+    public static TwitterAuthToken AUTHTOKEN;
 
     public static ArrayList<SearchDetails> listdetails = new ArrayList<SearchDetails>();
     public static ArrayList<Listitems> FILTERSOURSOURE = new ArrayList<Listitems>();
@@ -32,6 +35,8 @@ public class Constants {
     public static ArrayList<String>sourceslist=new ArrayList<>();
     public static ArrayList<String>sentimentlist=new ArrayList<>();
     public static ArrayList<String>genderlist=new ArrayList<>();
+
+    public static  ArrayList<Listitems> filterList;
 
 
 

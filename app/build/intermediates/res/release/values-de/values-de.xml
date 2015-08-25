@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1 Std.</item>
@@ -14,7 +14,7 @@
         <item quantity="one">1 Sek.</item>
         <item quantity="other">%d Sek.</item>
     </plurals>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-de/values-de.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Zur Startseite"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Nach oben"</string>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Sprachsuche"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Freigeben für"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Freigeben für %s"</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Abbrechen</string>
     <string name="dgts__communication_error">Kommunikationsfehler</string>
@@ -75,27 +75,27 @@
     <string name="dgts_pin_code_terms">Du hast zuvor einen 2-Schritte-Verifizierungscode auf digits.com eingestellt</string>
     <string name="dgts_verify">Verifizieren</string>
     <string name="dgts_verifying">Wird verifiziert</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Erlauben</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">Tweet wird geladen</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Mit Twitter anmelden</string>
     <string name="tw__not_now_btn_txt">Nicht jetzt</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">d.M.y</string>
     <string name="tw__relative_date_format_short">d. MMM</string>
     <string name="tw__retweeted_by_format">Retweetet von %1$s</string>
     <string name="tw__share_content_format">Sieh Dir den Tweet von \@%1$s an: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Erhalte Updates und andere Informationen von %1$s, indem Du diesem Nutzer Zugriff auf die E-Mail Deines Twitter Accounts gewährst \@%2$s</string>
     <string name="tw__share_email_title">Teile Deine E-Mail Adresse</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-de/values-de.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Tweet von %1$s (\@%2$s)</string>
     <string name="tw__share_tweet">Tweet teilen</string>

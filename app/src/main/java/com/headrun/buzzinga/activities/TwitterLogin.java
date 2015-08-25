@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.headrun.buzzinga.R;
 import com.headrun.buzzinga.UserSession;
+import com.headrun.buzzinga.config.Constants;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -33,6 +34,8 @@ public class TwitterLogin extends Activity {
                 // Do something with result, which provides a TwitterSession for making API calls
                 Log.i("Log_tag", "result is" + result.data.toString());
 
+                Constants.USERNAME=result.data.getUserName();
+                Constants.AUTHTOKEN=result.data.getAuthToken();
                 new UserSession(TwitterLogin.this).setTSESSION(result.data.toString());
                 /*
                    TwitterSession session = Twitter.getSessionManager().getActiveSession();

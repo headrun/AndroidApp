@@ -47,24 +47,28 @@ public class JsonData {
 
                         title = jobj_source.getString("title");
                         url = jobj_source.getString("url");
-                        text = jobj_source.getString("text");
+                        text = jobj_source.optString("text");
                         date = jobj_source.getString("_added");
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
-                        JSONObject json_author = jobj_source.getJSONObject("author");
+                        // author = jobj_source.getJSONObject("author").optString("name","null");
+                        //Log.i(TAG,"author is"+author);
+                        JSONObject json_author = jobj_source.optJSONObject("author");
 
-                        if (json_author.length() > 0)
-                            author = json_author.getString("name");
+
+                        if (json_author != null)
+                           author= json_author.optString("name");
+
 
                         xtags_separate(json_xtags);
 
                         Log.i("Log_tag", "data is \ntitle" + title + "\nurl" + url + "\ntext" + text + "\ndate" + date + "\nauthor" + author + "\nsentiment" + sentiment + "\narticle_type" + article_type + "gender" + gender);
 
                         if (Constants.swipedata) {
-                            swipelist.add(new SearchDetails(title, url, text, date, author, "positive_sentiment_final", "fbpages_sourcetype_manual"));
+                            swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
                         } else {
 
-                            Constants.listdetails.add(new SearchDetails(title, url, text, date, author, "positive_sentiment_final", "fbpages_sourcetype_manual"));
+                            Constants.listdetails.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
                         }
                     }
                     Constants.scroolid = jobj_result.getString("_scroll_id");
@@ -110,7 +114,7 @@ public class JsonData {
             }
             HomeScreen.swipeRefreshLayout.setRefreshing(false);
         } catch (JSONException e) {
-            Log.i("Log_tag", "exception" + e);
+            Log.i(TAG, "exception" + e);
             e.printStackTrace();
         }
 
@@ -137,7 +141,7 @@ public class JsonData {
                 Log.i(TAG, "source compared" + xtags.get(i).toString());
                 if (Constants.sourceslist.contains(xtags.get(i).toString())) {
                     Log.i(TAG, " matched" + xtags.get(i).toString());
-                    sentiment = xtags.get(i).toString();
+                    article_type = xtags.get(i).toString();
                     break;
                 }
             } catch (JSONException e) {
@@ -152,7 +156,7 @@ public class JsonData {
                 Log.i(TAG, "senment" + xtags.get(i).toString());
                 if (Constants.sentimentlist.contains(xtags.get(i).toString())) {
                     Log.i(TAG, " matched" + xtags.get(i).toString());
-                    article_type = xtags.get(i).toString();
+                    sentiment = xtags.get(i).toString();
                     break;
                 }
             } catch (JSONException e) {

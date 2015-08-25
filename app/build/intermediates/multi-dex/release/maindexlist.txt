@@ -37,8 +37,8 @@ com/digits/sdk/android/ActivityClassManager.class
 org/apache/http/conn/BasicManagedEntity.class
 butterknife/OnItemClick.class
 android/support/annotation/Size.class
-com/google/gson/FieldAttributes.class
 org/apache/http/impl/client/AbstractHttpClient.class
+com/google/gson/FieldAttributes.class
 android/support/v7/widget/LinearLayoutCompat$OrientationMode.class
 com/twitter/sdk/android/core/services/StatusesService.class
 com/twitter/sdk/android/core/models/UserEntities.class
@@ -67,6 +67,7 @@ com/twitter/sdk/android/core/GuestAuthClient.class
 android/support/v4/widget/SimpleCursorAdapter.class
 com/twitter/sdk/android/core/internal/TwitterApi.class
 android/support/annotation/AttrRes.class
+com/headrun/buzzinga/activities/Filtering$3.class
 android/support/annotation/StyleRes.class
 android/support/v4/view/LayoutInflaterFactory.class
 android/support/v7/internal/widget/TintTypedArray.class

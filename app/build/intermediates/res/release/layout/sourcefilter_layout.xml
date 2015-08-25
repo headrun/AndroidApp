@@ -20,13 +20,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
-                 android:dividerHeight="1dp"/>
+                android:dividerHeight="1dp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/sourcelistview">
+
+
+            <EditText
+                android:id="@+id/autosearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/roundborder"
+                android:text="Search"
+                android:visibility="gone"/>
+
 
             <ListView
                 android:id="@+id/filter_sourceslist"
@@ -46,16 +56,19 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"></ListView>
 
+
             <ListView
                 android:id="@+id/filter_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/autosearch"
                 android:visibility="gone"></ListView>
 
             <ListView
                 android:id="@+id/filter_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/autosearch"
                 android:visibility="gone"></ListView>
 
         </RelativeLayout>
@@ -84,9 +97,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#f48f1f"
-            android:textColor="#ffffff"
-            android:text="@string/applyfilter" />
+            android:text="@string/applyfilter"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 </RelativeLayout>
-<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/sourcefilter_layout.xml -->
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/sourcefilter_layout.xml -->

@@ -32,9 +32,9 @@ public class Test {
         callserver(userQuery, which_funn);
     }
 
-    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate) {
+    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate,String Loc,String Lang) {
 
-        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
+        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + check_loc(Loc)+check_lang(Lang)+" AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
         which_funn = "query";
         Log.i("query is",userQuery);
        callserver(userQuery, which_funn);
@@ -167,6 +167,20 @@ public class Test {
     private String check_sentiment(String sentiment) {
         if (!sentiment.equals("1"))
             return " AND (" + sentiment + ")";
+        return "";
+    }
+
+
+    private String check_loc(String loc) {
+        if (!loc.equals("1"))
+            return " AND (" + loc + ")";
+        return "";
+    }
+
+
+    private String check_lang(String lang) {
+        if (!lang.equals("1"))
+            return " AND (" + lang + ")";
         return "";
     }
 

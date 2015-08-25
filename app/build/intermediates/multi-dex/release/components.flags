@@ -1,5 +1,5 @@
--injars /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/release/allclasses.jar
--outjars /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/release/componentClasses.jar
+-injars /home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/multi-dex/release/allclasses.jar
+-outjars /home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/multi-dex/release/componentClasses.jar
 
 -libraryjars /home/headrun/Android/Sdk/build-tools/22.0.1/lib/shrinkedAndroid.jar
 
@@ -8,7 +8,7 @@
 -dontobfuscate
 -dontpreverify
 -dontwarn
--printconfiguration /home/headrun/Documents/Buzzinga/app/build/intermediates/multi-dex/release/components.flags
+-printconfiguration /home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/multi-dex/release/components.flags
 
 
 -keep class null {

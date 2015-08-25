@@ -28,14 +28,15 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/sourcelistview">
 
-            <!--
-                        <SearchView
-                            android:id="@+id/autosearch"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/roundborder"
-                            android:text="Search" />
-                            -->
+
+            <EditText
+                android:id="@+id/autosearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/roundborder"
+                android:hint="Search"
+                android:visibility="gone" />
+
 
             <ListView
                 android:id="@+id/filter_sourceslist"
@@ -60,13 +61,14 @@
                 android:id="@+id/filter_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_below="@+id/autosearch"
                 android:visibility="gone"></ListView>
 
             <ListView
                 android:id="@+id/filter_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/autosearch"
                 android:visibility="gone"></ListView>
 
         </RelativeLayout>

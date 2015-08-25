@@ -20,4 +20,4 @@
         android:layout_below="@+id/titleimage"
         android:textColor="#ffffff" />
 </RelativeLayout>
-<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/source_titles.xml -->
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/source_titles.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1 ч</item>
@@ -14,7 +14,7 @@
         <item quantity="one">1 с</item>
         <item quantity="other">%d с</item>
     </plurals>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Перейти на главный экран"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Перейти вверх"</string>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Голосовой поиск"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Открыть доступ"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Открыть доступ пользователю %s"</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Отмена</string>
     <string name="dgts__communication_error">Ошибка связи</string>
@@ -75,27 +75,27 @@
     <string name="dgts_pin_code_terms">Вы уже ввели код двухэтапной проверки на сайте digits.com</string>
     <string name="dgts_verify">Проверить</string>
     <string name="dgts_verifying">Проверка</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Разрешить</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">Загрузка твита</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Войти с учётной записью Твиттера</string>
     <string name="tw__not_now_btn_txt">Не сейчас</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">dd.MM.y</string>
     <string name="tw__relative_date_format_short">d MMM</string>
     <string name="tw__retweeted_by_format">Ретвитнуто пользователем %1$s</string>
     <string name="tw__share_content_format">Посмотрите твит пользователя \@%1$s: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Получать обновления и другую информацию от %1$s, если вы позволите им видеть ваш адрес электронной почты в вашем профиле Твиттера \@%2$s</string>
     <string name="tw__share_email_title">Поделиться своим адресом электронной почты</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-ru/values-ru.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Твит от %1$s (\@%2$s)</string>
     <string name="tw__share_tweet">Поделиться твитом</string>

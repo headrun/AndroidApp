@@ -57,15 +57,16 @@
 
         <TextView
             android:id="@+id/text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/url"
-            android:background="@drawable/roundborder"
             android:maxLines="3"
+            android:background="@drawable/roundborder"
             android:padding="10dp"
-            android:textColor="#666" />
+            android:textColor="#666"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/articledate"
@@ -88,4 +89,4 @@
 
     </RelativeLayout>
 </RelativeLayout>
-<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/search_data.xml -->
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/search_data.xml -->

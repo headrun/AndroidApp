@@ -15,12 +15,12 @@ ADDED from AndroidManifest.xml:2:1
 		INJECTED from AndroidManifest.xml:0:0
 uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:5:5
-MERGED from com.twitter.sdk.android:tweet-ui:1.3.1:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:25:5
-MERGED from com.digits.sdk.android:digits:1.6.2:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:25:5
+MERGED from com.digits.sdk.android:digits:1.7.2:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:25:5
 MERGED from com.twitter.sdk.android:tweet-composer:0.8.0:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:25:5
+MERGED from com.twitter.sdk.android:tweet-ui:1.4.1:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:25:5
 	android:name
 		ADDED from AndroidManifest.xml:5:22
 uses-permission#android.permission.ACCESS_NETWORK_STATE
@@ -37,21 +37,21 @@ ADDED from AndroidManifest.xml:8:5
 		ADDED from AndroidManifest.xml:8:22
 application
 ADDED from AndroidManifest.xml:11:5
-MERGED from com.twitter.sdk.android:twitter:1.6.1:25:5
-MERGED from com.twitter.sdk.android:tweet-ui:1.3.1:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
-MERGED from com.android.support:support-v4:22.2.0:22:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
-MERGED from com.digits.sdk.android:digits:1.6.2:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
+MERGED from com.twitter.sdk.android:twitter:1.7.2:25:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.digits.sdk.android:digits:1.7.2:27:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:27:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
 MERGED from com.twitter.sdk.android:tweet-composer:0.8.0:27:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:25:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:27:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.twitter.sdk.android:tweet-ui:1.4.1:27:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:27:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:25:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
 MERGED from com.android.support:appcompat-v7:22.2.0:22:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:label
@@ -131,21 +131,21 @@ ADDED from AndroidManifest.xml:60:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:multidex:1.0.1:18:5
-MERGED from com.twitter.sdk.android:twitter:1.6.1:23:5
-MERGED from com.twitter.sdk.android:tweet-ui:1.3.1:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
-MERGED from com.android.support:support-v4:22.2.0:20:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
-MERGED from com.digits.sdk.android:digits:1.6.2:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
+MERGED from com.twitter.sdk.android:twitter:1.7.2:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.digits.sdk.android:digits:1.7.2:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
 MERGED from com.twitter.sdk.android:tweet-composer:0.8.0:23:5
-MERGED from io.fabric.sdk.android:fabric:1.3.4:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.twitter.sdk.android:tweet-ui:1.4.1:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:23:5
+MERGED from io.fabric.sdk.android:fabric:1.3.5:23:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
 MERGED from com.android.support:appcompat-v7:22.2.0:20:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:targetSdkVersion
@@ -154,171 +154,171 @@ MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:minSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-activity#com.twitter.sdk.android.core.identity.OAuthActivity
-ADDED from com.twitter.sdk.android:twitter-core:1.4.1:28:9
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:28:9
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:28:9
-	android:configChanges
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:30:13
-	android:exported
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:32:13
-	android:excludeFromRecents
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:31:13
-	android:name
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:29:13
-activity#com.twitter.sdk.android.core.identity.ShareEmailActivity
-ADDED from com.twitter.sdk.android:twitter-core:1.4.1:33:9
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:33:9
-MERGED from com.twitter.sdk.android:twitter-core:1.4.1:33:9
-	android:label
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:39:13
-	android:icon
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:38:13
-	android:configChanges
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:35:13
-	android:exported
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:37:13
-	android:excludeFromRecents
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:36:13
-	android:name
-		ADDED from com.twitter.sdk.android:twitter-core:1.4.1:34:13
 activity#com.digits.sdk.android.PhoneNumberActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:28:9
+ADDED from com.digits.sdk.android:digits:1.7.2:28:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:33:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:33:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:30:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:30:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:31:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:31:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:32:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:32:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:29:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:29:13
 activity#com.digits.sdk.android.ConfirmationCodeActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:34:9
+ADDED from com.digits.sdk.android:digits:1.7.2:34:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:39:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:39:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:36:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:36:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:37:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:37:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:38:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:38:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:35:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:35:13
 activity#com.digits.sdk.android.LoginCodeActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:40:9
+ADDED from com.digits.sdk.android:digits:1.7.2:40:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:45:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:45:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:42:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:42:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:43:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:43:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:44:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:44:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:41:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:41:13
 activity#com.digits.sdk.android.PinCodeActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:46:9
+ADDED from com.digits.sdk.android:digits:1.7.2:46:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:51:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:51:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:48:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:48:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:49:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:49:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:50:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:50:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:47:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:47:13
 activity#com.digits.sdk.android.FailureActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:52:9
+ADDED from com.digits.sdk.android:digits:1.7.2:52:9
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:54:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:54:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:55:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:55:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:56:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:56:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:53:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:53:13
 activity#com.digits.sdk.android.ContactsActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:57:9
+ADDED from com.digits.sdk.android:digits:1.7.2:57:9
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:59:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:59:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:60:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:60:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:58:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:58:13
 activity#com.digits.sdk.android.PhoneNumberActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:61:9
+ADDED from com.digits.sdk.android:digits:1.7.2:61:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:66:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:66:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:63:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:63:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:64:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:64:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:65:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:65:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:62:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:62:13
 activity#com.digits.sdk.android.ConfirmationCodeActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:67:9
+ADDED from com.digits.sdk.android:digits:1.7.2:67:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:72:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:72:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:69:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:69:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:70:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:70:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:71:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:71:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:68:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:68:13
 activity#com.digits.sdk.android.LoginCodeActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:73:9
+ADDED from com.digits.sdk.android:digits:1.7.2:73:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:78:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:78:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:75:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:75:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:76:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:76:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:77:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:77:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:74:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:74:13
 activity#com.digits.sdk.android.FailureActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:79:9
+ADDED from com.digits.sdk.android:digits:1.7.2:79:9
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:81:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:81:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:82:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:82:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:83:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:83:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:80:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:80:13
 activity#com.digits.sdk.android.ContactsActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:84:9
+ADDED from com.digits.sdk.android:digits:1.7.2:84:9
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:86:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:86:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:87:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:87:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:85:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:85:13
 activity#com.digits.sdk.android.PinCodeActionBarActivity
-ADDED from com.digits.sdk.android:digits:1.6.2:88:9
+ADDED from com.digits.sdk.android:digits:1.7.2:88:9
 	android:windowSoftInputMode
-		ADDED from com.digits.sdk.android:digits:1.6.2:93:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:93:13
 	android:configChanges
-		ADDED from com.digits.sdk.android:digits:1.6.2:90:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:90:13
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:91:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:91:13
 	android:taskAffinity
-		ADDED from com.digits.sdk.android:digits:1.6.2:92:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:92:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:89:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:89:13
 service#com.digits.sdk.android.ContactsUploadService
-ADDED from com.digits.sdk.android:digits:1.6.2:95:9
+ADDED from com.digits.sdk.android:digits:1.7.2:95:9
 	android:exported
-		ADDED from com.digits.sdk.android:digits:1.6.2:98:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:98:13
 	android:enabled
-		ADDED from com.digits.sdk.android:digits:1.6.2:97:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:97:13
 	android:name
-		ADDED from com.digits.sdk.android:digits:1.6.2:96:13
+		ADDED from com.digits.sdk.android:digits:1.7.2:96:13
+activity#com.twitter.sdk.android.core.identity.OAuthActivity
+ADDED from com.twitter.sdk.android:twitter-core:1.4.3:28:9
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:28:9
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:28:9
+	android:configChanges
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:30:13
+	android:exported
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:32:13
+	android:excludeFromRecents
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:31:13
+	android:name
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:29:13
+activity#com.twitter.sdk.android.core.identity.ShareEmailActivity
+ADDED from com.twitter.sdk.android:twitter-core:1.4.3:33:9
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:33:9
+MERGED from com.twitter.sdk.android:twitter-core:1.4.3:33:9
+	android:label
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:39:13
+	android:icon
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:38:13
+	android:configChanges
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:35:13
+	android:exported
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:37:13
+	android:excludeFromRecents
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:36:13
+	android:name
+		ADDED from com.twitter.sdk.android:twitter-core:1.4.3:34:13

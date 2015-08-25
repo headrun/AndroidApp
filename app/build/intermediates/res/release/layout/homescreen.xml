@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingLeft="2dp"
-                    android:text="SORT BY DATE" />
+                    android:text="FILTER BY DATE" />
             </LinearLayout>
         </LinearLayout>
 
@@ -64,12 +64,16 @@
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/filterbuttons">
+            android:layout_below="@+id/filterbuttons"
+            >
 
             <ListView
                 android:id="@+id/result_listview"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"
+                android:dividerHeight="7dp"
+                android:padding="5dp"
+                android:background="@drawable/articletextround"></ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
@@ -246,4 +250,4 @@
 
 
 
-<!-- From: file:/home/headrun/Documents/Buzzinga/app/src/main/res/layout/homescreen.xml -->
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/homescreen.xml -->

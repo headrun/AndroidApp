@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="1_click-1.5-M2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/click-1.5-M2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

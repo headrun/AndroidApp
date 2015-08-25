@@ -1,14 +1,19 @@
 package com.headrun.buzzinga.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,9 +24,7 @@ import com.headrun.buzzinga.doto.Test;
 import com.headrun.buzzinga.utils.FilterTitleAdapter;
 import com.headrun.buzzinga.utils.ListViewAdapter;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by headrun on 6/8/15.
@@ -32,9 +35,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     //@InjectView(R.id.filter_titles)
     ListView filter_titles, filter_sourceslist, filter_sentiment, filter_gender, filter_location, filter_language;
     Button clearfilter, applyfilter;
-    // SearchView autosearch;
+    EditText autosearch;
     ListViewAdapter adapter;
-
+    SearchManager searchmanager;
 
     Test buzztest;
     public static StringBuilder sourcequery = new StringBuilder();
@@ -55,11 +58,13 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_language = (ListView) findViewById(R.id.filter_language);
         clearfilter = (Button) findViewById(R.id.clearfilter);
         applyfilter = (Button) findViewById(R.id.applyfilter);
-        // autosearch = (SearchView) findViewById(R.id.autosearch);
+        autosearch = (EditText) findViewById(R.id.autosearch);
+        searchmanager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
         buzztest = new Test(getApplication());
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
+
 
         String[] filtertitles = getResources().getStringArray(R.array.filtertitles);
         TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
@@ -85,62 +90,28 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 filterselection(filtering);
             }
         });
-        listOfFilterSources();
-        listOfFilterSentiment();
-        listOfFilterGender();
-        listOfFilterLang();
-        listOfFilterLocation();
 
-        ceratelists();
 
-       /* autosearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                adapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-*/
-        List<String> autotext = new ArrayList<>();
-        for (Listitems loc : Constants.FILTERLOC) {
-            autotext.add(loc.getSourcename());
-        }
-        /*
-        String[] str=new String[autotext.size()];
-        ArrayAdapter<String> AutoTextAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,autotext.toArray(str));
-
-        autosearch.setAdapter(AutoTextAdapter);
+        // ceratelists();
 
         autosearch.addTextChangedListener(new TextWatcher() {
-
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                // TODO Auto-generated method stub
-                String text = autosearch.getText().toString();
-                adapter.filter(text);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
             }
         });
-*/
+
+
     }
 
     public void filterselection(FilterStatus filtering) {
@@ -168,53 +139,59 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void filterSource() {
         Log.i("filter by", " source");
+        listOfFilterSources();
         filter_sourceslist.setVisibility(View.VISIBLE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.GONE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.GONE);
+        autosearch.setVisibility(View.GONE);
     }
 
     public void filterSentiment() {
         Log.i("filter by", " Sentiment");
+        listOfFilterSentiment();
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.VISIBLE);
         filter_gender.setVisibility(View.GONE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.GONE);
-       // autosearch.setVisibility(View.GONE);
+        autosearch.setVisibility(View.GONE);
 
     }
 
     public void filterGender() {
         Log.i("filter by", " gender");
+        listOfFilterGender();
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.VISIBLE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.GONE);
-       // autosearch.setVisibility(View.GONE);
+        autosearch.setVisibility(View.GONE);
 
     }
 
     public void filterLang() {
         Log.i("filter by", " Lang");
+        listOfFilterLang();
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.GONE);
         filter_language.setVisibility(View.VISIBLE);
         filter_location.setVisibility(View.GONE);
-       // autosearch.setVisibility(View.GONE);
+        autosearch.setVisibility(View.VISIBLE);
     }
 
     public void filterLocation() {
         Log.i("filter by", " Location");
+        listOfFilterLocation();
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.GONE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.VISIBLE);
-       // autosearch.setVisibility(View.VISIBLE);
+        autosearch.setVisibility(View.VISIBLE);
 
 
     }
@@ -232,11 +209,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 String genderquery = genderquery();
                 String locquery = locquery();
                 String langquery = langquery();
-                Log.i("Log_Tag", "source querry is" + sourcequery + "\nsentiment" + sentimentquery + "\n genderquery" + genderquery + "loc query" + locquery);
+                Log.i("Log_Tag", "source querry is" + sourcequery + "\nsentiment" + sentimentquery + "\n genderquery" + genderquery + "loc query" + locquery + "lang query" + langquery);
                 Constants.scroolid = "1";
                 Constants.listdetails.clear();
                 startActivity(new Intent(getApplication(), HomeScreen.class));
-                buzztest.buzzdata(Constants.SEARCHSTRING, sourcequery, genderquery, sentimentquery, "1", "1");
+                buzztest.buzzdata(Constants.SEARCHSTRING, sourcequery, genderquery, sentimentquery, "1", "1", locquery, langquery);
 
             } else {
                 Toast.makeText(getApplication(), "Enter the search string", Toast.LENGTH_LONG).show();
@@ -299,7 +276,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 sourcequery.append(prefix);
                 prefix = " OR ";
 
-                sourcequery.append("xtags:" + genderlist.getXtag() + "_country_manual_parent");
+                sourcequery.append("xtags:" + genderlist.getXtag());
             }
 
         }
@@ -321,7 +298,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 Constants.gender_selected.add(loclist.getSourcename());
                 sourcequery.append(prefix);
                 prefix = " OR ";
-                sourcequery.append("xtags:" + loclist.getXtag());
+                sourcequery.append("xtags:" + loclist.getXtag() + "_country_manual_parent");
             }
 
         }
@@ -332,7 +309,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public String langquery(){
+    public String langquery() {
 
 
         String prefix = "";
@@ -344,7 +321,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 Constants.lang_selected.add(langlist.getSourcename());
                 sourcequery.append(prefix);
                 prefix = " OR ";
-                sourcequery.append("xtags:" + langlist.getXtag());
+                sourcequery.append("xtags:" + langlist.getXtag() + "_language_auto");
             }
 
         }
@@ -353,6 +330,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         return "1";
     }
+
 
     public enum FilterStatus {
         SOURCES,
@@ -406,7 +384,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void listOfFilterLang() {
         Constants.FILTERLANG.clear();
-       // Constants.FILTERLANG.add(new Listitems("en_language_auto", "English", lang_check("English")));
+        // Constants.FILTERLANG.add(new Listitems("en_language_auto", "English", lang_check("English")));
         Constants.FILTERLANG.add(new Listitems("gv", "MANX", lang_check("MANX")));
         Constants.FILTERLANG.add(new Listitems("gu", "GUJARATI", lang_check("GUJARATI")));
         Constants.FILTERLANG.add(new Listitems("sco", "SCOTS", lang_check("SCOTS")));
@@ -571,7 +549,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERLANG);
         filter_language.setAdapter(adapter);
-
+        filter_language.setTextFilterEnabled(true);
     }
 
     public void listOfFilterLocation() {
@@ -763,7 +741,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean source_check(String source) {
-        Log.i("Log_tag", "sentiment_selected size is" + Constants.sources_selected.size() + "sentiment is" + source);
+        Log.i("Log_tag", "sentiment_selected size is" + Constants.sources_selected.size() + "source is" + source);
         if (Constants.sources_selected.size() > 0)
             if (Constants.sources_selected.contains(source)) {
                 Log.i("Log_tag", "seniment  is" + true);
@@ -773,7 +751,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean gender_check(String gender) {
-        Log.i("Log_tag", "sentiment_selected size is" + Constants.gender_selected.size() + "sentiment is" + gender);
+        Log.i("Log_tag", "sentiment_selected size is" + Constants.gender_selected.size() + "gender is" + gender);
         if (Constants.gender_selected.size() > 0)
             if (Constants.gender_selected.contains(gender)) {
                 Log.i("Log_tag", "seniment  is" + true);
@@ -783,7 +761,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean lang_check(String lang) {
-        Log.i("Log_tag", "sentiment_selected size is" + Constants.lang_selected.size() + "sentiment is" + lang);
+        Log.i("Log_tag", "sentiment_selected size is" + Constants.lang_selected.size() + "lang is" + lang);
         if (Constants.lang_selected.size() > 0)
             if (Constants.lang_selected.contains(lang)) {
                 Log.i("Log_tag", "seniment  is" + true);
@@ -793,7 +771,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean loc_check(String loc) {
-        Log.i("Log_tag", "sentiment_selected size is" + Constants.loc_selected.size() + "sentiment is" + loc);
+        Log.i("Log_tag", "sentiment_selected size is" + Constants.loc_selected.size() + "loc is" + loc);
         if (Constants.loc_selected.size() > 0)
             if (Constants.loc_selected.contains(loc)) {
                 Log.i("Log_tag", "seniment  is" + true);

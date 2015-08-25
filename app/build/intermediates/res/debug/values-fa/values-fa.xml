@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1 ساعت</item>
@@ -14,7 +14,7 @@
         <item quantity="one">1 ثانیه</item>
         <item quantity="other">%d ثانیه</item>
     </plurals>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"پیمایش به صفحه اصلی"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"پیمایش به بالا"</string>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"جستجوی شفاهی"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"اشتراک‌گذاری با"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"‏اشتراک‌گذاری با %s"</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="dgts__cancel">لغو</string>
     <string name="dgts__communication_error">خطای ارتباطی</string>
@@ -75,27 +75,27 @@
     <string name="dgts_pin_code_terms">شما پیش‌تر کد تاییدسازی ۲مرحله‌ای را در digits.com فعال کرده‌اید.</string>
     <string name="dgts_verify">تایید کردن</string>
     <string name="dgts_verifying">تاییدسازی</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">مجاز</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">بارگیری توییت</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">ورود با توییتر</string>
     <string name="tw__not_now_btn_txt">فعلاً نه</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">y/M/d</string>
     <string name="tw__relative_date_format_short">d LLL</string>
     <string name="tw__retweeted_by_format">بازتوییت‌شده توسط %1$s</string>
     <string name="tw__share_content_format">توییت ‎\@%1$s را بر‌رسی کنید: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">هنگامی که به آنها اجازه دسترسی به ایمیل خودتان برروی حساب کاربری توییترتان را دادید، به روزرسانی‌ها و دیگر اطلاعات از %1$s را دریافت کنید / ‎\@%2$s</string>
     <string name="tw__share_email_title">نشانی ایمیل خود را به اشتراک بگذارید</string>
-    <!-- From: file:/home/headrun/Documents/Buzzinga/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fa/values-fa.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fa/values-fa.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">توییت‌ از %1$s (‎\@%2$s)</string>
     <string name="tw__share_tweet">به اشتراک‌گذاری توییت</string>
