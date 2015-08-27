@@ -18,8 +18,19 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:twitter="http://schemas.android.com/apk/res-auto">
     <item twitter:state_toggled_on="true"
-          android:drawable="@drawable/ic_tweet_action_inline_favorite_on"/>
+          android:state_pressed="true"
+          android:drawable="@drawable/ic_action_fave_on_pressed"/>
+    <item twitter:state_toggled_on="true"
+          android:state_focused="true"
+          android:drawable="@drawable/ic_action_fave_on_focused" />
+    <item twitter:state_toggled_on="true"
+          android:drawable="@drawable/ic_action_fave_on_default"/>
 
     <item android:state_enabled="false"
-          android:drawable="@drawable/ic_tweet_action_inline_favorite"/>
-</selector><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/drawable/tw__favorite_action.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/drawable/tw__favorite_action.xml -->
+          android:drawable="@drawable/ic_action_fave_off_disabled"/>
+    <item android:state_pressed="true"
+          android:drawable="@drawable/ic_action_fave_off_pressed"/>
+    <item android:state_focused="true"
+          android:drawable="@drawable/ic_action_fave_off_focused" />
+    <item android:drawable="@drawable/ic_action_fave_off_default"/>
+</selector><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/drawable/tw__favorite_action.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/drawable/tw__favorite_action.xml -->

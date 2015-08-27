@@ -12,6 +12,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +49,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public static View content_lay;
     public View filterpanel;
     public View webview_lay;                                ///// Layout of menu button.
-    public View filtersource_lay,filterdate_lay;
+    public View filtersource_lay;
+    public View filterdate_lay;
+    public static View listviewfooter;
     public static TextView fromdate, todate;
     public static TextView browsertitle;
     public WebView webview;
@@ -56,13 +59,16 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public TextView filtersourcebtn, filterdatebtn;
     Button bydatefilter;
     public ImageView closebtn, closebrowser;
-
+    public static View footerView;
     Test buzztest;                                           ////  Call  the Test class
     UserSession userSession;
     SearchListData search_adapter;
-    public static ProgressBar progress, browserprogess;                      ////  progress bar after clicking the checkbox
+    public static ProgressBar progress, browserprogess, footerprogress;                      ////  progress bar after clicking the checkbox
 
     public static int DATEFLAG;
+
+    LayoutInflater inflater;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +87,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         content_lay = findViewById(R.id.content_lay);
         filterpanel = findViewById(R.id.filterpanel);
         webview_lay = findViewById(R.id.webview_lay);
-        filtersource_lay=findViewById(R.id.filtersource_lay);
-        filterdate_lay=findViewById(R.id.filterdate_lay);
+        filtersource_lay = findViewById(R.id.filtersource_lay);
+        filterdate_lay = findViewById(R.id.filterdate_lay);
 
         fromdate = (TextView) findViewById(R.id.fromdate);
         todate = (TextView) findViewById(R.id.todate);
@@ -96,6 +102,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         browserprogess = (ProgressBar) findViewById(R.id.browserprogress);
+        inflater = this.getLayoutInflater();
 
         filtersourcebtn.setOnClickListener(this);
         filterdatebtn.setOnClickListener(this);
@@ -105,7 +112,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         fromdate.setOnClickListener(this);
         todate.setOnClickListener(this);
         filtersource_lay.setOnClickListener(this);
-
+        filterpanel.setOnClickListener(this);
         browserprogess.setVisibility(View.GONE);
         buzztest = new Test(getApplication());
         search_adapter = new SearchListData(HomeScreen.this, 1);
@@ -138,12 +145,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                if (lastIndexInScreen >= totalItemCount - 1 && !Config.isLoading) {
+                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
                     Log.i("Log_tag", "start the fetching data");
-                    Config.isLoading = true;
+                    Config.SwipeLoading = true;
 
                     if (!Constants.scroolid.equals("1"))
                         Log.i(TAG, "calling the scool query");
+                    footerView = inflater.inflate(R.layout.listviewfooter, null);
+                    display_data.addFooterView(footerView);
+
                     buzztest.buzzdata(Constants.scroolid);
                 }
             }
@@ -154,7 +164,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Color.parseColor("#00ff00"),
                 Color.parseColor("#0000ff"),
                 Color.parseColor("#f234ab"));
-
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
 
@@ -178,7 +187,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
-            Log.i("Log_tag", "home screen query is" + Constants.SEARCHSTRING);
+            if (Constants.SEARCHSTRING.trim().length() > 0) {
+                Constants.listdetails.clear();
+                Log.i("Log_tag", "display_data length is" + display_data.getCount());
+            }
+
             searchquery(true);
         }
     }
@@ -259,14 +272,17 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 filterpanel.setVisibility(View.GONE);
                 if (search_validation()) {
                     Constants.listdetails.clear();
-                    searchquery(true);
+                    querybydate(true);
                 }
                 break;
             case R.id.closebrowser:
                 webview_lay.setVisibility(View.GONE);
                 webview.destroy();
                 HomeScreen.browserprogess.setProgress(100);
-                ;
+                break;
+            case R.id.filterpanel:
+                break;
+
 
         }
 
@@ -293,17 +309,22 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             HomeScreen.browserprogess.setProgress(0);
             super.onPageStarted(view, url, favicon);
         }
-
     }
 
 
     public void searchquery(boolean procesing) {
 
         if (search_validation()) {
-            if (procesing)
-                progress.setVisibility(View.VISIBLE);
 
             buzztest.buzzdata(Constants.SEARCHSTRING, "1", GetFromDate(), getToDate());
+        }
+    }
+
+    public void querybydate(boolean procesing) {
+
+        if (search_validation()) {
+
+            buzztest.buzzdata(Constants.SEARCHSTRING, Filtering.sourcequery(), Filtering.genderquery(), Filtering.sentimentquery(), GetFromDate(), getToDate(), Filtering.locquery(), Filtering.langquery());
         }
     }
 

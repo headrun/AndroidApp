@@ -32,7 +32,7 @@
     </string-array>
 
     <string name="missongsearch">Unable search the given keyword</string>
-     <string name="Filter">Filter</string>
+    <string name="Filter">Filter</string>
 
     <string-array name="filtertitles">
         <item>Sources</item>
@@ -53,4 +53,6 @@
     <string name="clearfilter">Clear Filter</string>
     <string name="applyfilter">Apply Filter</string>
     <string name="search">Search By Keyword</string>
+    <string name="loading_text">Loading</string>
+
 </resources>

@@ -16,5 +16,11 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_tweet_action_inline_share" />
-</selector><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/drawable/tw__share_action.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/drawable/tw__share_action.xml -->
+    <item android:state_enabled="false"
+          android:drawable="@drawable/ic_action_share_disabled" />
+    <item android:state_pressed="true"
+          android:drawable="@drawable/ic_action_share_pressed"/>
+    <item android:state_focused="true"
+          android:drawable="@drawable/ic_action_share_focused"/>
+    <item android:drawable="@drawable/ic_action_share_default"/>
+</selector><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/drawable/tw__share_action.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/drawable/tw__share_action.xml -->

@@ -10,5 +10,5 @@ public class Config {
     public static boolean HOME_SCREEN =true;
     public static boolean TWITTER_LOGIN =true;
 
-    public static boolean isLoading=false;
+    public static boolean SwipeLoading=false;
 }

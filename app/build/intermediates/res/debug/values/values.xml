@@ -31,7 +31,7 @@
         <item>@drawable/location</item>
         <item>@drawable/language</item>
     </string-array>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference|color" name="dgts__accentColor"/>
     <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
@@ -65,7 +65,7 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <color name="dgts__default_accent">#5baaf4</color>
     <color name="dgts__default_logo_name">#56626d</color>
@@ -108,7 +108,7 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <color name="tw__blue_default">#FF5BAAF4</color>
     <color name="tw__blue_pressed">#FF4186C8</color>
@@ -117,7 +117,7 @@
     <color name="tw__medium_gray">#8899a6</color>
     <color name="tw__solid_white">#FFFFFFFF</color>
     <color name="tw__transparent">#00000000</color>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <color name="tw__tweet_action_color">#55acee</color>
     <color name="tw__tweet_container_border">#1a000000</color>
@@ -221,7 +221,7 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <dimen name="dgts__country_code_margin_bottom">1dp</dimen>
     <dimen name="dgts__margin_bottom">16dp</dimen>
@@ -247,13 +247,12 @@
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__btn_bar_margin_left">8dp</dimen>
     <dimen name="tw__btn_bar_margin_right">8dp</dimen>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
-    <dimen name="tw__compact_tweet_action_bar_offset_left">-12dp</dimen>
     <dimen name="tw__compact_tweet_attribution_line_margin_right">36dp</dimen>
     <dimen name="tw__compact_tweet_avatar_margin_left">12dp</dimen>
     <dimen name="tw__compact_tweet_avatar_margin_right">8dp</dimen>
@@ -285,20 +284,17 @@
     <dimen name="tw__login_btn_radius">5dp</dimen>
     <dimen name="tw__login_btn_right_padding">12dp</dimen>
     <dimen name="tw__login_btn_text_size">14sp</dimen>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__padding_permission_horizontal_container">24dp</dimen>
     <dimen name="tw__padding_permission_vertical_container">24dp</dimen>
     <dimen name="tw__permission_description_text_size">16sp</dimen>
     <dimen name="tw__permission_title_text_size">24sp</dimen>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="tw__text_size_large">16dp</dimen>
     <dimen name="tw__text_size_medium">14dp</dimen>
-    <dimen name="tw__tweet_action_bar_offset_bottom">-8dp</dimen>
-    <dimen name="tw__tweet_action_bar_offset_left">8dp</dimen>
-    <dimen name="tw__tweet_action_button_padding">12dp</dimen>
-    <dimen name="tw__tweet_action_button_spacing">40dp</dimen>
+    <dimen name="tw__tweet_action_layout_margin_top">0dp</dimen>
     <dimen name="tw__tweet_avatar_margin_left">20dp</dimen>
     <dimen name="tw__tweet_avatar_margin_right">8dp</dimen>
     <dimen name="tw__tweet_avatar_margin_top">18dp</dimen>
@@ -316,6 +312,11 @@
     <dimen name="tw__tweet_retweeted_by_margin_top">10dp</dimen>
     <dimen name="tw__tweet_screen_name_margin_bottom">1dp</dimen>
     <dimen name="tw__tweet_screen_name_margin_top">-4dp</dimen>
+    <dimen name="tw__tweet_share_extra_bottom_margin">2dp</dimen>
+    <dimen name="tw__tweet_share_extra_top_margin">11dp</dimen>
+    <dimen name="tw__tweet_share_layout_height">36dp</dimen>
+    <dimen name="tw__tweet_share_margin_left">20dp</dimen>
+    <dimen name="tw__tweet_share_padding_bottom">12dp</dimen>
     <dimen name="tw__tweet_text_margin_left">20dp</dimen>
     <dimen name="tw__tweet_text_margin_right">20dp</dimen>
     <dimen name="tw__tweet_text_margin_top">12dp</dimen>
@@ -340,7 +341,7 @@
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1h</item>
@@ -383,7 +384,7 @@
     <string name="app_name">Buzzinga</string>
     <string name="applyfilter">Apply Filter</string>
     <string name="clearfilter">Clear Filter</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Cancel</string>
     <string name="dgts__communication_error">Communication Error</string>
@@ -432,11 +433,12 @@
     <string name="dgts_pin_code_terms">You have previously set a 2-step verification code on digits.com</string>
     <string name="dgts_verify">Verify</string>
     <string name="dgts_verifying">Verifying</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="kit_name">Twitter</string>
     <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="loading_text">Loading</string>
     <string name="missongsearch">Unable search the given keyword</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -450,30 +452,30 @@
     <string name="title_section1">Search</string>
     <string name="title_section2">Facebook</string>
     <string name="title_section3">Google +</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Allow</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__favorite_tweet">Favorite Tweet</string>
     <string name="tw__favorited_tweet">Favorited Tweet</string>
     <string name="tw__loading_tweet">Loading Tweet</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Log in with Twitter</string>
     <string name="tw__not_now_btn_txt">Not now</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">MM/dd/yy</string>
     <string name="tw__relative_date_format_short">MMM dd</string>
     <string name="tw__retweeted_by_format">Retweeted by %1$s</string>
     <string name="tw__share_content_format">Check out @%1$s\'s Tweet: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Get updates and other information from %1$s when you allow
         them access to your email on your Twitter account \@%2$s</string>
     <string name="tw__share_email_title">Share your email address</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Tweet from %1$s (@%2$s)</string>
     <string name="tw__share_tweet">Share Tweet</string>
@@ -1405,7 +1407,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <style name="Digits_default" parent="@android:style/Theme.Light">
         <item name="dgts__accentColor">@color/dgts__default_accent</item>
@@ -1738,7 +1740,7 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values/values.xml -->
     <eat-comment/>
     <style name="dgts__ButtonText">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
@@ -1759,8 +1761,15 @@
         <item name="android:textSize">@dimen/dgts__title_text_size</item>
         <item name="android:layout_marginBottom">24dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
+    <style name="tw__ActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="tw__ActionButton.Favorite">
+        <item name="android:background">@null</item>
+    </style>
     <style name="tw__AttributionText" ns1:ignore="NewApi">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -1768,7 +1777,7 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__Button">
         <item name="android:background">@drawable/tw__login_btn</item>
@@ -1788,7 +1797,7 @@
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingBottom">0dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__CompactAttributionLine" ns1:ignore="NewApi">
         <item name="android:layout_width">wrap_content</item>
@@ -1801,7 +1810,7 @@
         <item name="android:paddingTop">@dimen/tw__compact_tweet_container_padding_top</item>
         <item name="android:paddingBottom">@dimen/tw__compact_tweet_container_padding_bottom</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values/values.xml -->
     <eat-comment/>
     <style name="tw__Permission_Container">
         <item name="android:paddingLeft">@dimen/tw__padding_permission_horizontal_container</item>
@@ -1819,23 +1828,13 @@
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginTop">30dp</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values/values.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values/values.xml -->
     <eat-comment/>
-    <style name="tw__TweetActionButton">
+    <style name="tw__TweetAction" ns1:ignore="NewApi">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/tw__tweet_action_button_padding</item>
-    </style>
-    <style name="tw__TweetActionButton.Share">
-        <item name="android:background">@null</item>
-    </style>
-    <style name="tw__TweetActionButtonBar">
-        <item name="android:layout_marginLeft">@dimen/tw__tweet_action_bar_offset_left</item>
-        <item name="android:layout_marginBottom">@dimen/tw__tweet_action_bar_offset_bottom</item>
-    </style>
-    <style name="tw__TweetActionButtonBar.Compact">
-        <item name="android:layout_marginLeft">@dimen/tw__compact_tweet_action_bar_offset_left</item>
-        <item name="android:layout_marginBottom">@dimen/tw__tweet_action_bar_offset_bottom</item>
+        <item name="android:layout_marginTop">@dimen/tw__tweet_action_layout_margin_top</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
     <style name="tw__TweetAvatar">
         <item name="android:layout_width">@dimen/tw__tweet_avatar_size</item>
@@ -1863,9 +1862,6 @@
         <item name="tw__primary_text_color">@color/tw__tweet_dark_primary_text_color</item>
         <item name="tw__action_color">@color/tw__tweet_action_color</item>
     </style>
-    <style name="tw__TweetDarkWithActionsStyle" parent="tw__TweetDarkStyle">
-        <item name="tw__tweet_actions_enabled">true</item>
-    </style>
     <style name="tw__TweetFillWidth">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -1887,9 +1883,6 @@
         <item name="tw__container_bg_color">@color/tw__tweet_light_container_bg_color</item>
         <item name="tw__primary_text_color">@color/tw__tweet_light_primary_text_color</item>
         <item name="tw__action_color">@color/tw__tweet_action_color</item>
-    </style>
-    <style name="tw__TweetLightWithActionsStyle" parent="tw__TweetLightStyle">
-        <item name="tw__tweet_actions_enabled">true</item>
     </style>
     <style name="tw__TweetMedia">
         <item name="android:layout_width">match_parent</item>
@@ -1943,6 +1936,17 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/tw__text_size_medium</item>
         <item name="android:ellipsize">end</item>
+    </style>
+    <style name="tw__TweetShare" ns1:ignore="NewApi">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/tw__tweet_share_layout_height</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginLeft">@dimen/tw__tweet_share_margin_left</item>
+        <item name="android:textSize">@dimen/tw__text_size_large</item>
+        <item name="android:textColor">@color/tw__tweet_action_color</item>
+        <item name="android:paddingBottom">@dimen/tw__tweet_share_padding_bottom</item>
+        <item name="android:textAllCaps">false</item>
     </style>
     <style name="tw__TweetText" ns1:ignore="NewApi">
         <item name="android:layout_width">match_parent</item>

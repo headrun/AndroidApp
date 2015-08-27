@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1时</item>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"语音搜索"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"分享方式"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"通过%s分享"</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="dgts__cancel">取消</string>
     <string name="dgts__communication_error">通讯出错</string>
@@ -75,27 +75,27 @@
     <string name="dgts_pin_code_terms">你之前已在 digits.com 设置了两步验证</string>
     <string name="dgts_verify">验证</string>
     <string name="dgts_verifying">正在验证</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">允许</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">加载推文</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">登录 Twitter</string>
     <string name="tw__not_now_btn_txt">以后再说</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">y/M/d</string>
     <string name="tw__relative_date_format_short">M月d日</string>
     <string name="tw__retweeted_by_format">由 %1$s 转推</string>
     <string name="tw__share_content_format">看看 \@%1$s 的推文：https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">允许%1$s获取你的Twitter 账号\@%2$s电子邮件地址以随时接收更新及其它讯息</string>
     <string name="tw__share_email_title">分享你的电子邮件地址</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-zh-rCN/values-zh-rCN.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-zh-rCN/values-zh-rCN.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">来自 %1$s 的推文 (\@%2$s)</string>
     <string name="tw__share_tweet">分享推文</string>

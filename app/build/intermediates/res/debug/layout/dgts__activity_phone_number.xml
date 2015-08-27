@@ -69,4 +69,4 @@
             android:layout_height="wrap_content"
             android:text="@string/dgts__terms_text"/>
     </LinearLayout>
-</ScrollView><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/layout/dgts__activity_phone_number.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/layout/dgts__activity_phone_number.xml -->
+</ScrollView><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/digits/digits/src/main/res/layout/dgts__activity_phone_number.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/layout/dgts__activity_phone_number.xml -->

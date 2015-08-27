@@ -220,7 +220,7 @@
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem"/>
     <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="android:Widget.Material.Toolbar.Button.Navigation">
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-v21/values-v21.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-v21/values-v21.xml -->
     <eat-comment/>
     <style name="Digits_default" parent="@android:style/Theme.Material.Light">
         <item name="dgts__accentColor">?android:attr/colorAccent</item>
@@ -261,7 +261,7 @@
         <item name="android:colorControlHighlight">?attr/colorControlHighlight</item>
         <item name="android:colorButtonNormal">?attr/colorButtonNormal</item>
     </style>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-v21/values-v21.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-v21/values-v21.xml -->
     <eat-comment/>
     <style name="tw__TweetFullName" parent="tw__TweetFullNameBase">
         <item name="android:fontFamily">sans-serif-medium</item>

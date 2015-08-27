@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1s</item>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Sesli arama"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Şununla paylaş"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"%s ile paylaş"</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="dgts__cancel">İptal</string>
     <string name="dgts__communication_error">İletişim Hatası</string>
@@ -80,27 +80,27 @@ oluyorsun.</string>
     <string name="dgts_pin_code_terms">Daha önce digits.com üzerinden ayarladığın 2 adımlı doğrulama kodu</string>
     <string name="dgts_verify">Onayla</string>
     <string name="dgts_verifying">Doğrulanıyor</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">İzin ver</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">Tweet Yükleniyor</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Twitter ile giriş yap</string>
     <string name="tw__not_now_btn_txt">Şu an değil</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">dd.MM.y</string>
     <string name="tw__relative_date_format_short">d MMM</string>
     <string name="tw__retweeted_by_format">%1$s tarafından Retweetlendi</string>
     <string name="tw__share_content_format">\@%1$s adlı kişinin Tweetini incele: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">\@%2$s Twitter hesabındaki e-postana erişim izni verdiğinde, %1$s adlı kişinin güncellemelerini ve diğer bilgilerini alabilirsin.</string>
     <string name="tw__share_email_title">E-posta adresini paylaş</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Tweet gönderen: %1$s (\@%2$s)</string>
     <string name="tw__share_tweet">Tweet Paylaş</string>

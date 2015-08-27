@@ -36,6 +36,14 @@
     <init>();
 }
 
+-keep class com.twitter.sdk.android.core.identity.OAuthActivity {
+    <init>();
+}
+
+-keep class com.twitter.sdk.android.core.identity.ShareEmailActivity {
+    <init>();
+}
+
 -keep class com.digits.sdk.android.PhoneNumberActivity {
     <init>();
 }
@@ -85,14 +93,6 @@
 }
 
 -keep class com.digits.sdk.android.ContactsUploadService {
-    <init>();
-}
-
--keep class com.twitter.sdk.android.core.identity.OAuthActivity {
-    <init>();
-}
-
--keep class com.twitter.sdk.android.core.identity.ShareEmailActivity {
     <init>();
 }
 

@@ -22,6 +22,7 @@ import java.util.Date;
  */
 public class SearchListData extends ArrayAdapter<SearchDetails> {
 
+    String TAG=SearchListData.this.getClass().getSimpleName();
     Context context;
     ArrayList<SearchDetails> listdata;
     LayoutInflater inflater;
@@ -65,6 +66,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         public TextView sentimentcolor;
         public ImageView article_icon;
         public View title_lay;
+        public TextView sentimetncolor;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -82,6 +84,8 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.sentimentcolor = (TextView) itemView.findViewById(R.id.sentimetncolor);
         holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
         holder.title_lay = itemView.findViewById(R.id.title_lay);
+        holder.sentimetncolor = (TextView)itemView.findViewById(R.id.sentimetncolor);
+
 
         SearchDetails item = getItem(position);
         holder.title.setText(item.getTitle());
@@ -104,10 +108,26 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a");
         holder.articledate.setText(sdf.format(date));
+        Log.i("Log_tag","sentiment color is"+item.getSentiment()+"drawable  is"+applySentimentColor(item.getSentiment()));
+        holder.sentimetncolor.setBackgroundResource(applySentimentColor(item.getSentiment()));
 
         return itemView;
     }
 
+    private int applySentimentColor(String sentimet){
+
+        if(sentimet!=null)
+        if(sentimet.contains("positive")) {
+         Log.i(TAG,"pos");
+            return R.drawable.pos_sentiment;
+        }else if (sentimet.contains("negative")) {
+            Log.i(TAG,"neg");
+            return R.drawable.neg_sentiment;
+        }
+        Log.i(TAG,"neu");
+        return R.drawable.neu_sentiment;
+
+    }
 
 }
 

@@ -3,17 +3,22 @@ package com.headrun.buzzinga.doto;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.cloudlibs.proxy.NaturalDeserializer;
 import com.cloudlibs.proxy.Proxy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.headrun.buzzinga.activities.HomeScreen;
+import com.headrun.buzzinga.config.Constants;
 import com.headrun.buzzinga.utils.ConnectionSettings;
 import com.headrun.buzzinga.utils.JsonData;
 
 import java.util.Calendar;
 
 public class Test {
+
+    String TAG = Test.this.getClass().getSimpleName();
     static Context context;
     public static Gson gson;
     public static String rsstype = " AND xtags:rss_sourcetype_manual";
@@ -27,24 +32,25 @@ public class Test {
 
     public void buzzdata(String searchstring, String sources, String fromdate, String todate) {
 
-        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) +" AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]','fields':['title', 'text'],'use_dis_max':true}},'sort':[{'dt_added':{'order':'desc'}}],'size':6}";
+        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]','fields':['title', 'text'],'use_dis_max':true}},'sort':[{'dt_added':{'order':'desc'}}],'size':10}";
         which_funn = "query";
         callserver(userQuery, which_funn);
     }
 
-    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate,String Loc,String Lang) {
+    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate, String Loc, String Lang) {
 
-        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + check_loc(Loc)+check_lang(Lang)+" AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
+        userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + check_loc(Loc) + check_lang(Lang) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
         which_funn = "query";
-        Log.i("query is",userQuery);
-       callserver(userQuery, which_funn);
+        Log.i("query is", userQuery);
+
+        callserver(userQuery, which_funn);
     }
 
     public void buzzdata(String scroolid) {
         if (!scroolid.equals("1")) {
             userQuery = scroolid;
             which_funn = "scrool";
-            Log.i("query is",userQuery);
+            Log.i("query is", userQuery);
             callserver(userQuery, which_funn);
         }
     }
@@ -71,15 +77,18 @@ public class Test {
 
         Object response;
 
-        /*
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    HomeScreen.progress.setVisibility(View.VISIBLE);
 
-                }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-        */
+            if(Constants.scroolid.equals("1"))
+            HomeScreen.progress.setVisibility(View.VISIBLE);
+            Log.i(TAG,"processing");
+
+        }
+
+
         @Override
         protected String doInBackground(String... data) {
 

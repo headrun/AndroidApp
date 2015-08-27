@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:padding="10dp">
+            android:padding="10dp"
+            >
 
             <LinearLayout
                 android:id="@+id/filtersource_lay"
@@ -65,15 +66,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/filterbuttons"
+            android:layout_marginTop="5dp"
             >
 
             <ListView
                 android:id="@+id/result_listview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:dividerHeight="7dp"
-                android:padding="5dp"
-                android:background="@drawable/articletextround"></ListView>
+                android:dividerHeight="10dp"
+                android:layout_margin="10dp"
+                android:fastScrollEnabled="true"
+                android:persistentDrawingCache="scrolling"
+                android:scrollingCache="false"
+               />
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
@@ -115,7 +120,7 @@
                 android:layout_below="@+id/closebtn"
                 android:gravity="center_horizontal"
                 android:text="Articles Filter By Date"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/fromdate"
@@ -127,7 +132,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/roundborder"
                 android:gravity="start|center"
-                android:hint="From date" />
+                android:hint="From date"
+                android:editable="false"/>
 
             <TextView
                 android:id="@+id/todate"
@@ -138,7 +144,8 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/roundborder"
                 android:gravity="start|center"
-                android:hint="To date" />
+                android:hint="To date"
+                android:editable="false"/>
 
 
             <Button
@@ -164,9 +171,10 @@
 
             <ImageView
                 android:id="@+id/closebrowser"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/closebrowser" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/closebrowser"
+                android:layout_gravity="center_horizontal|center_vertical"/>
 
             <TextView
                 android:id="@+id/browsertitle"

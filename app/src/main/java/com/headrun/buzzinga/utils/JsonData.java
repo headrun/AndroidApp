@@ -63,7 +63,9 @@ public class JsonData {
 
                         Log.i("Log_tag", "data is \ntitle" + title + "\nurl" + url + "\ntext" + text + "\ndate" + date + "\nauthor" + author + "\nsentiment" + sentiment + "\narticle_type" + article_type + "gender" + gender);
 
+                        Log.i(TAG,"in jason Constants.swipedata"+Constants.swipedata);
                         if (Constants.swipedata) {
+                            Log.i(TAG,"swipe data added");
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
                         } else {
@@ -99,7 +101,9 @@ public class JsonData {
                 HomeScreen.display_data.setAdapter(resultadapter);
                 HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
-                Config.isLoading = false;
+                HomeScreen.display_data.removeFooterView(HomeScreen.footerView);
+              //  HomeScreen. footerView.setVisibility(View.GONE);
+                Config.SwipeLoading = false;
                 // Log.i("Log_tag", "data fetched");
 
             } else {
@@ -110,7 +114,7 @@ public class JsonData {
                 HomeScreen.display_data.setAdapter(resultadapter);
                 HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
-                Config.isLoading = false;
+                Config.SwipeLoading = false;
             }
             HomeScreen.swipeRefreshLayout.setRefreshing(false);
         } catch (JSONException e) {

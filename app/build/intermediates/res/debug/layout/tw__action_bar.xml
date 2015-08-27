@@ -27,16 +27,15 @@
 
     <com.twitter.sdk.android.tweetui.ToggleImageButton
         android:id="@+id/tw__tweet_favorite_button"
-        style="@style/tw__TweetActionButton"
+        style="@style/tw__ActionButton"
         android:src="@drawable/tw__favorite_action"
         twitter:contentDescriptionOff="@string/tw__favorited_tweet"
-        twitter:contentDescriptionOn="@string/tw__favorite_tweet"
-        android:layout_marginRight="@dimen/tw__tweet_action_button_spacing"/>
+        twitter:contentDescriptionOn="@string/tw__favorite_tweet"/>
 
     <ImageButton
         android:id="@+id/tw__tweet_share_button"
-        style="@style/tw__TweetActionButton.Share"
+        style="@style/tw__ActionButton.Favorite"
         android:contentDescription="@string/tw__share_tweet"
         android:src="@drawable/tw__share_action"/>
 
-</com.twitter.sdk.android.tweetui.TweetActionBarView><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/layout/tw__action_bar.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/layout/tw__action_bar.xml -->
+</com.twitter.sdk.android.tweetui.TweetActionBarView><!-- From: file:/Users/android/workspace/jenkins/workspace/fabric-android-deploy-to-staging/sdk/twitter/tweet-ui/src/main/res/layout/tw__action_bar.xml --><!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/layout/tw__action_bar.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <plurals name="tw__time_hours">
         <item quantity="one">1 h</item>
@@ -29,7 +29,7 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Puhehaku"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Jakaminen:"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Jakaminen: %s"</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.7.2/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.2/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="dgts__cancel">Peruuta</string>
     <string name="dgts__communication_error">Viestintävirhe</string>
@@ -78,27 +78,27 @@ ja/tai sähköpostiosoitteen perusteella.</string>
     <string name="dgts_pin_code_terms">Olet aiemmin asettanut kaksivaiheisen varmennuskoodin osoitteessa digits.com</string>
     <string name="dgts_verify">Varmenna</string>
     <string name="dgts_verifying">Varmennetaan</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__allow_btn_txt">Salli</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__loading_tweet">Ladataan twiittiä</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__login_btn_txt">Kirjaudu Twitter-tunnuksellasi</string>
     <string name="tw__not_now_btn_txt">Ei nyt</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__relative_date_format_long">d.M.y</string>
     <string name="tw__relative_date_format_short">d. MMM</string>
     <string name="tw__retweeted_by_format">Uudelleentwiitannut %1$s</string>
     <string name="tw__share_content_format">Katso käyttäjän \@%1$s twiitti: https://twitter.com/%1$s/status/%2$s</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.3/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__share_email_desc">Saa päivityksiä ja muuta tietoa kohteelta %1$s antamalla pääsy Twitter-tilisi \@%2$s sähköpostiosoitteeseen</string>
     <string name="tw__share_email_title">Jaa sähköpostiosoitteesi</string>
-    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.4.1/res/values-fi/values-fi.xml -->
+    <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.1/res/values-fi/values-fi.xml -->
     <eat-comment/>
     <string name="tw__share_subject_format">Twiitti käyttäjältä %1$s (\@%2$s)</string>
     <string name="tw__share_tweet">Jaa twiitti</string>
