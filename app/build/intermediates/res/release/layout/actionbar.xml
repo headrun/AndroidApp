@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/logoimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/buzz_logo" />
+
+        <EditText
+            android:id="@+id/searchtext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/logoimage"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/menu_source"
+            android:layout_toRightOf="@+id/logoimage"
+            android:layout_toStartOf="@+id/menu_source"
+            android:background="@drawable/roundborder"
+            android:hint="search"
+            android:singleLine="true">
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/menu_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="end|top"
+            android:padding="20dp"
+            android:src="@drawable/ic_drawer" />
+
+
+    </RelativeLayout>
+-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/action_filter"/>
+            <Button
+                android:id="@+id/filterbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:text="Filter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/action_filter"/>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="Filter by Date" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/filterpanel"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#80000000">
+
+        <RelativeLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/white">
+
+
+            <ImageButton
+                android:id="@+id/closebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="close_filterpannel"
+                android:src="@drawable/close" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/fromdate"
+                android:layout_alignStart="@+id/fromdate"
+                android:layout_below="@+id/closebtn"
+                android:gravity="center_horizontal"
+                android:text="Articles Filter By Date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fromdate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/statusText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundborder"
+                android:gravity="start|center"
+                android:hint="From date"
+                android:onClick="setFromDate" />
+
+            <TextView
+                android:id="@+id/todate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/fromdate"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/roundborder"
+                android:gravity="start|center"
+                android:hint="To date"
+                android:onClick="setToDate" />
+
+
+            <Button
+                android:id="@+id/bydatefilter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/todate"
+                android:layout_marginTop="45dp"
+                android:onClick="bydatefilter"
+                android:text="Filter" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/webview_lay"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/browserheader"
+            android:background="#ffffff">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/closebrowser"
+            android:id="@+id/closebrowser"
+            android:onClick="closeBrowser"/>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/browsertitle"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/closebrowser"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="start|center"/>
+            <ProgressBar
+                android:layout_width="fill_parent"
+                android:layout_height="3dp"
+                android:id="@+id/browserprogress"
+                android:layout_below="@+id/browsertitle"/>
+        </RelativeLayout>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/browserheader"
+            >
+
+        </WebView>
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/actionbar.xml -->

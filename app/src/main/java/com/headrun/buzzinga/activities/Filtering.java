@@ -145,10 +145,12 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                     filterGender();
                     break;
                 case LANGUAGE:
+                    autosearch.getText().clear();
                     Sourcestatus = "lang";
                     filterLang();
                     break;
                 case LOCATION:
+                    autosearch.getText().clear();
                     Sourcestatus = "loc";
                     filterLocation();
                     break;
