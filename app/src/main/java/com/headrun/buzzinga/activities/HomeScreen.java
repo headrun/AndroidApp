@@ -345,7 +345,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+t 
         //noinspection SimplifiableIfStatement
       /*
         if (id == R.id.action_filter) {
@@ -353,6 +353,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             return true;
         }
         */
+
+        if(id==R.id.action_logout){
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

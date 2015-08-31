@@ -11,9 +11,7 @@ com/digits/sdk/android/R.class
 io/fabric/sdk/android/FabricContext.class
 com/digits/sdk/android/Digits.class
 com/twitter/sdk/android/tweetui/TweetUtils.class
-com/twitter/sdk/android/core/identity/TwitterLoginButton.class
 android/support/v7/app/AppCompatActivity.class
-retrofit/Callback.class
 com/twitter/sdk/android/core/identity/ShareEmailClient.class
 org/apache/http/annotation/ThreadSafe.class
 android/support/annotation/LayoutRes.class
@@ -24,8 +22,8 @@ android/support/annotation/ColorRes.class
 io/fabric/sdk/android/Onboarding.class
 com/digits/sdk/android/PhoneNumberActionBarActivity.class
 com/twitter/sdk/android/core/TwitterPinningInfoProvider.class
-butterknife/BindString.class
 org/apache/http/client/params/ClientParamBean.class
+butterknife/BindString.class
 android/support/annotation/RequiresPermission.class
 android/support/v4/app/TaskStackBuilder$SupportParentable.class
 com/headrun/buzzinga/utils/SearchListData.class
@@ -93,6 +91,7 @@ org/apache/http/conn/params/ConnManagerParamBean.class
 retrofit/http/PATCH.class
 com/twitter/sdk/android/core/internal/oauth/GuestAuthToken.class
 org/apache/http/conn/scheme/Scheme.class
+com/headrun/buzzinga/activities/TwitterLogin$MyBrowser.class
 com/digits/sdk/android/PhoneNumberTask$Listener.class
 com/headrun/buzzinga/activities/Filtering.class
 com/google/gson/annotations/Since.class
@@ -148,8 +147,8 @@ retrofit/http/DELETE.class
 org/apache/http/conn/params/ConnManagerPNames.class
 com/twitter/sdk/android/core/internal/scribe/TwitterCoreScribeClientHolder.class
 org/apache/http/impl/conn/tsccm/BasicPoolEntry.class
-com/twitter/sdk/android/core/identity/OAuthController$Listener.class
 io/fabric/sdk/android/services/concurrency/internal/RetryPolicy.class
+com/twitter/sdk/android/core/identity/OAuthController$Listener.class
 android/support/v7/internal/widget/AdapterViewCompat.class
 android/support/v7/app/ActionBarDrawerToggle$DelegateProvider.class
 com/twitter/sdk/android/core/models/SearchMetadata.class
@@ -182,7 +181,6 @@ com/twitter/sdk/android/tweetui/SyndicationClientEvent$ExternalIds.class
 com/twitter/sdk/android/core/TwitterCore.class
 android/support/v7/view/ActionMode$Callback.class
 com/digits/sdk/android/ActivityClassManagerImp.class
-com/twitter/sdk/android/core/Callback.class
 android/support/v4/view/animation/LookupTableInterpolator.class
 com/google/gson/annotations/SerializedName.class
 org/apache/http/impl/cookie/BrowserCompatSpec.class
@@ -191,8 +189,8 @@ io/fabric/sdk/android/services/concurrency/internal/DefaultRetryPolicy.class
 android/support/v7/app/ActionBar$NavigationMode.class
 org/apache/http/client/protocol/ClientContextConfigurer.class
 android/support/v4/app/FragmentManager$OnBackStackChangedListener.class
-android/support/v7/app/ActionBar$Tab.class
 com/digits/sdk/android/NoOpScribeService.class
+android/support/v7/app/ActionBar$Tab.class
 com/digits/sdk/android/DigitsActivityDelegate.class
 io/fabric/sdk/android/Fabric.class
 retrofit/http/FormUrlEncoded.class
@@ -414,13 +412,14 @@ com/twitter/sdk/android/core/R.class
 com/twitter/sdk/android/core/identity/OAuthWebViewClient$Listener.class
 io/fabric/sdk/android/services/concurrency/internal/ExponentialBackoff.class
 com/digits/sdk/android/ContactsActivityDelegate.class
+com/headrun/buzzinga/activities/TwitterLogin$MyJavaScriptInterface.class
 retrofit/http/Path.class
 com/digits/sdk/android/FailureActivity.class
 android/support/v7/appcompat/R$styleable.class
 com/twitter/sdk/android/core/internal/oauth/GuestTokenResponse.class
 retrofit/http/Part.class
-android/support/v7/app/ActionBarDrawerToggle$Delegate.class
 com/digits/sdk/android/ConfirmationCodeActivityDelegate.class
+android/support/v7/app/ActionBarDrawerToggle$Delegate.class
 com/twitter/sdk/android/core/TwitterAuthToken.class
 com/digits/sdk/android/DigitsSession.class
 android/support/v7/app/AppCompatDelegate.class

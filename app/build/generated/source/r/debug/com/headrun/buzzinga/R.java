@@ -1835,13 +1835,14 @@ containing a value of this type.
         public static final int action_bar_title=0x7f100025;
         public static final int action_context_bar=0x7f100043;
         public static final int action_divider=0x7f100084;
+        public static final int action_logout=0x7f1000c0;
         public static final int action_menu_divider=0x7f100002;
         public static final int action_menu_presenter=0x7f100003;
         public static final int action_mode_bar=0x7f10003f;
         public static final int action_mode_bar_stub=0x7f10003e;
         public static final int action_mode_close_button=0x7f100027;
-        public static final int action_search=0x7f1000bc;
-        public static final int action_settings=0x7f1000bb;
+        public static final int action_search=0x7f1000bf;
+        public static final int action_settings=0x7f1000be;
         public static final int activity_chooser_view_content=0x7f100028;
         public static final int alertTitle=0x7f100032;
         public static final int always=0x7f100016;
@@ -1941,6 +1942,7 @@ containing a value of this type.
         public static final int progressBar1=0x7f10007f;
         public static final int progress_circular=0x7f100005;
         public static final int progress_horizontal=0x7f100006;
+        public static final int progressbar=0x7f1000bd;
         public static final int radio=0x7f10003c;
         public static final int result_listview=0x7f100060;
         public static final int screen=0x7f10001f;
@@ -2005,7 +2007,9 @@ containing a value of this type.
         public static final int tw__tweet_view=0x7f1000ae;
         public static final int tw__twitter_logo=0x7f1000b4;
         public static final int tw__web_view=0x7f1000a8;
-        public static final int twitter_login_button=0x7f1000ba;
+        public static final int twitter_auth_lay=0x7f1000bc;
+        public static final int twitter_btn=0x7f1000ba;
+        public static final int twitter_login_button=0x7f1000bb;
         public static final int up=0x7f100008;
         public static final int url=0x7f100091;
         public static final int useLogo=0x7f100012;

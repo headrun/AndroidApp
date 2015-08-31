@@ -604,13 +604,14 @@ int id action_bar_subtitle 0x7f100026
 int id action_bar_title 0x7f100025
 int id action_context_bar 0x7f100043
 int id action_divider 0x7f100084
+int id action_logout 0x7f1000c0
 int id action_menu_divider 0x7f100002
 int id action_menu_presenter 0x7f100003
 int id action_mode_bar 0x7f10003f
 int id action_mode_bar_stub 0x7f10003e
 int id action_mode_close_button 0x7f100027
-int id action_search 0x7f1000bc
-int id action_settings 0x7f1000bb
+int id action_search 0x7f1000bf
+int id action_settings 0x7f1000be
 int id activity_chooser_view_content 0x7f100028
 int id alertTitle 0x7f100032
 int id always 0x7f100016
@@ -710,6 +711,7 @@ int id progressBar 0x7f10007d
 int id progressBar1 0x7f10007f
 int id progress_circular 0x7f100005
 int id progress_horizontal 0x7f100006
+int id progressbar 0x7f1000bd
 int id radio 0x7f10003c
 int id result_listview 0x7f100060
 int id screen 0x7f10001f
@@ -774,7 +776,9 @@ int id tw__tweet_timestamp 0x7f1000b6
 int id tw__tweet_view 0x7f1000ae
 int id tw__twitter_logo 0x7f1000b4
 int id tw__web_view 0x7f1000a8
-int id twitter_login_button 0x7f1000ba
+int id twitter_auth_lay 0x7f1000bc
+int id twitter_btn 0x7f1000ba
+int id twitter_login_button 0x7f1000bb
 int id up 0x7f100008
 int id url 0x7f100091
 int id useLogo 0x7f100012
