@@ -11,28 +11,28 @@
 -printconfiguration /home/headrun/Documents/buzz/AndroidApp/app/build/intermediates/multi-dex/debug/components.flags
 
 
--keep class null {
+-keep class in.headrun.buzzinga.BuzzingaApplication {
     <init>();
     void attachBaseContext(android.content.Context);
 }
 
--keep class com.headrun.buzzinga.activities.SplashActivity {
+-keep class in.headrun.buzzinga.activities.SplashActivity {
     <init>();
 }
 
--keep class com.headrun.buzzinga.activities.HomeScreen {
+-keep class in.headrun.buzzinga.activities.HomeScreen {
     <init>();
 }
 
--keep class com.headrun.buzzinga.activities.Searchable {
+-keep class in.headrun.buzzinga.activities.Searchable {
     <init>();
 }
 
--keep class com.headrun.buzzinga.activities.TwitterLogin {
+-keep class in.headrun.buzzinga.activities.TwitterLogin {
     <init>();
 }
 
--keep class com.headrun.buzzinga.activities.Filtering {
+-keep class in.headrun.buzzinga.activities.Filtering {
     <init>();
 }
 

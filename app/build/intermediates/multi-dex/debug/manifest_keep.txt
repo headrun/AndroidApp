@@ -1,12 +1,12 @@
--keep class null {
+-keep class in.headrun.buzzinga.BuzzingaApplication {
     <init>();
     void attachBaseContext(android.content.Context);
 }
--keep class com.headrun.buzzinga.activities.SplashActivity { <init>(); }
--keep class com.headrun.buzzinga.activities.HomeScreen { <init>(); }
--keep class com.headrun.buzzinga.activities.Searchable { <init>(); }
--keep class com.headrun.buzzinga.activities.TwitterLogin { <init>(); }
--keep class com.headrun.buzzinga.activities.Filtering { <init>(); }
+-keep class in.headrun.buzzinga.activities.SplashActivity { <init>(); }
+-keep class in.headrun.buzzinga.activities.HomeScreen { <init>(); }
+-keep class in.headrun.buzzinga.activities.Searchable { <init>(); }
+-keep class in.headrun.buzzinga.activities.TwitterLogin { <init>(); }
+-keep class in.headrun.buzzinga.activities.Filtering { <init>(); }
 -keep class com.twitter.sdk.android.core.identity.OAuthActivity { <init>(); }
 -keep class com.twitter.sdk.android.core.identity.ShareEmailActivity { <init>(); }
 -keep class com.digits.sdk.android.PhoneNumberActivity { <init>(); }

@@ -25,7 +25,7 @@ android {
 
     defaultConfig {
 
-        applicationId "com.headrun.buzzinga"
+        applicationId "in.headrun.buzzinga"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.headrun.buzzinga"
+    package="in.headrun.buzzinga"
     android:versionCode="1"
     android:versionName="0.9" >
 
@@ -14,12 +14,13 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name="in.headrun.buzzinga.BuzzingaApplication"
         android:allowBackup="true"
         android:icon="@drawable/buzz_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.headrun.buzzinga.activities.SplashActivity"
+            android:name="in.headrun.buzzinga.activities.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -29,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.headrun.buzzinga.activities.HomeScreen"
+            android:name="in.headrun.buzzinga.activities.HomeScreen"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
@@ -41,7 +42,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="com.headrun.buzzinga.activities.Searchable" >
+        <activity android:name="in.headrun.buzzinga.activities.Searchable" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -51,14 +52,14 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.headrun.buzzinga.activities.TwitterLogin"
+            android:name="in.headrun.buzzinga.activities.TwitterLogin"
             android:screenOrientation="portrait" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d86019c459899199bc8457d29638cf0d995bc1f4" />
 
-        <activity android:name="com.headrun.buzzinga.activities.Filtering" >
+        <activity android:name="in.headrun.buzzinga.activities.Filtering" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeScreen" />
