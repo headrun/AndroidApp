@@ -19,7 +19,8 @@ public class Constants {
     public static String SEARCHSTRING;
     public static String USERNAME;
     public static TwitterAuthToken AUTHTOKEN;
-    public static String logout = "http://beta.buzzinga.com/accounts/logout?next=/link_socialmedia/";
+    public static String logout = "http://beta.buzzinga.com/accounts/logout?next=/";
+    public static String search = "http://beta.buzzinga.com/search/";
 
 
     public static ArrayList<SearchDetails> listdetails = new ArrayList<SearchDetails>();

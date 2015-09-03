@@ -30,7 +30,7 @@ public class UserSession {
 
 
     public String getTSESSION() {
-        String sess = pref.getString(TSESSION, "null");
+        String sess = pref.getString(TSESSION, "");
         Log.i("Log_Tag", "sess" + sess);
         return sess;
     }

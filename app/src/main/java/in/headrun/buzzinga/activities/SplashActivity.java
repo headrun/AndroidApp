@@ -79,11 +79,9 @@ public class SplashActivity extends Activity {
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
         Log.i("Log_tag", "loged session is" + loged);
-        if (loged.equals("null"))
-            startActivity(new Intent(this, TwitterLogin.class));
-        else
+        if (loged.length() > 0)
             startActivity(new Intent(this, HomeScreen.class));
-
-
+        else
+            startActivity(new Intent(this, TwitterLogin.class));
     }
 }

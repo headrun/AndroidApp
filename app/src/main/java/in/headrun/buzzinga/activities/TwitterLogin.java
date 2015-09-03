@@ -137,7 +137,7 @@ public class TwitterLogin extends Activity {
                          }
                      }
 
-                    if(!new UserSession(TwitterLogin.this).getTSESSION().equals("null"))
+                    if(new UserSession(TwitterLogin.this).getTSESSION().length()>0)
                         startActivity(new Intent(TwitterLogin.this,HomeScreen.class));
                 }
                 if (view.getOriginalUrl().toString().contains("http://beta.buzzinga.com/profile/"))

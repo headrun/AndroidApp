@@ -18,14 +18,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Iterator;
+
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
 import in.headrun.buzzinga.doto.Test;
 import in.headrun.buzzinga.utils.FilterTitleAdapter;
 import in.headrun.buzzinga.utils.ListViewAdapter;
-
-import java.util.Iterator;
 
 /**
  * Created by headrun on 6/8/15.
@@ -231,7 +231,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                     Log.i("Log_Tag", "source querry is" + sourcequery + "\nsentiment" + sentimentquery + "\n genderquery" + genderquery + "loc query" + locquery + "lang query" + langquery);
                     Constants.scroolid = "1";
                     Constants.listdetails.clear();
-                    buzztest.buzzdata(Constants.SEARCHSTRING, sourcequery, genderquery, sentimentquery, "1", "1", locquery, langquery);
+                    buzztest.buzzdata(Constants.SEARCHSTRING, sourcequery, genderquery, sentimentquery, "1", "1", locquery, langquery,"1");
                     startActivity(new Intent(getApplication(),HomeScreen.class));
                 } else {
                     Toast.makeText(getApplication(), "Enter the search string", Toast.LENGTH_LONG).show();

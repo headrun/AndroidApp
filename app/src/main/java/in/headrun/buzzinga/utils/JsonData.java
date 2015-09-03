@@ -4,16 +4,16 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
-import in.headrun.buzzinga.activities.HomeScreen;
-import in.headrun.buzzinga.config.Config;
-import in.headrun.buzzinga.config.Constants;
-import in.headrun.buzzinga.doto.SearchDetails;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import in.headrun.buzzinga.activities.HomeScreen;
+import in.headrun.buzzinga.config.Config;
+import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.doto.SearchDetails;
 
 
 public class JsonData {
@@ -60,10 +60,6 @@ public class JsonData {
 
 
                         xtags_separate(json_xtags);
-
-                        Log.i("Log_tag", "data is \ntitle" + title + "\nurl" + url + "\ntext" + text + "\ndate" + date + "\nauthor" + author + "\nsentiment" + sentiment + "\narticle_type" + article_type + "gender" + gender);
-
-                        Log.i(TAG,"in jason Constants.swipedata"+Constants.swipedata);
                         if (Constants.swipedata) {
                             Log.i(TAG,"swipe data added");
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
@@ -80,7 +76,7 @@ public class JsonData {
                 if (!swipelist.isEmpty()) {
 
                     for (int i = 0; i < swipelist.size(); i++) {
-                        Log.i("Log_ag", "swipe new url is" + swipelist.get(i).getUrl() + "\n url is" + Constants.listdetails.get(0).getUrl());
+
                         if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
                             searchpos = i;
                             Constants.finddata = true;

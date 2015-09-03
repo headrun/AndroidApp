@@ -165,7 +165,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     footerView = inflater.inflate(R.layout.listviewfooter, null);
                     display_data.addFooterView(footerView);
 
-                    buzztest.buzzdata(Constants.scroolid);
+                    querybydate(true);
+
                 }
             }
         });
@@ -336,7 +337,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
         if (search_validation()) {
 
-            buzztest.buzzdata(Constants.SEARCHSTRING, Filtering.sourcequery(), Filtering.genderquery(), Filtering.sentimentquery(), GetFromDate(), getToDate(), Filtering.locquery(), Filtering.langquery());
+            buzztest.buzzdata(Constants.SEARCHSTRING, Filtering.sourcequery(), Filtering.genderquery(), Filtering.sentimentquery(), GetFromDate(), getToDate(), Filtering.locquery(), Filtering.langquery(), Constants.scroolid);
         }
     }
 
@@ -367,8 +368,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         */
 
         if (id == R.id.action_logout) {
+            new UserSession(HomeScreen.this).clearsession();
 
-            stringrequest();
+            startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
+
+            //stringrequest();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -382,9 +386,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     public void onResponse(String response) {
 
                         Log.d(TAG, "string response is" + response);
-                             new UserSession(HomeScreen.this).clearsession();
-
-                        startActivity(new Intent(HomeScreen.this,TwitterLogin.class));
 
                     }
                 }, new Response.ErrorListener() {
