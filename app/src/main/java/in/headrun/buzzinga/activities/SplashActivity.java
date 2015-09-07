@@ -40,7 +40,7 @@ public class SplashActivity extends Activity {
 
         if (Config.SPLASH)
             Log.i(TAG, "splash activty");
-
+        Constants.xtags();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +80,7 @@ public class SplashActivity extends Activity {
         loged = new UserSession(SplashActivity.this).getTSESSION();
         Log.i("Log_tag", "loged session is" + loged);
         if (loged.length() > 0)
-            startActivity(new Intent(this, HomeScreen.class));
+            startActivity(new Intent(this, TrackKeyWord.class));
         else
             startActivity(new Intent(this, TwitterLogin.class));
     }

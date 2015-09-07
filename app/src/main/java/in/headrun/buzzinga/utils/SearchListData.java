@@ -1,7 +1,6 @@
 package in.headrun.buzzinga.utils;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,19 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import in.headrun.buzzinga.R;
-import in.headrun.buzzinga.doto.SearchDetails;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.doto.SearchDetails;
 
 /**
  * Created by headrun on 10/7/15.
  */
 public class SearchListData extends ArrayAdapter<SearchDetails> {
 
-    String TAG=SearchListData.this.getClass().getSimpleName();
+    String TAG = SearchListData.this.getClass().getSimpleName();
     Context context;
     ArrayList<SearchDetails> listdata;
     LayoutInflater inflater;
@@ -66,7 +65,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         public TextView sentimentcolor;
         public ImageView article_icon;
         public View title_lay;
-        public TextView sentimetncolor;
+        public View article_lay;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -84,47 +83,45 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.sentimentcolor = (TextView) itemView.findViewById(R.id.sentimetncolor);
         holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
         holder.title_lay = itemView.findViewById(R.id.title_lay);
-        holder.sentimetncolor = (TextView)itemView.findViewById(R.id.sentimetncolor);
-
-
+        holder.article_lay = itemView.findViewById(R.id.article_lay);
         SearchDetails item = getItem(position);
         holder.title.setText(item.getTitle());
 
         holder.url.setText(item.getUrl());
 
-        if (item.getText()!=null) {
+        if (item.getText() != null) {
             holder.text.setText(item.getText());
-           // holder.text.setBackgroundResource(R.drawable.roundborder);
+            // holder.text.setBackgroundResource(R.drawable.roundborder);
             holder.text.setVisibility(View.VISIBLE);
         }
 
-        if (item.getAuthor() !=null)
+        if (item.getAuthor() != null)
             holder.author.setText("By - " + item.getAuthor());
 
-        holder.sentimentcolor.setBackgroundColor(Color.parseColor("#5cb85c"));
+        // holder.sentimentcolor.setBackgroundColor(Color.parseColor("#5cb85c"));
         holder.article_icon.setImageResource(R.drawable.filter);
         long seconds = Long.parseLong(item.getArticledate());
         long millis = seconds * 1000;
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a");
         holder.articledate.setText(sdf.format(date));
-        Log.i("Log_tag","sentiment color is"+item.getSentiment()+"drawable  is"+applySentimentColor(item.getSentiment()));
-        holder.sentimetncolor.setBackgroundResource(applySentimentColor(item.getSentiment()));
+        Log.i("Log_tag", "sentiment color is" + item.getSentiment() + "drawable  is" + applySentimentColor(item.getSentiment()));
+        holder.article_lay.setBackgroundResource(applySentimentColor(item.getSentiment()));
 
         return itemView;
     }
 
-    private int applySentimentColor(String sentimet){
+    private int applySentimentColor(String sentimet) {
 
-        if(sentimet!=null)
-        if(sentimet.contains("positive")) {
-         Log.i(TAG,"pos");
-            return R.drawable.pos_sentiment;
-        }else if (sentimet.contains("negative")) {
-            Log.i(TAG,"neg");
-            return R.drawable.neg_sentiment;
-        }
-        Log.i(TAG,"neu");
+        if (sentimet != null)
+            if (sentimet.contains("positive")) {
+                Log.i(TAG, "pos");
+                return R.drawable.pos_sentiment;
+            } else if (sentimet.contains("negative")) {
+                Log.i(TAG, "neg");
+                return R.drawable.neg_sentiment;
+            }
+        Log.i(TAG, "neu");
         return R.drawable.neu_sentiment;
 
     }

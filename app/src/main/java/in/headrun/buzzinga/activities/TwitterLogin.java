@@ -14,8 +14,11 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.config.ServerConfig;
 
 /**
  * Created by headrun on 21/7/15.
@@ -23,25 +26,26 @@ import in.headrun.buzzinga.UserSession;
 public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
-    //String url="http://www.javacodegeeks.com";
-    String url = "http://beta.buzzinga.com/login/twitter";
-    String cookie;
 
+    @Bind(R.id.twitter_login_button)
     Button loginButton;
-    View twitter_btn,twitter_auth_lay;
-    static WebView webview;
+    @Bind(R.id.progressbar)
     ProgressBar progressbar;
+    @Bind(R.id.twitter_btn)
+    View twitter_btn;
+    @Bind(R.id.twitter_auth_lay)
+    View twitter_auth_lay;
+    @Bind(R.id.webview)
+    WebView webview;
+
+
+    String cookie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twitterlogin);
-
-        loginButton = (Button) findViewById(R.id.twitter_login_button);
-        twitter_btn=findViewById(R.id.twitter_btn);
-        twitter_auth_lay=findViewById(R.id.twitter_auth_lay);
-        webview = (WebView) findViewById(R.id.webview);
-        progressbar = (ProgressBar) findViewById(R.id.progressbar);
+        ButterKnife.bind(this);
 
 
         twitter_btn.setVisibility(View.VISIBLE);
@@ -49,20 +53,13 @@ public class TwitterLogin extends Activity {
         webview.setWebViewClient(new MyBrowser());
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.clearCache(true);
-        webview.clearHistory();
         webview.getSettings().getAllowContentAccess();
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.getSettings().setLoadWithOverviewMode(true);
         webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
-
-
-        // webview.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_DEFAULT);
-        webview.getSettings().getJavaScriptCanOpenWindowsAutomatically();
-        webview.getSettings().setGeolocationEnabled(true);
-
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        Log.d(TAG, "loading urls is" + url);
+
+        Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,37 +67,10 @@ public class TwitterLogin extends Activity {
 
                 twitter_btn.setVisibility(View.GONE);
                 twitter_auth_lay.setVisibility(View.VISIBLE);
-                webview.loadUrl(url.toString());
-            }
-        });
-       /* loginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // Do something with result, which provides a TwitterSession for making API calls
-                Log.i("Log_tag", "result is" + result.data.toString());
-
-                new UserSession(TwitterLogin.this).setTSESSION(result.data.toString());
-
-                   TwitterSession session = Twitter.getSessionManager().getActiveSession();
-                TwitterAuthToken authToken = session.getAuthToken();
-                String token = authToken.token;
-                String secret = authToken.secret;
-
-                TwitterAuthConfig authConfig = TwitterCore.getInstance().getAuthConfig();
-                OAuthSigning oauthSigning = new OAuthSigning(authConfig, authToken);
-
-                Log.i("Log_tag","token is"+token+"secret key is"+secret);
-
-                homeScreenIntent();
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // Do something on failure
+                webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
             }
         });
 
-        */
     }
 
     private class MyBrowser extends WebViewClient {
@@ -122,23 +92,23 @@ public class TwitterLogin extends Activity {
             Log.d(TAG, "TITLE is" + view.getTitle() + "\nurl is" + view.getOriginalUrl());
 
 
-            if (view.getOriginalUrl() != null){
+            if (view.getOriginalUrl() != null) {
                 cookie = CookieManager.getInstance().getCookie(url);
 
-                if(cookie !=null){
-                    String[] cookie_extract= cookie.split(";");
-                     for(String cookivalue:cookie_extract){
-                         if(cookivalue.contains("sessionid")){
-                             String[] temp1=cookivalue.split("=");
-                             Log.i(TAG, "session id is" + temp1[1]);
-                             Log.d(TAG, "All the cookies in a string:" + temp1[1]);
-                             new UserSession(TwitterLogin.this).setTSESSION(temp1[1]);
+                if (cookie != null) {
+                    String[] cookie_extract = cookie.split(";");
+                    for (String cookivalue : cookie_extract) {
+                        if (cookivalue.contains("sessionid")) {
+                            String[] temp1 = cookivalue.split("=");
+                            Log.i(TAG, "session id is" + temp1[1]);
 
-                         }
-                     }
+                            new UserSession(TwitterLogin.this).setTSESSION(temp1[1]);
 
-                    if(new UserSession(TwitterLogin.this).getTSESSION().length()>0)
-                        startActivity(new Intent(TwitterLogin.this,HomeScreen.class));
+                        }
+                    }
+
+                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0)
+                        startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
                 }
                 if (view.getOriginalUrl().toString().contains("http://beta.buzzinga.com/profile/"))
                     webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
@@ -154,31 +124,14 @@ public class TwitterLogin extends Activity {
         }
     }
 
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loginButton.onActivityResult(requestCode, resultCode, data);
 
-        Log.i("Log_tag", "on activiry result"+data.toString());
-
-    }
-
-    private void homeScreenIntent() {
-        startActivity(new Intent(TwitterLogin.this, HomeScreen.class));
-    }
-    */
-    class MyJavaScriptInterface
-    {
+    class MyJavaScriptInterface {
         @JavascriptInterface
         @SuppressWarnings("unused")
-        public void processHTML(String html)
-        {
+        public void processHTML(String html) {
             Log.i(TAG, html);
-           // if(html.toString().contains("An error occured, please contact Admin"))
-              // startActivity(new Intent(TwitterLogin.this,HomeScreen.class));
-               // Log.i(TAG,"Already User hass a login");
+
         }
     }
 
-    }
+}

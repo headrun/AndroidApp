@@ -30,8 +30,8 @@ import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.utils.ConnectionSettings;
-import in.headrun.buzzinga.utils.JsonData;
 
 public class Test {
 
@@ -60,6 +60,18 @@ public class Test {
         callserver(check_scrollid("1"), userQuery, setup, which_funn);
     }
 
+    public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate, String Loc, String Lang) {
+        setup = setupdate(check_fromdate(fromdate), check_todate(todate));
+
+        que = "(" + searchstring + ")" + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + check_loc(Loc) + check_lang(Lang) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]";
+        userQuery = queryform(que);
+        /*userQuery = "{'query': {'query_string': {'query':'" + searchstring + check_searchsources(sources) + check_gender(gender) + check_sentiment(sentiment) + check_loc(Loc) + check_lang(Lang) + " AND dt_added:[" + check_fromdate(fromdate) + " TO " + check_todate(todate) + "]', 'fields':['title', 'text'],  'use_dis_max':true}}, 'sort':[{'dt_added':{'order':'desc'}}], 'size':10}";
+        */
+        which_funn = "query";
+        Log.i("query is", userQuery);
+
+        callserver(check_scrollid("1"), userQuery, setup, which_funn);
+    }
 
     public void buzzdata(String searchstring, String sources, String gender, String sentiment, String fromdate, String todate, String Loc, String Lang, String scrool_id) {
         setup = setupdate(check_fromdate(fromdate), check_todate(todate));
@@ -78,13 +90,19 @@ public class Test {
     private void callserver(String scrool_id, String query, String setup, String which_funn) {
 
         if (ConnectionSettings.isConnected(context)) {
-            querydisplay(userQuery);
+
             new getresponce().execute(scrool_id, query, setup, which_funn);
 
         } else {
             Log.i("Log_tag", "network failed");
         }
     }
+
+
+    public static Object parseJson(String data) {
+        return gson.fromJson(data, Object.class);
+    }
+
 
     private String toCurrentDate() {
         Calendar now = Calendar.getInstance();
@@ -168,11 +186,11 @@ public class Test {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            if (Constants.scroolid.equals("1"))
+            Log.i(TAG, "scrool id is" + Constants.scroolid);
+            if (Constants.scroolid.equals("1")) {
                 HomeScreen.progress.setVisibility(View.VISIBLE);
-            Log.i(TAG, "processing");
-
+                Log.i(TAG, "scrool is" + Constants.scroolid.equals("1"));
+            }
         }
 
         @Override
@@ -185,14 +203,14 @@ public class Test {
 
             Log.i(TAG, "\n" + params[0] + "\n type is" + setup + "\ntime zone is" + Tzone + "scroll id is" + scrool_id);
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.search,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.search,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
                             Log.d(TAG, "string response is" + response);
 
-                            new JsonData(context, response);
+                            //new JsonData(context, response);
 
                         }
                     }, new Response.ErrorListener() {

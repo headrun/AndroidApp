@@ -2,7 +2,6 @@ package in.headrun.buzzinga.utils;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,22 +9,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import in.headrun.buzzinga.activities.HomeScreen;
-import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchDetails;
 
 
 public class JsonData {
 
+
     Context context;
     public ArrayList<SearchDetails> swipelist;
     String title, url, text, date, author, sentiment, gender, article_type;
     String TAG = JsonData.this.getClass().getSimpleName();
 
-    // File fileWithinMyDir;
 
-    public JsonData(Context context, String data) {
+    public ArrayList<SearchDetails> getJsonData(String data) {
         this.context = context;
         logLargeString(data);
         swipelist = new ArrayList<SearchDetails>();
@@ -50,18 +47,14 @@ public class JsonData {
                         text = jobj_source.optString("text");
                         date = jobj_source.getString("_added");
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
-                        // author = jobj_source.getJSONObject("author").optString("name","null");
-                        //Log.i(TAG,"author is"+author);
                         JSONObject json_author = jobj_source.optJSONObject("author");
-
-
                         if (json_author != null)
-                           author= json_author.optString("name");
-
+                            author = json_author.optString("name");
 
                         xtags_separate(json_xtags);
+
                         if (Constants.swipedata) {
-                            Log.i(TAG,"swipe data added");
+                            Log.i(TAG, "swipe data added");
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
                         } else {
@@ -90,20 +83,21 @@ public class JsonData {
                         }
 
                 }
-                //checkdata();
 
+                return Constants.listdetails;
+               /*
                 resultadapter = new SearchListData(context, Constants.listdetails);
                 resultadapter.notifyDataSetChanged();
                 HomeScreen.display_data.setAdapter(resultadapter);
                 HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
                 HomeScreen.display_data.removeFooterView(HomeScreen.footerView);
-              //  HomeScreen. footerView.setVisibility(View.GONE);
                 Config.SwipeLoading = false;
-                // Log.i("Log_tag", "data fetched");
 
+*/
             } else {
-                Constants.scroolid = "1";
+                return Constants.listdetails;
+  /*              Constants.scroolid = "1";
                 Constants.listdetails.add(new SearchDetails());
                 resultadapter = new SearchListData(context, Constants.listdetails);
                 resultadapter.notifyDataSetChanged();
@@ -111,13 +105,14 @@ public class JsonData {
                 HomeScreen.content_lay.setVisibility(View.VISIBLE);
                 HomeScreen.progress.setVisibility(View.GONE);
                 Config.SwipeLoading = false;
+    */
             }
-            HomeScreen.swipeRefreshLayout.setRefreshing(false);
+      //      HomeScreen.swipeRefreshLayout.setRefreshing(false);
         } catch (JSONException e) {
             Log.i(TAG, "exception" + e);
             e.printStackTrace();
         }
-
+        return Constants.listdetails;
     }
 
     public void logLargeString(String str) {

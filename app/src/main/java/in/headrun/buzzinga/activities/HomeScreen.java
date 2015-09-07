@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,19 +33,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchDetails;
 import in.headrun.buzzinga.doto.Test;
+import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.FilterByDate;
+import in.headrun.buzzinga.utils.JsonData;
 import in.headrun.buzzinga.utils.SearchListData;
-
 
 /**
  * Created by headrun on 7/7/15.
@@ -53,31 +59,50 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
-
-    public static ListView display_data;                     ////  Display the results
-
+    Utils query;
+    public static ListView display_data;
     public static View content_lay;
-    public View filterpanel;
-    public View webview_lay;                                ///// Layout of menu button.
-    public View filtersource_lay;
-    public View filterdate_lay;
-    public static View listviewfooter;
     public static TextView fromdate, todate;
-    public static TextView browsertitle;
-    public WebView webview;
     public static SwipeRefreshLayout swipeRefreshLayout;
-    public TextView filtersourcebtn, filterdatebtn;
+    public static ProgressBar progress;
+    Context context;
+
+    public static String Intent_opt;
+
+    @Bind(R.id.filterpanel)
+    View filterpanel;
+    @Bind(R.id.webview_lay)
+    View webview_lay;
+    @Bind(R.id.filtersource_lay)
+    View filtersource_lay;
+    @Bind(R.id.filterdate_lay)
+    View filterdate_lay;
+
+    @Bind(R.id.browsertitle)
+    TextView browsertitle;
+    @Bind(R.id.filterdate)
+    TextView filtersourcebtn;
+
+    @Bind(R.id.webview)
+    WebView webview;
+
+
+    @Bind(R.id.closebtn)
+    ImageView closebtn;
+    @Bind(R.id.closebrowser)
+    ImageView closebrowser;
+    @Bind(R.id.bydatefilter)
     Button bydatefilter;
-    public ImageView closebtn, closebrowser;
-    public static View footerView;
-    Test buzztest;                                           ////  Call  the Test class
-    UserSession userSession;
-    SearchListData search_adapter;
-    public static ProgressBar progress, browserprogess, footerprogress;                      ////  progress bar after clicking the checkbox
+
+    @Bind(R.id.browserprogress)
+    ProgressBar browserprogess;
+
 
     public static int DATEFLAG;
-    String cookies;
-
+    public static View footerView;
+    Test buzztest;
+    UserSession userSession;
+    SearchListData search_adapter;
     LayoutInflater inflater;
 
 
@@ -85,38 +110,30 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
+        ButterKnife.bind(this);
+
+        Bundle data = getIntent().getExtras();
+        Intent_opt = data.getString(Constants.Intent_OPERATION);
+
 
         handleIntent(getIntent());
         if (Config.HOME_SCREEN)
             Log.i(TAG, "HOME SCREEN");
-
+        query = new Utils(getApplication());
+        display_data = (ListView) findViewById(R.id.result_listview);
+        content_lay = findViewById(R.id.content_lay);
+        fromdate = (TextView) findViewById(R.id.fromdate);
+        todate = (TextView) findViewById(R.id.todate);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        progress = (ProgressBar) findViewById(R.id.progressBar);
+        context = getApplication();
 
         userSession = new UserSession(HomeScreen.this);
 
-        display_data = (ListView) findViewById(R.id.result_listview);
-        webview = (WebView) findViewById(R.id.webview);
-        content_lay = findViewById(R.id.content_lay);
-        filterpanel = findViewById(R.id.filterpanel);
-        webview_lay = findViewById(R.id.webview_lay);
-        filtersource_lay = findViewById(R.id.filtersource_lay);
-        filterdate_lay = findViewById(R.id.filterdate_lay);
-
-        fromdate = (TextView) findViewById(R.id.fromdate);
-        todate = (TextView) findViewById(R.id.todate);
-        browsertitle = (TextView) findViewById(R.id.browsertitle);
-        filtersourcebtn = (TextView) findViewById(R.id.filtersource);
-        filterdatebtn = (TextView) findViewById(R.id.filterdate);
-        bydatefilter = (Button) findViewById(R.id.bydatefilter);
-        closebtn = (ImageView) findViewById(R.id.closebtn);
-        closebrowser = (ImageView) findViewById(R.id.closebrowser);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        progress = (ProgressBar) findViewById(R.id.progressBar);
-        browserprogess = (ProgressBar) findViewById(R.id.browserprogress);
         inflater = this.getLayoutInflater();
 
         filtersourcebtn.setOnClickListener(this);
-        filterdatebtn.setOnClickListener(this);
+        // filterdatebtn.setOnClickListener(this);
         bydatefilter.setOnClickListener(this);
         closebtn.setOnClickListener(this);
         closebrowser.setOnClickListener(this);
@@ -125,8 +142,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         filtersource_lay.setOnClickListener(this);
         filterpanel.setOnClickListener(this);
         browserprogess.setVisibility(View.GONE);
+
         buzztest = new Test(getApplication());
         search_adapter = new SearchListData(HomeScreen.this, 1);
+
         content_lay.setVisibility(View.GONE);
         filterpanel.setVisibility(View.GONE);
         webview_lay.setVisibility(View.GONE);
@@ -141,7 +160,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 browsertitle.setText(details.getTitle() + "....");
                 webview_lay.setVisibility(View.VISIBLE);
                 webview.loadUrl(geturl);
-
                 Log.i("Log_tag", "selectd url is" + geturl);
             }
         });
@@ -157,15 +175,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
                 if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
-                    Log.i("Log_tag", "start the fetching data");
-                    Config.SwipeLoading = true;
 
-                    if (!Constants.scroolid.equals("1"))
-                        Log.i(TAG, "calling the scool query");
+                    Config.SwipeLoading = true;
                     footerView = inflater.inflate(R.layout.listviewfooter, null);
                     display_data.addFooterView(footerView);
-
-                    querybydate(true);
+                    String clobed_query = query.getquerydata(Constants.QueryString);
+                    new getresponce().execute(Constants.scroolid, clobed_query, Constants.SETUP);
 
                 }
             }
@@ -184,9 +199,24 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             public void onRefresh() {
                 Constants.swipedata = true;
                 //Log.i("Log_tag","swipedata is "+Constants.swipedata);
-                searchquery(false);
+
+                String clobed_query = query.getquerydata(Constants.QueryString);
+                new getresponce().execute(Constants.scroolid, clobed_query, Constants.SETUP);
             }
         });
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (Intent_opt.contains(Constants.Intent_TRACK)) {
+
+            new getresponce().execute();
+
+        }
 
     }
 
@@ -202,40 +232,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             if (Constants.SEARCHSTRING.trim().length() > 0) {
                 Constants.listdetails.clear();
                 Log.i("Log_tag", "display_data length is" + display_data.getCount());
+                Constants.BSEARCHKEY.clear();
+                Constants.BSEARCHKEY.add(Constants.SEARCHSTRING);
+
+                new getresponce().execute();
             }
 
-            searchquery(true);
         }
     }
-
-    //// Validate the edit text value
-    public static Boolean search_validation() {
-
-        Log.i("Log_tag", "search string" + Constants.SEARCHSTRING);
-        if (Constants.SEARCHSTRING.length() > 0)
-            return true;
-
-        return false;
-    }
-
-
-    ////public get the fromdate
-    public String GetFromDate() {
-        String Getfromdate = fromdate.getText().toString().trim();
-        if (Getfromdate.length() > 0) {
-            return Getfromdate;
-        }
-        return "1";
-    }
-
-    public String getToDate() {
-
-        String GetToDate = todate.getText().toString().trim();
-        if (GetToDate.length() > 0)
-            return GetToDate;
-        return "1";
-    }
-
 
     public void getdate() {
 
@@ -244,10 +248,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         newFragment.show(fm, "datePicker");
     }
 
-    public void displaydate(String data) {
-
-        Log.i("Log_tag", "data is" + data);
-    }
 
     private void webSettings() {
 
@@ -255,8 +255,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        // webview.getSettings().setBuiltInZoomControls(true);
-        // webview.getSettings().setUseWideViewPort(true);
     }
 
     @Override
@@ -274,27 +272,26 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 filterpanel.setVisibility(View.GONE);
                 break;
             case R.id.fromdate:
+                Constants.BFROMDATE.clear();
                 DATEFLAG = 0;
                 getdate();
                 break;
             case R.id.todate:
+                Constants.BTODATE.clear();
                 getdate();
                 break;
             case R.id.bydatefilter:
                 filterpanel.setVisibility(View.GONE);
-                if (search_validation()) {
-                    Constants.listdetails.clear();
-                    querybydate(true);
-                }
+
+                new getresponce().execute();
                 break;
             case R.id.closebrowser:
                 webview_lay.setVisibility(View.GONE);
                 webview.destroy();
-                HomeScreen.browserprogess.setProgress(100);
+                browserprogess.setProgress(100);
                 break;
             case R.id.filterpanel:
                 break;
-
 
         }
 
@@ -311,7 +308,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageFinished(WebView view, String url) {
             progress.setVisibility(View.GONE);
-            HomeScreen.browserprogess.setProgress(100);
+            browserprogess.setProgress(100);
             super.onPageFinished(view, url);
 
         }
@@ -319,32 +316,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             progress.setVisibility(View.VISIBLE);
-            HomeScreen.browserprogess.setProgress(0);
+            browserprogess.setProgress(0);
             super.onPageStarted(view, url, favicon);
-        }
-    }
-
-
-    public void searchquery(boolean procesing) {
-
-        if (search_validation()) {
-
-            buzztest.buzzdata(Constants.SEARCHSTRING, "1", GetFromDate(), getToDate());
-        }
-    }
-
-    public void querybydate(boolean procesing) {
-
-        if (search_validation()) {
-
-            buzztest.buzzdata(Constants.SEARCHSTRING, Filtering.sourcequery(), Filtering.genderquery(), Filtering.sentimentquery(), GetFromDate(), getToDate(), Filtering.locquery(), Filtering.langquery(), Constants.scroolid);
         }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -354,44 +334,31 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == R.id.action_logout)
+            stringrequest();
 
-        //noinspection SimplifiableIfStatement
-      /*
-        if (id == R.id.action_filter) {
-            startActivity(new Intent(getApplication(), Filtering.class));
-            return true;
-        }
-        */
-
-        if (id == R.id.action_logout) {
-            new UserSession(HomeScreen.this).clearsession();
-
-            startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
-
-            //stringrequest();
-        }
         return super.onOptionsItemSelected(item);
     }
 
-
     public void stringrequest() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.logout,
+        progress.setVisibility(View.VISIBLE);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.d(TAG, "string response is" + response);
-
+                        new UserSession(HomeScreen.this).clearsession();
+                        startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
+                        progress.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "string error response is" + error);
+                progress.setVisibility(View.GONE);
             }
         }) {
             @Override
@@ -406,5 +373,100 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         stringRequest.setTag(TAG);
         BuzzingaApplication.get().getRequestQueue().add(stringRequest);
     }
+
+
+    public class getresponce extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i(TAG, "scrool id is" + Constants.scroolid);
+            if (Constants.scroolid.equals("1") || !Constants.swipedata) {
+                progress.setVisibility(View.VISIBLE);
+                Log.i(TAG, "scrool is" + Constants.scroolid.equals("1"));
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            final String scrool_id = Constants.scroolid;
+            final String clubbed_query = query.getquerydata(Constants.QueryString);
+            final String setup = Constants.SETUP;
+            final String Tzone = Utils.timezone();
+
+            Log.i(TAG, "\n clubbed_query" + clubbed_query + "\n type is" + setup + "\ntime zone is" + Tzone + "scroll id is" + scrool_id);
+
+            Log.i(TAG,"url is"+ServerConfig.SERVER_ENDPOINT + ServerConfig.search);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,ServerConfig.SERVER_ENDPOINT + ServerConfig.search,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            Log.d(TAG, "string response is" + response +"\n success response code");
+
+                            // new JsonData(context, response);
+                            ArrayList<SearchDetails> list_response = new JsonData().getJsonData(response);
+                            display_data.setAdapter(new SearchListData(context, list_response));
+                            content_lay.setVisibility(View.VISIBLE);
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "string error response is" + error.getMessage() + "\nmessage is" + error.getMessage());
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    if (!scrool_id.equals("1"))
+                        params.put("scroll_id", scrool_id);
+                    else
+                        params.put("tz", Tzone);
+                    params.put("clubbed_query", clubbed_query);
+                    params.put("setup", setup);
+
+                    return params;
+                }
+
+                ;
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    String sessionid = new UserSession(HomeScreen.this).getTSESSION();
+                    if (sessionid.length() > 0) {
+                        Log.i(TAG, "session id is" + sessionid);
+                        StringBuilder builder = new StringBuilder();
+                        builder.append("sessionid");
+                        builder.append("=");
+                        builder.append(sessionid);
+                        if (headers.containsKey("Cookie")) {
+                            builder.append("; ");
+                            builder.append(headers.get("Cookie"));
+                        }
+                        headers.put("Cookie", builder.toString());
+                    }
+
+                    return headers;
+                }
+
+                ;
+            };
+            BuzzingaApplication.get().getRequestQueue().add(stringRequest);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progress.setVisibility(View.GONE);
+
+        }
+    }
+
 
 }

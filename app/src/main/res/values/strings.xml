@@ -54,5 +54,7 @@
     <string name="applyfilter">Apply Filter</string>
     <string name="search">Search By Keyword</string>
     <string name="loading_text">Loading</string>
+    <string name="track">Track</string>
+    <string name="keyword">Track your Brand</string>
 
 </resources>

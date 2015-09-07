@@ -6,11 +6,14 @@ buildscript {
 
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.6'
     }
 
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     jcenter();
@@ -53,7 +56,10 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
-}
+
+
+    }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,7 +69,8 @@ dependencies {
     }
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    //compile 'com.google.android.gms:play-services:7.0+'
+
+
 
 }
 configurations{

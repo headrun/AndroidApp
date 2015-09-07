@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 
-import in.headrun.buzzinga.activities.HomeScreen;
-
 import java.util.Calendar;
+
+import in.headrun.buzzinga.activities.HomeScreen;
+import in.headrun.buzzinga.config.Constants;
 
 /**
  * Created by headrun on 23/7/15.
@@ -31,17 +32,21 @@ public class FilterByDate extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-          int monthe=month+1;
+        int monthe = month + 1;
         Log.i("Log_tag", "date is" + year + "-" + monthe + "-" + day);
         StringBuilder setdate = new StringBuilder();
         setdate.append(year + "-" + monthe + "-" + day);
 
         if (HomeScreen.DATEFLAG == 0) {
+
             HomeScreen.DATEFLAG = 1;
             HomeScreen.fromdate.setText(setdate.toString());
-        } else
-            HomeScreen.todate.setText(setdate.toString());
+            Constants.BFROMDATE.add(HomeScreen.fromdate.getText().toString());
+        } else {
 
+            HomeScreen.todate.setText(setdate.toString());
+            Constants.BTODATE.add(HomeScreen.todate.getText().toString());
+        }
     }
 }
 

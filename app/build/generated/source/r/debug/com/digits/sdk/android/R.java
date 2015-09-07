@@ -387,16 +387,16 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020038;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020039;
 		public static final int abc_textfield_search_material = 0x7f02003a;
-		public static final int dgts__addressbook_header = 0x7f020043;
-		public static final int dgts__digits_btn = 0x7f020044;
-		public static final int dgts__digits_btn_default = 0x7f020045;
-		public static final int dgts__digits_btn_pressed = 0x7f020046;
-		public static final int dgts__ic_success = 0x7f020047;
-		public static final int dgts__login_header = 0x7f020048;
-		public static final int dgts__logo = 0x7f020049;
-		public static final int dgts__logo_name = 0x7f02004a;
-		public static final int dgts__spinner_dark = 0x7f02004b;
-		public static final int dgts__spinner_light = 0x7f02004c;
+		public static final int dgts__addressbook_header = 0x7f020042;
+		public static final int dgts__digits_btn = 0x7f020043;
+		public static final int dgts__digits_btn_default = 0x7f020044;
+		public static final int dgts__digits_btn_pressed = 0x7f020045;
+		public static final int dgts__ic_success = 0x7f020046;
+		public static final int dgts__login_header = 0x7f020047;
+		public static final int dgts__logo = 0x7f020048;
+		public static final int dgts__logo_name = 0x7f020049;
+		public static final int dgts__spinner_dark = 0x7f02004a;
+		public static final int dgts__spinner_light = 0x7f02004b;
 		public static final int progress_dark = 0x7f020062;
 		public static final int progress_light = 0x7f020063;
 		public static final int tw__ic_logo_default = 0x7f02006d;
@@ -466,7 +466,7 @@ public final class R {
 		public static final int icon = 0x7f10002d;
 		public static final int ifRoom = 0x7f100018;
 		public static final int image = 0x7f10002a;
-		public static final int imageView = 0x7f1000aa;
+		public static final int imageView = 0x7f1000ad;
 		public static final int listMode = 0x7f100009;
 		public static final int list_item = 0x7f10002c;
 		public static final int middle = 0x7f100015;
@@ -494,11 +494,11 @@ public final class R {
 		public static final int submit_area = 0x7f10004d;
 		public static final int tabMode = 0x7f10000b;
 		public static final int title = 0x7f10002e;
-		public static final int tw__allow_btn = 0x7f1000ad;
-		public static final int tw__not_now_btn = 0x7f1000ac;
-		public static final int tw__share_email_desc = 0x7f1000ab;
-		public static final int tw__spinner = 0x7f1000a9;
-		public static final int tw__web_view = 0x7f1000a8;
+		public static final int tw__allow_btn = 0x7f1000b0;
+		public static final int tw__not_now_btn = 0x7f1000af;
+		public static final int tw__share_email_desc = 0x7f1000ae;
+		public static final int tw__spinner = 0x7f1000ac;
+		public static final int tw__web_view = 0x7f1000ab;
 		public static final int up = 0x7f100008;
 		public static final int useLogo = 0x7f100012;
 		public static final int withText = 0x7f10001a;
@@ -537,17 +537,17 @@ public final class R {
 		public static final int dgts__activity_pin_code = 0x7f04001f;
 		public static final int dgts__country_row = 0x7f040020;
 		public static final int dgts__state_button = 0x7f040021;
-		public static final int support_simple_spinner_dropdown_item = 0x7f040034;
-		public static final int tw__activity_oauth = 0x7f040036;
-		public static final int tw__activity_share_email = 0x7f040037;
+		public static final int support_simple_spinner_dropdown_item = 0x7f040035;
+		public static final int tw__activity_oauth = 0x7f040038;
+		public static final int tw__activity_share_email = 0x7f040039;
 	}
 	public static final class raw {
 		public static final int tw__cacerts = 0x7f070000;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f080001;
-		public static final int abc_action_bar_home_description_format = 0x7f080049;
-		public static final int abc_action_bar_home_subtitle_description_format = 0x7f08004a;
+		public static final int abc_action_bar_home_description_format = 0x7f08004b;
+		public static final int abc_action_bar_home_subtitle_description_format = 0x7f08004c;
 		public static final int abc_action_bar_up_description = 0x7f080002;
 		public static final int abc_action_menu_overflow_description = 0x7f080003;
 		public static final int abc_action_mode_done = 0x7f080004;
@@ -560,7 +560,7 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f08000b;
 		public static final int abc_shareactionprovider_share_with = 0x7f08000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f08000d;
-		public static final int abc_toolbar_collapse_description = 0x7f08004c;
+		public static final int abc_toolbar_collapse_description = 0x7f08004e;
 		public static final int dgts__cancel = 0x7f08000e;
 		public static final int dgts__communication_error = 0x7f08000f;
 		public static final int dgts__confirmation_code = 0x7f080010;
@@ -572,7 +572,7 @@ public final class R {
 		public static final int dgts__confirmation_sending_text = 0x7f080016;
 		public static final int dgts__confirmation_sent_text = 0x7f080017;
 		public static final int dgts__confirmation_sms = 0x7f080018;
-		public static final int dgts__country_spinner_format = 0x7f080052;
+		public static final int dgts__country_spinner_format = 0x7f080054;
 		public static final int dgts__create_account_text = 0x7f080019;
 		public static final int dgts__creating_account_text = 0x7f08001a;
 		public static final int dgts__digits_logo_desc = 0x7f08001b;
@@ -606,7 +606,7 @@ public final class R {
 		public static final int dgts_pin_code_terms = 0x7f080037;
 		public static final int dgts_verify = 0x7f080038;
 		public static final int dgts_verifying = 0x7f080039;
-		public static final int kit_name = 0x7f080053;
+		public static final int kit_name = 0x7f080055;
 		public static final int tw__allow_btn_txt = 0x7f08003a;
 		public static final int tw__login_btn_txt = 0x7f08003c;
 		public static final int tw__not_now_btn_txt = 0x7f08003d;

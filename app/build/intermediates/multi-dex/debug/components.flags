@@ -24,15 +24,15 @@
     <init>();
 }
 
--keep class in.headrun.buzzinga.activities.Searchable {
-    <init>();
-}
-
 -keep class in.headrun.buzzinga.activities.TwitterLogin {
     <init>();
 }
 
 -keep class in.headrun.buzzinga.activities.Filtering {
+    <init>();
+}
+
+-keep class in.headrun.buzzinga.activities.TrackKeyWord {
     <init>();
 }
 

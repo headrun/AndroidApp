@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
     <RelativeLayout
         android:id="@+id/content_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       >
 
         <LinearLayout
             android:id="@+id/filterbuttons"
@@ -21,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:gravity="center_horizontal|center_vertical"
                 android:background="@drawable/rightborder">
 
@@ -74,10 +75,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:dividerHeight="10dp"
-                android:layout_margin="10dp"
-                android:fastScrollEnabled="true"
-                android:persistentDrawingCache="scrolling"
+                android:layout_marginLeft="10dp"
                 android:scrollingCache="false"
+
                />
         </android.support.v4.widget.SwipeRefreshLayout>
 

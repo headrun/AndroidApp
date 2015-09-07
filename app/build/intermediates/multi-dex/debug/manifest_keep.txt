@@ -4,9 +4,9 @@
 }
 -keep class in.headrun.buzzinga.activities.SplashActivity { <init>(); }
 -keep class in.headrun.buzzinga.activities.HomeScreen { <init>(); }
--keep class in.headrun.buzzinga.activities.Searchable { <init>(); }
 -keep class in.headrun.buzzinga.activities.TwitterLogin { <init>(); }
 -keep class in.headrun.buzzinga.activities.Filtering { <init>(); }
+-keep class in.headrun.buzzinga.activities.TrackKeyWord { <init>(); }
 -keep class com.twitter.sdk.android.core.identity.OAuthActivity { <init>(); }
 -keep class com.twitter.sdk.android.core.identity.ShareEmailActivity { <init>(); }
 -keep class com.digits.sdk.android.PhoneNumberActivity { <init>(); }
