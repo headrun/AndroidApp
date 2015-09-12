@@ -4,33 +4,41 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+
+    </ProgressBar>
+
     <RelativeLayout
         android:id="@+id/content_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/filterbuttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:padding="10dp"
-            >
+            android:weightSum="2">
 
             <LinearLayout
                 android:id="@+id/filtersource_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:background="@drawable/rightborder">
+                android:background="@drawable/rightborder"
+                android:gravity="center_horizontal|center_vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/filter"
-                   />
+                    android:src="@drawable/filter" />
+
                 <TextView
                     android:id="@+id/filtersource"
                     android:layout_width="wrap_content"
@@ -44,8 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal|center_vertical">
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -67,18 +75,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/filterbuttons"
-            android:layout_marginTop="5dp"
-            >
+            android:layout_marginTop="5dp">
 
             <ListView
                 android:id="@+id/result_listview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:dividerHeight="10dp"
                 android:layout_marginLeft="10dp"
-                android:scrollingCache="false"
-
-               />
+                android:dividerHeight="10dp"
+                android:scrollingCache="false" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
@@ -120,7 +125,7 @@
                 android:layout_below="@+id/closebtn"
                 android:gravity="center_horizontal"
                 android:text="Articles Filter By Date"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/fromdate"
@@ -131,9 +136,9 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/roundborder"
+                android:editable="false"
                 android:gravity="start|center"
-                android:hint="From date"
-                android:editable="false"/>
+                android:hint="From date" />
 
             <TextView
                 android:id="@+id/todate"
@@ -143,9 +148,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/roundborder"
+                android:editable="false"
                 android:gravity="start|center"
-                android:hint="To date"
-                android:editable="false"/>
+                android:hint="To date" />
 
 
             <Button
@@ -173,8 +178,8 @@
                 android:id="@+id/closebrowser"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/closebrowser"
-                android:layout_gravity="center_horizontal|center_vertical"/>
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:src="@drawable/closebrowser" />
 
             <TextView
                 android:id="@+id/browsertitle"
@@ -186,11 +191,6 @@
                 android:gravity="start|center"
                 android:maxLines="1" />
 
-            <ProgressBar
-                android:id="@+id/browserprogress"
-                android:layout_width="fill_parent"
-                android:layout_height="3dp"
-                android:layout_below="@+id/browsertitle" />
         </RelativeLayout>
 
         <WebView
@@ -239,15 +239,6 @@
             </RelativeLayout>
             -->
     </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"></ProgressBar>
 
 
 </RelativeLayout>

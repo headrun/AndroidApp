@@ -45,32 +45,34 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
+
                 checkSession();
+
                 finish();
 
             }
         }, Config.SPLASH_DISPLAY_LENGTH);
 
-        Constants.sourceslist.add("fbpages_sourcetype_manual");
-        Constants.sourceslist.add("twitter_search_sourcetype_manual");
-        Constants.sourceslist.add("googleplus_search_sourcetype_manual");
-        Constants.sourceslist.add("news_sourcetype_manual_parent");
-        Constants.sourceslist.add("blogs_sourcetype_manual_parent");
-        Constants.sourceslist.add("forums_sourcetype_manual_parent");
-        Constants.sourceslist.add("youtube_search_sourcetype_manual");
-        Constants.sourceslist.add("flickr_search_sourcetype_manual");
-        Constants.sourceslist.add("instagram_search_sourcetype_manual");
-        Constants.sourceslist.add("tumblr_search_sourcetype_manual");
-        Constants.sourceslist.add("linkedin_search_sourcetype_manual");
-        Constants.sourceslist.add("quora_sourcetype_manual_parent");
+        Constants.sourceslist.add("fb");
+        Constants.sourceslist.add("twitter");
+        Constants.sourceslist.add("googleplus");
+        Constants.sourceslist.add("news");
+        Constants.sourceslist.add("blogs");
+        Constants.sourceslist.add("forums");
+        Constants.sourceslist.add("youtube");
+        Constants.sourceslist.add("flickr");
+        Constants.sourceslist.add("instagram");
+        Constants.sourceslist.add("tumblr");
+        Constants.sourceslist.add("linkedin");
+        Constants.sourceslist.add("quora");
 
-        Constants.sentimentlist.add("positive_sentiment_final");
-        Constants.sentimentlist.add("negative_sentiment_final");
-        Constants.sentimentlist.add("neutral_sentiment_final");
+        Constants.sentimentlist.add("positive");
+        Constants.sentimentlist.add("negative");
+        Constants.sentimentlist.add("neutral");
 
-        Constants.genderlist.add("male_gender_final");
-        Constants.genderlist.add("female_gender_final");
-        Constants.genderlist.add("unclassified_gender_final");
+        Constants.genderlist.add("male");
+        Constants.genderlist.add("female");
+        Constants.genderlist.add("unclassified");
 
     }
 
@@ -84,4 +86,6 @@ public class SplashActivity extends Activity {
         else
             startActivity(new Intent(this, TwitterLogin.class));
     }
+
+
 }

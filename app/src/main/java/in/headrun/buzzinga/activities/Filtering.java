@@ -117,7 +117,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
                                               @Override
                                               public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                                  adapter.getFilter().filter(s.toString());
+
 
                                                   if (Sourcestatus.contains("lang")) {
                                                       if (TextUtils.isEmpty(s.toString()))
@@ -243,14 +243,12 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             Intent i = new Intent(Filtering.this, HomeScreen.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
             startActivity(i);
-
         }
     }
 
     public static void sourcequery() {
 
-        String prefix = "";
-        sourcequery.setLength(0);
+
         Constants.BSOURCES.clear();
         for (Listitems sourceslist : Constants.FILTERSOURSOURE)
             if (sourceslist.isSelectd())
@@ -259,8 +257,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public static void sentimentquery() {
-
-        sourcequery.setLength(0);
         Constants.BSENTIMENT.clear();
         for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
             if (sentimentlist.isSelectd())
@@ -268,21 +264,13 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public static void genderquery() {
-
-
-        sourcequery.setLength(0);
         Constants.BGENDER.clear();
         for (Listitems genderlist : Constants.FILTERGENDER)
-
             if (genderlist.isSelectd())
                 Constants.BGENDER.add(genderlist.getSourcename());
-
     }
 
     public static void locquery() {
-
-
-        sourcequery.setLength(0);
         Constants.BLOCATION.clear();
         for (Listitems loclist : Constants.FILTERLOC)
             if (loclist.isSelectd())
@@ -291,10 +279,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public static void langquery() {
-        sourcequery.setLength(0);
+
         Constants.BLANGUAGE.clear();
         for (Listitems langlist : Constants.FILTERLANG)
-
             if (langlist.isSelectd())
                 Constants.BLANGUAGE.add(langlist.getXtag());
 
@@ -326,9 +313,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         for (Map.Entry<String, String> entry : Constants.sentiment_map.entrySet()) {
             String value = entry.getKey().toUpperCase();
-            Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, source_check(value)));
+            Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, sentiment_check(value)));
         }
-
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSENTIMENT);
         filter_sentiment.setAdapter(adapter);
 
@@ -338,8 +324,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERGENDER.clear();
 
         for (Map.Entry<String, String> gendervalue : Constants.gender_map.entrySet()) {
-            String value = gendervalue.getValue().toUpperCase();
-            Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, sentiment_check(value)));
+            String value = gendervalue.getKey().toUpperCase();
+            Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, gender_check(value)));
         }
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERGENDER);
         filter_gender.setAdapter(adapter);

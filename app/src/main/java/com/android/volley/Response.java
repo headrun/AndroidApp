@@ -16,6 +16,10 @@
 
 package com.android.volley;
 
+import java.util.ArrayList;
+
+import in.headrun.buzzinga.doto.SearchDetails;
+
 /**
  * Encapsulates a parsed response for delivery.
  *
@@ -26,7 +30,7 @@ public class Response<T> {
     /** Callback interface for delivering parsed responses. */
     public interface Listener<T> {
         /** Called when a response is received. */
-        public void onResponse(T response);
+        public ArrayList<SearchDetails> onResponse(T response);
     }
 
     /** Callback interface for delivering error responses. */

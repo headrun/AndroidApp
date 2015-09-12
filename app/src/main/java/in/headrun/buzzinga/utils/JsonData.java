@@ -1,6 +1,5 @@
 package in.headrun.buzzinga.utils;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,14 +15,13 @@ import in.headrun.buzzinga.doto.SearchDetails;
 public class JsonData {
 
 
-    Context context;
     public ArrayList<SearchDetails> swipelist;
     String title, url, text, date, author, sentiment, gender, article_type;
     String TAG = JsonData.this.getClass().getSimpleName();
 
 
     public ArrayList<SearchDetails> getJsonData(String data) {
-        this.context = context;
+
         logLargeString(data);
         swipelist = new ArrayList<SearchDetails>();
         SearchListData resultadapter;
@@ -58,31 +56,40 @@ public class JsonData {
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
                         } else {
-
                             Constants.listdetails.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
                         }
                     }
                     Constants.scroolid = jobj_result.getString("_scroll_id");
+
+                    Log.i(TAG,"scroolid is"+Constants.scroolid);
+                    if (!swipelist.isEmpty()) {
+                        if (Constants.listdetails.size() > 0) {
+                            for (int i = 0; i < swipelist.size(); i++) {
+
+                                if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
+                                    Constants.newarticles = i;
+                                    Constants.finddata = true;
+                                    Constants.swipedata = false;
+                                    Log.i("Log_tag", "search pos is" + Constants.newarticles);
+                                }
+                            }
+
+                            if (Constants.finddata)
+                                for (int j = 0; j <= Constants.newarticles; j++) {
+                                    Constants.listdetails.add(j, swipelist.get(j));
+                                }
+
+                        }else{
+                            Constants.listdetails=swipelist;
+                        }
+
+                    }
+
                 } else {
+
                     Constants.scroolid = "1";
                 }
-                if (!swipelist.isEmpty()) {
-
-                    for (int i = 0; i < swipelist.size(); i++) {
-
-                        if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
-                            searchpos = i;
-                            Constants.finddata = true;
-                            Constants.swipedata = false;
-                            Log.i("Log_tag", "search pos is" + searchpos);
-                        }
-                    }
-                    if (Constants.finddata)
-                        for (int j = 0; j <= searchpos; j++) {
-                            Constants.listdetails.add(j, swipelist.get(j));
-                        }
-
-                }
+                Log.i(TAG,"Constants.listdetails size is"+Constants.listdetails.size());
 
                 return Constants.listdetails;
                /*
@@ -107,7 +114,7 @@ public class JsonData {
                 Config.SwipeLoading = false;
     */
             }
-      //      HomeScreen.swipeRefreshLayout.setRefreshing(false);
+            //      HomeScreen.swipeRefreshLayout.setRefreshing(false);
         } catch (JSONException e) {
             Log.i(TAG, "exception" + e);
             e.printStackTrace();
@@ -126,16 +133,21 @@ public class JsonData {
     }
 
     private void xtags_separate(JSONArray xtags) {
+        Log.i(TAG, "xtag size is" + xtags.length());
+        for (int i = 0; i < xtags.length(); i++) {
+            try {
+                Log.i(TAG, "xtag is" + xtags.get(i).toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
-        Log.i(TAG, "source list size is" + Constants.sourceslist.size() +
-                "sentiment list size is" + Constants.sentimentlist.size() +
-                "gender list size is" + Constants.genderlist.size());
         for (int i = 0; i < xtags.length(); i++) {
 
             try {
-                Log.i(TAG, "source compared" + xtags.get(i).toString());
+
                 if (Constants.sourceslist.contains(xtags.get(i).toString())) {
-                    Log.i(TAG, " matched" + xtags.get(i).toString());
+
                     article_type = xtags.get(i).toString();
                     break;
                 }
@@ -148,9 +160,9 @@ public class JsonData {
         for (int i = 0; i < xtags.length(); i++) {
 
             try {
-                Log.i(TAG, "senment" + xtags.get(i).toString());
+
                 if (Constants.sentimentlist.contains(xtags.get(i).toString())) {
-                    Log.i(TAG, " matched" + xtags.get(i).toString());
+
                     sentiment = xtags.get(i).toString();
                     break;
                 }
@@ -163,9 +175,9 @@ public class JsonData {
         for (int i = 0; i < xtags.length(); i++) {
 
             try {
-                Log.i(TAG, "gender" + xtags.get(i).toString());
+
                 if (Constants.genderlist.contains(xtags.get(i).toString())) {
-                    Log.i(TAG, " matched" + xtags.get(i).toString());
+
                     gender = xtags.get(i).toString();
                     break;
                 }

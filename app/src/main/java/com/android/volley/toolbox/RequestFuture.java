@@ -20,10 +20,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import in.headrun.buzzinga.doto.SearchDetails;
 
 /**
  * A Future that represents a Volley request.
@@ -138,10 +141,11 @@ public class RequestFuture<T> implements Future<T>, Response.Listener<T>,
     }
 
     @Override
-    public synchronized void onResponse(T response) {
+    public synchronized ArrayList<SearchDetails> onResponse(T response) {
         mResultReceived = true;
         mResult = response;
         notifyAll();
+        return null;
     }
 
     @Override

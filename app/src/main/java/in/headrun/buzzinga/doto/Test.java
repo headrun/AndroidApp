@@ -3,7 +3,6 @@ package in.headrun.buzzinga.doto;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,6 +17,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.UserSession;
-import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.utils.ConnectionSettings;
@@ -188,7 +187,7 @@ public class Test {
             super.onPreExecute();
             Log.i(TAG, "scrool id is" + Constants.scroolid);
             if (Constants.scroolid.equals("1")) {
-                HomeScreen.progress.setVisibility(View.VISIBLE);
+                //progress.setVisibility(View.VISIBLE);
                 Log.i(TAG, "scrool is" + Constants.scroolid.equals("1"));
             }
         }
@@ -206,12 +205,13 @@ public class Test {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.search,
                     new Response.Listener<String>() {
                         @Override
-                        public void onResponse(String response) {
+                        public ArrayList<SearchDetails> onResponse(String response) {
 
                             Log.d(TAG, "string response is" + response);
 
                             //new JsonData(context, response);
 
+                            return null;
                         }
                     }, new Response.ErrorListener() {
                 @Override

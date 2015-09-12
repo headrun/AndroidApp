@@ -12,14 +12,14 @@ public class HomeScreen$$ViewBinder<T extends in.headrun.buzzinga.activities.Hom
     target.filterpanel = view;
     view = finder.findRequiredView(source, 2131755097, "field 'webview_lay'");
     target.webview_lay = view;
-    view = finder.findRequiredView(source, 2131755129, "field 'filtersource_lay'");
+    view = finder.findRequiredView(source, 2131755130, "field 'filtersource_lay'");
     target.filtersource_lay = view;
-    view = finder.findRequiredView(source, 2131755131, "field 'filterdate_lay'");
+    view = finder.findRequiredView(source, 2131755132, "field 'filterdate_lay'");
     target.filterdate_lay = view;
     view = finder.findRequiredView(source, 2131755100, "field 'browsertitle'");
     target.browsertitle = finder.castView(view, 2131755100, "field 'browsertitle'");
-    view = finder.findRequiredView(source, 2131755132, "field 'filtersourcebtn'");
-    target.filtersourcebtn = finder.castView(view, 2131755132, "field 'filtersourcebtn'");
+    view = finder.findRequiredView(source, 2131755133, "field 'filtersourcebtn'");
+    target.filtersourcebtn = finder.castView(view, 2131755133, "field 'filtersourcebtn'");
     view = finder.findRequiredView(source, 2131755102, "field 'webview'");
     target.webview = finder.castView(view, 2131755102, "field 'webview'");
     view = finder.findRequiredView(source, 2131755092, "field 'closebtn'");
@@ -28,8 +28,8 @@ public class HomeScreen$$ViewBinder<T extends in.headrun.buzzinga.activities.Hom
     target.closebrowser = finder.castView(view, 2131755099, "field 'closebrowser'");
     view = finder.findRequiredView(source, 2131755096, "field 'bydatefilter'");
     target.bydatefilter = finder.castView(view, 2131755096, "field 'bydatefilter'");
-    view = finder.findRequiredView(source, 2131755101, "field 'browserprogess'");
-    target.browserprogess = finder.castView(view, 2131755101, "field 'browserprogess'");
+    view = finder.findRequiredView(source, 2131755127, "field 'progress'");
+    target.progress = finder.castView(view, 2131755127, "field 'progress'");
   }
 
   @Override public void unbind(T target) {
@@ -43,6 +43,6 @@ public class HomeScreen$$ViewBinder<T extends in.headrun.buzzinga.activities.Hom
     target.closebtn = null;
     target.closebrowser = null;
     target.bydatefilter = null;
-    target.browserprogess = null;
+    target.progress = null;
   }
 }

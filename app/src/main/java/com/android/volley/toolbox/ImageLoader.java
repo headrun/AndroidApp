@@ -27,8 +27,11 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import in.headrun.buzzinga.doto.SearchDetails;
 
 /**
  * Helper that handles loading and caching images from remote URLs.
@@ -251,8 +254,9 @@ public class ImageLoader {
             ScaleType scaleType, final String cacheKey) {
         return new ImageRequest(requestUrl, new Listener<Bitmap>() {
             @Override
-            public void onResponse(Bitmap response) {
+            public ArrayList<SearchDetails> onResponse(Bitmap response) {
                 onGetImageSuccess(cacheKey, response);
+                return null;
             }
         }, maxWidth, maxHeight, scaleType, Config.RGB_565, new ErrorListener() {
             @Override

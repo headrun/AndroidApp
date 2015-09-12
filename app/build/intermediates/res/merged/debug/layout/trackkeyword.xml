@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/buzz_logo"
+        android:src="@drawable/buzz_logo1"
         android:layout_above="@+id/keyword"
         android:layout_centerHorizontal="true"
         android:paddingBottom="50dp"
@@ -28,9 +28,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:background="@drawable/roundborder"
+        android:background="#4baadf"
         android:text="@string/track"
-        android:paddingTop="10dp"
+        android:textColor="#ffffff"
         android:layout_below="@+id/keyword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"

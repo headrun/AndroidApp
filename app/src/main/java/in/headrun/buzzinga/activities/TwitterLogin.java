@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import butterknife.Bind;
@@ -28,7 +27,7 @@ public class TwitterLogin extends Activity {
     String TAG = TwitterLogin.this.getClass().getSimpleName();
 
     @Bind(R.id.twitter_login_button)
-    Button loginButton;
+    ImageView loginButton;
     @Bind(R.id.progressbar)
     ProgressBar progressbar;
     @Bind(R.id.twitter_btn)
@@ -56,7 +55,7 @@ public class TwitterLogin extends Activity {
         webview.getSettings().getAllowContentAccess();
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.getSettings().setLoadWithOverviewMode(true);
-        webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
+       // webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
@@ -101,7 +100,6 @@ public class TwitterLogin extends Activity {
                         if (cookivalue.contains("sessionid")) {
                             String[] temp1 = cookivalue.split("=");
                             Log.i(TAG, "session id is" + temp1[1]);
-
                             new UserSession(TwitterLogin.this).setTSESSION(temp1[1]);
 
                         }
@@ -109,10 +107,13 @@ public class TwitterLogin extends Activity {
 
                     if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0)
                         startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
-                }
-                if (view.getOriginalUrl().toString().contains("http://beta.buzzinga.com/profile/"))
-                    webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
 
+                }
+
+
+              /*  if (view.getOriginalUrl().toString().contains("http://beta.buzzinga.com/profile/"))
+                    webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+*/
             }
         }
 
@@ -124,7 +125,7 @@ public class TwitterLogin extends Activity {
         }
     }
 
-
+/*
     class MyJavaScriptInterface {
         @JavascriptInterface
         @SuppressWarnings("unused")
@@ -133,5 +134,5 @@ public class TwitterLogin extends Activity {
 
         }
     }
-
+*/
 }

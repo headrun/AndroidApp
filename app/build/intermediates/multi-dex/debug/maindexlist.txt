@@ -13,7 +13,7 @@ com/twitter/sdk/android/tweetui/TweetUtils.class
 android/support/v7/app/AppCompatActivity.class
 com/android/volley/toolbox/ImageLoader$ImageCache.class
 com/twitter/sdk/android/core/identity/ShareEmailClient.class
-org/apache/http/annotation/ThreadSafe.class
+in/headrun/buzzinga/BuzzNotification$2.class
 android/support/annotation/LayoutRes.class
 in/headrun/buzzinga/config/Config.class
 com/squareup/picasso/Picasso.class
@@ -22,9 +22,8 @@ retrofit/client/Client.class
 android/support/annotation/ColorRes.class
 io/fabric/sdk/android/Onboarding.class
 com/digits/sdk/android/PhoneNumberActionBarActivity.class
-com/twitter/sdk/android/core/TwitterPinningInfoProvider.class
-org/apache/http/client/params/ClientParamBean.class
 butterknife/BindString.class
+com/twitter/sdk/android/core/TwitterPinningInfoProvider.class
 android/support/annotation/RequiresPermission.class
 android/support/v4/app/TaskStackBuilder$SupportParentable.class
 android/support/v4/app/FragmentManagerImpl$3.class
@@ -32,36 +31,33 @@ retrofit/http/GET.class
 in/headrun/buzzinga/activities/HomeScreen$2.class
 io/fabric/sdk/android/Fabric$Builder.class
 com/digits/sdk/android/ActivityClassManager.class
-org/apache/http/conn/BasicManagedEntity.class
 -keep class com.digits.sdk.android.PinCodeActivity { <init>(); }
 butterknife/OnItemClick.class
-android/support/annotation/Size.class
-org/apache/http/impl/client/AbstractHttpClient.class
 com/google/gson/FieldAttributes.class
+android/support/annotation/Size.class
 android/support/v7/widget/LinearLayoutCompat$OrientationMode.class
 com/twitter/sdk/android/core/services/StatusesService.class
 com/twitter/sdk/android/core/models/UserEntities.class
-org/apache/http/conn/params/ConnManagerParams.class
 android/support/v4/app/FragmentContainer.class
 in/headrun/buzzinga/activities/SplashActivity.class
 com/twitter/sdk/android/core/internal/SessionMonitor.class
 retrofit/RestAdapter$Builder.class
-org/apache/http/conn/scheme/SocketFactoryAdaptor.class
 com/twitter/sdk/android/tweetui/LoadCallback.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$SerialExecutor.class
 com/android/volley/Response.class
 -keep public class * extends android.app.backup.BackupAgent {
 retrofit/http/EncodedQueryMap.class
+in/headrun/buzzinga/BuzzNotification$1.class
 android/support/v4/util/DebugUtils.class
 io/fabric/sdk/android/services/concurrency/Dependency.class
 com/twitter/sdk/android/core/models/Search.class
+in/headrun/buzzinga/BootUpReceiver.class
 io/fabric/sdk/android/services/concurrency/DelegateProvider.class
 io/fabric/sdk/android/FabricKitsFinder.class
 io/fabric/sdk/android/InitializationException.class
 retrofit/http/Field.class
 android/support/v4/app/LoaderManager.class
 retrofit/http/Multipart.class
-com/android/volley/RequestQueue.class
 }
 com/digits/sdk/android/ContactsActivityDelegateImpl.class
 io/fabric/sdk/android/services/concurrency/internal/RetryFuture.class
@@ -82,7 +78,7 @@ com/twitter/sdk/android/core/TwitterSession.class
 com/squareup/picasso/Downloader$Response.class
 android/support/v4/app/NoSaveStateFrameLayout.class
 android/support/annotation/PluralsRes.class
-org/apache/http/impl/auth/NegotiateScheme.class
+in/headrun/buzzinga/activities/HomeScreen$9.class
 android/support/v4/app/FragmentManager$BackStackEntry.class
 android/support/v4/widget/MaterialProgressDrawable$3.class
 -keep class com.digits.sdk.android.ContactsActionBarActivity { <init>(); }
@@ -95,27 +91,24 @@ com/digits/sdk/android/PhoneNumberActivityDelegate.class
 com/digits/sdk/android/ContactsActionBarActivity.class
 io/fabric/sdk/android/services/network/NetworkUtils.class
 android/support/annotation/ColorInt.class
+in/headrun/buzzinga/BuzzNotification$4.class
 in/headrun/buzzinga/activities/Filtering$1.class
 android/support/v4/view/ViewPager.class
 android/support/annotation/FloatRange.class
-org/apache/http/conn/params/ConnManagerParamBean.class
-retrofit/http/PATCH.class
 com/twitter/sdk/android/core/internal/oauth/GuestAuthToken.class
-org/apache/http/conn/scheme/Scheme.class
+retrofit/http/PATCH.class
 in/headrun/buzzinga/doto/Utils.class
 com/digits/sdk/android/PhoneNumberTask$Listener.class
 -keep class in.headrun.buzzinga.BuzzingaApplication {
 -keep class com.digits.sdk.android.PhoneNumberActionBarActivity { <init>(); }
 com/google/gson/annotations/Since.class
-android/support/annotation/IntRange.class
 butterknife/OnTextChanged.class
+android/support/annotation/IntRange.class
 android/support/v4/app/FragmentTabHost.class
 butterknife/OnCheckedChanged.class
 android/support/v7/widget/LinearLayoutCompat$LayoutParams.class
 com/twitter/sdk/android/core/internal/oauth/OAuth2Service.class
-org/apache/http/impl/conn/AbstractClientConnAdapter.class
 android/support/v4/app/Fragment.class
-org/apache/http/conn/scheme/LayeredSocketFactory.class
 android/support/v4/widget/SlidingPaneLayout.class
 butterknife/internal/ListenerClass.class
 android/support/v4/app/ActivityCompat.class
@@ -128,17 +121,15 @@ com/twitter/sdk/android/core/TwitterApiClient.class
 io/fabric/sdk/android/Fabric$1.class
 retrofit/http/POST.class
 retrofit/http/PUT.class
-com/twitter/sdk/android/core/internal/TwitterCollection$Content.class
 io/fabric/sdk/android/InitializationCallback.class
 io/fabric/sdk/android/Logger.class
 butterknife/OnItemSelected$Callback.class
 com/google/gson/annotations/Expose.class
-in/headrun/buzzinga/activities/HomeScreen$getresponce.class
+com/twitter/sdk/android/core/internal/TwitterCollection$Content.class
 com/twitter/sdk/android/Twitter.class
 com/twitter/sdk/android/core/internal/oauth/OAuthService.class
 android/support/v4/view/GravityCompat.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$WorkerRunnable.class
-org/apache/http/impl/client/EntityEnclosingRequestWrapper$EntityWrapper.class
 android/support/v4/widget/MaterialProgressDrawable$1.class
 android/support/v4/app/FragmentActivity.class
 com/digits/sdk/android/AuthResponse.class
@@ -158,20 +149,17 @@ com/android/volley/toolbox/ImageRequest.class
 com/twitter/sdk/android/core/internal/TwitterCollection$Metadata.class
 com/twitter/sdk/android/core/PersistedSessionManager.class
 retrofit/http/DELETE.class
-org/apache/http/conn/params/ConnManagerPNames.class
 com/twitter/sdk/android/core/internal/scribe/TwitterCoreScribeClientHolder.class
 com/android/volley/Response$ErrorListener.class
-org/apache/http/impl/conn/tsccm/BasicPoolEntry.class
 com/twitter/sdk/android/core/identity/OAuthController$Listener.class
 io/fabric/sdk/android/services/concurrency/internal/RetryPolicy.class
 android/support/v7/internal/widget/AdapterViewCompat.class
 android/support/v7/app/ActionBarDrawerToggle$DelegateProvider.class
 com/twitter/sdk/android/core/models/SearchMetadata.class
-org/apache/http/conn/scheme/PlainSocketFactory.class
 com/digits/sdk/android/ContactsUploadResult.class
 android/support/v7/widget/LinearLayoutCompat.class
 android/support/annotation/Keep.class
-org/apache/http/conn/scheme/LayeredSocketFactoryAdaptor.class
+in/headrun/buzzinga/activities/HomeScreen$7.class
 com/twitter/sdk/android/core/identity/OAuthActivity.class
 io/fabric/sdk/android/Fabric$2.class
 -keep class com.digits.sdk.android.FailureActivity { <init>(); }
@@ -180,20 +168,18 @@ in/headrun/buzzinga/activities/SplashActivity$1.class
 com/twitter/sdk/android/core/models/User.class
 retrofit/RestAdapter.class
 butterknife/OnLongClick.class
-org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.class
 butterknife/OnPageChange$Callback.class
 android/support/v4/widget/MaterialProgressDrawable$ProgressDrawableSize.class
 com/twitter/sdk/android/core/models/HashtagEntity.class
 com/twitter/sdk/android/core/models/UrlEntity.class
-org/apache/http/conn/MultihomePlainSocketFactory.class
 android/support/v4/app/ActivityCompatHoneycomb.class
 com/twitter/sdk/android/core/models/MediaEntity$Size.class
 android/support/v7/app/ActionBar$OnNavigationListener.class
 in/headrun/buzzinga/UserSession.class
-com/digits/sdk/vcard/VCardBuilder.class
 com/google/gson/reflect/TypeToken.class
-org/apache/http/auth/AuthScheme.class
+com/digits/sdk/vcard/VCardBuilder.class
 com/twitter/sdk/android/tweetui/SyndicationClientEvent$ExternalIds.class
+in/headrun/buzzinga/BuzzingaRequest.class
 com/twitter/sdk/android/core/TwitterCore.class
 in/headrun/buzzinga/activities/TwitterLogin$1.class
 android/support/v7/view/ActionMode$Callback.class
@@ -203,24 +189,22 @@ com/digits/sdk/android/ActivityClassManagerImp.class
 android/support/v4/view/animation/LookupTableInterpolator.class
 com/android/volley/toolbox/ImageLoader.class
 com/google/gson/annotations/SerializedName.class
-org/apache/http/impl/cookie/BrowserCompatSpec.class
 android/support/annotation/TransitionRes.class
 io/fabric/sdk/android/services/concurrency/internal/DefaultRetryPolicy.class
 android/support/v7/app/ActionBar$NavigationMode.class
-org/apache/http/client/protocol/ClientContextConfigurer.class
 in/headrun/buzzinga/utils/FilterByDate.class
     *;
 android/support/v4/app/FragmentManager$OnBackStackChangedListener.class
-android/support/v7/app/ActionBar$Tab.class
 com/digits/sdk/android/NoOpScribeService.class
+android/support/v7/app/ActionBar$Tab.class
 com/digits/sdk/android/DigitsActivityDelegate.class
-io/fabric/sdk/android/Fabric.class
 retrofit/http/FormUrlEncoded.class
+io/fabric/sdk/android/Fabric.class
 io/fabric/sdk/android/services/concurrency/internal/RetryState.class
 butterknife/OnClick.class
 com/twitter/sdk/android/core/internal/scribe/ScribeEvent.class
-butterknife/ButterKnife.class
 android/support/v4/app/FragmentActivity$1.class
+butterknife/ButterKnife.class
 com/digits/sdk/android/LoginCodeActivity.class
 in/headrun/buzzinga/BuzzingaApplication$1.class
 com/twitter/sdk/android/core/models/UserEntities$UrlEntities.class
@@ -231,7 +215,6 @@ android/support/v4/view/ViewCompat.class
 in/headrun/buzzinga/activities/Filtering$3.class
 butterknife/BindInt.class
 android/support/annotation/Nullable.class
-org/apache/http/client/params/ClientPNames.class
 -keep class com.digits.sdk.android.ContactsActivity { <init>(); }
 android/support/v4/app/FragmentManagerImpl$4.class
 android/support/annotation/RequiresPermission$Write.class
@@ -240,11 +223,8 @@ io/fabric/sdk/android/services/concurrency/PriorityAsyncTask.class
 retrofit/http/EncodedPath.class
 com/android/volley/Response$Listener.class
 io/fabric/sdk/android/services/common/ApiKey.class
-org/apache/http/entity/mime/content/InputStreamBody.class
-org/apache/http/entity/mime/content/FileBody.class
 -keep class com.digits.sdk.android.ConfirmationCodeActionBarActivity { <init>(); }
 -keep class com.digits.sdk.android.LoginCodeActivity { <init>(); }
-org/apache/http/annotation/NotThreadSafe.class
 android/support/v4/content/ContextCompat.class
 android/support/v4/app/FragmentManagerState.class
 io/fabric/sdk/android/services/concurrency/DependsOn.class
@@ -262,7 +242,6 @@ io/fabric/sdk/android/ActivityLifecycleManager$Callbacks.class
 com/twitter/sdk/android/core/internal/scribe/SyndicatedSdkImpressionEvent.class
 android/support/v4/app/FragmentManagerImpl$FragmentTag.class
 com/android/volley/toolbox/StringRequest.class
-org/apache/http/client/RedirectHandler.class
 io/fabric/sdk/android/services/concurrency/AsyncTask.class
 android/support/annotation/IdRes.class
 -keep class com.twitter.sdk.android.core.identity.OAuthActivity { <init>(); }
@@ -270,7 +249,6 @@ android/support/v4/app/FragmentManagerImpl$5.class
 retrofit/http/HEAD.class
 android/support/v7/widget/ActionMenuView$LayoutParams.class
 com/twitter/sdk/android/core/models/MediaEntity.class
-org/apache/http/conn/scheme/SchemeSocketFactoryAdaptor.class
 com/twitter/sdk/android/core/TwitterSession$Serializer.class
 com/digits/sdk/android/DigitsScribeService.class
 com/digits/sdk/android/FailureActivityDelegateImpl.class
@@ -282,9 +260,7 @@ butterknife/Bind.class
 io/fabric/sdk/android/services/concurrency/Task.class
 com/digits/sdk/android/ContactsClient$ContactsService.class
 io/fabric/sdk/android/services/concurrency/PriorityTask.class
-org/apache/http/impl/client/DefaultRedirectHandler.class
 com/twitter/sdk/android/core/internal/MigrationHelper.class
-org/apache/http/impl/conn/tsccm/ConnPoolByRoute.class
 io/fabric/sdk/android/services/common/IdManager.class
 -keep public class * extends java.lang.annotation.Annotation {
 android/support/annotation/AnyRes.class
@@ -304,36 +280,30 @@ com/twitter/sdk/android/core/identity/ShareEmailActivity.class
 com/twitter/sdk/android/core/internal/scribe/DefaultScribeClient.class
 android/support/annotation/MenuRes.class
 com/digits/sdk/android/DigitsScribeServiceImp.class
-android/support/v4/widget/CursorAdapter.class
 com/twitter/sdk/android/core/internal/TwitterCollection$TimelineItem$TweetItem.class
+android/support/v4/widget/CursorAdapter.class
 retrofit/http/Query.class
 com/twitter/sdk/android/core/services/ListService.class
-org/apache/http/impl/conn/tsccm/RouteSpecificPool.class
 android/support/v4/app/FragmentManagerImpl$2.class
 com/digits/sdk/android/DigitsActivity.class
 io/fabric/sdk/android/InitializationTask.class
-in/headrun/buzzinga/doto/QueryData.class
 android/support/v4/util/SimpleArrayMap.class
 com/twitter/sdk/android/core/internal/oauth/OAuth1aService.class
 com/digits/sdk/android/DigitsApiClient$DeviceService.class
 android/support/annotation/DrawableRes.class
 android/support/v4/app/BackStackState.class
 com/twitter/sdk/android/core/models/Place.class
-org/apache/http/impl/conn/IdleConnectionHandler.class
+in/headrun/buzzinga/activities/HomeScreen$8.class
 android/support/v4/app/NotificationCompat$Builder.class
 io/fabric/sdk/android/services/persistence/PreferenceStore.class
 io/fabric/sdk/android/Kit.class
 com/twitter/sdk/android/tweetui/TweetViewFetchAdapter.class
-org/apache/http/impl/conn/tsccm/AbstractConnPool.class
 com/twitter/sdk/android/core/internal/CollectionService.class
-org/apache/http/impl/conn/tsccm/RefQueueWorker.class
 com/digits/sdk/android/AppCompatClassManagerImp.class
-org/apache/http/annotation/GuardedBy.class
 butterknife/OnTextChanged$Callback.class
 retrofit/http/FieldMap.class
 io/fabric/sdk/android/services/settings/AnalyticsSettingsData.class
 retrofit/http/QueryMap.class
-org/apache/http/impl/conn/SingleClientConnManager.class
 in/headrun/buzzinga/activities/Filtering$FilterStatus.class
 android/support/v4/view/MenuCompat.class
 com/digits/sdk/android/DeviceRegistrationResponse.class
@@ -346,9 +316,7 @@ butterknife/OnItemSelected.class
 android/support/annotation/ArrayRes.class
 android/support/v4/app/Fragment$SavedState.class
 io/fabric/sdk/android/KitGroup.class
-org/apache/http/annotation/Immutable.class
 com/digits/sdk/android/DigitsSessionResponse.class
-org/apache/http/impl/client/DefaultRequestDirector.class
 com/twitter/sdk/android/core/services/AccountService.class
 com/twitter/sdk/android/core/internal/scribe/EventNamespace.class
 in/headrun/buzzinga/activities/HomeScreen$4.class
@@ -363,7 +331,6 @@ com/twitter/sdk/android/core/AppSession.class
 com/twitter/sdk/android/core/identity/ShareEmailController.class
 com/digits/sdk/android/ConfirmationCodeActionBarActivity.class
 android/support/v4/app/FragmentManagerImpl$1.class
-org/apache/http/impl/conn/Wire.class
 butterknife/BindBool.class
 com/digits/sdk/android/AuthConfig.class
 -keep class com.digits.sdk.android.ContactsUploadService { <init>(); }
@@ -377,11 +344,9 @@ com/twitter/sdk/android/core/internal/scribe/ScribeClient.class
 android/support/v7/app/ActionBar.class
 com/twitter/sdk/android/core/internal/TwitterCollection.class
 in/headrun/buzzinga/activities/HomeScreen.class
-org/apache/http/impl/conn/tsccm/RefQueueHandler.class
 io/fabric/sdk/android/services/concurrency/internal/AbstractFuture.class
 in/headrun/buzzinga/BuzzingaApplication.class
 com/digits/sdk/android/ConfirmationCodeActivity.class
-in/headrun/buzzinga/activities/TwitterLogin$MyJavaScriptInterface.class
 android/support/v4/util/LogWriter.class
 retrofit/http/Body.class
 android/support/v4/app/NavUtils.class
@@ -391,7 +356,6 @@ com/digits/sdk/android/ContactsUploadService.class
 in/headrun/buzzinga/activities/TrackKeyWord.class
 com/digits/sdk/android/LoginCodeActionBarActivity.class
 com/twitter/sdk/android/core/models/Place$BoundingBox.class
-org/apache/http/conn/params/ConnPerRouteBean.class
 com/twitter/sdk/android/tweetui/SyndicationClientEvent.class
 android/support/v7/app/ActionBarActivity.class
 io/fabric/sdk/android/services/concurrency/internal/Backoff.class
@@ -403,8 +367,8 @@ com/twitter/sdk/android/core/internal/oauth/OAuth2Service$OAuth2Api.class
 android/support/v7/widget/LinearLayoutCompat$DividerMode.class
 android/support/annotation/AnimRes.class
 android/support/v4/app/SuperNotCalledException.class
-com/twitter/sdk/android/core/DefaultClient.class
 com/twitter/sdk/android/core/internal/TwitterCollection$TimelineItem.class
+com/twitter/sdk/android/core/DefaultClient.class
 android/support/v4/widget/SwipeRefreshLayout.class
 io/fabric/sdk/android/services/concurrency/internal/RetryThreadPoolExecutor.class
 android/support/annotation/BinderThread.class
@@ -413,10 +377,9 @@ io/fabric/sdk/android/services/concurrency/AsyncTask$Status.class
 android/support/v4/widget/DrawerLayout$DrawerListener.class
 butterknife/BindColor.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$InternalHandler.class
-org/apache/http/impl/conn/AbstractPooledConnAdapter.class
-com/digits/sdk/android/DigitsApi.class
-android/support/v7/app/ActionBarDrawerToggle.class
 android/support/v4/app/TaskStackBuilder.class
+android/support/v7/app/ActionBarDrawerToggle.class
+com/digits/sdk/android/DigitsApi.class
 com/twitter/sdk/android/core/SessionManager.class
 android/support/annotation/StringRes.class
 com/twitter/sdk/android/core/AuthToken.class
@@ -430,26 +393,23 @@ android/support/annotation/InterpolatorRes.class
 android/support/v4/widget/SwipeRefreshLayout$OnRefreshListener.class
 -keep class com.twitter.sdk.android.core.identity.ShareEmailActivity { <init>(); }
 android/support/v4/widget/MaterialProgressDrawable$Ring.class
-org/apache/http/conn/scheme/LayeredSchemeSocketFactoryAdaptor.class
 in/headrun/buzzinga/config/Constants.class
 android/support/v7/internal/widget/ViewUtils.class
 in/headrun/buzzinga/activities/TwitterLogin.class
-org/apache/http/conn/scheme/HostNameResolver.class
 com/digits/sdk/android/DigitsApiClient$SdkService.class
-com/twitter/sdk/android/core/AuthenticatedClient.class
+-keep class in.headrun.buzzinga.BootUpReceiver { <init>(); }
 butterknife/internal/ListenerClass$NONE.class
+com/twitter/sdk/android/core/AuthenticatedClient.class
 android/support/annotation/WorkerThread.class
-com/twitter/sdk/android/core/internal/oauth/OAuth2Token.class
 com/twitter/sdk/android/core/services/SearchService.class
+com/twitter/sdk/android/core/internal/oauth/OAuth2Token.class
 butterknife/OnFocusChange.class
 android/support/v7/app/ActionBar$TabListener.class
-com/twitter/sdk/android/core/TwitterException.class
 com/digits/sdk/android/DigitsClient.class
-com/digits/sdk/android/ContactsHelper.class
+com/twitter/sdk/android/core/TwitterException.class
 com/digits/sdk/android/UploadResponse.class
+com/digits/sdk/android/ContactsHelper.class
 com/twitter/sdk/android/core/identity/TwitterAuthClient.class
-org/apache/http/conn/ssl/SSLSocketFactory.class
-org/apache/http/impl/client/DefaultRedirectStrategyAdaptor.class
 com/twitter/sdk/android/core/R.class
 com/twitter/sdk/android/core/identity/OAuthWebViewClient$Listener.class
 io/fabric/sdk/android/services/concurrency/internal/ExponentialBackoff.class
@@ -465,11 +425,11 @@ android/support/v7/app/ActionBarDrawerToggle$Delegate.class
 com/twitter/sdk/android/core/TwitterAuthToken.class
 com/digits/sdk/android/DigitsSession.class
 android/support/v7/app/AppCompatDelegate.class
-org/apache/http/client/protocol/ClientContext.class
 android/support/v4/widget/MaterialProgressDrawable.class
 android/support/annotation/VisibleForTesting.class
 -keep class in.headrun.buzzinga.activities.HomeScreen { <init>(); }
 com/twitter/sdk/android/core/internal/oauth/OAuth1aService$OAuthApi.class
+in/headrun/buzzinga/BuzzNotification.class
 com/digits/sdk/android/Vcards.class
 com/digits/sdk/android/DigitsSession$Serializer.class
 com/twitter/sdk/android/core/identity/OAuthController.class
@@ -482,8 +442,9 @@ butterknife/BindDimen.class
 android/support/v4/app/BackStackRecord.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$3.class
 com/twitter/sdk/android/core/services/FavoriteService.class
-com/twitter/sdk/android/core/identity/ShareEmailClient$EmailService.class
 in/headrun/buzzinga/activities/HomeScreen$MyBrowser.class
+com/twitter/sdk/android/core/identity/ShareEmailClient$EmailService.class
+in/headrun/buzzinga/BuzzNotification$3.class
 android/support/annotation/MainThread.class
 in/headrun/buzzinga/activities/HomeScreen$3.class
 retrofit/http/Header.class
@@ -492,21 +453,19 @@ butterknife/OnPageChange.class
 in/headrun/buzzinga/utils/SearchListData.class
 in/headrun/buzzinga/utils/FilterTitleAdapter.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$AsyncTaskResult.class
-org/apache/http/conn/scheme/SocketFactory.class
 com/digits/sdk/android/Contacts.class
 butterknife/internal/ListenerMethod.class
 com/digits/sdk/android/PinCodeActivityDelegate.class
 com/digits/sdk/android/DigitsActivityDelegateImpl.class
 in/headrun/buzzinga/activities/HomeScreen$6.class
-org/apache/http/entity/mime/content/StringBody.class
 android/support/v7/app/ActionBar$DisplayOptions.class
 com/digits/sdk/android/DigitsActionBarActivity.class
-oauth/signpost/OAuthProvider.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$1.class
 com/digits/sdk/android/FailureActionBarActivity.class
 android/support/annotation/CheckResult.class
 io/fabric/sdk/android/ActivityLifecycleManager.class
 com/twitter/sdk/android/core/models/Tweet.class
+-keep class in.headrun.buzzinga.BuzzNotification { <init>(); }
 android/support/annotation/BoolRes.class
 com/twitter/sdk/android/tweetui/TweetUi.class
 android/support/v4/app/FragmentManager.class

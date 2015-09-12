@@ -1,6 +1,12 @@
 package in.headrun.buzzinga.doto;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -17,6 +23,9 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import in.headrun.buzzinga.BuzzNotification;
+import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 
@@ -25,16 +34,55 @@ import in.headrun.buzzinga.config.Constants;
  */
 public class Utils {
 
+    public static String trackkey_query, search_query, source_query, gender_query, sentiment_query, location_query, language_query, scrollid_query, fromdate_query, todate_queruy;
     public String TAG = Utils.this.getClass().getSimpleName();
     Context context;
     ArrayList<QueryData> query = new ArrayList<QueryData>();
     StringBuilder queryvalue = new StringBuilder();
 
-
-    public static String trackkey_query, search_query, source_query, gender_query, sentiment_query, location_query, language_query, scrollid_query, fromdate_query, todate_queruy;
-
     public Utils(Context context) {
         this.context = context;
+
+    }
+
+    public static String timezone() {
+        Calendar mCalendar = new GregorianCalendar();
+        TimeZone mTimeZone = mCalendar.getTimeZone();
+        int mGMTOffset = mTimeZone.getRawOffset();
+
+        System.out.printf("GMT offset is %s hours", TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS));
+        long tz = TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS);
+
+        if (tz > 0)
+            return String.valueOf(-tz);
+        else
+            return String.valueOf(Math.abs(tz));
+    }
+
+    public static void add_query_data() {
+        Constants.QueryString.clear();
+        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
+        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
+        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
+        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
+        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
+        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
+        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
+        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
+        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
+
+    }
+
+    public static void clear_all_data(){
+        Constants.BTRACKKEY.clear();
+        Constants.BSEARCHKEY.clear();
+        Constants.BTODATE.clear();
+        Constants.BFROMDATE.clear();
+        Constants.BLOCATION.clear();
+        Constants.BLANGUAGE.clear();
+        Constants.BSOURCES.clear();
+        Constants.BGENDER.clear();
+        Constants.BSENTIMENT.clear();
 
     }
 
@@ -47,6 +95,9 @@ public class Utils {
             switch (item) {
                 case Constants.TRACKKEY:
                     trackkey_query = query_trackkey(i.getBvalue());
+                    if(trackkey_query.trim().length()==0 || trackkey_query.trim()==null)
+                        Log.i(TAG,"track query is null");
+                        //context.stopService(new Intent(context,BuzzNotification.class));
                     break;
                 case Constants.SEARCHKEY:
                     search_query = query_searchkey(i.getBvalue());
@@ -99,11 +150,10 @@ public class Utils {
             return "";
     }
 
-
     public String query_searchkey(ArrayList<String> item) {
         queryvalue.setLength(0);
         if (item.size() > 0) {
-           String pref = " AND ";
+            String pref = " AND ";
             for (String skey : item) {
                 queryvalue.append(pref);
 
@@ -126,67 +176,121 @@ public class Utils {
             for (String tkey : item) {
                 queryvalue.append(pref);
                 pref = " AND ";
-                queryvalue.append(tkey);
+                queryvalue.append(tkey.trim());
             }
             if (Config.Utils)
                 Log.i(TAG, "track key is" + queryvalue.toString());
             return queryvalue.toString();
         } else
             return "";
+        
+        
     }
-
 
     public String query_sources(ArrayList<String> item) {
         queryvalue.setLength(0);
         if (Config.Utils)
             Log.i(TAG, "size is" + item.size());
-        String pref = " AND ";
-        if (item.size() > 0) {
+        String pref = "";
+        query_loc_source();
 
+        if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
                 if (value.length() > 0)
-                    if (Constants.source_map.containsKey(value)) {
+                    queryvalue.append(pref);
+                pref = " OR ";
+                queryvalue.append(get_source_xtag(value));
 
-                        queryvalue.append(pref);
-                        pref = " OR ";
-                        queryvalue.append((String) Constants.source_map.get(value));
-
-                    }
             }
         }
+
         if (queryvalue.length() > 0) {
+            return " AND (" + queryvalue.toString() + ")";
 
-            if (Config.Utils)
-                Log.i(TAG, "source return value is" + queryvalue.toString() + "return size is" + queryvalue.length());
-            return queryvalue.toString();
+        } else
 
-        } else {
-
-            if (Config.Utils)
-                Log.i(TAG, "source map else part is" + "\n Constants.source_map size is" + Constants.source_map.size());
-
+        {
             for (Map.Entry<String, String> values : Constants.source_map.entrySet()) {
-                if (Config.Utils)
-                    Log.i(TAG, "source map value 1 is" + values.getKey() + "\n value 2 is" + values.getValue());
+
+                String source_type = values.getKey();
                 queryvalue.append(pref);
                 pref = " OR ";
-                queryvalue.append(values.getValue());
+                queryvalue.append(get_source_xtag(source_type));
             }
-            if (Config.Utils)
-                Log.i(TAG, "source return string " + queryvalue.toString());
-            return queryvalue.toString();
-        }
 
+            return " AND (" + queryvalue.toString() + ")";
+        }
+    }
+
+    public String get_source_xtag(String sourcetype) {
+
+        if (Constants.source_map.containsKey(sourcetype)) {
+
+            if (sourcetype == Constants.FACEBOOK) {
+                return Constants.source_map.get(sourcetype) + (Constants.facebook_specific_xtags.trim().length() > 0 ? " AND " + Constants.facebook_specific_xtags : "");
+            } else if (sourcetype == Constants.GOOGLEPLUS) {
+                return Constants.source_map.get(sourcetype) + (Constants.googleplus_specific_xtags.trim().length() > 0 ? " AND " + Constants.googleplus_specific_xtags : "");
+
+            } else if (sourcetype == Constants.TWITTER) {
+                return Constants.source_map.get(sourcetype) + (Constants.twitter_specific_xtags.trim().length() > 0 ? " AND " + Constants.twitter_specific_xtags : "");
+            } else if (sourcetype == Constants.FORUMS || sourcetype == Constants.NEWS || sourcetype.contains(Constants.BLOGS)) {
+                return Constants.source_map.get(sourcetype) + (Constants.rss_specific_xtags.trim().length() > 0 ? " AND " + Constants.rss_specific_xtags : "");
+            } else
+                return Constants.source_map.get(sourcetype);
+
+
+        }
+        return "";
+    }
+
+    public void query_loc_source() {
+
+        String pref = "";
+        if (Constants.BLOCATION.size() > 0) {
+            Constants.rss_specific_xtags = "";
+            Constants.twitter_specific_xtags = "";
+            Constants.googleplus_specific_xtags = "";
+            Constants.facebook_specific_xtags = "";
+            Constants.rss_specific_xtags += "(";
+            Constants.twitter_specific_xtags += "(";
+            Constants.googleplus_specific_xtags += "(";
+            Constants.facebook_specific_xtags += "(";
+
+            for (int i = 0; i < Constants.BLOCATION.size(); i++) {
+                String loc = Constants.BLOCATION.get(i).toLowerCase();
+
+
+                Constants.facebook_specific_xtags += pref + " (xtags:" + loc + "_country_manual_parent" +
+                        " OR xtags:" + loc + "_country_auto)";
+
+                Constants.rss_specific_xtags += pref + " xtags:" + loc + "_country_manual_parent";
+
+                Constants.twitter_specific_xtags += pref + " xtags:" + loc + "_country_auto";
+                Constants.googleplus_specific_xtags += pref + " xtags:" + loc + "_country_auto";
+
+                pref = " OR ";
+            }
+
+
+            Constants.rss_specific_xtags += ")";
+            Constants.twitter_specific_xtags += ")";
+            Constants.googleplus_specific_xtags += ")";
+            Constants.facebook_specific_xtags += ")";
+
+
+        }
     }
 
     public String query_gender(ArrayList<String> item) {
         queryvalue.setLength(0);
-        String pref = " AND ";
+        String pref = "";
         if (item.size() > 0) {
             int gen_value = -0;
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
+                Log.i(TAG, "gender" +
+                        " value is \t" + value);
                 if (Constants.gender_map_values.containsKey(value)) {
                     gen_value += Constants.gender_map_values.get(value);
                 }
@@ -197,59 +301,64 @@ public class Utils {
                     pref = " OR ";
                     queryvalue.append((String) Constants.source_map.get(gender_xtag));
                 }
-                return queryvalue.toString();
+                return " AND (" + queryvalue.toString() + ")";
             } else if (Math.abs(gen_value) == 1)
-                return Constants.gender_map.get(Constants.MALE);
+                return " AND (" + Constants.gender_map.get(Constants.MALE) + ")";
             else if (Math.abs(gen_value) == 2)
-                return Constants.gender_map.get(Constants.FEMALE);
+                return " AND (" + Constants.gender_map.get(Constants.FEMALE) + ")";
             else if (Math.abs(gen_value) == 3)
-                return Constants.gender_map.get(Constants.UNCLASSIFIED);
+                return " AND (" + Constants.gender_map.get(Constants.UNCLASSIFIED) + ")";
         }
         return queryvalue.toString();
     }
 
     public String query_sentiment(ArrayList<String> item) {
         queryvalue.setLength(0);
-        String pref = " AND ";
+        String pref = "";
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
+                Log.i(TAG, "sentiment value is \t" + value);
                 if (Constants.sentiment_map.containsKey(value)) {
                     queryvalue.append(pref);
                     pref = " OR ";
-                    queryvalue.append((String) Constants.source_map.get(value));
+                    Log.i(TAG, "sentiment xtsg is\t" + Constants.sentiment_map.get(value));
+                    queryvalue.append(Constants.sentiment_map.get(value));
                 }
             }
-            return queryvalue.toString();
+            return " AND (" + queryvalue.toString() + ")";
         }
         return queryvalue.toString();
     }
 
-
     public String query_fromdate(ArrayList<String> item) {
 
-        if (item.size() <= 0) {
+        if (item.isEmpty() || item.size()<=0) {
             Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
+            Log.i(TAG, "from date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
             return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE);
-        } else
+        } else {
+            Log.i(TAG, "from date is" + item.get(0));
             return item.get(0);
-    }
+        }
 
+    }
 
     public String query_todate(ArrayList<String> item) {
         if (item.size() <= 0) {
             Calendar now = Calendar.getInstance();
+            Log.i(TAG, "to date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
             return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE);
-        } else
+        } else {
+            Log.i(TAG, "from date is" + item.get(0));
             return item.get(0);
-
+        }
     }
-
 
     public String query_language(ArrayList<String> item) {
         queryvalue.setLength(0);
-        String pref = " AND ";
+        String pref = "";
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 queryvalue.append(pref);
@@ -257,7 +366,7 @@ public class Utils {
                 queryvalue.append("xtags:" + item.get(i) + "_language_auto");
 
             }
-            return queryvalue.toString();
+            return " AND (" + queryvalue.toString() + ")";
         }
 
         return queryvalue.toString();
@@ -265,7 +374,7 @@ public class Utils {
 
     public String query_location(ArrayList<String> item) {
         queryvalue.setLength(0);
-        String pref = " AND ";
+        String pref = "";
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 queryvalue.append(pref);
@@ -273,12 +382,11 @@ public class Utils {
                 queryvalue.append("xtags:" + item.get(i) + "_country_manual_parent");
 
             }
-            return queryvalue.toString();
+            return " AND (" + queryvalue.toString() + ")";
         }
 
         return queryvalue.toString();
     }
-
 
     public String query_scrollid(ArrayList<String> item) {
         return item.get(0);
@@ -338,7 +446,6 @@ public class Utils {
         }
 
         return main.toString();
-
     }
 
     public void setupdate(String fromdate, String todate) {
@@ -357,37 +464,44 @@ public class Utils {
 
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
     }
 
-    public static String timezone() {
-        Calendar mCalendar = new GregorianCalendar();
-        TimeZone mTimeZone = mCalendar.getTimeZone();
-        int mGMTOffset = mTimeZone.getRawOffset();
+    public void Buzz_notification() {
 
-        System.out.printf("GMT offset is %s hours", TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS));
-        long tz = TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS);
+        // if (Constants.newarticles>0) {
+        Intent intent = new Intent(context, HomeScreen.class);
+        intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtifi);
+// use System.currentTimeMillis() to have a unique ID for the pending intent
+        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
-        if (tz > 0)
-            return String.valueOf(-tz);
-        else
-            return String.valueOf(Math.abs(tz));
+// build notification
+// the addAction re-use the same intent to keep the example short
+        NotificationManager mNotifyMgr =
+                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setContentTitle(Constants.listdetails.size() + "New Articles are come")
+                        .setSmallIcon(R.drawable.buzz_logo)
+                        .setContentIntent(pIntent)
+                        .setAutoCancel(true)
+                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+
+        mNotifyMgr.notify(0, mBuilder.build());
+        Constants.newarticles = 0;
+        // }
     }
 
-
-    public static void add_query_data() {
-        Constants.QueryString.clear();
-        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
-        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
-        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
-        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
-        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
-        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
-        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
-        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
-        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
-
+    public void call_service() {
+        Log.i(TAG, "call_service");
+        Intent intent = new Intent(context, BuzzNotification.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.i(TAG, "call_service 2");
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 1000 * 2, pendingIntent);
+        Log.i(TAG, "call_service_alaram manager");
     }
-
 }

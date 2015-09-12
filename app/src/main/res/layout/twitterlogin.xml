@@ -13,16 +13,17 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 
-    <Button
-        android:id="@+id/twitter_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Twitter Login"
-        android:textColor="#ffffff"
-        android:background="#1f3ccc"/>
+
+        <ImageView
+            android:id="@+id/twitter_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/twitterbtn"
+            android:layout_marginBottom="42dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            />
+
 
     </RelativeLayout>
 

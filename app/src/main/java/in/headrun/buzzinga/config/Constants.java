@@ -25,6 +25,9 @@ public class Constants {
     public static TwitterAuthToken AUTHTOKEN;
     public static String Intent_OPERATION = "Operation";
     public static String Intent_TRACK = "Intent_track";
+    public static String Intent_NOtifi = "notification";
+
+    public static int newarticles =0;
 
     public static final String TRACKKEY = "trackkey";
     public static final String SEARCHKEY = "searchkey";
@@ -77,8 +80,7 @@ public class Constants {
     public static Map<String, String> gender_map = new HashMap<>();
     public static Map<String, Integer> gender_map_values = new HashMap<>();
     public static Map<String, String> sentiment_map = new HashMap<>();
-    public static Map<String, String> location_map = new HashMap<>();
-    public static Map<String, String> language_map = new HashMap<>();
+
 
     public static String facebook_specific_xtags = "";
     public static String twitter_specific_xtags = "";
@@ -92,17 +94,11 @@ public class Constants {
     public static ArrayList<Listitems> FILTERLOC = new ArrayList<Listitems>();
     public static ArrayList<Listitems> FILTERLANG = new ArrayList<Listitems>();
 
-    public static ArrayList<String> sources_selected = new ArrayList<String>();
-    public static ArrayList<String> sentiment_selected = new ArrayList<String>();
-    public static ArrayList<String> gender_selected = new ArrayList<String>();
-    public static ArrayList<String> loc_selected = new ArrayList<String>();
-    public static ArrayList<String> lang_selected = new ArrayList<String>();
-
     public static ArrayList<String> sourceslist = new ArrayList<>();
     public static ArrayList<String> sentimentlist = new ArrayList<>();
     public static ArrayList<String> genderlist = new ArrayList<>();
 
-    public static ArrayList<Listitems> filterList;
+
 
     public static void xtags() {
 
@@ -119,21 +115,16 @@ public class Constants {
         sources_list.put("linkedin", LINKDIN);
         sources_list.put("quora", QUORA);
 
+        source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)");
 
-        source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)" +
-                (facebook_specific_xtags.length() > 0 ? " AND " + facebook_specific_xtags : ""));
+        source_map.put(TWITTER, "(xtags:twitter_search_sourcetype_manual OR xtags:twitter_streaming_sourcetype_manual)");
 
-        source_map.put(TWITTER, "(xtags:twitter_search_sourcetype_manual OR xtags:twitter_streaming_sourcetype_manual)" +
-                (twitter_specific_xtags.length() > 0 ? " AND " + twitter_specific_xtags : ""));
+        source_map.put(NEWS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent )");
+        source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)");
+        source_map.put(FORUMS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent)");
 
-        source_map.put(NEWS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent )" +
-                (rss_specific_xtags.length() > 0 ? " AND " + rss_specific_xtags : ""));
-        source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)"
-                + (rss_specific_xtags.length() > 0 ? " AND " + rss_specific_xtags : ""));
-        source_map.put(FORUMS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent)" + (rss_specific_xtags.length() > 0 ? " AND " + rss_specific_xtags : ""));
+        source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
 
-        source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)"
-                + (googleplus_specific_xtags.length() > 0 ? " AND " + googleplus_specific_xtags : ""));
         source_map.put(YOUTUBE, "(xtags:youtube_search_sourcetype_manual)");
         source_map.put(FLICKR, "(xtags:flickr_search_sourcetype_manual)");
         source_map.put(INSTAGRAM, "(xtags:instagram_search_sourcetype_manual)");
