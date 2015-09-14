@@ -12,8 +12,10 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchDetails;
 
 /**
@@ -21,11 +23,11 @@ import in.headrun.buzzinga.doto.SearchDetails;
  */
 public class SearchListData extends ArrayAdapter<SearchDetails> {
 
+    public int count;
     String TAG = SearchListData.this.getClass().getSimpleName();
     Context context;
     ArrayList<SearchDetails> listdata;
     LayoutInflater inflater;
-    public int count;
 
     public SearchListData(Context context, int resource) {
         super(context, resource);
@@ -33,7 +35,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
 
     public SearchListData(Context context, ArrayList<SearchDetails> listdata) {
         super(context, R.layout.search_data, listdata);
-        Log.i("Log_tag", "search data adapter is" + listdata.size());
+        Log.i(TAG, "search data adapter is" + listdata.size());
 
         this.context = context;
         this.listdata = new ArrayList<>();
@@ -55,6 +57,104 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         return count;
     }
 
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View itemView = inflater.inflate(R.layout.search_data, parent, false);
+
+        Log.i(TAG, "searchDetails view");
+        SearchHolder holder = new SearchHolder();
+
+        holder.title = (TextView) itemView.findViewById(R.id.title);
+        holder.text = (TextView) itemView.findViewById(R.id.text);
+        holder.url = (TextView) itemView.findViewById(R.id.url);
+        holder.articledate = (TextView) itemView.findViewById(R.id.articledate);
+        holder.author = (TextView) itemView.findViewById(R.id.author);
+        holder.sentimentcolor = (TextView) itemView.findViewById(R.id.sentimetncolor);
+        holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
+        holder.title_lay = itemView.findViewById(R.id.title_lay);
+        holder.article_lay = itemView.findViewById(R.id.article_lay);
+        SearchDetails item = getItem(position);
+
+        Log.i(TAG, "item.getTitle()" + item.getTitle());
+        if (item.getTitle().length() > 0)
+            holder.title.setText(item.getTitle());
+        else {
+            if (item.getArticle_type().equals(Constants.TWITTER))
+                holder.title.setText("@" + item.getAuthor());
+        }
+
+        holder.url.setText(item.getUrl());
+
+        if (item.getText() != null) {
+            holder.text.setText(item.getText());
+            holder.text.setVisibility(View.VISIBLE);
+        }
+
+        if (item.getAuthor() != null)
+            holder.author.setText("By - " + item.getAuthor());
+
+
+        int icon = source_icon(item.article_type);
+        if (icon != 0)
+            holder.article_icon.setImageResource(icon);
+
+        long seconds = Long.parseLong(item.getArticledate());
+        long millis = seconds * 1000;
+        Date date = new Date(millis);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+        holder.articledate.setText(sdf.format(date));
+
+        Log.i(TAG, "epoch time is\t" + item.getArticledate() + "\ntime is\t" + sdf.format(date));
+        holder.article_lay.setBackgroundResource(applySentimentColor(item.getSentiment()));
+
+        return itemView;
+    }
+
+    private int applySentimentColor(String sentimet) {
+
+        if (sentimet != null)
+            if (sentimet.contains("positive")) {
+                return R.drawable.pos_sentiment;
+            } else if (sentimet.contains("negative")) {
+                return R.drawable.neg_sentiment;
+            }
+        return R.drawable.neu_sentiment;
+
+    }
+
+    private int source_icon(String type) {
+
+        if (type != null)
+            switch (type) {
+                case Constants.FACEBOOK:
+                    return R.drawable.fb;
+                case Constants.TWITTER:
+                    return R.drawable.twitter;
+                case Constants.NEWS:
+                    return R.drawable.news;
+                case Constants.BLOGS:
+                    return R.drawable.blogs;
+                case Constants.FORUMS:
+                    return R.drawable.forum;
+                case Constants.TUMBLR:
+                    return R.drawable.tumblr;
+                case Constants.QUORA:
+                    return R.drawable.quora;
+                case Constants.FLICKR:
+                    return R.drawable.flikckr;
+                case Constants.INSTAGRAM:
+                    return R.drawable.instagram;
+                case Constants.YOUTUBE:
+                    return R.drawable.youtube;
+                case Constants.GOOGLEPLUS:
+                    return R.drawable.googleplus;
+                case Constants.LINKDIN:
+                    return R.drawable.linkdin;
+            }
+        return 0;
+    }
+
     private static class SearchHolder {
 
         public TextView title;
@@ -68,64 +168,5 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         public View article_lay;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.search_data, parent, false);
-
-        SearchHolder holder = new SearchHolder();
-
-        holder.title = (TextView) itemView.findViewById(R.id.title);
-        holder.text = (TextView) itemView.findViewById(R.id.text);
-        holder.url = (TextView) itemView.findViewById(R.id.url);
-        holder.articledate = (TextView) itemView.findViewById(R.id.articledate);
-        holder.author = (TextView) itemView.findViewById(R.id.author);
-        holder.sentimentcolor = (TextView) itemView.findViewById(R.id.sentimetncolor);
-        holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
-        holder.title_lay = itemView.findViewById(R.id.title_lay);
-        holder.article_lay = itemView.findViewById(R.id.article_lay);
-        SearchDetails item = getItem(position);
-        holder.title.setText(item.getTitle());
-
-        holder.url.setText(item.getUrl());
-
-        if (item.getText() != null) {
-            holder.text.setText(item.getText());
-            // holder.text.setBackgroundResource(R.drawable.roundborder);
-            holder.text.setVisibility(View.VISIBLE);
-        }
-
-        if (item.getAuthor() != null)
-            holder.author.setText("By - " + item.getAuthor());
-
-        // holder.sentimentcolor.setBackgroundColor(Color.parseColor("#5cb85c"));
-        holder.article_icon.setImageResource(R.drawable.filter);
-        long seconds = Long.parseLong(item.getArticledate());
-        long millis = seconds * 1000;
-        Date date = new Date(millis);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a");
-        holder.articledate.setText(sdf.format(date));
-        Log.i("Log_tag", "sentiment color is" + item.getSentiment() + "drawable  is" + applySentimentColor(item.getSentiment()));
-        holder.article_lay.setBackgroundResource(applySentimentColor(item.getSentiment()));
-
-        return itemView;
-    }
-
-    private int applySentimentColor(String sentimet) {
-
-        if (sentimet != null)
-            if (sentimet.contains("positive")) {
-                Log.i(TAG, "pos");
-                return R.drawable.pos_sentiment;
-            } else if (sentimet.contains("negative")) {
-                Log.i(TAG, "neg");
-                return R.drawable.neg_sentiment;
-            }
-        Log.i(TAG, "neu");
-        return R.drawable.neu_sentiment;
-
-    }
 
 }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        

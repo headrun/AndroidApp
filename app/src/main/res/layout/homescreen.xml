@@ -9,8 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        >
+        android:layout_centerVertical="true">
 
     </ProgressBar>
 
@@ -83,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:dividerHeight="10dp"
-                android:scrollingCache="false" />
+                android:scrollingCache="true" />
+
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
@@ -177,17 +177,20 @@
             <ImageView
                 android:id="@+id/closebrowser"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+
+                android:paddingTop="5dp"
                 android:src="@drawable/closebrowser" />
 
             <TextView
                 android:id="@+id/browsertitle"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/closebrowser"
+                android:background="@drawable/roundborder"
                 android:gravity="start|center"
                 android:maxLines="1" />
 
@@ -199,8 +202,16 @@
             android:layout_height="fill_parent"
             android:layout_below="@+id/browserheader">
 
+
         </WebView>
 
+        <ProgressBar
+            android:id="@+id/browser_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal|center_vertical" />
 
         <!--
             <RelativeLayout
@@ -239,6 +250,15 @@
             </RelativeLayout>
             -->
     </RelativeLayout>
+
+    <include
+        android:id="@+id/listfooter"
+        layout="@layout/listviewfooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

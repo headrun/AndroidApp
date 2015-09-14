@@ -19,12 +19,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import in.headrun.buzzinga.BuzzNotification;
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
@@ -73,7 +75,7 @@ public class Utils {
 
     }
 
-    public static void clear_all_data(){
+    public static void clear_all_data() {
         Constants.BTRACKKEY.clear();
         Constants.BSEARCHKEY.clear();
         Constants.BTODATE.clear();
@@ -95,51 +97,72 @@ public class Utils {
             switch (item) {
                 case Constants.TRACKKEY:
                     trackkey_query = query_trackkey(i.getBvalue());
-                    if(trackkey_query.trim().length()==0 || trackkey_query.trim()==null)
-                        Log.i(TAG,"track query is null");
-                        //context.stopService(new Intent(context,BuzzNotification.class));
+                    if (trackkey_query.trim().length() == 0 || trackkey_query.trim() == null)
+                        Log.i(TAG, "track query is null");
+                    else
+                        Log.i(TAG, "Track key is" + trackkey_query);
+                    //context.stopService(new Intent(context,BuzzNotification.class));
                     break;
                 case Constants.SEARCHKEY:
                     search_query = query_searchkey(i.getBvalue());
+                    Log.i(TAG, "Search key is" + search_query);
                     break;
                 case Constants.SOURCES:
                     if (Config.Utils)
                         Log.i(TAG, "source checking");
                     source_query = query_sources(i.getBvalue());
+                    Log.i(TAG, "Source is" + source_query);
                     break;
                 case Constants.GENDER:
                     gender_query = query_gender(i.getBvalue());
+                    Log.i(TAG, "Gender is" + gender_query);
                     break;
                 case Constants.SENTIMENT:
                     sentiment_query = query_sentiment(i.getBvalue());
+                    Log.i(TAG, "Sentiment is" + sentiment_query);
                     break;
                 case Constants.LOCATION:
                     location_query = query_location(i.getBvalue());
+                    Log.i(TAG, "loc is" + location_query);
                     break;
                 case Constants.LANGUAGE:
                     language_query = query_language(i.getBvalue());
+                    Log.i(TAG, "lang is" + language_query);
                     break;
                 case Constants.FROMDATE:
                     fromdate_query = query_fromdate(i.getBvalue());
+                    Log.i(TAG, "from date is" + fromdate_query);
                     break;
                 case Constants.TODATE:
                     todate_queruy = query_todate(i.getBvalue());
+                    Log.i(TAG, "To date is" + todate_queruy);
                     break;
 
             }
         }
 
+
         return formquery(trackkey_query, search_query, source_query, sentiment_query, gender_query, location_query, language_query, fromdate_query, todate_queruy);
+
+
     }
 
     public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
+
 
         setupdate(fromdate, todate);
         String query = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang)
                 + " AND dt_added:[" + fromdate + " TO " + todate + "]";
 
+
+        String countquery = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
+                + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang)
+                + " AND dt_added:[" + timestamp(Long.parseLong(new UserSession(context).getLatestDate())) + " TO " + timestamp(0) + "]";
+        Log.i(TAG, "count query is" + countquery);
+        count_query(countquery);
         return queryform(query);
+
     }
 
     public String check_query_value(String query_value) {
@@ -183,8 +206,8 @@ public class Utils {
             return queryvalue.toString();
         } else
             return "";
-        
-        
+
+
     }
 
     public String query_sources(ArrayList<String> item) {
@@ -333,7 +356,7 @@ public class Utils {
 
     public String query_fromdate(ArrayList<String> item) {
 
-        if (item.isEmpty() || item.size()<=0) {
+        if (item.isEmpty() || item.size() <= 0) {
             Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
             Log.i(TAG, "from date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
@@ -445,8 +468,65 @@ public class Utils {
             e.printStackTrace();
         }
 
+        Log.i(TAG, "search query is" + main.toString());
         return main.toString();
     }
+
+    public void count_query(String query_data) {
+
+        JSONObject main = new JSONObject();
+        JSONObject mainquery = new JSONObject();
+
+        JSONObject subquery = new JSONObject();
+        JSONObject dataquery = new JSONObject();
+        JSONObject query_string = new JSONObject();
+        JSONObject order = new JSONObject();
+        JSONObject dt_added = new JSONObject();
+        JSONObject text = new JSONObject();
+        JSONObject title = new JSONObject();
+        JSONObject fields = new JSONObject();
+        JSONObject fieldsobj = new JSONObject();
+        JSONObject scroll = new JSONObject();
+        JSONArray fieldsarray = new JSONArray();
+        JSONArray sortarray = new JSONArray();
+        JSONArray indexes_array = new JSONArray();
+
+        try {
+            dataquery.put("query", query_data);
+            dataquery.put("use_dis_max", true);
+            fieldsarray.put("title");
+            fieldsarray.put("text");
+            dataquery.put("fields", fieldsarray);
+
+            query_string.put("query_string", dataquery);
+            //mainquery.put("query", query_string);
+
+            // order.put("order", "desc");
+            // sortarray.put(dt_added.put("dt_added", order));
+
+            ///mainquery.put("sort", sortarray);
+            //mainquery.put("size", 15);
+            //fields.put("text", text);
+            //fields.put("title", title);
+            //fieldsobj.put("fields", fields);
+            //mainquery.put("highlight", fieldsobj);
+
+            indexes_array.put("socialdata");
+            main.put("indexes", indexes_array);
+            main.put("doc_types", "item");
+            main.put("query", query_string);
+
+            //scroll.put("scroll", "15m");
+
+            //main.put("query_params", scroll);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.i(TAG, "count query is" + main.toString());
+        new UserSession(context).setClubbedquery(main.toString());
+    }
+
 
     public void setupdate(String fromdate, String todate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -470,29 +550,25 @@ public class Utils {
 
     }
 
-    public void Buzz_notification() {
+    public void Buzz_notify(int article_count) {
 
-        // if (Constants.newarticles>0) {
-        Intent intent = new Intent(context, HomeScreen.class);
-        intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtifi);
-// use System.currentTimeMillis() to have a unique ID for the pending intent
-        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
+            Intent intent = new Intent(context, HomeScreen.class);
+            intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
 
-// build notification
-// the addAction re-use the same intent to keep the example short
-        NotificationManager mNotifyMgr =
-                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setContentTitle(Constants.listdetails.size() + "New Articles are come")
-                        .setSmallIcon(R.drawable.buzz_logo)
-                        .setContentIntent(pIntent)
-                        .setAutoCancel(true)
-                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+            PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
-        mNotifyMgr.notify(0, mBuilder.build());
-        Constants.newarticles = 0;
-        // }
+            NotificationManager mNotifyMgr =
+                    (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(context)
+                            .setContentTitle(article_count+ "New Articles are come")
+                            .setSmallIcon(R.drawable.buzz_logo)
+                            .setContentIntent(pIntent)
+                            .setAutoCancel(true)
+                            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+
+            mNotifyMgr.notify(0, mBuilder.build());
+
     }
 
     public void call_service() {
@@ -504,4 +580,16 @@ public class Utils {
         alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 1000 * 2, pendingIntent);
         Log.i(TAG, "call_service_alaram manager");
     }
+
+    public String timestamp(long ecpoch_value) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        if (ecpoch_value != 0) {
+            long millis = ecpoch_value * 1000;
+            return sdf.format(new Date(millis));
+        } else
+            return sdf.format(new Date());
+
+    }
+
+
 }

@@ -9,5 +9,6 @@ public class ServerConfig {
     public static final String login = "/login/twitter";
     public static String logout = "/accounts/logout?next=/";
     public static String search = "/search/";
+    public static String count = "/count/";
 
 }

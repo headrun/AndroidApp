@@ -80,6 +80,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
 
+        filter_sourceslist.setVisibility(View.VISIBLE);
+
         String[] filtertitles = getResources().getStringArray(R.array.filtertitles);
         TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
 
@@ -231,6 +233,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if (v.getId() == R.id.clearfilter) {
 
+            clearfilters();
 
         } else if (v.getId() == R.id.applyfilter) {
 
@@ -239,10 +242,15 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             genderquery();
             locquery();
             langquery();
+
             Utils.add_query_data();
+            Constants.listdetails.clear();
+            HomeScreen.display_data.setAdapter(null);
+
             Intent i = new Intent(Filtering.this, HomeScreen.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
             startActivity(i);
+
         }
     }
 
@@ -296,7 +304,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         LOCATION
     }
 
-    public void listOfFilterSources() {
+    public  void listOfFilterSources() {
         Constants.FILTERSOURSOURE.clear();
 
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
@@ -741,5 +749,19 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             Log.i("Log_tag", "source is" + sourcelist.next().getXtag());
             Constants.sourceslist.add(sourcelist.next().getXtag());
         }
+    }
+
+    public void clearfilters(){
+        Constants.BLANGUAGE.clear();
+        Constants.BLOCATION.clear();
+        Constants.BSOURCES.clear();
+        Constants.BSENTIMENT.clear();
+        Constants.BGENDER.clear();
+
+        listOfFilterSources();
+        listOfFilterSentiment();
+        listOfFilterGender();
+        listOfFilterLocation();
+        listOfFilterLang();
     }
 }

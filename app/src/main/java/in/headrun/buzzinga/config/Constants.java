@@ -19,13 +19,17 @@ public class Constants {
     public static String FIRSTURL = "";
     public static boolean swipedata = false;
     public static boolean finddata = false;
+    public static boolean BUZZ_NOTIFY = false;
+
+
     public static String SEARCHSTRING;
     public static String USERNAME;
     public static String SETUP = "";
     public static TwitterAuthToken AUTHTOKEN;
     public static String Intent_OPERATION = "Operation";
-    public static String Intent_TRACK = "Intent_track";
-    public static String Intent_NOtifi = "notification";
+    public static String Intent_TRACK = "search";
+    public static String Intent_NOtify = "notification";
+
 
     public static int newarticles =0;
 

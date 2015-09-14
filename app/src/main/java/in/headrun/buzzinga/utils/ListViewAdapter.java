@@ -1,7 +1,6 @@
 package in.headrun.buzzinga.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ public class ListViewAdapter extends BaseAdapter{
     public ListViewAdapter(Context context, ArrayList<Listitems> source) {
         this.context = context;
         this.source = source;
-        Log.i(TAG,"size is"+source.size()+"list 1 is"+source.get(1).getSourcename());
+       // Log.i(TAG,"size is"+source.size()+"list 1 is"+source.get(1).getSourcename());
         //this.source.addAll(source);
         this.selectlist = source;
     }

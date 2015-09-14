@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/buzz_logo1"
+        android:layout_above="@+id/keyword"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="50dp"
+         />
+    <EditText
+        android:id="@+id/keyword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/roundborder"
+        android:drawableRight="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:hint="@string/keyword"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="5dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="#4baadf"
+        android:text="@string/track"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/keyword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:id="@+id/trackbtn" />
+</RelativeLayout>
+<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/trackkeyword.xml -->

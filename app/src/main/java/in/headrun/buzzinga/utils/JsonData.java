@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchDetails;
@@ -42,6 +43,7 @@ public class JsonData {
 
                         title = jobj_source.getString("title");
                         url = jobj_source.getString("url");
+                        Log.i(TAG,"url is"+url);
                         text = jobj_source.optString("text");
                         date = jobj_source.getString("_added");
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
@@ -52,7 +54,7 @@ public class JsonData {
                         xtags_separate(json_xtags);
 
                         if (Constants.swipedata) {
-                            Log.i(TAG, "swipe data added");
+                           // Log.i(TAG, "swipe data added");
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
                         } else {
@@ -61,7 +63,7 @@ public class JsonData {
                     }
                     Constants.scroolid = jobj_result.getString("_scroll_id");
 
-                    Log.i(TAG,"scroolid is"+Constants.scroolid);
+                    //Log.i(TAG, "scroolid is" + Constants.scroolid);
                     if (!swipelist.isEmpty()) {
                         if (Constants.listdetails.size() > 0) {
                             for (int i = 0; i < swipelist.size(); i++) {
@@ -79,8 +81,8 @@ public class JsonData {
                                     Constants.listdetails.add(j, swipelist.get(j));
                                 }
 
-                        }else{
-                            Constants.listdetails=swipelist;
+                        } else {
+                            Constants.listdetails = swipelist;
                         }
 
                     }
@@ -89,7 +91,7 @@ public class JsonData {
 
                     Constants.scroolid = "1";
                 }
-                Log.i(TAG,"Constants.listdetails size is"+Constants.listdetails.size());
+                Log.i(TAG, "Constants.listdetails size is" + Constants.listdetails.size());
 
                 return Constants.listdetails;
                /*
@@ -133,56 +135,33 @@ public class JsonData {
     }
 
     private void xtags_separate(JSONArray xtags) {
-        Log.i(TAG, "xtag size is" + xtags.length());
-        for (int i = 0; i < xtags.length(); i++) {
-            try {
-                Log.i(TAG, "xtag is" + xtags.get(i).toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
 
-        for (int i = 0; i < xtags.length(); i++) {
-
-            try {
-
-                if (Constants.sourceslist.contains(xtags.get(i).toString())) {
-
-                    article_type = xtags.get(i).toString();
+        if (xtags.length() > 0) {
+            Set<String> source_keys = Constants.source_map.keySet();
+            for (String key : source_keys) {
+                if (xtags.toString().contains(key)) {
+                    article_type = key;
                     break;
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+                if (xtags.toString().contains("fb"))
+                    article_type = Constants.FACEBOOK;
             }
 
-        }
-
-        for (int i = 0; i < xtags.length(); i++) {
-
-            try {
-
-                if (Constants.sentimentlist.contains(xtags.get(i).toString())) {
-
-                    sentiment = xtags.get(i).toString();
+            Set<String> sentiment_keys = Constants.sentiment_map.keySet();
+            for (String sentiment_key : sentiment_keys) {
+                if (xtags.toString().contains(sentiment_key)) {
+                    sentiment = sentiment_key;
                     break;
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-
-        }
-
-        for (int i = 0; i < xtags.length(); i++) {
-
-            try {
-
-                if (Constants.genderlist.contains(xtags.get(i).toString())) {
-
-                    gender = xtags.get(i).toString();
+            Set<String> gender_keys = Constants.gender_map.keySet();
+            for (String gender_key : gender_keys) {
+                if (xtags.toString().contains(gender_key)) {
+                    gender = gender_key;
                     break;
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+
             }
 
         }

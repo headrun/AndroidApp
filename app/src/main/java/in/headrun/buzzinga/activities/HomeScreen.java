@@ -2,13 +2,13 @@ package in.headrun.buzzinga.activities;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -69,7 +69,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     static Context context;
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
-    public ProgressDialog mProgressDialog;
+    Parcelable state;
 
     Utils query;
     @Bind(R.id.filterpanel)
@@ -92,16 +92,31 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     ImageView closebrowser;
     @Bind(R.id.bydatefilter)
     Button bydatefilter;
+    @Bind(R.id.listfooter)
+    View Listfooter;
+
 
     @Bind(R.id.progressBar)
     ProgressBar progress;
+    @Bind(R.id.browser_progress)
+    ProgressBar browser_progress;
+
+
     Test buzztest;
     UserSession userSession;
     SearchListData search_adapter;
     LayoutInflater inflater;
+    SearchListData articles_data;
 
+    public static void display_articles(Context context, ArrayList<SearchDetails> article_list) {
 
+        Log.i("Log_tag", "display_article contet is\t" + context + "\t article list is" + article_list);
+        SearchListData articles_listdata = new SearchListData(context, article_list);
+        articles_listdata.notifyDataSetChanged();
+        display_data.setAdapter(new SearchListData(context, article_list));
 
+        content_lay.setVisibility(View.VISIBLE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,12 +160,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         filterpanel.setVisibility(View.GONE);
         webview_lay.setVisibility(View.GONE);
         progress.setVisibility(View.GONE);
-
+        Listfooter.setVisibility(View.GONE);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.buzz_logo);
         actionBar.setDefaultDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(Constants.BTRACKKEY.get(0));
+
+        actionBar.setTitle(userSession.getTrackKey());
         webSettings();
 
         display_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,7 +175,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
                 String geturl = details.getUrl();
-                browsertitle.setText(details.getTitle() + "....");
+                browsertitle.setText(geturl);
                 webview_lay.setVisibility(View.VISIBLE);
                 webview.loadUrl(geturl);
                 Log.i("Log_tag", "selectd url is" + geturl);
@@ -176,12 +192,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+                display_data.getChildCount()
+
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
                 if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5) {
                     Log.i(TAG, "scrolling is on");
                     Config.SwipeLoading = true;
                     footerView = inflater.inflate(R.layout.listviewfooter, null);
-                    display_data.addFooterView(footerView);
+                    //display_data.addFooterView(footerView);
+                    Listfooter.setVisibility(View.VISIBLE);
                     Log.i(TAG, "listview footer count" + display_data.getFooterViewsCount());
                     getServer_response();
                 }
@@ -203,6 +222,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 getServer_response();
             }
         });
+
+        if (state != null) {
+            Log.d(TAG, "trying to restore listview state..");
+            display_data.onRestoreInstanceState(state);
+        }
     }
 
     @Override
@@ -212,10 +236,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if (Intent_opt.contains(Constants.Intent_TRACK)) {
             //new getresponce().execute();
             getServer_response();
-        } else if (Intent_opt.contains(Constants.Intent_NOtifi)) {
-            display_data.setVisibility(View.VISIBLE);
-            content_lay.setVisibility(View.VISIBLE);
-            Log.i(TAG, "notification");
+        }else if (Intent_opt.equals(Constants.Intent_NOtify)){
+            getServer_response();
         }
     }
 
@@ -233,7 +255,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Log.i("Log_tag", "display_data length is" + display_data.getCount());
                 Constants.BSEARCHKEY.clear();
                 Constants.BSEARCHKEY.add(Constants.SEARCHSTRING);
-
+                Constants.listdetails.clear();
+                HomeScreen.display_data.setAdapter(null);
                 getServer_response();
             }
         }
@@ -279,7 +302,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.bydatefilter:
                 filterpanel.setVisibility(View.GONE);
-
+                Constants.listdetails.clear();
+                display_data.setAdapter(null);
                 getServer_response();
                 break;
             case R.id.closebrowser:
@@ -311,9 +335,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.action_track) {
             if (item.isChecked()) {
                 item.setChecked(false);
+                Constants.BUZZ_NOTIFY = false;
                 stopService(new Intent(getBaseContext(), BuzzNotification.class));
             } else {
                 item.setChecked(true);
+                Constants.BUZZ_NOTIFY = true;
                 startService(new Intent(getBaseContext(), BuzzNotification.class));
             }
 
@@ -353,21 +379,32 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             ;
         };
         stringRequest.setTag(TAG);
-        //BuzzingaApplication.get().getRequestQueue().add(stringRequest);
+
         BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
     }
 
     public void getServer_response() {
 
-        if (swipeRefreshLayout.isRefreshing() || display_data.getFooterViewsCount() == 1)
+        if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
             progress.setVisibility(View.GONE);
-        else
+        else {
+
             progress.setVisibility(View.VISIBLE);
 
-        userSession.setSCROLLID(Constants.scroolid);
-        userSession.setClubbedquery(query.getquerydata(Constants.QueryString));
+        }
+        final String clubbed_query;
+        if (Intent_opt.equals(Constants.Intent_NOtify)) {
+           // userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
+            clubbed_query=userSession.get_search_Clubbedquery();
+        }else
+            clubbed_query=query.getquerydata(Constants.QueryString);
         userSession.setSETUP(Constants.SETUP);
         userSession.setTIMEZONE(Utils.timezone());
+        userSession.setSCROLLID(Constants.scroolid);
+
+
+        final String clubbedquery = userSession.getClubbedquery();
+        Log.i(TAG, "final clubbed query is" + clubbedquery);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 ServerConfig.SERVER_ENDPOINT + ServerConfig.search,
@@ -379,7 +416,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                         if (list_response.isEmpty()) {
                             Toast.makeText(HomeScreen.this, "No  articles found", Toast.LENGTH_LONG).show();
                         } else {
+                            state = display_data.onSaveInstanceState();
+                            SearchListData articles_listdata = new SearchListData(context, list_response);
+                            articles_listdata.notifyDataSetChanged();
                             display_data.setAdapter(new SearchListData(context, list_response));
+                            SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
+                            userSession.setLatestDate(fistitem.getArticledate());
+
+
+                            display_data.onRestoreInstanceState(state);
                         }
                         progress.setVisibility(View.GONE);
 
@@ -387,39 +432,40 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                         if (swipeRefreshLayout.isRefreshing())
                             swipeRefreshLayout.setRefreshing(false);
-                        display_data.removeFooterView(footerView);
+                        if (Config.SwipeLoading)
+                            Listfooter.setVisibility(View.GONE);
 
                         return null;
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "string error response is" + error.getMessage() + "\nmessage is" + error.getMessage());
-                Toast.makeText(HomeScreen.this, "No Resuls found try again", Toast.LENGTH_LONG).show();
+                // Log.d(TAG, "string error response is" + error.networkResponse.headers.values());
+                Toast.makeText(HomeScreen.this, "Try again search", Toast.LENGTH_LONG).show();
                 progress.setVisibility(View.GONE);
 
                 content_lay.setVisibility(View.VISIBLE);
 
                 if (swipeRefreshLayout.isRefreshing())
                     swipeRefreshLayout.setRefreshing(false);
-                display_data.removeFooterView(footerView);
-
+                if (Config.SwipeLoading)
+                    Listfooter.setVisibility(View.GONE);
             }
         }) {
 
             @Override
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                if (!userSession.getSCROLLID().equals("1")) {
+                UserSession usersess = new UserSession(HomeScreen.this);
+                params.put("clubbed_query", clubbed_query);
+                params.put("setup", usersess.getSETUP());
+                if (!usersess.getSCROLLID().equals("1")) {
                     Log.i(TAG, "qury on scrool");
-                    params.put("scroll_id", userSession.getSCROLLID());
+                    params.put("scroll_id", usersess.getSCROLLID());
                 } else {
                     Log.i(TAG, "qury on TZone");
-                    params.put("tz", userSession.getTIMEZONE());
+                    params.put("tz", usersess.getTIMEZONE());
                 }
-                params.put("clubbed_query", userSession.getClubbedquery());
-                params.put("setup", userSession.getSETUP());
-
                 return params;
             }
 
@@ -447,12 +493,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
             ;
         };
-
-
-        //BuzzingaApplication.get().getRequestQueue().add(stringRequest);
+        stringRequest.setTag(TAG);
         BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        state = display_data.onSaveInstanceState();
+    }
 
     private class MyBrowser extends WebViewClient {
         @Override
@@ -465,7 +514,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageFinished(WebView view, String url) {
 
-            progress.setProgress(100);
+            browser_progress.setProgress(100);
+            browser_progress.setVisibility(View.GONE);
             super.onPageFinished(view, url);
 
         }
@@ -473,14 +523,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
 
-            progress.setProgress(0);
+            browser_progress.setProgress(0);
+            browser_progress.setVisibility(View.VISIBLE);
             super.onPageStarted(view, url, favicon);
         }
-    }
-
-    public static void display_articles(ArrayList<SearchDetails> article_list) {
-
-        display_data.setAdapter(new SearchListData(context, article_list));
-        content_lay.setVisibility(View.VISIBLE);
     }
 }
