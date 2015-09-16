@@ -24,6 +24,7 @@ import java.util.TimerTask;
 import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchDetails;
 import in.headrun.buzzinga.doto.Utils;
+import in.headrun.buzzinga.utils.ConnectionSettings;
 
 /**
  * Created by headrun on 8/9/15.
@@ -48,6 +49,7 @@ public class BuzzNotification extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         Log.i(TAG, "call the notification");
+                        if(new ConnectionSettings().isConnected(getApplication()))
                         stringrequest();
 
                     }

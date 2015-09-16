@@ -76,12 +76,14 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.article_lay = itemView.findViewById(R.id.article_lay);
         SearchDetails item = getItem(position);
 
-        Log.i(TAG, "item.getTitle()" + item.getTitle());
+
         if (item.getTitle().length() > 0)
             holder.title.setText(item.getTitle());
         else {
-            if (item.getArticle_type().equals(Constants.TWITTER))
-                holder.title.setText("@" + item.getAuthor());
+            Log.i(TAG, "articley type" + item.getArticle_type());
+            if (item.getArticle_type() != null)
+                if (item.getArticle_type().equals(Constants.TWITTER))
+                    holder.title.setText("@" + item.getAuthor());
         }
 
         holder.url.setText(item.getUrl());
@@ -100,7 +102,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
             holder.article_icon.setImageResource(icon);
 
         long seconds = Long.parseLong(item.getArticledate());
-        Log.i(TAG,"article time is"+seconds);
+        Log.i(TAG, "article time is" + seconds);
         long millis = seconds * 1000;
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());

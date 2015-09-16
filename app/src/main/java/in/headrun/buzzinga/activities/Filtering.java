@@ -157,19 +157,23 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                                               @Override
                                               public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                                                  adapter.getFilter().filter(s.toString());
 
                                                   if (Sourcestatus.contains("lang")) {
                                                       if (TextUtils.isEmpty(s.toString()))
                                                           filter_language.clearTextFilter();
-                                                      else
+                                                      else{
+                                                      Log.i(TAG,"get the lang" +s.toString());
                                                           filter_language.setFilterText(s.toString());
 
-                                                  } else {
+                                                  }
+                                                  }else {
                                                       if (TextUtils.isEmpty(s.toString()))
                                                           filter_location.clearTextFilter();
-                                                      else
+                                                      else {
+                                                          Log.i(TAG,"get the loc"+ s.toString());
                                                           filter_location.setFilterText(s.toString());
-
+                                                      }
                                                   }
                                               }
 

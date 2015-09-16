@@ -1,19 +1,23 @@
 package in.headrun.buzzinga.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
 
-public class ListViewAdapter extends BaseAdapter{
+public class ListViewAdapter extends BaseAdapter implements Filterable {
 
     String TAG=ListViewAdapter.this.getClass().getSimpleName();
     // Declare Variables
@@ -22,7 +26,7 @@ public class ListViewAdapter extends BaseAdapter{
     ArrayList<Listitems> source = null;
     ArrayList<Listitems> selectlist = null;
     LayoutInflater inflater;
-
+    ValueFilter valueFilter = new ValueFilter();
 
     public ListViewAdapter(Context context, ArrayList<Listitems> source) {
         this.context = context;
@@ -32,6 +36,10 @@ public class ListViewAdapter extends BaseAdapter{
         this.selectlist = source;
     }
 
+    @Override
+    public Filter getFilter() {
+        return valueFilter;
+    }
 
 
     private static class listholder {
@@ -95,6 +103,37 @@ public class ListViewAdapter extends BaseAdapter{
 
         return convertView;
     }
+
+    public class ValueFilter extends Filter {
+
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            FilterResults results = new FilterResults();
+
+
+            Constants.filterList = new ArrayList<Listitems>(selectlist.size());
+            for (int i = 0; i < selectlist.size(); i++) {
+                Log.i(TAG, "source list string" + selectlist.get(i).getSourcename().toUpperCase() + " comparde strin " + constraint.toString().toUpperCase());
+                if ((selectlist.get(i).getSourcename().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                    Constants.filterList.add(selectlist.get(i));
+                }
+            }
+            results.count = Constants.filterList.size();
+            results.values = Constants.filterList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            source = (ArrayList<Listitems>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
 
 
 }

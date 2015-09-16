@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
-import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 
 /**
@@ -50,8 +49,6 @@ public class Utils {
         Calendar mCalendar = new GregorianCalendar();
         TimeZone mTimeZone = mCalendar.getTimeZone();
         int mGMTOffset = mTimeZone.getRawOffset();
-
-        System.out.printf("GMT offset is %s hours", TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS));
         long tz = TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS);
 
         if (tz > 0)
@@ -96,19 +93,14 @@ public class Utils {
             switch (item) {
                 case Constants.TRACKKEY:
                     trackkey_query = query_trackkey(i.getBvalue());
-                    if (trackkey_query.trim().length() == 0 || trackkey_query.trim() == null)
-                        Log.i(TAG, "track query is null");
-                    else
                         Log.i(TAG, "Track key is" + trackkey_query);
-                    //context.stopService(new Intent(context,BuzzNotification.class));
+
                     break;
                 case Constants.SEARCHKEY:
                     search_query = query_searchkey(i.getBvalue());
                     Log.i(TAG, "Search key is" + search_query);
                     break;
                 case Constants.SOURCES:
-                    if (Config.Utils)
-                        Log.i(TAG, "source checking");
                     source_query = query_sources(i.getBvalue());
                     Log.i(TAG, "Source is" + source_query);
                     break;
@@ -158,7 +150,6 @@ public class Utils {
         String countquery = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
 
-        Log.i(TAG, "count query is" + countquery);
         new UserSession(context).setClubbedquery(countquery);
 
         return queryform(query);
@@ -166,7 +157,6 @@ public class Utils {
     }
 
     public String check_query_value(String query_value) {
-        Log.i(TAG, "check_query value is" + query_value);
         if (query_value != null)
             return query_value.toString();
         else
@@ -182,11 +172,6 @@ public class Utils {
 
                 queryvalue.append(skey);
             }
-
-            if (Config.Utils)
-                Log.i(TAG, "search key is" + queryvalue.toString());
-
-
             return queryvalue.toString();
         } else
             return "";
@@ -201,8 +186,6 @@ public class Utils {
                 pref = " AND ";
                 queryvalue.append(tkey.trim());
             }
-            if (Config.Utils)
-                Log.i(TAG, "track key is" + queryvalue.toString());
             return queryvalue.toString();
         } else
             return "";
@@ -212,24 +195,19 @@ public class Utils {
 
     public String query_sources(ArrayList<String> item) {
         queryvalue.setLength(0);
-        if (Config.Utils)
-            Log.i(TAG, "source size is" + item.size());
         String pref = "";
         query_loc_source();
 
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
-                Log.i(TAG,"source value is"+value +"\n xtag is"+get_source_xtag(value));
                 queryvalue.append(pref);
                 pref = " OR ";
                 queryvalue.append(get_source_xtag(value));
             }
-            Log.i(TAG,"source xtag is"+queryvalue.toString());
         }
 
         if (queryvalue.length() > 0) {
-            Log.i(TAG,"source query is"+queryvalue.toString()+"sourth lenth is"+queryvalue.length());
             return " AND (" + queryvalue.toString() + ")";
 
         } else
@@ -243,8 +221,11 @@ public class Utils {
                 queryvalue.append(get_source_xtag(source_type));
                 Log.i(TAG,"source xtag is"+get_source_xtag(source_type));
             }
+            if( queryvalue.toString().trim().length()>0)
+                return " AND (" + queryvalue.toString() + ")";
+            else
+                return "";
 
-            return " AND (" + queryvalue.toString() + ")";
         }
     }
 
@@ -262,7 +243,6 @@ public class Utils {
             } else if (sourcetype == Constants.FORUMS || sourcetype == Constants.NEWS || sourcetype.contains(Constants.BLOGS)) {
                 return Constants.source_map.get(sourcetype) + (Constants.rss_specific_xtags.trim().length() > 0 ? " AND " + Constants.rss_specific_xtags : "");
             } else {
-             Log.i(TAG,"else xtag");
                 return Constants.source_map.get(sourcetype);
             }
 
@@ -274,7 +254,6 @@ public class Utils {
 
         String pref = "";
         if (Constants.BLOCATION.size() > 0) {
-            Log.i(TAG,"loc size is"+Constants.BLOCATION.size());
             Constants.rss_specific_xtags = "";
             Constants.twitter_specific_xtags = "";
             Constants.googleplus_specific_xtags = "";
@@ -346,11 +325,9 @@ public class Utils {
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
-                Log.i(TAG, "sentiment value is \t" + value);
                 if (Constants.sentiment_map.containsKey(value)) {
                     queryvalue.append(pref);
                     pref = " OR ";
-                    Log.i(TAG, "sentiment xtsg is\t" + Constants.sentiment_map.get(value));
                     queryvalue.append(Constants.sentiment_map.get(value));
                 }
             }
@@ -365,12 +342,9 @@ public class Utils {
             Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
             //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-            Log.i(TAG, "from time is" + now);
-            Log.i(TAG, "from date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
             return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T00:00:00";
 
         } else {
-            Log.i(TAG, "from date is" + item.get(0));
             return item.get(0) + "T00:00:00";
         }
 
@@ -379,13 +353,8 @@ public class Utils {
     public String query_todate(ArrayList<String> item) {
         if (item.size() <= 0) {
             Calendar now = Calendar.getInstance();
-            // Log.i(TAG, "to date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
-
             return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T23:59:59";
-            //return sdf.format(now);
         } else {
-            Log.i(TAG, "from date is" + item.get(0));
-
             return item.get(0) + "T23:59:59";
         }
     }
@@ -480,7 +449,6 @@ public class Utils {
     }
 
     public String count_query() {
-        Log.i(TAG, "notifi query 2");
         JSONObject main = new JSONObject();
         JSONObject dataquery = new JSONObject();
         JSONObject query_string = new JSONObject();
@@ -492,7 +460,6 @@ public class Utils {
         try {
 
             dataquery.put("query", Date_added_toquery());
-            Log.i(TAG, "notifi query 3" + dataquery.toString());
             dataquery.put("use_dis_max", true);
             fieldsarray.put("title");
             fieldsarray.put("text");
@@ -500,18 +467,16 @@ public class Utils {
 
             query_string.put("query_string", dataquery);
 
-            Log.i(TAG, "notifi query 4" + query_string.toString());
             indexes_array.put("socialdata");
             main.put("indexes", indexes_array);
             main.put("doc_types", "item");
             main.put("query", query_string);
 
-            Log.i(TAG, "notifi query 5" + main.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.i(TAG, "count query is" + main.toString());
+
 
         return main.toString();
     }

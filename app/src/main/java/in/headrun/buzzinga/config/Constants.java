@@ -18,6 +18,7 @@ public class Constants {
     public static String scroolid = "1";
     public static String FIRSTURL = "";
     public static boolean swipedata = false;
+    public static boolean REQUEST_ENABLE = true;
 
     public static boolean BUZZ_NOTIFY = false;
 
@@ -102,7 +103,7 @@ public class Constants {
     public static ArrayList<String> sentimentlist = new ArrayList<>();
     public static ArrayList<String> genderlist = new ArrayList<>();
 
-
+    public static ArrayList<Listitems> filterList;
 
     public static void xtags() {
 

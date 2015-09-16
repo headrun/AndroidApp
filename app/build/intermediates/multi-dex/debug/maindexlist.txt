@@ -133,6 +133,7 @@ io/fabric/sdk/android/services/concurrency/AsyncTask$WorkerRunnable.class
 android/support/v4/widget/MaterialProgressDrawable$1.class
 android/support/v4/app/FragmentActivity.class
 com/digits/sdk/android/AuthResponse.class
+in/headrun/buzzinga/utils/ConnectionSettings.class
 com/digits/sdk/android/FailureActivityDelegate.class
 butterknife/BindDrawable.class
 com/digits/sdk/android/ContactsUploadService$1.class
@@ -408,8 +409,8 @@ butterknife/OnFocusChange.class
 android/support/v7/app/ActionBar$TabListener.class
 com/digits/sdk/android/DigitsClient.class
 com/twitter/sdk/android/core/TwitterException.class
-com/digits/sdk/android/UploadResponse.class
 com/digits/sdk/android/ContactsHelper.class
+com/digits/sdk/android/UploadResponse.class
 com/twitter/sdk/android/core/identity/TwitterAuthClient.class
 com/twitter/sdk/android/core/R.class
 com/twitter/sdk/android/core/identity/OAuthWebViewClient$Listener.class

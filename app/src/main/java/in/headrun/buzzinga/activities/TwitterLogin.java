@@ -12,12 +12,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.ServerConfig;
+import in.headrun.buzzinga.utils.ConnectionSettings;
 
 /**
  * Created by headrun on 21/7/15.
@@ -55,7 +57,7 @@ public class TwitterLogin extends Activity {
         webview.getSettings().getAllowContentAccess();
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.getSettings().setLoadWithOverviewMode(true);
-       // webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
+        // webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
@@ -66,7 +68,10 @@ public class TwitterLogin extends Activity {
 
                 twitter_btn.setVisibility(View.GONE);
                 twitter_auth_lay.setVisibility(View.VISIBLE);
+                if(new ConnectionSettings().isConnected(getApplication()))
                 webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
+                else
+                    Toast.makeText(getApplication(),"Network error",Toast.LENGTH_LONG).show();
             }
         });
 

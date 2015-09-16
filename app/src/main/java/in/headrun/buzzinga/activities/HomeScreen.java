@@ -50,6 +50,7 @@ import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchDetails;
 import in.headrun.buzzinga.doto.Test;
 import in.headrun.buzzinga.doto.Utils;
+import in.headrun.buzzinga.utils.ConnectionSettings;
 import in.headrun.buzzinga.utils.FilterByDate;
 import in.headrun.buzzinga.utils.JsonData;
 import in.headrun.buzzinga.utils.SearchListData;
@@ -108,16 +109,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     LayoutInflater inflater;
     SearchListData articles_data;
 
-    public static void display_articles(Context context, ArrayList<SearchDetails> article_list) {
-
-        Log.i("Log_tag", "display_article contet is\t" + context + "\t article list is" + article_list);
-        SearchListData articles_listdata = new SearchListData(context, article_list);
-        articles_listdata.notifyDataSetChanged();
-        display_data.setAdapter(new SearchListData(context, article_list));
-
-        content_lay.setVisibility(View.VISIBLE);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +135,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         inflater = this.getLayoutInflater();
 
         filtersourcebtn.setOnClickListener(this);
-        // filterdatebtn.setOnClickListener(this);
         bydatefilter.setOnClickListener(this);
         closebtn.setOnClickListener(this);
         closebrowser.setOnClickListener(this);
@@ -193,14 +183,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
-                    Log.i(TAG, "scrolling is on");
-                    footerView = inflater.inflate(R.layout.listviewfooter, null);
-                    Listfooter.setVisibility(View.VISIBLE);
-                    Config.SwipeLoading = true;
+                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 2 && !Config.SwipeLoading) {
 
-                    if (!Constants.SCROLLID.equals("1"))
+                    if (!Constants.scroolid.equals("1")) {
+                        Log.i(TAG, "Scrolling" + Constants.scroolid);
+                        footerView = inflater.inflate(R.layout.listviewfooter, null);
+                        display_data.addFooterView(footerView);
+                        Config.SwipeLoading = true;
                         getServer_response(ServerConfig.SCROLL);
+                    }
 
                 }
             }
@@ -252,8 +243,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Constants.listdetails.clear();
                 Constants.BSEARCHKEY.clear();
                 Constants.BSEARCHKEY.add(Constants.SEARCHSTRING);
-                Constants.listdetails.clear();
                 HomeScreen.display_data.setAdapter(null);
+                Log.i(TAG, "key word search");
                 getServer_response(ServerConfig.search);
             }
         }
@@ -345,162 +336,176 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     public void stringrequest() {
+        if (new ConnectionSettings().isConnected(getApplication())) {
+            progress.setVisibility(View.VISIBLE);
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
+                    new Response.Listener<String>() {
+                        @Override
+                        public ArrayList<SearchDetails> onResponse(String response) {
 
-        progress.setVisibility(View.VISIBLE);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
-                new Response.Listener<String>() {
-                    @Override
-                    public ArrayList<SearchDetails> onResponse(String response) {
+                            Log.d(TAG, "string response is" + response);
+                            stopService(new Intent(HomeScreen.this, BuzzNotification.class));
+                            new UserSession(HomeScreen.this).clearsession();
+                            startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
+                            progress.setVisibility(View.GONE);
+                            return null;
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "string error response is" + error);
+                    progress.setVisibility(View.GONE);
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("sessionid", new UserSession(HomeScreen.this).getTSESSION());
+                    return params;
+                }
 
-                        Log.d(TAG, "string response is" + response);
-                        stopService(new Intent(HomeScreen.this, BuzzNotification.class));
-                        new UserSession(HomeScreen.this).clearsession();
-                        startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
-                        progress.setVisibility(View.GONE);
-                        return null;
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "string error response is" + error);
-                progress.setVisibility(View.GONE);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("sessionid", new UserSession(HomeScreen.this).getTSESSION());
-                return params;
-            }
+                ;
+            };
+            stringRequest.setTag(TAG);
 
-            ;
-        };
-        stringRequest.setTag(TAG);
-
-        BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
+            BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void getServer_response(String URL_request) {
 
-        if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
-            progress.setVisibility(View.GONE);
-        else {
-            progress.setVisibility(View.VISIBLE);
-        }
-        final String clubbed_query;
-        if (Intent_opt.equals(Constants.Intent_NOtify)) {
-            clubbed_query = query.queryform(query.Date_added_toquery());
+        if (new ConnectionSettings().isConnected(getApplication())) {
+            if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
+                progress.setVisibility(View.GONE);
+            else {
+                progress.setVisibility(View.VISIBLE);
+            }
+            final String clubbed_query;
+            Log.i(TAG, "Config.SwipeLoading" + Config.SwipeLoading);
+            if (Intent_opt.equals(Constants.Intent_NOtify)) {
+                clubbed_query = query.queryform(query.Date_added_toquery());
+            } else if (Config.SwipeLoading) {
+                clubbed_query = "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
+            } else {
+                userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
+                clubbed_query = userSession.get_search_Clubbedquery();
+            }
+            userSession.setSETUP(Constants.SETUP);
+            userSession.setTIMEZONE(Utils.timezone());
+
+            Log.i(TAG, "url is" + ServerConfig.SERVER_ENDPOINT + URL_request);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
+                    new Response.Listener<String>() {
+                        @Override
+                        public ArrayList<SearchDetails> onResponse(String response) {
+
+                            ArrayList<SearchDetails> list_response = new JsonData().getJsonData(response);
+                            if (list_response.isEmpty()) {
+                                Toast.makeText(HomeScreen.this, "No  articles found", Toast.LENGTH_LONG).show();
+                            } else {
+                                state = display_data.onSaveInstanceState();
+                                SearchListData articles_listdata = new SearchListData(context, list_response);
+                                articles_listdata.notifyDataSetChanged();
+                                display_data.setAdapter(new SearchListData(context, list_response));
+                                SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
+                                userSession.setLatestDate(fistitem.getArticledate());
+                                display_data.onRestoreInstanceState(state);
+                            }
+                            progress.setVisibility(View.GONE);
+                            content_lay.setVisibility(View.VISIBLE);
+
+                            if (swipeRefreshLayout.isRefreshing())
+                                swipeRefreshLayout.setRefreshing(false);
+                            if (Config.SwipeLoading) {
+                                display_data.removeFooterView(footerView);
+                                Config.SwipeLoading = false;
+                            }
+
+                            return null;
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    error.printStackTrace();
+                    try {
+                        byte[] error_resp = error.networkResponse.data;
+                        if (error_resp != null)
+                            webview.loadData(new String(error.networkResponse.data), "text/html", "UTF-8");
+                        webview_lay.setVisibility(View.VISIBLE);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    progress.setVisibility(View.GONE);
+                    content_lay.setVisibility(View.VISIBLE);
+
+                    if (swipeRefreshLayout.isRefreshing())
+                        swipeRefreshLayout.setRefreshing(false);
+                    if (Config.SwipeLoading) {
+                        display_data.removeFooterView(footerView);
+                        Config.SwipeLoading = false;
+                    }
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    UserSession usersess = new UserSession(HomeScreen.this);
+                    if (!Config.SwipeLoading) {
+                        params.put("tz", usersess.getTIMEZONE());
+                        Log.i(TAG, "time zone is" + usersess.getTIMEZONE());
+                    }
+                    params.put("clubbed_query", clubbed_query);
+                    params.put("setup", usersess.getSETUP());
+                    Log.i(TAG, "query" + clubbed_query + "\nsetup" + usersess.getSETUP());
+
+                    return params;
+                }
+
+                ;
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    String sessionid = new UserSession(HomeScreen.this).getTSESSION();
+                    if (sessionid.length() > 0) {
+                        Log.i(TAG, "session id is" + sessionid);
+                        StringBuilder builder = new StringBuilder();
+                        builder.append("sessionid");
+                        builder.append("=");
+                        builder.append(sessionid);
+                        if (headers.containsKey("Cookie")) {
+                            builder.append("; ");
+                            builder.append(headers.get("Cookie"));
+                        }
+                        headers.put("Cookie", builder.toString());
+                    }
+
+                    return headers;
+                }
+
+                ;
+            };
+
+            stringRequest.setTag(TAG);
+            BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
 
         } else {
-            userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
-            clubbed_query = userSession.get_search_Clubbedquery();
+            progress.setVisibility(View.GONE);
+            content_lay.setVisibility(View.VISIBLE);
+
+            if (swipeRefreshLayout.isRefreshing())
+                swipeRefreshLayout.setRefreshing(false);
+            if (Config.SwipeLoading) {
+                display_data.removeFooterView(footerView);
+                Config.SwipeLoading = false;
+            }
+            Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
         }
-        userSession.setSETUP(Constants.SETUP);
-        userSession.setTIMEZONE(Utils.timezone());
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
-                new Response.Listener<String>() {
-                    @Override
-                    public ArrayList<SearchDetails> onResponse(String response) {
-
-                        ArrayList<SearchDetails> list_response = new JsonData().getJsonData(response);
-                        if (list_response.isEmpty()) {
-                            Toast.makeText(HomeScreen.this, "No  articles found", Toast.LENGTH_LONG).show();
-                        } else {
-                            state = display_data.onSaveInstanceState();
-                            SearchListData articles_listdata = new SearchListData(context, list_response);
-                            articles_listdata.notifyDataSetChanged();
-                            display_data.setAdapter(new SearchListData(context, list_response));
-                            SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
-                            userSession.setLatestDate(fistitem.getArticledate());
-
-
-                            display_data.onRestoreInstanceState(state);
-                        }
-                        progress.setVisibility(View.GONE);
-
-                        content_lay.setVisibility(View.VISIBLE);
-
-                        if (swipeRefreshLayout.isRefreshing())
-                            swipeRefreshLayout.setRefreshing(false);
-                        if (Config.SwipeLoading) {
-                            Listfooter.setVisibility(View.GONE);
-                            Config.SwipeLoading = false;
-                        }
-
-                        return null;
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.i(TAG, "error message is" + error.getMessage());
-                error.printStackTrace();
-                if(error.networkResponse.data!=null)
-                webview.loadData(new String(error.networkResponse.data),"text/html","UTF-8");
-                webview_lay.setVisibility(View.VISIBLE);
-                Toast.makeText(HomeScreen.this, "Network error Try again", Toast.LENGTH_LONG).show();
-                progress.setVisibility(View.GONE);
-
-                content_lay.setVisibility(View.VISIBLE);
-
-                if (swipeRefreshLayout.isRefreshing())
-                    swipeRefreshLayout.setRefreshing(false);
-                if (Config.SwipeLoading) {
-                    Listfooter.setVisibility(View.GONE);
-                    Config.SwipeLoading = false;
-                }
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                UserSession usersess = new UserSession(HomeScreen.this);
-                if (Config.SwipeLoading) {
-                    String clubbedquery = "{\"scroll_id\":\""+Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
-                    params.put("clubbed_query", clubbedquery);
-                    Log.i(TAG, "qury on scroll" + clubbedquery);
-                } else {
-                    Log.i(TAG, "qury on TZone");
-                    params.put("tz", usersess.getTIMEZONE());
-                    params.put("clubbed_query", clubbed_query);
-                    Log.i(TAG, " seach clubbed_query" + clubbed_query + "\nusersess.getTIMEZONE()" + usersess.getTIMEZONE());
-                }
-                params.put("setup", usersess.getSETUP());
-
-                Log.i(TAG, "request setup" + usersess.getSETUP());
-
-
-                return params;
-            }
-
-            ;
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                String sessionid = new UserSession(HomeScreen.this).getTSESSION();
-                if (sessionid.length() > 0) {
-                    Log.i(TAG, "session id is" + sessionid);
-                    StringBuilder builder = new StringBuilder();
-                    builder.append("sessionid");
-                    builder.append("=");
-                    builder.append(sessionid);
-                    if (headers.containsKey("Cookie")) {
-                        builder.append("; ");
-                        builder.append(headers.get("Cookie"));
-                    }
-                    headers.put("Cookie", builder.toString());
-                }
-
-                return headers;
-            }
-
-            ;
-        };
-        stringRequest.setTag(TAG);
-        BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
     }
 
     @Override
