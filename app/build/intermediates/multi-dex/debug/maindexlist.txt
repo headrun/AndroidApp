@@ -238,7 +238,6 @@ io/fabric/sdk/android/services/concurrency/PriorityAsyncTask$ProxyExecutor.class
 in/headrun/buzzinga/doto/Test.class
 com/digits/sdk/android/ContactsClient.class
 io/fabric/sdk/android/services/concurrency/Priority.class
-in/headrun/buzzinga/BuzzNotification$7.class
 retrofit/http/Headers.class
 io/fabric/sdk/android/ActivityLifecycleManager$Callbacks.class
 com/twitter/sdk/android/core/internal/scribe/SyndicatedSdkImpressionEvent.class
@@ -382,7 +381,6 @@ io/fabric/sdk/android/services/concurrency/AsyncTask$InternalHandler.class
 android/support/v4/app/TaskStackBuilder.class
 android/support/v7/app/ActionBarDrawerToggle.class
 com/digits/sdk/android/DigitsApi.class
-in/headrun/buzzinga/BuzzNotification$6.class
 com/twitter/sdk/android/core/SessionManager.class
 android/support/annotation/StringRes.class
 com/twitter/sdk/android/core/AuthToken.class
@@ -410,8 +408,8 @@ butterknife/OnFocusChange.class
 android/support/v7/app/ActionBar$TabListener.class
 com/digits/sdk/android/DigitsClient.class
 com/twitter/sdk/android/core/TwitterException.class
-com/digits/sdk/android/ContactsHelper.class
 com/digits/sdk/android/UploadResponse.class
+com/digits/sdk/android/ContactsHelper.class
 com/twitter/sdk/android/core/identity/TwitterAuthClient.class
 com/twitter/sdk/android/core/R.class
 com/twitter/sdk/android/core/identity/OAuthWebViewClient$Listener.class
@@ -468,7 +466,6 @@ com/digits/sdk/android/FailureActionBarActivity.class
 android/support/annotation/CheckResult.class
 io/fabric/sdk/android/ActivityLifecycleManager.class
 com/twitter/sdk/android/core/models/Tweet.class
-in/headrun/buzzinga/BuzzNotification$5.class
 -keep class in.headrun.buzzinga.BuzzNotification { <init>(); }
 android/support/annotation/BoolRes.class
 com/twitter/sdk/android/tweetui/TweetUi.class

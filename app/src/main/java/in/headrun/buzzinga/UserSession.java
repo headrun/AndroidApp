@@ -3,7 +3,6 @@ package in.headrun.buzzinga;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 
 /**
  * Created by headrun on 22/7/15.
@@ -11,6 +10,14 @@ import android.util.Log;
 public class UserSession {
 
     public static final String TSESSION = "tsession";
+    public static final String count_CLUBBEDQUERY = "count_clubbedquery";
+    public static final String search_CLUBBEDQUERY = "search_clubbedquery";
+    public static final String TIMEZONE = "timezone";
+    public static final String SETUP = "setup";
+    public static final String FROM_DATE = "fromdate";
+    public static final String TO_DATE = "to";
+    public static final String LATEST_DATE = "laestdate";
+    public static final String TRACK_KEY = "trackkey";
     private static final String PREFER_NAME = "BUZZINGA";
     public String TAG = UserSession.this.getClass().getSimpleName();
     public SharedPreferences pref;
@@ -18,18 +25,10 @@ public class UserSession {
     public Editor editor;
     int PRIVATE_MODE = 0;
 
-    public static final String count_CLUBBEDQUERY="count_clubbedquery";
-    public static final String search_CLUBBEDQUERY="search_clubbedquery";
-    public static final String TIMEZONE="timezone";
-    public static final String SETUP="setup";
-    public static final String SCROLLID="scrollid";
-    public static final String LATEST_DATE="laestdate";
-    public static final String TRACK_KEY="trackkey";
-
 
     public UserSession(Context context) {
         this._context = context;
-        Log.i(TAG,"context is\t"+context);
+
         pref = _context.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
         editor = pref.edit();
         editor.commit();
@@ -37,128 +36,135 @@ public class UserSession {
 
     public String getTSESSION() {
         String sess = pref.getString(TSESSION, "");
-        Log.i("Log_Tag", "sess" + sess);
+
         return sess;
     }
 
     public void setTSESSION(String sessiondata) {
-        Log.i("Log_tag", "sessiondata is" + sessiondata);
+
         editor.putString(TSESSION, sessiondata);
         editor.commit();
     }
 
     public void clearsession() {
-        Log.i(TAG, "before" + pref.getString(TSESSION, "null"));
+
         editor.remove(TSESSION);
         editor.commit();
-        Log.i(TAG, "after" + pref.getString(TSESSION, "null"));
-    }
-
-    public void setClubbedquery(String clubbedquery) {
-        Log.i(TAG, "before querry is" + clubbedquery);
-        editor.putString(count_CLUBBEDQUERY, clubbedquery);
-        editor.commit();
-        String query = pref.getString(count_CLUBBEDQUERY, "");
-        Log.i(TAG, "after querry is" + query);
 
     }
 
     public String getClubbedquery() {
         String clubbedquery = pref.getString(count_CLUBBEDQUERY, "");
-        Log.i(TAG,"getcount querry is"+clubbedquery);
+
         return clubbedquery;
     }
 
-    public void set_search_Clubbedquery(String clubbedquery) {
-        Log.i(TAG, "before querry is" + clubbedquery);
-        editor.putString(search_CLUBBEDQUERY, clubbedquery);
+    public void setClubbedquery(String clubbedquery) {
+
+        editor.putString(count_CLUBBEDQUERY, clubbedquery);
         editor.commit();
-        String query = pref.getString(search_CLUBBEDQUERY, "");
-        Log.i(TAG, "after querry is" + query);
+        String query = pref.getString(count_CLUBBEDQUERY, "");
+
 
     }
 
     public String get_search_Clubbedquery() {
         String clubbedquery = pref.getString(search_CLUBBEDQUERY, "");
-        Log.i(TAG,"get querry is"+clubbedquery);
+
         return clubbedquery;
     }
 
-    public void setTIMEZONE(String timezone) {
-        Log.i(TAG, "before time zone is" + timezone);
-        editor.putString(TIMEZONE, timezone);
+    public void set_search_Clubbedquery(String clubbedquery) {
+
+        editor.putString(search_CLUBBEDQUERY, clubbedquery);
         editor.commit();
-        String time_zone = pref.getString(TIMEZONE,"");
-        Log.i(TAG, "after time zone is" + time_zone);
+        String query = pref.getString(search_CLUBBEDQUERY, "");
+
 
     }
-
 
     public String getTIMEZONE() {
-        String timezone = pref.getString(TIMEZONE,"null");
-        Log.i(TAG,"get time zone is"+timezone);
+        String timezone = pref.getString(TIMEZONE, "null");
+
         return timezone;
     }
-    public void setSETUP(String setup){
-        Log.i(TAG, "before set_up  is" + setup);
-        editor.putString(SETUP, setup);
+
+    public void setTIMEZONE(String timezone) {
+
+        editor.putString(TIMEZONE, timezone);
         editor.commit();
-        String set_up=pref.getString(SETUP,"");
-        Log.i(TAG, "after set_up  is" + set_up);
+        String time_zone = pref.getString(TIMEZONE, "");
+
 
     }
 
     public String getSETUP() {
 
-        String setup=pref.getString(SETUP,"null");
-        Log.i(TAG,"get time setup is"+setup);
+        String setup = pref.getString(SETUP, "null");
+
         return setup;
     }
-    public void setSCROLLID(String scrollid){
-        Log.i(TAG, "before scroolid is" + scrollid);
-        editor.putString(SCROLLID, scrollid);
+
+    public void setSETUP(String setup) {
+
+        editor.putString(SETUP, setup);
         editor.commit();
+        String set_up = pref.getString(SETUP, "");
 
-        String scroll_id=pref.getString(SCROLLID,"");
-        Log.i(TAG, "after scroolid is" + scroll_id);
 
     }
 
-    public String getSCROLLID() {
-        String scrollid=pref.getString(SCROLLID,"null");
-        Log.i(TAG,"get time scroolid is"+scrollid);
-        return scrollid;
+/*    public String getFromDate() {
+        String fromdate = pref.getString(FROM_DATE, "0");
+        return fromdate;
     }
 
-    public void setLatestDate(String latestDate) {
-        Log.i(TAG, "before latestDate is" + latestDate);
-        editor.putString(LATEST_DATE, latestDate);
+    public void setFromDate(String fromdate) {
+
+        editor.putString(FROM_DATE, fromdate);
         editor.commit();
-        String query = pref.getString(LATEST_DATE, "");
-        Log.i(TAG, "after date is" + query);
-
     }
 
+
+    public String getTODate() {
+        String todate = pref.getString(TO_DATE, "0");
+        return todate;
+    }
+
+    public void seToDate(String todate) {
+
+        editor.putString(TO_DATE, todate);
+        editor.commit();
+    }
+*/
     public String getLatestDate() {
         String getLastestDate = pref.getString(LATEST_DATE, "0");
-        Log.i(TAG,"get querry is"+getLastestDate);
+
         return getLastestDate;
     }
 
+    public void setLatestDate(String latestDate) {
 
-    public void setTrackKey(String trackKey) {
-        Log.i(TAG, "before trackKey is" + trackKey);
-        editor.putString(TRACK_KEY, trackKey);
+        editor.putString(LATEST_DATE, latestDate);
         editor.commit();
-        String query = pref.getString(TRACK_KEY, "");
-        Log.i(TAG, "after TrackKey is" + query);
+        String query = pref.getString(LATEST_DATE, "");
+
 
     }
 
     public String getTrackKey() {
         String getTrackKey = pref.getString(TRACK_KEY, "0");
-        Log.i(TAG,"get TrackKey is"+getTrackKey);
+
         return getTrackKey;
+    }
+
+    public void setTrackKey(String trackKey) {
+
+        editor.putString(TRACK_KEY, trackKey);
+        editor.commit();
+        String query = pref.getString(TRACK_KEY, "");
+
+
     }
 
 }

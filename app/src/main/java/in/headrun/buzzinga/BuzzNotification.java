@@ -21,11 +21,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchDetails;
 import in.headrun.buzzinga.doto.Utils;
-import in.headrun.buzzinga.utils.JsonData;
 
 /**
  * Created by headrun on 8/9/15.
@@ -49,13 +47,14 @@ public class BuzzNotification extends Service {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
+                        Log.i(TAG, "call the notification");
                         stringrequest();
 
                     }
                 });
 
             }
-        }, 0, 1000 * 1 * 60);
+        }, 0, 1000 * 5 * 60);
     }
 
     @Override
@@ -80,68 +79,6 @@ public class BuzzNotification extends Service {
         return START_STICKY;
     }
 
-    public void getdata() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
-                new Response.Listener<String>() {
-                    @Override
-                    public ArrayList<SearchDetails> onResponse(String response) {
-
-                        Log.d(TAG, "string response is" + response + "\n success response code");
-                        ArrayList<SearchDetails> list_response = new JsonData().getJsonData(response);
-                        HomeScreen.display_articles(getApplication(), list_response);
-
-                        return list_response;
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "string error response is" + error.getMessage());
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tz", userSession.getTIMEZONE());
-                params.put("clubbed_query", userSession.getClubbedquery());
-                params.put("setup", userSession.getSETUP());
-
-                return params;
-            }
-
-            ;
-
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                String sessionid = new UserSession(BuzzNotification.this).getTSESSION();
-                if (sessionid.length() > 0) {
-                    Log.i(TAG, "session id is" + sessionid);
-                    StringBuilder builder = new StringBuilder();
-                    builder.append("sessionid");
-                    builder.append("=");
-                    builder.append(sessionid);
-                    if (headers.containsKey("Cookie")) {
-                        builder.append("; ");
-                        builder.append(headers.get("Cookie"));
-                    }
-                    headers.put("Cookie", builder.toString());
-                }
-
-                return headers;
-            }
-
-            ;
-        };
-        stringRequest.setTag(TAG);
-        //BuzzingaApplication.get().getRequestQueue().add(stringRequest);
-        BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
-
-    }
-
-
     public void stringrequest() {
 
         Log.i(TAG, "string count quert test");
@@ -152,12 +89,12 @@ public class BuzzNotification extends Service {
 
                         Log.d(TAG, "string response is" + response);
                         try {
-                            JSONObject jobj_reult=new JSONObject(response);
-                            if(jobj_reult.optInt("error")==0) {
+                            JSONObject jobj_reult = new JSONObject(response);
+                            if (jobj_reult.optInt("error") == 0) {
                                 JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
                                 int article_count = json_result.optInt("count");
-                                if(article_count>0)
-                                new Utils(getApplication()).Buzz_notify(article_count);
+                                if (article_count > 0)
+                                    new Utils(getApplication()).Buzz_notify(article_count);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -168,7 +105,7 @@ public class BuzzNotification extends Service {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "string error response values" + error.networkResponse.statusCode);
+                Log.d(TAG, "string error response values" + error);
 
             }
         }) {
@@ -176,14 +113,15 @@ public class BuzzNotification extends Service {
             @Override
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("clubbed_query", query.count_query());
                 params.put("tz", userSession.getTIMEZONE());
-                params.put("clubbed_query", userSession.getClubbedquery());
                 params.put("setup", userSession.getSETUP());
 
                 return params;
             }
 
             ;
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();

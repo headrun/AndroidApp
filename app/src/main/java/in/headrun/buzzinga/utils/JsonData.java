@@ -25,8 +25,7 @@ public class JsonData {
 
         logLargeString(data);
         swipelist = new ArrayList<SearchDetails>();
-        SearchListData resultadapter;
-        int searchpos = 0;
+
 
         try {
             JSONObject jobj = new JSONObject(data);
@@ -43,9 +42,9 @@ public class JsonData {
 
                         title = jobj_source.getString("title");
                         url = jobj_source.getString("url");
-                        Log.i(TAG,"url is"+url);
                         text = jobj_source.optString("text");
-                        date = jobj_source.getString("_added");
+                        date = jobj_source.getString("dt_added");
+
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
                         JSONObject json_author = jobj_source.optJSONObject("author");
                         if (json_author != null)
@@ -53,33 +52,32 @@ public class JsonData {
 
                         xtags_separate(json_xtags);
 
-                        if (Constants.swipedata) {
-                           // Log.i(TAG, "swipe data added");
+                        if (Constants.swipedata)
                             swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
 
-                        } else {
+                        else
                             Constants.listdetails.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
-                        }
-                    }
-                    Constants.scroolid = jobj_result.getString("_scroll_id");
 
-                    //Log.i(TAG, "scroolid is" + Constants.scroolid);
+                    }
+                    Constants.scroolid = jobj_result.optString("_scroll_id");
+                    Log.i(TAG, "scroll id" + Constants.scroolid);
+
+
                     if (!swipelist.isEmpty()) {
                         if (Constants.listdetails.size() > 0) {
                             for (int i = 0; i < swipelist.size(); i++) {
 
                                 if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
                                     Constants.newarticles = i;
-                                    Constants.finddata = true;
                                     Constants.swipedata = false;
                                     Log.i("Log_tag", "search pos is" + Constants.newarticles);
                                 }
                             }
 
-                            if (Constants.finddata)
-                                for (int j = 0; j <= Constants.newarticles; j++) {
+                            if (Constants.newarticles != 0)
+                                for (int j = 0; j <= Constants.newarticles; j++)
                                     Constants.listdetails.add(j, swipelist.get(j));
-                                }
+
 
                         } else {
                             Constants.listdetails = swipelist;
@@ -91,32 +89,15 @@ public class JsonData {
 
                     Constants.scroolid = "1";
                 }
-                Log.i(TAG, "Constants.listdetails size is" + Constants.listdetails.size());
+                Log.i(TAG, "Articles size " + Constants.listdetails.size());
 
                 return Constants.listdetails;
-               /*
-                resultadapter = new SearchListData(context, Constants.listdetails);
-                resultadapter.notifyDataSetChanged();
-                HomeScreen.display_data.setAdapter(resultadapter);
-                HomeScreen.content_lay.setVisibility(View.VISIBLE);
-                HomeScreen.progress.setVisibility(View.GONE);
-                HomeScreen.display_data.removeFooterView(HomeScreen.footerView);
-                Config.SwipeLoading = false;
 
-*/
             } else {
                 return Constants.listdetails;
-  /*              Constants.scroolid = "1";
-                Constants.listdetails.add(new SearchDetails());
-                resultadapter = new SearchListData(context, Constants.listdetails);
-                resultadapter.notifyDataSetChanged();
-                HomeScreen.display_data.setAdapter(resultadapter);
-                HomeScreen.content_lay.setVisibility(View.VISIBLE);
-                HomeScreen.progress.setVisibility(View.GONE);
-                Config.SwipeLoading = false;
-    */
+
             }
-            //      HomeScreen.swipeRefreshLayout.setRefreshing(false);
+
         } catch (JSONException e) {
             Log.i(TAG, "exception" + e);
             e.printStackTrace();
@@ -124,7 +105,7 @@ public class JsonData {
         return Constants.listdetails;
     }
 
-    public void logLargeString(String str) {
+    public static void logLargeString(String str) {
 
         if (str.length() > 3000) {
             String ss = str.substring(0, 3000);

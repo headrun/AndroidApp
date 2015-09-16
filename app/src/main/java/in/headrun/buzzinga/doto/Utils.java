@@ -1,6 +1,5 @@
 package in.headrun.buzzinga.doto;
 
-import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,7 +23,6 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import in.headrun.buzzinga.BuzzNotification;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
@@ -41,10 +39,11 @@ public class Utils {
     Context context;
     ArrayList<QueryData> query = new ArrayList<QueryData>();
     StringBuilder queryvalue = new StringBuilder();
+    UserSession userSession;
 
     public Utils(Context context) {
         this.context = context;
-
+        userSession = new UserSession(context);
     }
 
     public static String timezone() {
@@ -157,10 +156,11 @@ public class Utils {
 
 
         String countquery = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
-                + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang)
-                + " AND dt_added:[" + timestamp(Long.parseLong(new UserSession(context).getLatestDate())) + " TO " + timestamp(0) + "]";
+                + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
+
         Log.i(TAG, "count query is" + countquery);
-        count_query(countquery);
+        new UserSession(context).setClubbedquery(countquery);
+
         return queryform(query);
 
     }
@@ -213,22 +213,23 @@ public class Utils {
     public String query_sources(ArrayList<String> item) {
         queryvalue.setLength(0);
         if (Config.Utils)
-            Log.i(TAG, "size is" + item.size());
+            Log.i(TAG, "source size is" + item.size());
         String pref = "";
         query_loc_source();
 
         if (item.size() > 0) {
             for (int i = 0; i < item.size(); i++) {
                 String value = item.get(i).toLowerCase();
-                if (value.length() > 0)
-                    queryvalue.append(pref);
+                Log.i(TAG,"source value is"+value +"\n xtag is"+get_source_xtag(value));
+                queryvalue.append(pref);
                 pref = " OR ";
                 queryvalue.append(get_source_xtag(value));
-
             }
+            Log.i(TAG,"source xtag is"+queryvalue.toString());
         }
 
         if (queryvalue.length() > 0) {
+            Log.i(TAG,"source query is"+queryvalue.toString()+"sourth lenth is"+queryvalue.length());
             return " AND (" + queryvalue.toString() + ")";
 
         } else
@@ -240,6 +241,7 @@ public class Utils {
                 queryvalue.append(pref);
                 pref = " OR ";
                 queryvalue.append(get_source_xtag(source_type));
+                Log.i(TAG,"source xtag is"+get_source_xtag(source_type));
             }
 
             return " AND (" + queryvalue.toString() + ")";
@@ -259,9 +261,10 @@ public class Utils {
                 return Constants.source_map.get(sourcetype) + (Constants.twitter_specific_xtags.trim().length() > 0 ? " AND " + Constants.twitter_specific_xtags : "");
             } else if (sourcetype == Constants.FORUMS || sourcetype == Constants.NEWS || sourcetype.contains(Constants.BLOGS)) {
                 return Constants.source_map.get(sourcetype) + (Constants.rss_specific_xtags.trim().length() > 0 ? " AND " + Constants.rss_specific_xtags : "");
-            } else
+            } else {
+             Log.i(TAG,"else xtag");
                 return Constants.source_map.get(sourcetype);
-
+            }
 
         }
         return "";
@@ -271,10 +274,12 @@ public class Utils {
 
         String pref = "";
         if (Constants.BLOCATION.size() > 0) {
+            Log.i(TAG,"loc size is"+Constants.BLOCATION.size());
             Constants.rss_specific_xtags = "";
             Constants.twitter_specific_xtags = "";
             Constants.googleplus_specific_xtags = "";
             Constants.facebook_specific_xtags = "";
+
             Constants.rss_specific_xtags += "(";
             Constants.twitter_specific_xtags += "(";
             Constants.googleplus_specific_xtags += "(";
@@ -359,11 +364,14 @@ public class Utils {
         if (item.isEmpty() || item.size() <= 0) {
             Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+            Log.i(TAG, "from time is" + now);
             Log.i(TAG, "from date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
-            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE);
+            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T00:00:00";
+
         } else {
             Log.i(TAG, "from date is" + item.get(0));
-            return item.get(0);
+            return item.get(0) + "T00:00:00";
         }
 
     }
@@ -371,11 +379,14 @@ public class Utils {
     public String query_todate(ArrayList<String> item) {
         if (item.size() <= 0) {
             Calendar now = Calendar.getInstance();
-            Log.i(TAG, "to date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
-            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE);
+            // Log.i(TAG, "to date is" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE));
+
+            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T23:59:59";
+            //return sdf.format(now);
         } else {
             Log.i(TAG, "from date is" + item.get(0));
-            return item.get(0);
+
+            return item.get(0) + "T23:59:59";
         }
     }
 
@@ -411,9 +422,6 @@ public class Utils {
         return queryvalue.toString();
     }
 
-    public String query_scrollid(ArrayList<String> item) {
-        return item.get(0);
-    }
 
     public String queryform(String query_data) {
 
@@ -421,7 +429,6 @@ public class Utils {
         JSONObject main = new JSONObject();
         JSONObject mainquery = new JSONObject();
 
-        JSONObject subquery = new JSONObject();
         JSONObject dataquery = new JSONObject();
         JSONObject query_string = new JSONObject();
         JSONObject order = new JSONObject();
@@ -472,59 +479,41 @@ public class Utils {
         return main.toString();
     }
 
-    public void count_query(String query_data) {
-
+    public String count_query() {
+        Log.i(TAG, "notifi query 2");
         JSONObject main = new JSONObject();
-        JSONObject mainquery = new JSONObject();
-
-        JSONObject subquery = new JSONObject();
         JSONObject dataquery = new JSONObject();
         JSONObject query_string = new JSONObject();
-        JSONObject order = new JSONObject();
-        JSONObject dt_added = new JSONObject();
-        JSONObject text = new JSONObject();
-        JSONObject title = new JSONObject();
-        JSONObject fields = new JSONObject();
-        JSONObject fieldsobj = new JSONObject();
-        JSONObject scroll = new JSONObject();
+
         JSONArray fieldsarray = new JSONArray();
-        JSONArray sortarray = new JSONArray();
+
         JSONArray indexes_array = new JSONArray();
 
         try {
-            dataquery.put("query", query_data);
+
+            dataquery.put("query", Date_added_toquery());
+            Log.i(TAG, "notifi query 3" + dataquery.toString());
             dataquery.put("use_dis_max", true);
             fieldsarray.put("title");
             fieldsarray.put("text");
             dataquery.put("fields", fieldsarray);
 
             query_string.put("query_string", dataquery);
-            //mainquery.put("query", query_string);
 
-            // order.put("order", "desc");
-            // sortarray.put(dt_added.put("dt_added", order));
-
-            ///mainquery.put("sort", sortarray);
-            //mainquery.put("size", 15);
-            //fields.put("text", text);
-            //fields.put("title", title);
-            //fieldsobj.put("fields", fields);
-            //mainquery.put("highlight", fieldsobj);
-
+            Log.i(TAG, "notifi query 4" + query_string.toString());
             indexes_array.put("socialdata");
             main.put("indexes", indexes_array);
             main.put("doc_types", "item");
             main.put("query", query_string);
 
-            //scroll.put("scroll", "15m");
-
-            //main.put("query_params", scroll);
+            Log.i(TAG, "notifi query 5" + main.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.i(TAG, "count query is" + main.toString());
-        new UserSession(context).setClubbedquery(main.toString());
+
+        return main.toString();
     }
 
 
@@ -552,34 +541,25 @@ public class Utils {
 
     public void Buzz_notify(int article_count) {
 
-            Intent intent = new Intent(context, HomeScreen.class);
-            intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
+        Intent intent = new Intent(context, HomeScreen.class);
+        intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
 
-            PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
-            NotificationManager mNotifyMgr =
-                    (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setContentTitle(article_count+ "New Articles are come")
-                            .setSmallIcon(R.drawable.buzz_logo)
-                            .setContentIntent(pIntent)
-                            .setAutoCancel(true)
-                            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        NotificationManager mNotifyMgr =
+                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setContentTitle(article_count + "New Articles are come")
+                        .setSmallIcon(R.drawable.buzz_logo)
+                        .setContentIntent(pIntent)
+                        .setAutoCancel(true)
+                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
-            mNotifyMgr.notify(0, mBuilder.build());
+        mNotifyMgr.notify(0, mBuilder.build());
 
     }
 
-    public void call_service() {
-        Log.i(TAG, "call_service");
-        Intent intent = new Intent(context, BuzzNotification.class);
-        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Log.i(TAG, "call_service 2");
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 1000 * 2, pendingIntent);
-        Log.i(TAG, "call_service_alaram manager");
-    }
 
     public String timestamp(long ecpoch_value) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -591,5 +571,10 @@ public class Utils {
 
     }
 
+    public String Date_added_toquery() {
 
+        String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + timestamp(Long.parseLong(userSession.getLatestDate())) + " TO " + timestamp(0) + "]";
+        Log.i(TAG, "count_clubbed_query is" + count_clubbed_query);
+        return count_clubbed_query;
+    }
 }

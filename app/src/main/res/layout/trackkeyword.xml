@@ -23,6 +23,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="5dp"
+        android:lines="1"
+        android:imeActionLabel="@string/abc_action_mode_done"
         />
 
     <Button

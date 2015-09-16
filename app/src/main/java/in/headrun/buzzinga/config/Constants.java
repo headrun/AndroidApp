@@ -18,7 +18,7 @@ public class Constants {
     public static String scroolid = "1";
     public static String FIRSTURL = "";
     public static boolean swipedata = false;
-    public static boolean finddata = false;
+
     public static boolean BUZZ_NOTIFY = false;
 
 
@@ -106,18 +106,18 @@ public class Constants {
 
     public static void xtags() {
 
-        sources_list.put("fb", FACEBOOK);
-        sources_list.put("twitter", TWITTER);
-        sources_list.put("news", NEWS);
-        sources_list.put("blogs", BLOGS);
-        sources_list.put("forums", FORUMS);
-        sources_list.put("googleplus", GOOGLEPLUS);
-        sources_list.put("youtube", YOUTUBE);
-        sources_list.put("flickr", FLICKR);
-        sources_list.put("instagram", INSTAGRAM);
-        sources_list.put("tumblr", TUMBLR);
-        sources_list.put("linkedin", LINKDIN);
-        sources_list.put("quora", QUORA);
+        sources_list.put(FACEBOOK, FACEBOOK);
+        sources_list.put(TWITTER, TWITTER);
+        sources_list.put(NEWS, NEWS);
+        sources_list.put(BLOGS, BLOGS);
+        sources_list.put(FORUMS, FORUMS);
+        sources_list.put(GOOGLEPLUS, GOOGLEPLUS);
+        sources_list.put(YOUTUBE, YOUTUBE);
+        sources_list.put(FLICKR, FLICKR);
+        sources_list.put(INSTAGRAM, INSTAGRAM);
+        sources_list.put(TUMBLR, TUMBLR);
+        sources_list.put(LINKDIN, LINKDIN);
+        sources_list.put(QUORA, QUORA);
 
         source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)");
 
@@ -126,6 +126,7 @@ public class Constants {
         source_map.put(NEWS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent )");
         source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)");
         source_map.put(FORUMS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent)");
+
 
         source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
 

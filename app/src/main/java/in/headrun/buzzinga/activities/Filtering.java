@@ -35,8 +35,8 @@ import in.headrun.buzzinga.utils.ListViewAdapter;
  */
 public class Filtering extends AppCompatActivity implements View.OnClickListener {
 
+    public static StringBuilder sourcequery = new StringBuilder();
     public String TAG = Filtering.this.getClass().getSimpleName();
-
     @Bind(R.id.filter_titles)
     ListView filter_titles;
     @Bind(R.id.filter_sourceslist)
@@ -54,16 +54,53 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     Button clearfilter;
     @Bind(R.id.applyfilter)
     Button applyfilter;
-
     @Bind(R.id.autosearch)
     EditText autosearch;
-
     ListViewAdapter adapter;
     SearchManager searchmanager;
     String Sourcestatus;
-
     Test buzztest;
-    public static StringBuilder sourcequery = new StringBuilder();
+
+    public static void sentimentquery() {
+        Constants.BSENTIMENT.clear();
+        for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
+            if (sentimentlist.isSelectd())
+                Constants.BSENTIMENT.add(sentimentlist.getSourcename());
+    }
+
+    public static void genderquery() {
+        Constants.BGENDER.clear();
+        for (Listitems genderlist : Constants.FILTERGENDER)
+            if (genderlist.isSelectd())
+                Constants.BGENDER.add(genderlist.getSourcename());
+    }
+
+    public static void locquery() {
+        Constants.BLOCATION.clear();
+        for (Listitems loclist : Constants.FILTERLOC)
+            if (loclist.isSelectd())
+                Constants.BLOCATION.add(loclist.getXtag());
+
+    }
+
+    public static void langquery() {
+
+        Constants.BLANGUAGE.clear();
+        for (Listitems langlist : Constants.FILTERLANG)
+            if (langlist.isSelectd())
+                Constants.BLANGUAGE.add(langlist.getXtag());
+
+    }
+
+    public void sourcequery() {
+
+        Constants.BSOURCES.clear();
+        for (Listitems sourceslist : Constants.FILTERSOURSOURE)
+            if (sourceslist.isSelectd()) {
+                Constants.BSOURCES.add(sourceslist.getSourcename());
+                Log.i(TAG, "selected source is" + sourceslist.getSourcename());
+            }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,63 +291,14 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public static void sourcequery() {
-
-
-        Constants.BSOURCES.clear();
-        for (Listitems sourceslist : Constants.FILTERSOURSOURE)
-            if (sourceslist.isSelectd())
-                Constants.BSOURCES.add(sourceslist.getSourcename());
-
-    }
-
-    public static void sentimentquery() {
-        Constants.BSENTIMENT.clear();
-        for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
-            if (sentimentlist.isSelectd())
-                Constants.BSENTIMENT.add(sentimentlist.getSourcename());
-    }
-
-    public static void genderquery() {
-        Constants.BGENDER.clear();
-        for (Listitems genderlist : Constants.FILTERGENDER)
-            if (genderlist.isSelectd())
-                Constants.BGENDER.add(genderlist.getSourcename());
-    }
-
-    public static void locquery() {
-        Constants.BLOCATION.clear();
-        for (Listitems loclist : Constants.FILTERLOC)
-            if (loclist.isSelectd())
-                Constants.BLOCATION.add(loclist.getXtag());
-
-    }
-
-    public static void langquery() {
-
-        Constants.BLANGUAGE.clear();
-        for (Listitems langlist : Constants.FILTERLANG)
-            if (langlist.isSelectd())
-                Constants.BLANGUAGE.add(langlist.getXtag());
-
-    }
-
-
-    public enum FilterStatus {
-        SOURCES,
-        SENTIMENT,
-        GENDER,
-        LANGUAGE,
-        LOCATION
-    }
-
-    public  void listOfFilterSources() {
+    public void listOfFilterSources() {
         Constants.FILTERSOURSOURE.clear();
 
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSOURSOURE.add(new Listitems(entry.getKey(), value, source_check(value)));
         }
+
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSOURSOURE);
         filter_sourceslist.setAdapter(adapter);
 
@@ -686,7 +674,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
     public boolean sentiment_check(String sentiment) {
         Log.i("Log_tag", "BSENTIMENT size is" + Constants.BSENTIMENT.size() + "sentiment is" + sentiment);
         if (Constants.BSENTIMENT.size() > 0)
@@ -751,7 +738,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void clearfilters(){
+    public void clearfilters() {
         Constants.BLANGUAGE.clear();
         Constants.BLOCATION.clear();
         Constants.BSOURCES.clear();
@@ -763,5 +750,13 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         listOfFilterGender();
         listOfFilterLocation();
         listOfFilterLang();
+    }
+
+    public enum FilterStatus {
+        SOURCES,
+        SENTIMENT,
+        GENDER,
+        LANGUAGE,
+        LOCATION
     }
 }

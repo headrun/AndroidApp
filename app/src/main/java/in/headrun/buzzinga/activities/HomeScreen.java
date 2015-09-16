@@ -178,7 +178,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 browsertitle.setText(geturl);
                 webview_lay.setVisibility(View.VISIBLE);
                 webview.loadUrl(geturl);
-                Log.i("Log_tag", "selectd url is" + geturl);
+
 
             }
         });
@@ -192,17 +192,16 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                display_data.getChildCount()
-
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5) {
+                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
                     Log.i(TAG, "scrolling is on");
-                    Config.SwipeLoading = true;
                     footerView = inflater.inflate(R.layout.listviewfooter, null);
-                    //display_data.addFooterView(footerView);
                     Listfooter.setVisibility(View.VISIBLE);
-                    Log.i(TAG, "listview footer count" + display_data.getFooterViewsCount());
-                    getServer_response();
+                    Config.SwipeLoading = true;
+
+                    if (!Constants.SCROLLID.equals("1"))
+                        getServer_response(ServerConfig.SCROLL);
+
                 }
             }
         });
@@ -219,12 +218,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onRefresh() {
                 Constants.swipedata = true;
-                getServer_response();
+                getServer_response(ServerConfig.search);
             }
         });
 
         if (state != null) {
-            Log.d(TAG, "trying to restore listview state..");
             display_data.onRestoreInstanceState(state);
         }
     }
@@ -234,10 +232,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
 
         if (Intent_opt.contains(Constants.Intent_TRACK)) {
-            //new getresponce().execute();
-            getServer_response();
-        }else if (Intent_opt.equals(Constants.Intent_NOtify)){
-            getServer_response();
+
+            getServer_response(ServerConfig.search);
+        } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
+            getServer_response(ServerConfig.search);
         }
     }
 
@@ -252,12 +250,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
             if (Constants.SEARCHSTRING.trim().length() > 0) {
                 Constants.listdetails.clear();
-                Log.i("Log_tag", "display_data length is" + display_data.getCount());
                 Constants.BSEARCHKEY.clear();
                 Constants.BSEARCHKEY.add(Constants.SEARCHSTRING);
                 Constants.listdetails.clear();
                 HomeScreen.display_data.setAdapter(null);
-                getServer_response();
+                getServer_response(ServerConfig.search);
             }
         }
     }
@@ -304,7 +301,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 filterpanel.setVisibility(View.GONE);
                 Constants.listdetails.clear();
                 display_data.setAdapter(null);
-                getServer_response();
+                getServer_response(ServerConfig.search);
                 break;
             case R.id.closebrowser:
                 webview_lay.setVisibility(View.GONE);
@@ -383,31 +380,25 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
     }
 
-    public void getServer_response() {
+    public void getServer_response(String URL_request) {
 
         if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
             progress.setVisibility(View.GONE);
         else {
-
             progress.setVisibility(View.VISIBLE);
-
         }
         final String clubbed_query;
         if (Intent_opt.equals(Constants.Intent_NOtify)) {
-           // userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
-            clubbed_query=userSession.get_search_Clubbedquery();
-        }else
-            clubbed_query=query.getquerydata(Constants.QueryString);
+            clubbed_query = query.queryform(query.Date_added_toquery());
+
+        } else {
+            userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
+            clubbed_query = userSession.get_search_Clubbedquery();
+        }
         userSession.setSETUP(Constants.SETUP);
         userSession.setTIMEZONE(Utils.timezone());
-        userSession.setSCROLLID(Constants.scroolid);
 
-
-        final String clubbedquery = userSession.getClubbedquery();
-        Log.i(TAG, "final clubbed query is" + clubbedquery);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                ServerConfig.SERVER_ENDPOINT + ServerConfig.search,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
                 new Response.Listener<String>() {
                     @Override
                     public ArrayList<SearchDetails> onResponse(String response) {
@@ -432,24 +423,33 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                         if (swipeRefreshLayout.isRefreshing())
                             swipeRefreshLayout.setRefreshing(false);
-                        if (Config.SwipeLoading)
+                        if (Config.SwipeLoading) {
                             Listfooter.setVisibility(View.GONE);
+                            Config.SwipeLoading = false;
+                        }
 
                         return null;
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Log.d(TAG, "string error response is" + error.networkResponse.headers.values());
-                Toast.makeText(HomeScreen.this, "Try again search", Toast.LENGTH_LONG).show();
+
+                Log.i(TAG, "error message is" + error.getMessage());
+                error.printStackTrace();
+                if(error.networkResponse.data!=null)
+                webview.loadData(new String(error.networkResponse.data),"text/html","UTF-8");
+                webview_lay.setVisibility(View.VISIBLE);
+                Toast.makeText(HomeScreen.this, "Network error Try again", Toast.LENGTH_LONG).show();
                 progress.setVisibility(View.GONE);
 
                 content_lay.setVisibility(View.VISIBLE);
 
                 if (swipeRefreshLayout.isRefreshing())
                     swipeRefreshLayout.setRefreshing(false);
-                if (Config.SwipeLoading)
+                if (Config.SwipeLoading) {
                     Listfooter.setVisibility(View.GONE);
+                    Config.SwipeLoading = false;
+                }
             }
         }) {
 
@@ -457,15 +457,21 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 UserSession usersess = new UserSession(HomeScreen.this);
-                params.put("clubbed_query", clubbed_query);
-                params.put("setup", usersess.getSETUP());
-                if (!usersess.getSCROLLID().equals("1")) {
-                    Log.i(TAG, "qury on scrool");
-                    params.put("scroll_id", usersess.getSCROLLID());
+                if (Config.SwipeLoading) {
+                    String clubbedquery = "{\"scroll_id\":\""+Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
+                    params.put("clubbed_query", clubbedquery);
+                    Log.i(TAG, "qury on scroll" + clubbedquery);
                 } else {
                     Log.i(TAG, "qury on TZone");
                     params.put("tz", usersess.getTIMEZONE());
+                    params.put("clubbed_query", clubbed_query);
+                    Log.i(TAG, " seach clubbed_query" + clubbed_query + "\nusersess.getTIMEZONE()" + usersess.getTIMEZONE());
                 }
+                params.put("setup", usersess.getSETUP());
+
+                Log.i(TAG, "request setup" + usersess.getSETUP());
+
+
                 return params;
             }
 

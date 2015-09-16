@@ -26,7 +26,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     public String TAG = TrackKeyWord.this.getClass().getSimpleName();
 
     @Bind(R.id.keyword)
-    EditText keyword;
+    EditText Trackkeyword;
     @Bind(R.id.trackbtn)
     Button trackbtn;
 
@@ -38,7 +38,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         trackbtn.setOnClickListener(this);
 
-        keyword.setOnKeyListener(new View.OnKeyListener() {
+        Trackkeyword.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -73,7 +73,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
 
     public void trackkeyword(){
-        String[] track_word = {keyword.getText().toString().toString()};
+        String[] track_word = {Trackkeyword.getText().toString().toString()};
         if (Config.TRACKKEYWORD)
             Log.i(TAG, "track key word is" + track_word[0]);
         if (track_word[0].length() > 0) {

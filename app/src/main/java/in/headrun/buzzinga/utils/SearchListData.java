@@ -100,6 +100,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
             holder.article_icon.setImageResource(icon);
 
         long seconds = Long.parseLong(item.getArticledate());
+        Log.i(TAG,"article time is"+seconds);
         long millis = seconds * 1000;
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
