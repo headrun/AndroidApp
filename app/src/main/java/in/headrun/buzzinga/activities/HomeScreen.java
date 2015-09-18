@@ -29,8 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
@@ -108,6 +110,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     SearchListData search_adapter;
     LayoutInflater inflater;
     SearchListData articles_data;
+    StringRequest stringRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,9 +168,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
                 String geturl = details.getUrl();
-                browsertitle.setText(geturl);
+                browsertitle.setText(geturl.toString());
                 webview_lay.setVisibility(View.VISIBLE);
-                webview.loadUrl(geturl);
+                content_lay.setVisibility(View.GONE);
+                Log.i(TAG, "webview url is" + geturl);
+                webview.clearCache(true);
+                webview.clearView();
+
+                webview.loadUrl("");
+                webview.loadUrl(geturl.toString());
 
 
             }
@@ -263,6 +272,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webview.getSettings().setLoadWithOverviewMode(true);
+
+
     }
 
     @Override
@@ -298,6 +310,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 webview_lay.setVisibility(View.GONE);
                 webview.destroy();
                 progress.setProgress(100);
+                webview.stopLoading();
+                content_lay.setVisibility(View.VISIBLE);
+
+
                 break;
             case R.id.filterpanel:
                 break;
@@ -396,7 +412,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             userSession.setTIMEZONE(Utils.timezone());
 
             Log.i(TAG, "url is" + ServerConfig.SERVER_ENDPOINT + URL_request);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
+            stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
                     new Response.Listener<String>() {
                         @Override
                         public ArrayList<SearchDetails> onResponse(String response) {
@@ -430,15 +446,19 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 public void onErrorResponse(VolleyError error) {
 
                     error.printStackTrace();
-                    try {
-                        byte[] error_resp = error.networkResponse.data;
-                        if (error_resp != null)
-                            webview.loadData(new String(error.networkResponse.data), "text/html", "UTF-8");
-                        webview_lay.setVisibility(View.VISIBLE);
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+
+                    if (error instanceof TimeoutError) {
+
+                        Log.i(TAG, "time out error");
+
+
+                    } else if (error.networkResponse != null && error.networkResponse.data != null) {
+                        byte[] error_resp = error.networkResponse.data;
+                        webview.loadData(new String(error.networkResponse.data), "text/html", "UTF-8");
+                        webview_lay.setVisibility(View.VISIBLE);
                     }
+
                     progress.setVisibility(View.GONE);
                     content_lay.setVisibility(View.VISIBLE);
 
@@ -490,6 +510,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 ;
             };
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    900,
+                    5,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
             stringRequest.setTag(TAG);
             BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
@@ -515,28 +540,34 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     private class MyBrowser extends WebViewClient {
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-            view.loadUrl(url);
             return true;
         }
 
+
         @Override
         public void onPageFinished(WebView view, String url) {
-
             browser_progress.setProgress(100);
             browser_progress.setVisibility(View.GONE);
             super.onPageFinished(view, url);
-
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
             browser_progress.setProgress(0);
+
+            Log.i(TAG, "webview startd url is" + url);
+            // browsertitle.setText(url);
             browser_progress.setVisibility(View.VISIBLE);
             super.onPageStarted(view, url, favicon);
+
+        }@Override
+         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            Log.i(TAG,"error code:" +errorCode);
+            super.onReceivedError(view, errorCode, description, failingUrl);
         }
     }
 }

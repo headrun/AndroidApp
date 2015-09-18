@@ -8,12 +8,12 @@ import butterknife.ButterKnife.ViewBinder;
 public class TrackKeyWord$$ViewBinder<T extends in.headrun.buzzinga.activities.TrackKeyWord> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131755179, "field 'Trackkeyword'");
-    target.Trackkeyword = finder.castView(view, 2131755179, "field 'Trackkeyword'");
-    view = finder.findRequiredView(source, 2131755180, "field 'trackbtn'");
-    target.trackbtn = finder.castView(view, 2131755180, "field 'trackbtn'");
-    view = finder.findRequiredView(source, 2131755178, "field 'trak_progress'");
-    target.trak_progress = finder.castView(view, 2131755178, "field 'trak_progress'");
+    view = finder.findRequiredView(source, 2131755176, "field 'Trackkeyword'");
+    target.Trackkeyword = finder.castView(view, 2131755176, "field 'Trackkeyword'");
+    view = finder.findRequiredView(source, 2131755177, "field 'trackbtn'");
+    target.trackbtn = finder.castView(view, 2131755177, "field 'trackbtn'");
+    view = finder.findRequiredView(source, 2131755175, "field 'trak_progress'");
+    target.trak_progress = finder.castView(view, 2131755175, "field 'trak_progress'");
   }
 
   @Override public void unbind(T target) {

@@ -93,7 +93,7 @@ public class Utils {
             switch (item) {
                 case Constants.TRACKKEY:
                     trackkey_query = query_trackkey(i.getBvalue());
-                        Log.i(TAG, "Track key is" + trackkey_query);
+                    Log.i(TAG, "Track key is" + trackkey_query);
 
                     break;
                 case Constants.SEARCHKEY:
@@ -219,9 +219,9 @@ public class Utils {
                 queryvalue.append(pref);
                 pref = " OR ";
                 queryvalue.append(get_source_xtag(source_type));
-                Log.i(TAG,"source xtag is"+get_source_xtag(source_type));
+                Log.i(TAG, "source xtag is" + get_source_xtag(source_type));
             }
-            if( queryvalue.toString().trim().length()>0)
+            if (queryvalue.toString().trim().length() > 0)
                 return " AND (" + queryvalue.toString() + ")";
             else
                 return "";
@@ -232,16 +232,37 @@ public class Utils {
     public String get_source_xtag(String sourcetype) {
 
         if (Constants.source_map.containsKey(sourcetype)) {
+            int specific_xtag_length;
+            Log.i(TAG, "source type is" + sourcetype);
+            Log.i(TAG, "Constants.rss_specific_xtags" + Constants.rss_specific_xtags +
+                    "\nConstants.twitter_specific_xtags" + Constants.twitter_specific_xtags +
+                    "\nConstants.googleplus_specific_xtags" + Constants.googleplus_specific_xtags +
+                    "\nConstants.facebook_specific_xtags" + Constants.facebook_specific_xtags);
 
-            if (sourcetype == Constants.FACEBOOK) {
-                return Constants.source_map.get(sourcetype) + (Constants.facebook_specific_xtags.trim().length() > 0 ? " AND " + Constants.facebook_specific_xtags : "");
-            } else if (sourcetype == Constants.GOOGLEPLUS) {
-                return Constants.source_map.get(sourcetype) + (Constants.googleplus_specific_xtags.trim().length() > 0 ? " AND " + Constants.googleplus_specific_xtags : "");
+            if (sourcetype.contains(Constants.FACEBOOK)) {
+                specific_xtag_length = Constants.facebook_specific_xtags.trim().length();
+                Log.i(TAG, " FACEBOOK specific_xtag_length" + specific_xtag_length);
+                return Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.facebook_specific_xtags : "");
+            } else if (sourcetype.contains(Constants.GOOGLEPLUS)) {
+                Log.i(TAG, "google plus");
+                specific_xtag_length = Constants.googleplus_specific_xtags.trim().length();
+                Log.i(TAG, " GOOGLEPLUS specific_xtag_length" + specific_xtag_length);
 
-            } else if (sourcetype == Constants.TWITTER) {
-                return Constants.source_map.get(sourcetype) + (Constants.twitter_specific_xtags.trim().length() > 0 ? " AND " + Constants.twitter_specific_xtags : "");
-            } else if (sourcetype == Constants.FORUMS || sourcetype == Constants.NEWS || sourcetype.contains(Constants.BLOGS)) {
-                return Constants.source_map.get(sourcetype) + (Constants.rss_specific_xtags.trim().length() > 0 ? " AND " + Constants.rss_specific_xtags : "");
+                return Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.googleplus_specific_xtags : "");
+
+            } else if (sourcetype.contains(Constants.TWITTER)) {
+                specific_xtag_length = Constants.twitter_specific_xtags.trim().length();
+                Log.i(TAG, "TWITTER specific_xtag_length" + specific_xtag_length);
+                return Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.twitter_specific_xtags : "");
+            } else if (sourcetype.contains(Constants.FORUMS) || sourcetype.contains(Constants.NEWS) ||
+                    sourcetype.contains(Constants.BLOGS)) {
+                specific_xtag_length = Constants.rss_specific_xtags.trim().length();
+                Log.i(TAG, " FORUMS specific_xtag_length" + specific_xtag_length);
+                return Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.rss_specific_xtags : "");
             } else {
                 return Constants.source_map.get(sourcetype);
             }
@@ -253,7 +274,10 @@ public class Utils {
     public void query_loc_source() {
 
         String pref = "";
+
         if (Constants.BLOCATION.size() > 0) {
+            Log.i(TAG, "loc size is query_loc_source" + Constants.BLOCATION.size());
+
             Constants.rss_specific_xtags = "";
             Constants.twitter_specific_xtags = "";
             Constants.googleplus_specific_xtags = "";
@@ -267,6 +291,7 @@ public class Utils {
             for (int i = 0; i < Constants.BLOCATION.size(); i++) {
                 String loc = Constants.BLOCATION.get(i).toLowerCase();
 
+                Log.i(TAG, "loc valus is" + loc);
 
                 Constants.facebook_specific_xtags += pref + " (xtags:" + loc + "_country_manual_parent" +
                         " OR xtags:" + loc + "_country_auto)";
@@ -286,6 +311,11 @@ public class Utils {
             Constants.facebook_specific_xtags += ")";
 
 
+        } else {
+            Constants.rss_specific_xtags = "";
+            Constants.twitter_specific_xtags = "";
+            Constants.googleplus_specific_xtags = "";
+            Constants.facebook_specific_xtags = "";
         }
     }
 
@@ -360,6 +390,7 @@ public class Utils {
     }
 
     public String query_language(ArrayList<String> item) {
+        Log.i(TAG, "lang size is" + item.size());
         queryvalue.setLength(0);
         String pref = "";
         if (item.size() > 0) {
@@ -376,6 +407,7 @@ public class Utils {
     }
 
     public String query_location(ArrayList<String> item) {
+        Log.i(TAG, "loc size is" + item.size());
         queryvalue.setLength(0);
         String pref = "";
         if (item.size() > 0) {

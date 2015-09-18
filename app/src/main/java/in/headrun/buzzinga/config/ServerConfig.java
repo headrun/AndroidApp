@@ -5,7 +5,7 @@ package in.headrun.buzzinga.config;
  */
 public class ServerConfig {
 
-    public static final String SERVER_ENDPOINT = "http://beta.buzzinga.com:9001";
+    public static final String SERVER_ENDPOINT = "http://beta.buzzinga.com";
     public static final String login = "/login/twitter";
     public static String logout = "/accounts/logout?next=/";
     public static String search = "/search/";

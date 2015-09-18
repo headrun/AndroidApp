@@ -121,16 +121,11 @@ public class Constants {
         sources_list.put(QUORA, QUORA);
 
         source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)");
-
         source_map.put(TWITTER, "(xtags:twitter_search_sourcetype_manual OR xtags:twitter_streaming_sourcetype_manual)");
-
         source_map.put(NEWS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent )");
         source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)");
         source_map.put(FORUMS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent)");
-
-
         source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
-
         source_map.put(YOUTUBE, "(xtags:youtube_search_sourcetype_manual)");
         source_map.put(FLICKR, "(xtags:flickr_search_sourcetype_manual)");
         source_map.put(INSTAGRAM, "(xtags:instagram_search_sourcetype_manual)");

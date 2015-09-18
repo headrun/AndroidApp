@@ -114,6 +114,7 @@ butterknife/internal/ListenerClass.class
 android/support/v4/app/ActivityCompat.class
 retrofit/http/RestMethod.class
 android/support/v7/view/ActionMode.class
+com/android/volley/DefaultRetryPolicy.class
 android/support/annotation/UiThread.class
 com/digits/sdk/android/ActivityClassManagerFactory.class
 retrofit/http/Streaming.class
@@ -413,6 +414,7 @@ com/digits/sdk/android/ContactsHelper.class
 com/digits/sdk/android/UploadResponse.class
 com/twitter/sdk/android/core/identity/TwitterAuthClient.class
 com/twitter/sdk/android/core/R.class
+com/android/volley/RetryPolicy.class
 com/twitter/sdk/android/core/identity/OAuthWebViewClient$Listener.class
 io/fabric/sdk/android/services/concurrency/internal/ExponentialBackoff.class
 com/digits/sdk/android/ContactsActivityDelegate.class
