@@ -185,14 +185,15 @@
 
             <TextView
                 android:id="@+id/browsertitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/closebrowser"
                 android:background="@drawable/roundborder"
                 android:gravity="start|center"
-                android:maxLines="1" />
+                android:lines="1"
+                android:editable="false"/>
 
         </RelativeLayout>
 

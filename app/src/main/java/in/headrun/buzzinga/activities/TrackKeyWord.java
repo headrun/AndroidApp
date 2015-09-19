@@ -34,6 +34,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     Button trackbtn;
     @Bind(R.id.track_progress)
     ProgressBar trak_progress;
+    UserSession usersession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         trak_progress.setVisibility(View.GONE);
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        usersession=new UserSession(getApplication());
+
 
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -68,14 +71,14 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
 
     public void trackkeyword(){
-        String[] track_word = {Trackkeyword.getText().toString().toString()};
+        String[] track_word = {Trackkeyword.getText().toString().trim().toString()};
         if (Config.TRACKKEYWORD)
             Log.i(TAG, "track key word is" + track_word[0]);
         if (track_word[0].length() > 0) {
             trak_progress.setVisibility(View.VISIBLE);
-            new UserSession(TrackKeyWord.this).setTrackKey(track_word[0].toString());
+            usersession.setTrackKey(track_word[0].toString());
             new Utils(this).clear_all_data();
-            Constants.BTRACKKEY.add(track_word[0].toString());
+            Constants.BTRACKKEY.add(usersession.getTrackKey());
             Utils.add_query_data();
             Constants.listdetails.clear();
 

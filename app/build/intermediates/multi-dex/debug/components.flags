@@ -36,6 +36,10 @@
     <init>();
 }
 
+-keep class in.headrun.buzzinga.activities.ArticleDisplay {
+    <init>();
+}
+
 -keep class in.headrun.buzzinga.BuzzNotification {
     <init>();
 }

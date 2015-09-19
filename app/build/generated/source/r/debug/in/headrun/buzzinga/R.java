@@ -1847,20 +1847,23 @@ containing a value of this type.
         public static final int action_bar_title=0x7f100025;
         public static final int action_context_bar=0x7f100043;
         public static final int action_divider=0x7f100083;
-        public static final int action_logout=0x7f1000c5;
+        public static final int action_logout=0x7f1000c9;
         public static final int action_menu_divider=0x7f100002;
         public static final int action_menu_presenter=0x7f100003;
         public static final int action_mode_bar=0x7f10003f;
         public static final int action_mode_bar_stub=0x7f10003e;
         public static final int action_mode_close_button=0x7f100027;
-        public static final int action_search=0x7f1000c3;
-        public static final int action_settings=0x7f1000c2;
-        public static final int action_track=0x7f1000c4;
+        public static final int action_search=0x7f1000c7;
+        public static final int action_settings=0x7f1000c6;
+        public static final int action_track=0x7f1000c8;
         public static final int activity_chooser_view_content=0x7f100028;
         public static final int alertTitle=0x7f100032;
         public static final int always=0x7f100016;
         public static final int applyfilter=0x7f1000a3;
         public static final int article_lay=0x7f10008e;
+        public static final int article_url=0x7f1000c4;
+        public static final int article_view=0x7f1000c2;
+        public static final int article_webview=0x7f1000c5;
         public static final int articledate=0x7f100092;
         public static final int author=0x7f100093;
         public static final int autosearch=0x7f10009b;
@@ -1876,6 +1879,7 @@ containing a value of this type.
         public static final int clearfilter=0x7f1000a2;
         public static final int closebrowser=0x7f100078;
         public static final int closebtn=0x7f100071;
+        public static final int closewebciew=0x7f1000c3;
         public static final int collapseActionView=0x7f100017;
         public static final int contentPanel=0x7f100033;
         public static final int content_lay=0x7f100068;
@@ -2102,6 +2106,7 @@ containing a value of this type.
         public static final int tw__tweet=0x7f040037;
         public static final int tw__tweet_compact=0x7f040038;
         public static final int twitterlogin=0x7f040039;
+        public static final int webview=0x7f04003a;
     }
     public static final class menu {
         public static final int global=0x7f110000;

@@ -92,12 +92,12 @@ public class Utils {
 
             switch (item) {
                 case Constants.TRACKKEY:
-                    trackkey_query = query_trackkey(i.getBvalue());
+                    trackkey_query =query_trackkey(i.getBvalue());
                     Log.i(TAG, "Track key is" + trackkey_query);
 
                     break;
                 case Constants.SEARCHKEY:
-                    search_query = query_searchkey(i.getBvalue());
+                    search_query =query_searchkey(i.getBvalue());
                     Log.i(TAG, "Search key is" + search_query);
                     break;
                 case Constants.SOURCES:

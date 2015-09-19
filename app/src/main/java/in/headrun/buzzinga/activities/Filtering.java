@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
-import in.headrun.buzzinga.doto.Test;
 import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.FilterTitleAdapter;
 import in.headrun.buzzinga.utils.ListViewAdapter;
@@ -58,7 +57,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     ListViewAdapter adapter;
     SearchManager searchmanager;
     String Sourcestatus;
-    Test buzztest;
+
 
     public static void sentimentquery() {
         Constants.BSENTIMENT.clear();
@@ -111,7 +110,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
 
         searchmanager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        buzztest = new Test(getApplication());
+
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);

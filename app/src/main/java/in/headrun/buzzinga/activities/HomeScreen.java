@@ -1,5 +1,6 @@
 package in.headrun.buzzinga.activities;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AbsListView;
@@ -36,6 +38,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import junit.framework.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +54,6 @@ import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchDetails;
-import in.headrun.buzzinga.doto.Test;
 import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.ConnectionSettings;
 import in.headrun.buzzinga.utils.FilterByDate;
@@ -71,6 +74,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public static View footerView;
     static Context context;
     public String TAG = HomeScreen.this.getClass().getSimpleName();
+    AlertDialog alertDialog;
 
     Parcelable state;
 
@@ -114,6 +118,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
         ButterKnife.bind(this);
@@ -134,7 +139,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         context = getApplication();
 
         userSession = new UserSession(HomeScreen.this);
-
+        alertDialog = new AlertDialog.Builder(this).create();
         inflater = this.getLayoutInflater();
 
         filtersourcebtn.setOnClickListener(this);
@@ -146,7 +151,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         filtersource_lay.setOnClickListener(this);
         filterpanel.setOnClickListener(this);
 
-        buzztest = new Test(getApplication());
         search_adapter = new SearchListData(HomeScreen.this, 1);
 
         content_lay.setVisibility(View.GONE);
@@ -160,7 +164,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         actionBar.setDefaultDisplayHomeAsUpEnabled(true);
 
         actionBar.setTitle(userSession.getTrackKey());
-        webSettings();
+
 
         display_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -168,16 +172,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
                 String geturl = details.getUrl();
-                browsertitle.setText(geturl.toString());
-                webview_lay.setVisibility(View.VISIBLE);
+
+
                 content_lay.setVisibility(View.GONE);
-                Log.i(TAG, "webview url is" + geturl);
-                webview.clearCache(true);
-                webview.clearView();
-
-                webview.loadUrl("");
-                webview.loadUrl(geturl.toString());
-
+                webview_lay.setVisibility(View.VISIBLE);
+                browsertitle.setText(geturl.toString());
+                webSettings(geturl);
 
             }
         });
@@ -225,6 +225,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if (state != null) {
             display_data.onRestoreInstanceState(state);
         }
+
+
     }
 
     @Override
@@ -240,6 +242,19 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        webview.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        webview.onPause();
+        state = display_data.onSaveInstanceState();
+    }
+
+    @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
         handleIntent(intent);
@@ -251,7 +266,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             if (Constants.SEARCHSTRING.trim().length() > 0) {
                 Constants.listdetails.clear();
                 Constants.BSEARCHKEY.clear();
-                Constants.BSEARCHKEY.add(Constants.SEARCHSTRING);
+
+                Constants.BSEARCHKEY.add("\""+Constants.SEARCHSTRING + "\"");
                 HomeScreen.display_data.setAdapter(null);
                 Log.i(TAG, "key word search");
                 getServer_response(ServerConfig.search);
@@ -266,55 +282,101 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         newFragment.show(fm, "datePicker");
     }
 
-    private void webSettings() {
+    private void webSettings(String url) {
 
-        webview.setWebViewClient(new MyBrowser());
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.clearCache(true);
+        webview.clearHistory();
+        webview.loadUrl("");
 
+
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                Log.i(TAG, "started webview");
+                browser_progress.setProgress(0);
+                browser_progress.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                Log.i(TAG, "finished webview");
+                browser_progress.setProgress(100);
+                browser_progress.setVisibility(View.GONE);
+                super.onPageFinished(view, url);
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+                Log.i(TAG, "load resource" + url);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                Log.i(TAG, "webview error code" + errorCode + "\n description" + description);
+            }
+        });
+
+
+        webview.loadUrl(url.toString());
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.filtersource_lay:
                 startActivity(new Intent(this, Filtering.class));
                 break;
+
             case R.id.filterdate:
                 content_lay.setVisibility(View.VISIBLE);
                 filterpanel.setVisibility(View.VISIBLE);
                 webview_lay.setVisibility(View.GONE);
                 break;
+
             case R.id.closebtn:
                 filterpanel.setVisibility(View.GONE);
                 break;
+
             case R.id.fromdate:
                 Constants.BFROMDATE.clear();
                 DATEFLAG = 0;
                 getdate();
                 break;
+
             case R.id.todate:
                 Constants.BTODATE.clear();
                 getdate();
                 break;
+
             case R.id.bydatefilter:
                 filterpanel.setVisibility(View.GONE);
                 Constants.listdetails.clear();
                 display_data.setAdapter(null);
                 getServer_response(ServerConfig.search);
                 break;
+
             case R.id.closebrowser:
                 webview_lay.setVisibility(View.GONE);
-                webview.destroy();
+                //webview.destroy();
                 progress.setProgress(100);
                 webview.stopLoading();
                 content_lay.setVisibility(View.VISIBLE);
-
-
                 break;
+
             case R.id.filterpanel:
                 break;
 
@@ -511,7 +573,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 ;
             };
             stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    900,
+                    5000,
                     5,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -533,41 +595,4 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        state = display_data.onSaveInstanceState();
-    }
-
-    private class MyBrowser extends WebViewClient {
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            return true;
-        }
-
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            browser_progress.setProgress(100);
-            browser_progress.setVisibility(View.GONE);
-            super.onPageFinished(view, url);
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            browser_progress.setProgress(0);
-
-            Log.i(TAG, "webview startd url is" + url);
-            // browsertitle.setText(url);
-            browser_progress.setVisibility(View.VISIBLE);
-            super.onPageStarted(view, url, favicon);
-
-        }@Override
-         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            Log.i(TAG,"error code:" +errorCode);
-            super.onReceivedError(view, errorCode, description, failingUrl);
-        }
-    }
 }

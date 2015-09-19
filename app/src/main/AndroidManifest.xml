@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.HomeScreen"
             android:launchMode="singleTop"
@@ -62,6 +63,15 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+
+        <activity
+            android:name=".activities.ArticleDisplay">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeScreen" />
+
+        </activity>
 
         <service android:name=".BuzzNotification" />
         <receiver

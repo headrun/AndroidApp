@@ -3,6 +3,7 @@ package in.headrun.buzzinga;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 /**
  * Created by headrun on 22/7/15.
@@ -101,7 +102,7 @@ public class UserSession {
     public String getSETUP() {
 
         String setup = pref.getString(SETUP, "null");
-
+        Log.i(TAG,"setup is"+setup);
         return setup;
     }
 
@@ -111,32 +112,31 @@ public class UserSession {
         editor.commit();
         String set_up = pref.getString(SETUP, "");
 
-
     }
 
-/*    public String getFromDate() {
-        String fromdate = pref.getString(FROM_DATE, "0");
-        return fromdate;
-    }
+    /*    public String getFromDate() {
+            String fromdate = pref.getString(FROM_DATE, "0");
+            return fromdate;
+        }
 
-    public void setFromDate(String fromdate) {
+        public void setFromDate(String fromdate) {
 
-        editor.putString(FROM_DATE, fromdate);
-        editor.commit();
-    }
+            editor.putString(FROM_DATE, fromdate);
+            editor.commit();
+        }
 
 
-    public String getTODate() {
-        String todate = pref.getString(TO_DATE, "0");
-        return todate;
-    }
+        public String getTODate() {
+            String todate = pref.getString(TO_DATE, "0");
+            return todate;
+        }
 
-    public void seToDate(String todate) {
+        public void seToDate(String todate) {
 
-        editor.putString(TO_DATE, todate);
-        editor.commit();
-    }
-*/
+            editor.putString(TO_DATE, todate);
+            editor.commit();
+        }
+    */
     public String getLatestDate() {
         String getLastestDate = pref.getString(LATEST_DATE, "0");
 
