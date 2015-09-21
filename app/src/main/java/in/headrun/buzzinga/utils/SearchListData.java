@@ -109,6 +109,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.articledate.setText(sdf.format(date));
 
         Log.i(TAG, "epoch time is\t" + item.getArticledate() + "\ntime is\t" + sdf.format(date));
+
         holder.article_lay.setBackgroundResource(applySentimentColor(item.getSentiment()));
 
         return itemView;
@@ -117,13 +118,14 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
     private int applySentimentColor(String sentimet) {
 
         if (sentimet != null)
-            if (sentimet.contains("positive")) {
+            if (sentimet.contains(Constants.POSITIVE)) {
                 return R.drawable.pos_sentiment;
-            } else if (sentimet.contains("negative")) {
+            } else if (sentimet.contains(Constants.NEGATIVE)) {
                 return R.drawable.neg_sentiment;
-            }
-        return R.drawable.neu_sentiment;
+            } else
+                return R.drawable.neu_sentiment;
 
+        return R.drawable.neu_sentiment;
     }
 
     private int source_icon(String type) {

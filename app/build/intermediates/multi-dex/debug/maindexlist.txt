@@ -181,6 +181,7 @@ android/support/v7/app/ActionBar$OnNavigationListener.class
 in/headrun/buzzinga/UserSession.class
 com/google/gson/reflect/TypeToken.class
 com/digits/sdk/vcard/VCardBuilder.class
+in/headrun/buzzinga/activities/Filtering$4.class
 com/twitter/sdk/android/tweetui/SyndicationClientEvent$ExternalIds.class
 in/headrun/buzzinga/BuzzingaRequest.class
 com/twitter/sdk/android/core/TwitterCore.class
@@ -262,7 +263,6 @@ android/support/annotation/FractionRes.class
 in/headrun/buzzinga/activities/HomeScreen$1.class
 butterknife/Bind.class
 io/fabric/sdk/android/services/concurrency/Task.class
-in/headrun/buzzinga/activities/ArticleDisplay$2.class
 com/digits/sdk/android/ContactsClient$ContactsService.class
 io/fabric/sdk/android/services/concurrency/PriorityTask.class
 com/twitter/sdk/android/core/internal/MigrationHelper.class
@@ -280,7 +280,6 @@ android/support/annotation/IntegerRes.class
 in/headrun/buzzinga/activities/HomeScreen$5.class
 com/squareup/picasso/RequestCreator.class
 io/fabric/sdk/android/services/concurrency/AsyncTask$4.class
-in/headrun/buzzinga/activities/ArticleDisplay.class
 android/support/v4/app/BackStackRecord$TransitionState.class
 com/twitter/sdk/android/core/identity/ShareEmailActivity.class
 com/twitter/sdk/android/core/internal/scribe/DefaultScribeClient.class
@@ -293,6 +292,7 @@ com/twitter/sdk/android/core/services/ListService.class
 android/support/v4/app/FragmentManagerImpl$2.class
 com/digits/sdk/android/DigitsActivity.class
 io/fabric/sdk/android/InitializationTask.class
+in/headrun/buzzinga/doto/QueryData.class
 android/support/v4/util/SimpleArrayMap.class
 com/twitter/sdk/android/core/internal/oauth/OAuth1aService.class
 com/digits/sdk/android/DigitsApiClient$DeviceService.class
@@ -326,7 +326,6 @@ com/digits/sdk/android/DigitsSessionResponse.class
 com/twitter/sdk/android/core/services/AccountService.class
 com/twitter/sdk/android/core/internal/scribe/EventNamespace.class
 in/headrun/buzzinga/activities/HomeScreen$4.class
-in/headrun/buzzinga/activities/ArticleDisplay$1.class
 retrofit/http/PartMap.class
 com/twitter/sdk/android/core/models/Coordinates.class
 com/twitter/sdk/android/core/R$layout.class

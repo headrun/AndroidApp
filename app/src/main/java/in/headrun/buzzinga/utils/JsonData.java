@@ -19,6 +19,7 @@ public class JsonData {
     public ArrayList<SearchDetails> swipelist;
     String title, url, text, date, author, sentiment, gender, article_type;
     String TAG = JsonData.this.getClass().getSimpleName();
+    int article_count=0;
 
 
     public ArrayList<SearchDetails> getJsonData(String data) {
@@ -46,6 +47,7 @@ public class JsonData {
                         date = jobj_source.getString("dt_added");
 
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
+                        Log.i(TAG,"json_xtags"+json_xtags +"length"+json_xtags.length());
                         JSONObject json_author = jobj_source.optJSONObject("author");
                         if (json_author != null)
                             author = json_author.optString("name");
@@ -117,7 +119,22 @@ public class JsonData {
 
     private void xtags_separate(JSONArray xtags) {
 
+
+
         if (xtags.length() > 0) {
+
+            Log.i(TAG,"article_count"+article_count++ +"xtag length is"+xtags.length());
+            for(int k=0;k<xtags.length();k++)
+            {
+                try {
+                    Log.i(TAG,xtags.getString(k));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
             Set<String> source_keys = Constants.source_map.keySet();
             for (String key : source_keys) {
                 if (xtags.toString().contains(key)) {
@@ -130,7 +147,7 @@ public class JsonData {
 
             Set<String> sentiment_keys = Constants.sentiment_map.keySet();
             for (String sentiment_key : sentiment_keys) {
-                if (xtags.toString().contains(sentiment_key)) {
+                if (xtags.toString().contains(sentiment_key+"_sentiment_final")) {
                     sentiment = sentiment_key;
                     break;
                 }

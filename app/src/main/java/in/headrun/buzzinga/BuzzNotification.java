@@ -49,8 +49,8 @@ public class BuzzNotification extends Service {
                 handler.post(new Runnable() {
                     public void run() {
                         Log.i(TAG, "call the notification");
-                        if(new ConnectionSettings().isConnected(getApplication()))
-                        stringrequest();
+                        if (new ConnectionSettings().isConnected(getApplication()))
+                            stringrequest();
 
                     }
                 });
@@ -118,7 +118,7 @@ public class BuzzNotification extends Service {
                 params.put("clubbed_query", query.count_query());
                 params.put("tz", userSession.getTIMEZONE());
                 params.put("setup", userSession.getSETUP());
-
+                Log.i(TAG, " count tz" + userSession.getTIMEZONE() + "setup" + userSession.getSETUP());
                 return params;
             }
 

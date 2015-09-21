@@ -47,6 +47,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzNotification;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
@@ -73,6 +74,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public static int DATEFLAG;
     public static View footerView;
     static Context context;
+    BuzzingaApplication buzzapp;
     public String TAG = HomeScreen.this.getClass().getSimpleName();
     AlertDialog alertDialog;
 
@@ -139,9 +141,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         context = getApplication();
 
         userSession = new UserSession(HomeScreen.this);
+        buzzapp=new BuzzingaApplication();
+
         alertDialog = new AlertDialog.Builder(this).create();
         inflater = this.getLayoutInflater();
-
         filtersourcebtn.setOnClickListener(this);
         bydatefilter.setOnClickListener(this);
         closebtn.setOnClickListener(this);
@@ -192,7 +195,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                if (display_data.getCount() != 0 && lastIndexInScreen >= totalItemCount - 2 && !Config.SwipeLoading) {
+                int visibleChildCount = (display_data.getLastVisiblePosition() - display_data.getFirstVisiblePosition()) + 1;
+
+                if (display_data.getCount() != 0 && lastIndexInScreen>visibleChildCount && lastIndexInScreen >= totalItemCount -5 && !Config.SwipeLoading) {
 
                     if (!Constants.scroolid.equals("1")) {
                         Log.i(TAG, "Scrolling" + Constants.scroolid);
@@ -265,9 +270,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
             if (Constants.SEARCHSTRING.trim().length() > 0) {
                 Constants.listdetails.clear();
-                Constants.BSEARCHKEY.clear();
+                buzzapp.BSEARCHKEY.clear();
 
-                Constants.BSEARCHKEY.add("\""+Constants.SEARCHSTRING + "\"");
+                buzzapp.BSEARCHKEY.add("\""+Constants.SEARCHSTRING + "\"");
                 HomeScreen.display_data.setAdapter(null);
                 Log.i(TAG, "key word search");
                 getServer_response(ServerConfig.search);
@@ -352,13 +357,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case R.id.fromdate:
-                Constants.BFROMDATE.clear();
+                buzzapp.BFROMDATE.clear();
                 DATEFLAG = 0;
                 getdate();
                 break;
 
             case R.id.todate:
-                Constants.BTODATE.clear();
+                buzzapp.BTODATE.clear();
                 getdate();
                 break;
 
@@ -467,7 +472,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             } else if (Config.SwipeLoading) {
                 clubbed_query = "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
             } else {
-                userSession.set_search_Clubbedquery(query.getquerydata(Constants.QueryString));
+                userSession.set_search_Clubbedquery(query.getquerydata(buzzapp.QueryString));
                 clubbed_query = userSession.get_search_Clubbedquery();
             }
             userSession.setSETUP(Constants.SETUP);
@@ -537,6 +542,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     UserSession usersess = new UserSession(HomeScreen.this);
+                    Log.i(TAG,"!Config.SwipeLoading"+!Config.SwipeLoading);
                     if (!Config.SwipeLoading) {
                         params.put("tz", usersess.getTIMEZONE());
                         Log.i(TAG, "time zone is" + usersess.getTIMEZONE());

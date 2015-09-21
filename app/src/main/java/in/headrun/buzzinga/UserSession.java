@@ -20,6 +20,8 @@ public class UserSession {
     public static final String LATEST_DATE = "laestdate";
     public static final String TRACK_KEY = "trackkey";
     private static final String PREFER_NAME = "BUZZINGA";
+    private static final String BUZZ_NOTIFY_SEL = "notifysel";
+    private static final boolean IS_NOTIFY_SEL = false;
     public String TAG = UserSession.this.getClass().getSimpleName();
     public SharedPreferences pref;
     public Context _context;
@@ -84,6 +86,18 @@ public class UserSession {
 
     }
 
+    public boolean isBUZZ_NOTIFY_SEL() {
+       return  pref.getBoolean(BUZZ_NOTIFY_SEL,false);
+    }
+
+    public void setBUZZ_NOTIFY_SEL(boolean notifysel) {
+
+        editor.putBoolean(BUZZ_NOTIFY_SEL,notifysel);
+
+        editor.commit();
+    }
+
+
     public String getTIMEZONE() {
         String timezone = pref.getString(TIMEZONE, "null");
 
@@ -114,29 +128,7 @@ public class UserSession {
 
     }
 
-    /*    public String getFromDate() {
-            String fromdate = pref.getString(FROM_DATE, "0");
-            return fromdate;
-        }
 
-        public void setFromDate(String fromdate) {
-
-            editor.putString(FROM_DATE, fromdate);
-            editor.commit();
-        }
-
-
-        public String getTODate() {
-            String todate = pref.getString(TO_DATE, "0");
-            return todate;
-        }
-
-        public void seToDate(String todate) {
-
-            editor.putString(TO_DATE, todate);
-            editor.commit();
-        }
-    */
     public String getLatestDate() {
         String getLastestDate = pref.getString(LATEST_DATE, "0");
 

@@ -166,45 +166,32 @@
     <RelativeLayout
         android:id="@+id/webview_lay"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#000000">
 
-        <RelativeLayout
-            android:id="@+id/browserheader"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff">
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/close_browser"
+                android:gravity="end|left"
+                android:paddingRight="10dp"
                 android:id="@+id/closebrowser"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
                 android:layout_alignParentTop="true"
-
-                android:paddingTop="5dp"
-                android:src="@drawable/closebrowser" />
-
-            <TextView
-                android:id="@+id/browsertitle"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/closebrowser"
-                android:background="@drawable/roundborder"
-                android:gravity="start|center"
-                android:lines="1"
-                android:editable="false"/>
-
-        </RelativeLayout>
-
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/browserheader">
-
-
-        </WebView>
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:id="@+id/browsertitle"
+                android:editable="false"
+                android:background="#ffffff"
+                android:layout_below="@+id/closebrowser"/>
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/webview"
+                android:layout_below="@+id/browsertitle"></WebView>
 
         <ProgressBar
             android:id="@+id/browser_progress"

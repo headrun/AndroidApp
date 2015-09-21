@@ -9,14 +9,15 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.activities.HomeScreen;
-import in.headrun.buzzinga.config.Constants;
 
 /**
  * Created by headrun on 23/7/15.
  */
 public class FilterByDate extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+    BuzzingaApplication buzzapp=new BuzzingaApplication();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,11 +42,11 @@ public class FilterByDate extends DialogFragment
 
             HomeScreen.DATEFLAG = 1;
             HomeScreen.fromdate.setText(setdate.toString());
-            Constants.BFROMDATE.add(HomeScreen.fromdate.getText().toString());
+            buzzapp.BFROMDATE.add(HomeScreen.fromdate.getText().toString());
         } else {
 
             HomeScreen.todate.setText(setdate.toString());
-            Constants.BTODATE.add(HomeScreen.todate.getText().toString());
+            buzzapp.BTODATE.add(HomeScreen.todate.getText().toString());
         }
     }
 }

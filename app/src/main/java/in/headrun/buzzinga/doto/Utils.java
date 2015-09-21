@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
@@ -40,6 +41,7 @@ public class Utils {
     StringBuilder queryvalue = new StringBuilder();
     UserSession userSession;
 
+    BuzzingaApplication buzzapp=new BuzzingaApplication();
     public Utils(Context context) {
         this.context = context;
         userSession = new UserSession(context);
@@ -57,32 +59,6 @@ public class Utils {
             return String.valueOf(Math.abs(tz));
     }
 
-    public static void add_query_data() {
-        Constants.QueryString.clear();
-        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
-        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
-        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
-        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
-        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
-        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
-        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
-        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
-        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
-
-    }
-
-    public static void clear_all_data() {
-        Constants.BTRACKKEY.clear();
-        Constants.BSEARCHKEY.clear();
-        Constants.BTODATE.clear();
-        Constants.BFROMDATE.clear();
-        Constants.BLOCATION.clear();
-        Constants.BLANGUAGE.clear();
-        Constants.BSOURCES.clear();
-        Constants.BGENDER.clear();
-        Constants.BSENTIMENT.clear();
-
-    }
 
     public String getquerydata(ArrayList<QueryData> data) {
 
@@ -92,12 +68,12 @@ public class Utils {
 
             switch (item) {
                 case Constants.TRACKKEY:
-                    trackkey_query =query_trackkey(i.getBvalue());
+                    trackkey_query = query_trackkey(i.getBvalue());
                     Log.i(TAG, "Track key is" + trackkey_query);
 
                     break;
                 case Constants.SEARCHKEY:
-                    search_query =query_searchkey(i.getBvalue());
+                    search_query = query_searchkey(i.getBvalue());
                     Log.i(TAG, "Search key is" + search_query);
                     break;
                 case Constants.SOURCES:
@@ -143,16 +119,14 @@ public class Utils {
 
         setupdate(fromdate, todate);
         String query = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
-                + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang)
-                + " AND dt_added:[" + fromdate + " TO " + todate + "]";
-
-
-        String countquery = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
 
-        new UserSession(context).setClubbedquery(countquery);
 
-        return queryform(query);
+        String countquery = query + " AND dt_added:[" + fromdate + " TO " + todate + "]";
+
+        new UserSession(context).setClubbedquery(query);
+
+        return queryform(countquery);
 
     }
 
@@ -275,8 +249,8 @@ public class Utils {
 
         String pref = "";
 
-        if (Constants.BLOCATION.size() > 0) {
-            Log.i(TAG, "loc size is query_loc_source" + Constants.BLOCATION.size());
+        if (buzzapp.BLOCATION.size() > 0) {
+            Log.i(TAG, "loc size is query_loc_source" + buzzapp.BLOCATION.size());
 
             Constants.rss_specific_xtags = "";
             Constants.twitter_specific_xtags = "";
@@ -288,8 +262,8 @@ public class Utils {
             Constants.googleplus_specific_xtags += "(";
             Constants.facebook_specific_xtags += "(";
 
-            for (int i = 0; i < Constants.BLOCATION.size(); i++) {
-                String loc = Constants.BLOCATION.get(i).toLowerCase();
+            for (int i = 0; i < buzzapp.BLOCATION.size(); i++) {
+                String loc = buzzapp.BLOCATION.get(i).toLowerCase();
 
                 Log.i(TAG, "loc valus is" + loc);
 
@@ -509,7 +483,7 @@ public class Utils {
             e.printStackTrace();
         }
 
-
+        Log.i(TAG, "count_clubbed_query is" + main.toString());
         return main.toString();
     }
 
@@ -543,15 +517,13 @@ public class Utils {
 
         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
-        NotificationManager mNotifyMgr =
-                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setContentTitle(article_count + "New Articles are come")
-                        .setSmallIcon(R.drawable.buzz_logo)
-                        .setContentIntent(pIntent)
-                        .setAutoCancel(true)
-                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setContentTitle(article_count + "New Articles are come")
+                .setSmallIcon(R.drawable.buzz_logo)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
         mNotifyMgr.notify(0, mBuilder.build());
 
@@ -571,7 +543,7 @@ public class Utils {
     public String Date_added_toquery() {
 
         String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + timestamp(Long.parseLong(userSession.getLatestDate())) + " TO " + timestamp(0) + "]";
-        Log.i(TAG, "count_clubbed_query is" + count_clubbed_query);
+
         return count_clubbed_query;
     }
 }

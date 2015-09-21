@@ -8,6 +8,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
+import in.headrun.buzzinga.doto.QueryData;
+
 /**
  * Created by headrun on 31/8/15.
  */
@@ -16,6 +20,18 @@ public class BuzzingaApplication extends Application {
     private static final String TAG = BuzzingaApplication.class.getSimpleName();
 
     private static BuzzingaApplication instance = null;
+
+    public static ArrayList<String> BTRACKKEY = new ArrayList<>();
+    public static ArrayList<String> BSEARCHKEY = new ArrayList<>();
+    public static ArrayList<String> BSOURCES = new ArrayList<>();
+    public static ArrayList<String> BGENDER = new ArrayList<>();
+    public static ArrayList<String> BSENTIMENT = new ArrayList<>();
+    public static ArrayList<String> BLOCATION = new ArrayList<>();
+    public static ArrayList<String> BLANGUAGE = new ArrayList<>();
+    public static ArrayList<String> BFROMDATE = new ArrayList<>();
+    public static ArrayList<String> BTODATE = new ArrayList<>();
+
+    public static ArrayList<QueryData> QueryString = new ArrayList<QueryData>();
 
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;

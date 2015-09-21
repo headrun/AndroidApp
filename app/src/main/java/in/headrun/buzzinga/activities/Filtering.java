@@ -17,14 +17,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
-import in.headrun.buzzinga.doto.Utils;
+import in.headrun.buzzinga.doto.QueryData;
 import in.headrun.buzzinga.utils.FilterTitleAdapter;
 import in.headrun.buzzinga.utils.ListViewAdapter;
 
@@ -35,6 +39,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public static StringBuilder sourcequery = new StringBuilder();
     public String TAG = Filtering.this.getClass().getSimpleName();
+    BuzzingaApplication buzzapp;
     @Bind(R.id.filter_titles)
     ListView filter_titles;
     @Bind(R.id.filter_sourceslist)
@@ -59,46 +64,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     String Sourcestatus;
 
 
-    public static void sentimentquery() {
-        Constants.BSENTIMENT.clear();
-        for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
-            if (sentimentlist.isSelectd())
-                Constants.BSENTIMENT.add(sentimentlist.getSourcename());
-    }
-
-    public static void genderquery() {
-        Constants.BGENDER.clear();
-        for (Listitems genderlist : Constants.FILTERGENDER)
-            if (genderlist.isSelectd())
-                Constants.BGENDER.add(genderlist.getSourcename());
-    }
-
-    public static void locquery() {
-        Constants.BLOCATION.clear();
-        for (Listitems loclist : Constants.FILTERLOC)
-            if (loclist.isSelectd())
-                Constants.BLOCATION.add(loclist.getXtag());
-
-    }
-
-    public static void langquery() {
-
-        Constants.BLANGUAGE.clear();
-        for (Listitems langlist : Constants.FILTERLANG)
-            if (langlist.isSelectd())
-                Constants.BLANGUAGE.add(langlist.getXtag());
-
-    }
-
-    public void sourcequery() {
-
-        Constants.BSOURCES.clear();
-        for (Listitems sourceslist : Constants.FILTERSOURSOURE)
-            if (sourceslist.isSelectd()) {
-                Constants.BSOURCES.add(sourceslist.getSourcename());
-                Log.i(TAG, "selected source is" + sourceslist.getSourcename());
-            }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +75,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
 
         searchmanager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
+        buzzapp=new BuzzingaApplication();
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
@@ -281,7 +246,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             locquery();
             langquery();
 
-            Utils.add_query_data();
+            add_query_data();
             Constants.listdetails.clear();
             HomeScreen.display_data.setAdapter(null);
 
@@ -299,9 +264,10 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSOURSOURE.add(new Listitems(entry.getKey(), value, source_check(value)));
         }
-
+        sortlist(Constants.FILTERSOURSOURE);
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSOURSOURE);
         filter_sourceslist.setAdapter(adapter);
+
 
     }
 
@@ -312,6 +278,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, sentiment_check(value)));
         }
+        sortlist(Constants.FILTERSENTIMENT);
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSENTIMENT);
         filter_sentiment.setAdapter(adapter);
 
@@ -324,6 +291,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             String value = gendervalue.getKey().toUpperCase();
             Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, gender_check(value)));
         }
+        sortlist(Constants.FILTERGENDER);
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERGENDER);
         filter_gender.setAdapter(adapter);
     }
@@ -363,9 +331,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLANG.add(new Listitems("-pt-BR", "PORTUGUESE_B", lang_check("-pt-BR")));
         Constants.FILTERLANG.add(new Listitems("dv", "DHIVEHI", lang_check("dv")));
         Constants.FILTERLANG.add(new Listitems("sr-ME", "MONTENEGRIN", lang_check("sr-ME")));
-        Constants.FILTERLANG.add(new Listitems("crp", "CREOLES_AND_PIDGINS_OTHER", lang_check("crp")));
+        Constants.FILTERLANG.add(new Listitems("crp", "CREOLES_AND_PIDGINS_ OTHER", lang_check("crp")));
         Constants.FILTERLANG.add(new Listitems("qu", "QUECHUA", lang_check("qu")));
-        Constants.FILTERLANG.add(new Listitems("cpf", "CREOLES_AND_PIDGINS_FRENCH_BASED", lang_check("cpf")));
+        Constants.FILTERLANG.add(new Listitems("cpf", "CREOLES_AND_PIDGINS_ FRENCH_BASED", lang_check("cpf")));
         Constants.FILTERLANG.add(new Listitems("ut", "TG_UNKNOWN_LANGUAGE", lang_check("ut")));
         Constants.FILTERLANG.add(new Listitems("el", "GREEK", lang_check("el")));
         Constants.FILTERLANG.add(new Listitems("eo", "ESPERANTO", lang_check("eo")));
@@ -375,7 +343,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLANG.add(new Listitems("za", "ZHUANG", lang_check("za")));
         Constants.FILTERLANG.add(new Listitems("eu", "BASQUE", lang_check("eu")));
         Constants.FILTERLANG.add(new Listitems("zu", "ZULU", lang_check("zu")));
-        Constants.FILTERLANG.add(new Listitems("cpe", "CREOLES_AND_PIDGINS_ENGLISH_BASED", lang_check("cpe")));
+        Constants.FILTERLANG.add(new Listitems("cpe", "CREOLES_AND_PIDGINS_ ENGLISH_BASED", lang_check("cpe")));
         Constants.FILTERLANG.add(new Listitems("es", "SPANISH", lang_check("es")));
         Constants.FILTERLANG.add(new Listitems("ba", "BASHKIR", lang_check("BASHKIR")));
         Constants.FILTERLANG.add(new Listitems("ru", "RUSSIAN", lang_check("ru")));
@@ -486,13 +454,14 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLANG.add(new Listitems("sn", "SHONA", lang_check("sn")));
         Constants.FILTERLANG.add(new Listitems("ku", "KURDISH", lang_check("ku")));
         Constants.FILTERLANG.add(new Listitems("sl", "SLOVENIAN", lang_check("sl")));
-        Constants.FILTERLANG.add(new Listitems("cpp", "CREOLES_AND_PIDGINS_PORTUGUESE_BASED", lang_check("cpp")));
+        Constants.FILTERLANG.add(new Listitems("cpp", "CREOLES_AND_PIDGINS _PORTUGUESE_BASED", lang_check("cpp")));
         Constants.FILTERLANG.add(new Listitems("dz", "DZONGKHA", lang_check("dz")));
         Constants.FILTERLANG.add(new Listitems("ky", "KYRGYZ", lang_check("ky")));
         Constants.FILTERLANG.add(new Listitems("sg", "SANGO", lang_check("sg")));
         Constants.FILTERLANG.add(new Listitems("sw", "SWAHILI", lang_check("sw")));
         Constants.FILTERLANG.add(new Listitems("sd", "SINDHI", lang_check("sd")));
 
+        sortlist(Constants.FILTERLANG);
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERLANG);
         filter_language.setAdapter(adapter);
         filter_language.setTextFilterEnabled(true);
@@ -673,6 +642,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLOC.add(new Listitems("zimbabwe", "Zimbabwe", loc_check("zimbabwe")));
         Constants.FILTERLOC.add(new Listitems("hong_kong", "Hong Kong", loc_check("hong_kong")));
 
+        sortlist(Constants.FILTERLOC);
         adapter = new ListViewAdapter(Filtering.this, Constants.FILTERLOC);
         filter_location.setAdapter(adapter);
         filter_location.setTextFilterEnabled(true);
@@ -680,9 +650,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean sentiment_check(String sentiment) {
-        Log.i("Log_tag", "BSENTIMENT size is" + Constants.BSENTIMENT.size() + "sentiment is" + sentiment);
-        if (Constants.BSENTIMENT.size() > 0)
-            if (Constants.BSENTIMENT.contains(sentiment)) {
+        Log.i("Log_tag", "BSENTIMENT size is" + buzzapp.BSENTIMENT.size() + "sentiment is" + sentiment);
+        if (buzzapp.BSENTIMENT.size() > 0)
+            if (buzzapp.BSENTIMENT.contains(sentiment)) {
                 Log.i("Log_tag", "seniment  is" + true);
                 return true;
             }
@@ -690,9 +660,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean source_check(String source) {
-        Log.i("Log_tag", "BSOURCES size is" + Constants.BSOURCES.size() + "source is" + source);
-        if (Constants.BSOURCES.size() > 0)
-            if (Constants.BSOURCES.contains(source)) {
+        Log.i("Log_tag", "BSOURCES size is" + buzzapp.BSOURCES.size() + "source is" + source);
+        if (buzzapp.BSOURCES.size() > 0)
+            if (buzzapp.BSOURCES.contains(source)) {
                 Log.i("Log_tag", "source  is" + true);
                 return true;
             }
@@ -700,9 +670,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean gender_check(String gender) {
-        Log.i("Log_tag", "BGENDER size is" + Constants.BGENDER.size() + "gender is" + gender);
-        if (Constants.BGENDER.size() > 0)
-            if (Constants.BGENDER.contains(gender)) {
+        Log.i("Log_tag", "BGENDER size is" + buzzapp.BGENDER.size() + "gender is" + gender);
+        if (buzzapp.BGENDER.size() > 0)
+            if (buzzapp.BGENDER.contains(gender)) {
                 Log.i("Log_tag", "gender is" + true);
                 return true;
             }
@@ -710,9 +680,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean lang_check(String lang) {
-        Log.i("Log_tag", "BLANGUAGE size is" + Constants.BLANGUAGE.size() + " langs aree " + Constants.BLANGUAGE.toString() + "lang is" + lang);
-        if (Constants.BLANGUAGE.size() > 0)
-            if (Constants.BLANGUAGE.contains(lang)) {
+        Log.i("Log_tag", "BLANGUAGE size is" + buzzapp.BLANGUAGE.size() + " langs aree " + buzzapp.BLANGUAGE.toString() + "lang is" + lang);
+        if (buzzapp.BLANGUAGE.size() > 0)
+            if (buzzapp.BLANGUAGE.contains(lang)) {
                 Log.i("Log_tag", "lang_check  is" + true);
                 return true;
 
@@ -721,9 +691,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean loc_check(String loc) {
-        Log.i("Log_tag", "BLOCATION size is" + Constants.BLOCATION.size() + "locs are"+Constants.BLOCATION.toString()+"loc is" + loc);
-        if (Constants.BLOCATION.size() > 0)
-            if (Constants.BLOCATION.contains(loc)) {
+        Log.i("Log_tag", "BLOCATION size is" + buzzapp.BLOCATION.size() + "locs are" + buzzapp.BLOCATION.toString() + "loc is" + loc);
+        if (buzzapp.BLOCATION.size() > 0)
+            if (buzzapp.BLOCATION.contains(loc)) {
                 Log.i("Log_tag", "loc_check is" + true);
                 return true;
             }
@@ -732,19 +702,29 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void clearfilters() {
 
-        Constants.BSOURCES.clear();
-        Constants.BSENTIMENT.clear();
-        Constants.BGENDER.clear();
-        Constants.BLANGUAGE.clear();
-        Constants.BLOCATION.clear();
+        buzzapp.BSOURCES.clear();
+        buzzapp.BSENTIMENT.clear();
+        buzzapp.BGENDER.clear();
+        buzzapp.BLANGUAGE.clear();
+        buzzapp.BLOCATION.clear();
 
-        Log.i(TAG, "loc size is" + Constants.BLOCATION.size() + "\n lang is" + Constants.BLANGUAGE.size());
+        Log.i(TAG, "loc size is" + buzzapp.BLOCATION.size() + "\n lang is" + buzzapp.BLANGUAGE.size());
 
         listOfFilterSources();
         listOfFilterSentiment();
         listOfFilterGender();
         listOfFilterLocation();
         listOfFilterLang();
+
+    }
+
+
+    public void sortlist(ArrayList<Listitems> list) {
+        Collections.sort(list, new Comparator<Listitems>() {
+            public int compare(Listitems item1, Listitems item2) {
+                return item1.getSourcename().compareToIgnoreCase(item2.getSourcename());
+            }
+        });
     }
 
     public enum FilterStatus {
@@ -754,4 +734,63 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         LANGUAGE,
         LOCATION
     }
+
+    public void sentimentquery() {
+        buzzapp.BSENTIMENT.clear();
+        for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
+            if (sentimentlist.isSelectd())
+                buzzapp.BSENTIMENT.add(sentimentlist.getSourcename());
+    }
+
+    public void genderquery() {
+        buzzapp.BGENDER.clear();
+        for (Listitems genderlist : Constants.FILTERGENDER)
+            if (genderlist.isSelectd())
+                buzzapp.BGENDER.add(genderlist.getSourcename());
+    }
+
+    public  void locquery() {
+        buzzapp.BLOCATION.clear();
+        for (Listitems loclist : Constants.FILTERLOC)
+            if (loclist.isSelectd())
+                buzzapp.BLOCATION.add(loclist.getXtag());
+
+    }
+
+    public void langquery() {
+
+        buzzapp.BLANGUAGE.clear();
+        for (Listitems langlist : Constants.FILTERLANG)
+            if (langlist.isSelectd())
+                buzzapp.BLANGUAGE.add(langlist.getXtag());
+
+    }
+
+    public void sourcequery() {
+
+        buzzapp.BSOURCES.clear();
+        for (Listitems sourceslist : Constants.FILTERSOURSOURE)
+            if (sourceslist.isSelectd()) {
+                buzzapp.BSOURCES.add(sourceslist.getSourcename());
+                Log.i(TAG, "selected source is" + sourceslist.getSourcename());
+            }
+    }
+
+    public  void add_query_data() {
+        buzzapp.QueryString.clear();
+        buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
+        buzzapp.QueryString.add(new QueryData(Constants.TODATE, buzzapp.BTODATE));
+        buzzapp.QueryString.add(new QueryData(Constants.LOCATION, buzzapp.BLOCATION));
+        buzzapp.QueryString.add(new QueryData(Constants.LANGUAGE, buzzapp.BLANGUAGE));
+        buzzapp.QueryString.add(new QueryData(Constants.SEARCHKEY, buzzapp.BSEARCHKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
+        buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
+        buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
+
+    }
+
+
+
+
 }
