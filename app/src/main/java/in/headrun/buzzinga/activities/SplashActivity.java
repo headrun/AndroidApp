@@ -8,8 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,7 +16,7 @@ import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
-import io.fabric.sdk.android.Fabric;
+
 
 /**
  * Created by headrun on 7/7/15.
@@ -38,8 +37,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+
         setContentView(R.layout.splashscren);
         ButterKnife.bind(this);
         splash_progress.setVisibility(View.VISIBLE);

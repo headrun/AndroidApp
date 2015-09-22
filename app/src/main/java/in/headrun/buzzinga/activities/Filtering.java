@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
@@ -787,6 +788,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
         buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
         buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
+
+        Log.i(TAG,"buzzapp.BLOCATION"+ Arrays.asList(buzzapp.BLOCATION));
 
     }
 

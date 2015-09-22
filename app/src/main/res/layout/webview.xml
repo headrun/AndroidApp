@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#80000000"
-    android:id="@+id/article_view">
+    android:id="@+id/article_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/closebrowser"
-        android:gravity="end|left"
-        android:id="@+id/closewebciew"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <TextView
+    <LinearLayout
+        android:id="@+id/browser_headder"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:id="@+id/article_url"
-        android:editable="false"
-        android:layout_below="@+id/closewebciew"/>
+        android:layout_height="50dp"
+        android:weightSum="1"
+        android:background="#000000">
+
+
+        <ImageView
+            android:id="@+id/article_closebrowser"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/browsertitle"
+            android:layout_weight="0.1"
+            android:padding="10dp"
+            android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+
+        <TextView
+            android:id="@+id/article_browsertitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.9"
+            android:editable="false"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+
+            />
+
+    </LinearLayout>
+
     <WebView
+        android:id="@+id/article_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/article_webview"
-        android:layout_below="@+id/article_url"></WebView>
+        android:layout_below="@+id/browser_headder" />
+
+    <ProgressBar
+        android:id="@+id/article_browser_progress"
+        style="@android:style/Widget.ProgressBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 </RelativeLayout>

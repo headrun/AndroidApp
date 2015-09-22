@@ -1,6 +1,8 @@
 package in.headrun.buzzinga.config;
 
-import com.twitter.sdk.android.core.TwitterAuthToken;
+
+
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +52,12 @@ public class Constants {
     public static String SEARCHSTRING;
     public static String USERNAME;
     public static String SETUP = "";
-    public static TwitterAuthToken AUTHTOKEN;
+    public static Parcelable state;
+
     public static String Intent_OPERATION = "Operation";
     public static String Intent_TRACK = "search";
     public static String Intent_NOtify = "notification";
+    public static String Intent_NOTHING = "nothing";
     public static int newarticles = 0;
 
 
@@ -98,10 +102,14 @@ public class Constants {
         sources_list.put(QUORA, QUORA);
 
         source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)");
+
         source_map.put(TWITTER, "(xtags:twitter_search_sourcetype_manual OR xtags:twitter_streaming_sourcetype_manual)");
-        source_map.put(NEWS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent )");
+
+        source_map.put(NEWS, "(xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent");
+
         source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)");
-        source_map.put(FORUMS, "((xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent)");
+        source_map.put(FORUMS, "(xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent");
+
         source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
         source_map.put(YOUTUBE, "(xtags:youtube_search_sourcetype_manual)");
         source_map.put(FLICKR, "(xtags:flickr_search_sourcetype_manual)");

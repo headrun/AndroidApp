@@ -70,7 +70,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.url = (TextView) itemView.findViewById(R.id.url);
         holder.articledate = (TextView) itemView.findViewById(R.id.articledate);
         holder.author = (TextView) itemView.findViewById(R.id.author);
-        holder.sentimentcolor = (TextView) itemView.findViewById(R.id.sentimetncolor);
+
         holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
         holder.title_lay = itemView.findViewById(R.id.title_lay);
         holder.article_lay = itemView.findViewById(R.id.article_lay);

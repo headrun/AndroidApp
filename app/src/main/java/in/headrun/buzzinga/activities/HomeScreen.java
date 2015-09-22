@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -74,11 +73,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public static int DATEFLAG;
     public static View footerView;
     static Context context;
-    BuzzingaApplication buzzapp;
     public String TAG = HomeScreen.this.getClass().getSimpleName();
+    BuzzingaApplication buzzapp;
     AlertDialog alertDialog;
-
-    Parcelable state;
 
     Utils query;
     @Bind(R.id.filterpanel)
@@ -141,7 +138,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         context = getApplication();
 
         userSession = new UserSession(HomeScreen.this);
-        buzzapp=new BuzzingaApplication();
+        buzzapp = new BuzzingaApplication();
 
         alertDialog = new AlertDialog.Builder(this).create();
         inflater = this.getLayoutInflater();
@@ -176,11 +173,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
                 String geturl = details.getUrl();
 
-
+               /*
                 content_lay.setVisibility(View.GONE);
                 webview_lay.setVisibility(View.VISIBLE);
                 browsertitle.setText(geturl.toString());
                 webSettings(geturl);
+                */
+                Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
+                i.putExtra("url", geturl);
+                startActivity(i);
 
             }
         });
@@ -197,7 +198,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
                 int visibleChildCount = (display_data.getLastVisiblePosition() - display_data.getFirstVisiblePosition()) + 1;
 
-                if (display_data.getCount() != 0 && lastIndexInScreen>visibleChildCount && lastIndexInScreen >= totalItemCount -5 && !Config.SwipeLoading) {
+                if (display_data.getCount() != 0 && lastIndexInScreen > visibleChildCount && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
 
                     if (!Constants.scroolid.equals("1")) {
                         Log.i(TAG, "Scrolling" + Constants.scroolid);
@@ -227,8 +228,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-        if (state != null) {
-            display_data.onRestoreInstanceState(state);
+        if (Constants.state != null) {
+            display_data.onRestoreInstanceState(Constants.state);
         }
 
 
@@ -239,10 +240,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
 
         if (Intent_opt.contains(Constants.Intent_TRACK)) {
-
+            Constants.listdetails.clear();
             getServer_response(ServerConfig.search);
         } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
+            Constants.listdetails.clear();
             getServer_response(ServerConfig.search);
+        } else if (Intent_opt.equals(Constants.Intent_NOTHING)) {
+            article_laoding(Constants.listdetails);
+            content_lay.setVisibility(View.VISIBLE);
         }
     }
 
@@ -256,7 +261,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public void onPause() {
         super.onPause();
         webview.onPause();
-        state = display_data.onSaveInstanceState();
+        Constants.state = display_data.onSaveInstanceState();
     }
 
     @Override
@@ -272,7 +277,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Constants.listdetails.clear();
                 buzzapp.BSEARCHKEY.clear();
 
-                buzzapp.BSEARCHKEY.add("\""+Constants.SEARCHSTRING + "\"");
+                buzzapp.BSEARCHKEY.add("\"" + Constants.SEARCHSTRING + "\"");
                 HomeScreen.display_data.setAdapter(null);
                 Log.i(TAG, "key word search");
                 getServer_response(ServerConfig.search);
@@ -488,13 +493,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                             if (list_response.isEmpty()) {
                                 Toast.makeText(HomeScreen.this, "No  articles found", Toast.LENGTH_LONG).show();
                             } else {
-                                state = display_data.onSaveInstanceState();
-                                SearchListData articles_listdata = new SearchListData(context, list_response);
-                                articles_listdata.notifyDataSetChanged();
-                                display_data.setAdapter(new SearchListData(context, list_response));
-                                SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
-                                userSession.setLatestDate(fistitem.getArticledate());
-                                display_data.onRestoreInstanceState(state);
+                                article_laoding(list_response);
                             }
                             progress.setVisibility(View.GONE);
                             content_lay.setVisibility(View.VISIBLE);
@@ -542,7 +541,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     UserSession usersess = new UserSession(HomeScreen.this);
-                    Log.i(TAG,"!Config.SwipeLoading"+!Config.SwipeLoading);
+                    Log.i(TAG, "!Config.SwipeLoading" + !Config.SwipeLoading);
                     if (!Config.SwipeLoading) {
                         params.put("tz", usersess.getTIMEZONE());
                         Log.i(TAG, "time zone is" + usersess.getTIMEZONE());
@@ -599,6 +598,16 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             }
             Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void article_laoding(ArrayList<SearchDetails> list_response) {
+        Constants.state = display_data.onSaveInstanceState();
+        SearchListData articles_listdata = new SearchListData(context, list_response);
+        articles_listdata.notifyDataSetChanged();
+        display_data.setAdapter(new SearchListData(context, list_response));
+        SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
+        userSession.setLatestDate(fistitem.getArticledate());
+        display_data.onRestoreInstanceState(Constants.state);
     }
 
 }

@@ -36,7 +36,7 @@
     <init>();
 }
 
--keep class in.headrun.buzzinga.activities.ArticleDisplay {
+-keep class in.headrun.buzzinga.activities.ArticleWebDisplay {
     <init>();
 }
 
@@ -45,66 +45,6 @@
 }
 
 -keep class in.headrun.buzzinga.BootUpReceiver {
-    <init>();
-}
-
--keep class com.twitter.sdk.android.core.identity.OAuthActivity {
-    <init>();
-}
-
--keep class com.twitter.sdk.android.core.identity.ShareEmailActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.PhoneNumberActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.ConfirmationCodeActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.LoginCodeActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.PinCodeActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.FailureActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.ContactsActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.PhoneNumberActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.ConfirmationCodeActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.LoginCodeActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.FailureActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.ContactsActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.PinCodeActionBarActivity {
-    <init>();
-}
-
--keep class com.digits.sdk.android.ContactsUploadService {
     <init>();
 }
 
