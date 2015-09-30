@@ -43,7 +43,7 @@
     </string-array>
 
     <string-array name="titleimages">
-        <item>@drawable/sources</item>
+        <item>@drawable/s1</item>
         <item>@drawable/sentiment</item>
         <item>@drawable/gender</item>
         <item>@drawable/location</item>

@@ -80,6 +80,8 @@ public class Constants {
     public static ArrayList<Listitems> FILTERLOC = new ArrayList<Listitems>();
     public static ArrayList<Listitems> FILTERLANG = new ArrayList<Listitems>();
 
+
+
     public static ArrayList<String> sourceslist = new ArrayList<>();
     public static ArrayList<String> sentimentlist = new ArrayList<>();
     public static ArrayList<String> genderlist = new ArrayList<>();

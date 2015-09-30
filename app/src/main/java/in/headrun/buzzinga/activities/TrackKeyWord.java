@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
@@ -23,6 +25,7 @@ import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.QueryData;
+import in.headrun.buzzinga.utils.ConnectionSettings;
 
 /**
  * Created by headrun on 4/9/15.
@@ -49,8 +52,11 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         usersession = new UserSession(getApplication());
-        buzzapp=new BuzzingaApplication();
+        buzzapp = new BuzzingaApplication();
 
+        if (usersession.getTrackKey().length()<0) {
+            Trackkeyword.setText(usersession.getTrackKey());
+        }
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -74,29 +80,40 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-
     public void trackkeyword() {
 
         hideKeyboard();
 
-        String track_word = Trackkeyword.getText().toString().trim().toString();
-        if (Config.TRACKKEYWORD)
-            Log.i(TAG, "track key word is" + track_word);
-        if (track_word.length() > 0) {
-            trak_progress.setVisibility(View.VISIBLE);
-            usersession.setTrackKey(track_word.toString());
-            clear_all_data();
-           new BuzzingaApplication().BTRACKKEY.add(usersession.getTrackKey());
-            add_query_data();
-            Constants.listdetails.clear();
+        if(ConnectionSettings.isConnected(TrackKeyWord.this)) {
 
-            Intent intent = new Intent(getApplication(), HomeScreen.class);
-            intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
-            startActivity(intent);
-            trak_progress.setVisibility(View.GONE);
+            String track = Trackkeyword.getText().toString().trim().toString();
+            ArrayList<String> track_word = new ArrayList<>();
 
-        } else
-            Toast.makeText(this, "Enter your brand", Toast.LENGTH_LONG).show();
+            if (Config.TRACKKEYWORD)
+                Log.i(TAG, "track key word is" + track);
+            if (track.length() > 0) {
+                track_word.add(track);
+                trak_progress.setVisibility(View.VISIBLE);
+                usersession.setTrackKey(track_word.get(0));
+                //usersession.setBTRACKKEY("BTACK_KEY", track_word.get(0));
+
+                clear_all_data();
+
+                Log.i(TAG, "track key is" + usersession.getTrackKey());
+                new BuzzingaApplication().BTRACKKEY.add(usersession.getTrackKey());
+                add_query_data();
+                Constants.listdetails.clear();
+
+                Intent intent = new Intent(getApplication(), HomeScreen.class);
+                intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
+                startActivity(intent);
+                trak_progress.setVisibility(View.GONE);
+
+            } else
+                Toast.makeText(this, "Enter your brand", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void hideKeyboard() {
@@ -108,7 +125,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-    public  void clear_all_data() {
+    public void clear_all_data() {
+        Constants.SEARCHSTRING = "";
         buzzapp.BTRACKKEY.clear();
         buzzapp.BSEARCHKEY.clear();
         buzzapp.BTODATE.clear();
@@ -118,9 +136,9 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         buzzapp.BSOURCES.clear();
         buzzapp.BGENDER.clear();
         buzzapp.BSENTIMENT.clear();
-
     }
-    public  void add_query_data() {
+
+    public void add_query_data() {
         buzzapp.QueryString.clear();
         buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
         buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
@@ -134,6 +152,9 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        add_query_data();
+    }
 }

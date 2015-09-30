@@ -11,6 +11,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,7 +40,7 @@ import in.headrun.buzzinga.utils.ListViewAdapter;
  */
 public class Filtering extends AppCompatActivity implements View.OnClickListener {
 
-    public static StringBuilder sourcequery = new StringBuilder();
+    // public static StringBuilder sourcequery = new StringBuilder();
     public String TAG = Filtering.this.getClass().getSimpleName();
     BuzzingaApplication buzzapp;
     @Bind(R.id.filter_titles)
@@ -65,6 +67,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     String Sourcestatus;
 
 
+    FilterTitleAdapter titleadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +76,17 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         ButterKnife.bind(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.buzz_logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+        listOfFilterSources();
+        listOfFilterSentiment();
+        listOfFilterGender();
+        listOfFilterLocation();
+        listOfFilterLang();
 
         searchmanager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        buzzapp=new BuzzingaApplication();
+        buzzapp = new BuzzingaApplication();
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
@@ -87,29 +97,33 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
 
 
-        FilterTitleAdapter titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
+        titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
         filter_titles.setAdapter(titleadapter);
+      /*  filter_titles.performItemClick(
+                filter_titles.getAdapter().getView(0, null, null),
+                0,
+                filter_titles.getAdapter().getItemId(0));
+      */
+
+        // filter_titles.getChildAt(0).setBackgroundColor(Color.parseColor("#d62a2a2a"));
+        //filter_titles.setSelection(0);
+        //filter_titles.getAdapter().getView(0,null,null).setBackgroundColor(Color.parseColor("#FFCFCACA"));
+
 
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                for (int i = 0; i < filter_titles.getAdapter().getCount(); i++)
+                for (int i = 0; i < filter_titles.getAdapter().getCount(); i++) {
                     filter_titles.getChildAt(i).setBackgroundColor(Color.parseColor("#d62a2a2a"));
-
-                parent.getChildAt(position).setBackgroundColor(Color.GRAY);
+                }
+                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#FFCFCACA"));
                 String filteritem = filter_titles.getItemAtPosition(position).toString().toUpperCase();
                 FilterStatus filtering = FilterStatus.valueOf(filteritem);
                 filterselection(filtering);
             }
         });
 
-
-        listOfFilterSources();
-        listOfFilterSentiment();
-        listOfFilterGender();
-        listOfFilterLocation();
-        listOfFilterLang();
         // cereatelists();
 
         autosearch.addTextChangedListener(new TextWatcher() {
@@ -122,6 +136,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                                               public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                                                   // adapter.getFilter().filter(s.toString());
+
 
                                                   if (Sourcestatus.contains("lang")) {
                                                       if (TextUtils.isEmpty(s.toString()))
@@ -139,6 +154,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                                                           filter_location.setFilterText(s.toString());
                                                       }
                                                   }
+
                                               }
 
                                               @Override
@@ -147,7 +163,31 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                                               }
                                           }
         );
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(Filtering.this, HomeScreen.class);
+                i.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void filterselection(FilterStatus filtering) {
 
@@ -185,6 +225,17 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.GONE);
         autosearch.setVisibility(View.GONE);
+
+        if (filter_sourceslist.getCount() <= 0) {
+            new Runnable() {
+                @Override
+                public void run() {
+
+                    listOfFilterSources();
+
+                }
+            };
+        }
     }
 
     public void filterSentiment() {
@@ -197,17 +248,40 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_location.setVisibility(View.GONE);
         autosearch.setVisibility(View.GONE);
 
+        if (filter_sentiment.getCount() <= 0) {
+
+            new Runnable() {
+
+                @Override
+                public void run() {
+                    listOfFilterSentiment();
+
+                }
+            };
+        }
+
+
     }
 
     public void filterGender() {
         Log.i("filter by", " gender");
-
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.VISIBLE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.GONE);
         autosearch.setVisibility(View.GONE);
+
+        if (filter_gender.getCount() <= 0) {
+
+            new Runnable() {
+                @Override
+                public void run() {
+                    listOfFilterGender();
+
+                }
+            };
+        }
 
     }
 
@@ -220,17 +294,40 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_language.setVisibility(View.VISIBLE);
         filter_location.setVisibility(View.GONE);
         autosearch.setVisibility(View.VISIBLE);
+
+        if (filter_language.getCount() <= 0) {
+
+            new Runnable() {
+                @Override
+                public void run() {
+                    listOfFilterLang();
+
+                }
+            };
+        }
+
     }
 
     public void filterLocation() {
         Log.i("filter by", " Location");
-
         filter_sourceslist.setVisibility(View.GONE);
         filter_sentiment.setVisibility(View.GONE);
         filter_gender.setVisibility(View.GONE);
         filter_language.setVisibility(View.GONE);
         filter_location.setVisibility(View.VISIBLE);
         autosearch.setVisibility(View.VISIBLE);
+
+        if (filter_location.getCount() <= 0) {
+
+            new Runnable() {
+                @Override
+                public void run() {
+                    listOfFilterLang();
+
+                }
+            };
+        }
+
     }
 
     @Override
@@ -717,6 +814,10 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         listOfFilterLocation();
         listOfFilterLang();
 
+        Intent i = new Intent(Filtering.this, HomeScreen.class);
+        i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
+        startActivity(i);
+
     }
 
 
@@ -726,14 +827,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 return item1.getSourcename().compareToIgnoreCase(item2.getSourcename());
             }
         });
-    }
-
-    public enum FilterStatus {
-        SOURCES,
-        SENTIMENT,
-        GENDER,
-        LANGUAGE,
-        LOCATION
     }
 
     public void sentimentquery() {
@@ -750,7 +843,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 buzzapp.BGENDER.add(genderlist.getSourcename());
     }
 
-    public  void locquery() {
+    public void locquery() {
         buzzapp.BLOCATION.clear();
         for (Listitems loclist : Constants.FILTERLOC)
             if (loclist.isSelectd())
@@ -777,7 +870,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             }
     }
 
-    public  void add_query_data() {
+    public void add_query_data() {
         buzzapp.QueryString.clear();
         buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
         buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
@@ -789,11 +882,23 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
         buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
 
-        Log.i(TAG,"buzzapp.BLOCATION"+ Arrays.asList(buzzapp.BLOCATION));
+        Log.i(TAG, "buzzapp.BLOCATION" + Arrays.asList(buzzapp.BLOCATION));
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        add_query_data();
+    }
 
 
+    public enum FilterStatus {
+        SOURCES,
+        SENTIMENT,
+        GENDER,
+        LANGUAGE,
+        LOCATION
+    }
 
 }

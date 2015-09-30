@@ -66,12 +66,15 @@ public class TwitterLogin extends Activity {
             @Override
             public void onClick(View v) {
 
-                twitter_btn.setVisibility(View.GONE);
-                twitter_auth_lay.setVisibility(View.VISIBLE);
-                if(new ConnectionSettings().isConnected(getApplication()))
-                webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
-                else
-                    Toast.makeText(getApplication(),"Network error",Toast.LENGTH_LONG).show();
+                if (ConnectionSettings.isConnected(TwitterLogin.this)) {
+                    twitter_btn.setVisibility(View.GONE);
+                    twitter_auth_lay.setVisibility(View.VISIBLE);
+
+                    webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
+
+                } else {
+                    Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -86,7 +89,6 @@ public class TwitterLogin extends Activity {
 
             return true;
         }
-
 
         @Override
         public void onPageFinished(WebView view, String url) {
@@ -106,19 +108,13 @@ public class TwitterLogin extends Activity {
                             String[] temp1 = cookivalue.split("=");
                             Log.i(TAG, "session id is" + temp1[1]);
                             new UserSession(TwitterLogin.this).setTSESSION(temp1[1]);
-
                         }
                     }
 
                     if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0)
                         startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
-
                 }
 
-
-              /*  if (view.getOriginalUrl().toString().contains("http://beta.buzzinga.com/profile/"))
-                    webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
-*/
             }
         }
 
@@ -130,14 +126,4 @@ public class TwitterLogin extends Activity {
         }
     }
 
-/*
-    class MyJavaScriptInterface {
-        @JavascriptInterface
-        @SuppressWarnings("unused")
-        public void processHTML(String html) {
-            Log.i(TAG, html);
-
-        }
-    }
-*/
 }

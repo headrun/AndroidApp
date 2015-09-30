@@ -40,11 +40,11 @@
     <init>();
 }
 
--keep class in.headrun.buzzinga.BuzzNotification {
+-keep class in.headrun.buzzinga.BootUpReceiver {
     <init>();
 }
 
--keep class in.headrun.buzzinga.BootUpReceiver {
+-keep class in.headrun.buzzinga.BuzzingaNotification {
     <init>();
 }
 

@@ -72,7 +72,6 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         holder.author = (TextView) itemView.findViewById(R.id.author);
 
         holder.article_icon = (ImageView) itemView.findViewById(R.id.source_icon);
-        holder.title_lay = itemView.findViewById(R.id.title_lay);
         holder.article_lay = itemView.findViewById(R.id.article_lay);
         SearchDetails item = getItem(position);
 
@@ -169,7 +168,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         public TextView author;
         public TextView sentimentcolor;
         public ImageView article_icon;
-        public View title_lay;
+
         public View article_lay;
     }
 

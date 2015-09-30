@@ -5,7 +5,6 @@ android/support/v7/widget/ActionMenuView$LayoutParams.class
 android/support/v7/widget/SearchView.class
 android/support/v7/app/AppCompatActivity.class
 com/android/volley/toolbox/ImageLoader$ImageCache.class
-in/headrun/buzzinga/BuzzNotification$2.class
 android/support/annotation/LayoutRes.class
 android/support/annotation/FractionRes.class
 in/headrun/buzzinga/activities/HomeScreen$1.class
@@ -41,7 +40,6 @@ com/android/volley/Response.class
 android/support/v4/app/FragmentManagerImpl$2.class
 in/headrun/buzzinga/doto/QueryData.class
 android/support/v4/util/SimpleArrayMap.class
-in/headrun/buzzinga/BuzzNotification$1.class
 android/support/v4/util/DebugUtils.class
 in/headrun/buzzinga/BootUpReceiver.class
 android/support/annotation/DrawableRes.class
@@ -78,9 +76,9 @@ android/support/v7/app/ActionBar$OnMenuVisibilityListener.class
 android/support/v4/app/FragmentState.class
 butterknife/OnEditorAction.class
 android/support/v4/app/FragmentActivity$2.class
+in/headrun/buzzinga/BuzzingaNotification.class
 android/support/annotation/NonNull.class
 in/headrun/buzzinga/config/ServerConfig.class
-in/headrun/buzzinga/BuzzNotification$4.class
 android/support/annotation/ColorInt.class
 in/headrun/buzzinga/activities/Filtering$1.class
 android/support/v4/app/FragmentManagerImpl$1.class
@@ -112,6 +110,7 @@ android/support/v4/app/NavUtils.class
 in/headrun/buzzinga/activities/TrackKeyWord.class
 com/google/gson/annotations/Expose.class
 butterknife/OnItemSelected$Callback.class
+in/headrun/buzzinga/activities/Filtering$9.class
 android/support/v4/view/GravityCompat.class
 android/support/v7/app/ActionBarActivity.class
     <init>();
@@ -120,6 +119,7 @@ android/support/annotation/AnimatorRes.class
 android/support/v4/app/FragmentActivity.class
 android/support/v4/widget/MaterialProgressDrawable$1.class
 android/support/v7/widget/LinearLayoutCompat$DividerMode.class
+in/headrun/buzzinga/BuzzingaNotification$3.class
 in/headrun/buzzinga/utils/ConnectionSettings.class
 android/support/annotation/AnimRes.class
 android/support/v4/app/SuperNotCalledException.class
@@ -127,8 +127,8 @@ butterknife/BindDrawable.class
 android/support/v4/widget/SwipeRefreshLayout.class
 android/support/annotation/BinderThread.class
 android/support/v7/app/ActionBar$LayoutParams.class
-com/google/gson/annotations/Until.class
 android/support/annotation/StringDef.class
+com/google/gson/annotations/Until.class
 android/support/v4/widget/DrawerLayout$DrawerListener.class
 butterknife/BindColor.class
 android/support/v4/app/TaskStackBuilder.class
@@ -167,6 +167,7 @@ com/android/volley/RetryPolicy.class
 android/support/v7/app/ActionBar$OnNavigationListener.class
 in/headrun/buzzinga/UserSession.class
 com/google/gson/reflect/TypeToken.class
+in/headrun/buzzinga/BuzzingaNotification$2.class
 in/headrun/buzzinga/doto/Listitems.class
 in/headrun/buzzinga/activities/Filtering$4.class
 in/headrun/buzzinga/BuzzingaRequest.class
@@ -189,8 +190,9 @@ android/support/v4/app/FragmentManager$OnBackStackChangedListener.class
 android/support/annotation/VisibleForTesting.class
 android/support/v7/app/ActionBar$Tab.class
 -keep class in.headrun.buzzinga.activities.HomeScreen { <init>(); }
+-keep class in.headrun.buzzinga.BuzzingaNotification { <init>(); }
 in/headrun/buzzinga/activities/TrackKeyWord$1.class
-in/headrun/buzzinga/BuzzNotification.class
+in/headrun/buzzinga/BuzzingaNotification$1.class
 butterknife/OnClick.class
 in/headrun/buzzinga/activities/HomeScreen$10.class
 in/headrun/buzzinga/activities/ArticleWebDisplay.class
@@ -209,11 +211,11 @@ android/support/v4/app/FragmentManagerImpl.class
 butterknife/BindDimen.class
 android/support/v4/app/BackStackRecord.class
 android/support/v4/app/FragmentManagerImpl$4.class
-in/headrun/buzzinga/BuzzNotification$3.class
 android/support/annotation/MainThread.class
 in/headrun/buzzinga/activities/HomeScreen$3.class
 android/support/annotation/RequiresPermission$Write.class
 android/support/v7/view/CollapsibleActionView.class
+in/headrun/buzzinga/activities/Filtering$8.class
 butterknife/OnPageChange.class
 com/android/volley/Response$Listener.class
 -keep class in.headrun.buzzinga.activities.ArticleWebDisplay { <init>(); }
@@ -221,6 +223,7 @@ in/headrun/buzzinga/utils/SearchListData.class
 in/headrun/buzzinga/utils/FilterTitleAdapter.class
 butterknife/internal/ListenerMethod.class
 android/support/v4/content/ContextCompat.class
+in/headrun/buzzinga/activities/Filtering$5.class
 in/headrun/buzzinga/activities/HomeScreen$6.class
 android/support/v4/app/FragmentManagerState.class
 android/support/v4/view/animation/FastOutSlowInInterpolator.class
@@ -229,9 +232,10 @@ butterknife/OnItemLongClick.class
 android/support/v4/app/ActionBarDrawerToggle.class
 android/support/annotation/CheckResult.class
     void attachBaseContext(android.content.Context);
--keep class in.headrun.buzzinga.BuzzNotification { <init>(); }
+in/headrun/buzzinga/activities/Filtering$7.class
 android/support/v4/app/FragmentManagerImpl$FragmentTag.class
 android/support/annotation/BoolRes.class
 com/android/volley/toolbox/StringRequest.class
 android/support/annotation/IdRes.class
 android/support/v4/app/FragmentManager.class
+in/headrun/buzzinga/activities/Filtering$6.class

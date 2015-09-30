@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by headrun on 22/7/15.
  */
@@ -20,14 +22,18 @@ public class UserSession {
     public static final String LATEST_DATE = "laestdate";
     public static final String TRACK_KEY = "trackkey";
     private static final String PREFER_NAME = "BUZZINGA";
-    private static final String BUZZ_NOTIFY_SEL = "notifysel";
-    private static final boolean IS_NOTIFY_SEL = false;
+    private static final boolean BUZZ_NOTIFY_SEL = false;
+
+    private static final String TACK_SEARCH_KEY = "";
+
+    public static String BTRACKKEY = "";
+    public static String BSources = "";
+
     public String TAG = UserSession.this.getClass().getSimpleName();
     public SharedPreferences pref;
     public Context _context;
     public Editor editor;
     int PRIVATE_MODE = 0;
-
 
     public UserSession(Context context) {
         this._context = context;
@@ -87,13 +93,13 @@ public class UserSession {
     }
 
     public boolean isBUZZ_NOTIFY_SEL() {
-       return  pref.getBoolean(BUZZ_NOTIFY_SEL,false);
+        Log.i(TAG, "BUZZ_NOTIFY_SEL" + pref.getBoolean("BUZZ_NOTIFY_SEL", false));
+        return pref.getBoolean("BUZZ_NOTIFY_SEL", false);
     }
 
     public void setBUZZ_NOTIFY_SEL(boolean notifysel) {
 
-        editor.putBoolean(BUZZ_NOTIFY_SEL,notifysel);
-
+        editor.putBoolean("BUZZ_NOTIFY_SEL", notifysel);
         editor.commit();
     }
 
@@ -109,14 +115,12 @@ public class UserSession {
         editor.putString(TIMEZONE, timezone);
         editor.commit();
         String time_zone = pref.getString(TIMEZONE, "");
-
-
     }
 
     public String getSETUP() {
 
         String setup = pref.getString(SETUP, "null");
-        Log.i(TAG,"setup is"+setup);
+        Log.i(TAG, "setup is" + setup);
         return setup;
     }
 
@@ -145,7 +149,7 @@ public class UserSession {
     }
 
     public String getTrackKey() {
-        String getTrackKey = pref.getString(TRACK_KEY, "0");
+        String getTrackKey = pref.getString(TRACK_KEY, "");
 
         return getTrackKey;
     }
@@ -155,9 +159,47 @@ public class UserSession {
         editor.putString(TRACK_KEY, trackKey);
         editor.commit();
         String query = pref.getString(TRACK_KEY, "");
+    }
 
+    public void setTACK_SEARCH_KEY(String search_key) {
+        editor.putString(TACK_SEARCH_KEY, search_key);
+        editor.commit();
+    }
+
+    public String gettTACK_SEARCH_KEY() {
+        return pref.getString(TACK_SEARCH_KEY, "");
+    }
+
+    public String getFROM_DATE() {
+        return pref.getString(FROM_DATE, "");
 
     }
 
+    public void setFROM_DATE(String fromdate) {
+        editor.putString(FROM_DATE, fromdate);
+        editor.commit();
+    }
+
+    public String getTO_DATE() {
+        return pref.getString(TO_DATE, "");
+    }
+
+    public void setTO_DATE(String todate) {
+        editor.putString(TO_DATE, todate);
+        editor.commit();
+    }
+
+    public void setBTRACKKEY(String btrackkey, ArrayList<String> list) {
+        editor.putString(BTRACKKEY, list.toString());
+        editor.commit();
+    }
+
+    public String getBTRACKKEY() {
+        return pref.getString(BTRACKKEY, "");
+    }
+
+    public void seetBSources(String Bsource, ArrayList<String> list) {
+        editor.putString(BSources, list.toString());
+    }
 }
 

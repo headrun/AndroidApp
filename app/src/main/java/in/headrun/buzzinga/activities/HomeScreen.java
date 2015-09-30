@@ -1,8 +1,10 @@
 package in.headrun.buzzinga.activities;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -45,14 +47,16 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzNotification;
+
 import in.headrun.buzzinga.BuzzingaApplication;
+import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
+import in.headrun.buzzinga.doto.QueryData;
 import in.headrun.buzzinga.doto.SearchDetails;
 import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.ConnectionSettings;
@@ -86,16 +90,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     View filtersource_lay;
     @Bind(R.id.filterdate_lay)
     View filterdate_lay;
-    @Bind(R.id.browsertitle)
-    TextView browsertitle;
+
     @Bind(R.id.filterdate)
     TextView filtersourcebtn;
     @Bind(R.id.webview)
     WebView webview;
     @Bind(R.id.closebtn)
     ImageView closebtn;
-    @Bind(R.id.closebrowser)
-    ImageView closebrowser;
+
     @Bind(R.id.bydatefilter)
     Button bydatefilter;
     @Bind(R.id.listfooter)
@@ -145,11 +147,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         filtersourcebtn.setOnClickListener(this);
         bydatefilter.setOnClickListener(this);
         closebtn.setOnClickListener(this);
-        closebrowser.setOnClickListener(this);
+
         fromdate.setOnClickListener(this);
         todate.setOnClickListener(this);
         filtersource_lay.setOnClickListener(this);
-        filterpanel.setOnClickListener(this);
+
 
         search_adapter = new SearchListData(HomeScreen.this, 1);
 
@@ -160,10 +162,16 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         Listfooter.setVisibility(View.GONE);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.drawable.buzz_logo);
+        actionBar.setLogo(R.drawable.buzz_logo);
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
 
-        actionBar.setTitle(userSession.getTrackKey());
+        if (Constants.SEARCHSTRING != null && !Constants.SEARCHSTRING.isEmpty())
+            actionBar.setTitle(userSession.getTrackKey() + "," + Constants.SEARCHSTRING);
+        else
+            actionBar.setTitle(userSession.getTrackKey());
 
 
         display_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,16 +181,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
                 String geturl = details.getUrl();
 
-               /*
-                content_lay.setVisibility(View.GONE);
-                webview_lay.setVisibility(View.VISIBLE);
-                browsertitle.setText(geturl.toString());
-                webSettings(geturl);
-                */
-                Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
-                i.putExtra("url", geturl);
-                startActivity(i);
-
+                if (ConnectionSettings.isConnected(HomeScreen.this)) {
+                    Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
+                    i.putExtra("url", geturl);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -243,7 +248,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             Constants.listdetails.clear();
             getServer_response(ServerConfig.search);
         } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
+            Log.i(TAG, "clear data for notification");
             Constants.listdetails.clear();
+
             getServer_response(ServerConfig.search);
         } else if (Intent_opt.equals(Constants.Intent_NOTHING)) {
             article_laoding(Constants.listdetails);
@@ -275,14 +282,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
             if (Constants.SEARCHSTRING.trim().length() > 0) {
                 Constants.listdetails.clear();
+                userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
                 buzzapp.BSEARCHKEY.clear();
-
-                buzzapp.BSEARCHKEY.add("\"" + Constants.SEARCHSTRING + "\"");
+                buzzapp.BSEARCHKEY.add(userSession.gettTACK_SEARCH_KEY());
                 HomeScreen.display_data.setAdapter(null);
                 Log.i(TAG, "key word search");
                 getServer_response(ServerConfig.search);
             }
         }
+
     }
 
     public void getdate() {
@@ -352,8 +360,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case R.id.filterdate:
-                content_lay.setVisibility(View.VISIBLE);
+                //ActionBar.hide();
                 filterpanel.setVisibility(View.VISIBLE);
+                content_lay.setVisibility(View.VISIBLE);
                 webview_lay.setVisibility(View.GONE);
                 break;
 
@@ -377,18 +386,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Constants.listdetails.clear();
                 display_data.setAdapter(null);
                 getServer_response(ServerConfig.search);
+                userSession.setFROM_DATE(fromdate.getText().toString().trim());
+                userSession.setTO_DATE(todate.getText().toString().trim());
                 break;
 
-            case R.id.closebrowser:
-                webview_lay.setVisibility(View.GONE);
-                //webview.destroy();
-                progress.setProgress(100);
-                webview.stopLoading();
-                content_lay.setVisibility(View.VISIBLE);
-                break;
 
-            case R.id.filterpanel:
-                break;
 
         }
     }
@@ -400,26 +402,50 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        Log.i(TAG, "userSession.isBUZZ_NOTIFY_SEL()" + userSession.isBUZZ_NOTIFY_SEL());
+        menu.findItem(R.id.action_track).setChecked(userSession.isBUZZ_NOTIFY_SEL());
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_logout)
+        if (id == R.id.action_logout) {
             stringrequest();
-        if (id == R.id.action_track) {
-            if (item.isChecked()) {
-                item.setChecked(false);
-                Constants.BUZZ_NOTIFY = false;
-                stopService(new Intent(getBaseContext(), BuzzNotification.class));
-            } else {
-                item.setChecked(true);
-                Constants.BUZZ_NOTIFY = true;
-                startService(new Intent(getBaseContext(), BuzzNotification.class));
-            }
 
+        } else if (id == R.id.action_track) {
+            Boolean track_check;
+            track_check = userSession.isBUZZ_NOTIFY_SEL();
+            Log.i(TAG, "track_check" + track_check);
+            item.setChecked(track_check);
+            Log.i(TAG, " item.setChecked(track_check)" + item.setChecked(track_check));
+            if (item.isChecked()) {
+                userSession.setBUZZ_NOTIFY_SEL(false);
+                item.setChecked(userSession.isBUZZ_NOTIFY_SEL());
+                Log.i(TAG, "stop the service");
+                // stopService(new Intent(getBaseContext(), BuzzNotification.class));
+
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(context, BuzzingaNotification.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                alarmManager.cancel(pendingIntent);
+            } else {
+                userSession.setBUZZ_NOTIFY_SEL(true);
+                track_check = userSession.isBUZZ_NOTIFY_SEL();
+                item.setChecked(track_check);
+                Log.i(TAG, "false  item.setChecked(track_check)" + item.setChecked(track_check));
+
+                //startService(new Intent(getBaseContext(), BuzzNotification.class));
+
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(context, BuzzingaNotification.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1 * 60 * 1000, pendingIntent);
+                Log.i(TAG, "start the service");
+            }
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -432,7 +458,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                         public ArrayList<SearchDetails> onResponse(String response) {
 
                             Log.d(TAG, "string response is" + response);
-                            stopService(new Intent(HomeScreen.this, BuzzNotification.class));
+
+                            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                            Intent intent = new Intent(context, BuzzingaNotification.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                            alarmManager.cancel(pendingIntent);
+                           // stopService(new Intent(HomeScreen.this, .class));
                             new UserSession(HomeScreen.this).clearsession();
                             startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
                             progress.setVisibility(View.GONE);
@@ -464,22 +495,34 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     public void getServer_response(String URL_request) {
 
+        final String clubbed_query;
         if (new ConnectionSettings().isConnected(getApplication())) {
             if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
                 progress.setVisibility(View.GONE);
             else {
                 progress.setVisibility(View.VISIBLE);
             }
-            final String clubbed_query;
+
             Log.i(TAG, "Config.SwipeLoading" + Config.SwipeLoading);
-            if (Intent_opt.equals(Constants.Intent_NOtify)) {
-                clubbed_query = query.queryform(query.Date_added_toquery());
-            } else if (Config.SwipeLoading) {
+            if (Config.SwipeLoading) {
                 clubbed_query = "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
+            } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
+                buzzapp.QueryString.clear();
+                buzzapp.QueryString.clear();
+                add_query_data();
+                ArrayList<String> date = new ArrayList<String>();
+                date.add("");
+
+                clubbed_query = query.queryform(query.Date_added_toquery());
             } else {
+                Log.i(TAG, "search");
+
                 userSession.set_search_Clubbedquery(query.getquerydata(buzzapp.QueryString));
                 clubbed_query = userSession.get_search_Clubbedquery();
             }
+
+            Intent_opt = "";
+
             userSession.setSETUP(Constants.SETUP);
             userSession.setTIMEZONE(Utils.timezone());
 
@@ -517,7 +560,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     if (error instanceof TimeoutError) {
 
                         Log.i(TAG, "time out error");
-
 
                     } else if (error.networkResponse != null && error.networkResponse.data != null) {
                         byte[] error_resp = error.networkResponse.data;
@@ -610,4 +652,23 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         display_data.onRestoreInstanceState(Constants.state);
     }
 
+    public void add_query_data() {
+        buzzapp.QueryString.clear();
+        buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
+        buzzapp.QueryString.add(new QueryData(Constants.TODATE, buzzapp.BTODATE));
+        buzzapp.QueryString.add(new QueryData(Constants.LOCATION, buzzapp.BLOCATION));
+        buzzapp.QueryString.add(new QueryData(Constants.LANGUAGE, buzzapp.BLANGUAGE));
+        buzzapp.QueryString.add(new QueryData(Constants.SEARCHKEY, buzzapp.BSEARCHKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
+        buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
+        buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        add_query_data();
+    }
 }

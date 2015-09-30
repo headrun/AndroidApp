@@ -22,13 +22,5 @@
         android:title="Logout"
         app:showAsAction="never" />
 
-
-    <!--
-    <item android:id="@+id/action_filter"
-        android:title="@string/Filter"
-        app:showAsAction="always"
-        android:icon="@drawable/action_filter"/>
--->
-
 </menu>
 <!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/menu/main.xml -->

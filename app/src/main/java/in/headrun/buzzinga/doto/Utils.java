@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -63,56 +64,57 @@ public class Utils {
 
     public String getquerydata(ArrayList<QueryData> data) {
 
-        for (QueryData i : data) {
+        Log.i(TAG, "Array query data size is" + data.size());
+        if (data.size() > 0) {
+            for (QueryData i : data) {
+                String item = i.getBkey();
+                Log.i(TAG, "key is" + item);
+                switch (item) {
+                    case Constants.TRACKKEY:
+                        trackkey_query = query_trackkey(i.getBvalue());
+                        Log.i(TAG, "Track key is" + trackkey_query);
 
-            String item = i.getBkey();
+                        break;
+                    case Constants.SEARCHKEY:
+                        search_query = query_searchkey(i.getBvalue());
+                        Log.i(TAG, "Search key is" + search_query);
+                        break;
+                    case Constants.SOURCES:
+                        source_query = query_sources(i.getBvalue());
+                        Log.i(TAG, "Source is" + source_query);
+                        break;
+                    case Constants.GENDER:
+                        gender_query = query_gender(i.getBvalue());
+                        Log.i(TAG, "Gender is" + gender_query);
+                        break;
+                    case Constants.SENTIMENT:
+                        sentiment_query = query_sentiment(i.getBvalue());
+                        Log.i(TAG, "Sentiment is" + sentiment_query);
+                        break;
+                    case Constants.LOCATION:
+                        location_query = query_location(i.getBvalue());
+                        Log.i(TAG, "loc is" + location_query);
+                        break;
+                    case Constants.LANGUAGE:
+                        language_query = query_language(i.getBvalue());
+                        Log.i(TAG, "lang is" + language_query);
+                        break;
+                    case Constants.FROMDATE:
+                        fromdate_query = query_fromdate(i.getBvalue());
+                        Log.i(TAG, "from date is" + fromdate_query);
+                        break;
+                    case Constants.TODATE:
+                        todate_queruy = query_todate(i.getBvalue());
+                        Log.i(TAG, "To date is" + todate_queruy);
+                        break;
 
-            switch (item) {
-                case Constants.TRACKKEY:
-                    trackkey_query = query_trackkey(i.getBvalue());
-                    Log.i(TAG, "Track key is" + trackkey_query);
-
-                    break;
-                case Constants.SEARCHKEY:
-                    search_query = query_searchkey(i.getBvalue());
-                    Log.i(TAG, "Search key is" + search_query);
-                    break;
-                case Constants.SOURCES:
-                    source_query = query_sources(i.getBvalue());
-                    Log.i(TAG, "Source is" + source_query);
-                    break;
-                case Constants.GENDER:
-                    gender_query = query_gender(i.getBvalue());
-                    Log.i(TAG, "Gender is" + gender_query);
-                    break;
-                case Constants.SENTIMENT:
-                    sentiment_query = query_sentiment(i.getBvalue());
-                    Log.i(TAG, "Sentiment is" + sentiment_query);
-                    break;
-                case Constants.LOCATION:
-                    location_query = query_location(i.getBvalue());
-                    Log.i(TAG, "loc is" + location_query);
-                    break;
-                case Constants.LANGUAGE:
-                    language_query = query_language(i.getBvalue());
-                    Log.i(TAG, "lang is" + language_query);
-                    break;
-                case Constants.FROMDATE:
-                    fromdate_query = query_fromdate(i.getBvalue());
-                    Log.i(TAG, "from date is" + fromdate_query);
-                    break;
-                case Constants.TODATE:
-                    todate_queruy = query_todate(i.getBvalue());
-                    Log.i(TAG, "To date is" + todate_queruy);
-                    break;
-
+                }
             }
+
+            return formquery(trackkey_query, search_query, source_query, sentiment_query, gender_query, location_query, language_query, fromdate_query, todate_queruy);
+        } else {
+            return formquery(userSession.getTrackKey(), userSession.gettTACK_SEARCH_KEY(), source_query, sentiment_query, gender_query, location_query, language_query, userSession.getFROM_DATE(), userSession.getTO_DATE());
         }
-
-
-        return formquery(trackkey_query, search_query, source_query, sentiment_query, gender_query, location_query, language_query, fromdate_query, todate_queruy);
-
-
     }
 
     public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
@@ -122,12 +124,13 @@ public class Utils {
         String query = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
 
+        userSession.setClubbedquery(query);
 
-        String countquery = query + " AND dt_added:[" + fromdate + " TO " + todate + "]";
+        String query_date = userSession.getClubbedquery() + " AND dt_added:[" + fromdate + " TO " + todate + "]";
 
-        new UserSession(context).setClubbedquery(query);
+        Log.i(TAG, "query_date" + query_date);
 
-        return queryform(countquery);
+        return queryform(query_date);
 
     }
 
@@ -155,16 +158,19 @@ public class Utils {
     public String query_trackkey(ArrayList<String> item) {
         queryvalue.setLength(0);
         if (item.size() > 0) {
-            String pref = "";
-            for (String tkey : item) {
-                queryvalue.append(pref);
-                pref = " AND ";
-                queryvalue.append(tkey.trim());
+            if (item.get(0) != null) {
+                String pref = "";
+                for (String tkey : item) {
+                    queryvalue.append(pref);
+                    pref = " AND ";
+                    queryvalue.append(tkey.trim());
+                }
+                return queryvalue.toString();
             }
-            return queryvalue.toString();
-        } else
-            return "";
-
+        } else if (!userSession.getTrackKey().equals("0")) {
+            return userSession.getTrackKey();
+        }
+        return "";
 
     }
 
@@ -215,28 +221,28 @@ public class Utils {
             if (sourcetype.contains(Constants.FACEBOOK)) {
                 specific_xtag_length = Constants.facebook_specific_xtags.trim().length();
                 Log.i(TAG, " FACEBOOK specific_xtag_length" + specific_xtag_length);
-                return "("+Constants.source_map.get(sourcetype) +
-                        (specific_xtag_length > 0 ? " AND " + Constants.facebook_specific_xtags : "") +")";
+                return "(" + Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.facebook_specific_xtags : "") + ")";
 
             } else if (sourcetype.contains(Constants.GOOGLEPLUS)) {
                 Log.i(TAG, "google plus");
                 specific_xtag_length = Constants.googleplus_specific_xtags.trim().length();
                 Log.i(TAG, " GOOGLEPLUS specific_xtag_length" + specific_xtag_length);
 
-                return  "("+Constants.source_map.get(sourcetype) +
-                        (specific_xtag_length > 0 ? " AND " + Constants.googleplus_specific_xtags : "") +")";
+                return "(" + Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.googleplus_specific_xtags : "") + ")";
 
             } else if (sourcetype.contains(Constants.TWITTER)) {
                 specific_xtag_length = Constants.twitter_specific_xtags.trim().length();
                 Log.i(TAG, "TWITTER specific_xtag_length" + specific_xtag_length);
-                return "("+Constants.source_map.get(sourcetype) +
-                        (specific_xtag_length > 0 ? " AND " + Constants.twitter_specific_xtags : "")+")";
+                return "(" + Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.twitter_specific_xtags : "") + ")";
             } else if (sourcetype.contains(Constants.FORUMS) || sourcetype.contains(Constants.NEWS) ||
                     sourcetype.contains(Constants.BLOGS)) {
                 specific_xtag_length = Constants.rss_specific_xtags.trim().length();
                 Log.i(TAG, " FORUMS specific_xtag_length" + specific_xtag_length);
-                return "("+ Constants.source_map.get(sourcetype) +
-                        (specific_xtag_length > 0 ? " AND " + Constants.rss_specific_xtags : "")+")";
+                return "(" + Constants.source_map.get(sourcetype) +
+                        (specific_xtag_length > 0 ? " AND " + Constants.rss_specific_xtags : "") + ")";
             } else {
                 return Constants.source_map.get(sourcetype);
             }
@@ -345,7 +351,8 @@ public class Utils {
 
     public String query_fromdate(ArrayList<String> item) {
 
-        if (item.isEmpty() || item.size() <= 0) {
+        Log.i(TAG, "from date item is" + item.size());
+        if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
             Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
             //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -358,7 +365,7 @@ public class Utils {
     }
 
     public String query_todate(ArrayList<String> item) {
-        if (item.size() <= 0) {
+        if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
             Calendar now = Calendar.getInstance();
             return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T23:59:59";
         } else {
@@ -500,7 +507,7 @@ public class Utils {
             ToDate = dateFormat.parse(todate);
             long days = (ToDate.getTime() - FromDate.getTime()) / (24 * 60 * 60 * 1000);
             Log.i(TAG, "days is" + days);
-            if (days > 30)
+            if (Math.abs(days) > 30)
                 Constants.SETUP = "main";
             else
                 Constants.SETUP = "mini";
@@ -517,9 +524,9 @@ public class Utils {
 
         Intent intent = new Intent(context, HomeScreen.class);
         intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
-
+        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setContentTitle(article_count + "New Articles are come")
@@ -527,11 +534,39 @@ public class Utils {
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-
         mNotifyMgr.notify(0, mBuilder.build());
 
     }
 
+
+    public void Buzz_notification(int article_count) {
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.buzz_logo)
+                        .setContentTitle("My notification")
+                        .setAutoCancel(true)
+                        .setContentText(article_count + "New Articles are come");
+
+        Intent resultIntent = new Intent(context, HomeScreen.class);
+        resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(HomeScreen.class);
+        stackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(0, mBuilder.build());
+
+    }
 
     public String timestamp(long ecpoch_value) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -545,7 +580,11 @@ public class Utils {
 
     public String Date_added_toquery() {
 
-        String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + timestamp(Long.parseLong(userSession.getLatestDate())) + " TO " + timestamp(0) + "]";
+        String from_date = timestamp(Long.parseLong(userSession.getLatestDate()));
+        String to_date = timestamp(0);
+        String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + from_date + " TO " + to_date + "]";
+
+        setupdate(from_date, to_date);
 
         return count_clubbed_query;
     }

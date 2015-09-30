@@ -11,13 +11,15 @@ import java.util.Calendar;
 
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.activities.HomeScreen;
+import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.doto.QueryData;
 
 /**
  * Created by headrun on 23/7/15.
  */
 public class FilterByDate extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-    BuzzingaApplication buzzapp=new BuzzingaApplication();
+    BuzzingaApplication buzzapp = new BuzzingaApplication();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -39,15 +41,33 @@ public class FilterByDate extends DialogFragment
         setdate.append(year + "-" + monthe + "-" + day);
 
         if (HomeScreen.DATEFLAG == 0) {
-
             HomeScreen.DATEFLAG = 1;
             HomeScreen.fromdate.setText(setdate.toString());
             buzzapp.BFROMDATE.add(HomeScreen.fromdate.getText().toString());
         } else {
-
             HomeScreen.todate.setText(setdate.toString());
             buzzapp.BTODATE.add(HomeScreen.todate.getText().toString());
         }
+    }
+
+    public void add_query_data() {
+        buzzapp.QueryString.clear();
+        buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
+        buzzapp.QueryString.add(new QueryData(Constants.TODATE, buzzapp.BTODATE));
+        buzzapp.QueryString.add(new QueryData(Constants.LOCATION, buzzapp.BLOCATION));
+        buzzapp.QueryString.add(new QueryData(Constants.LANGUAGE, buzzapp.BLANGUAGE));
+        buzzapp.QueryString.add(new QueryData(Constants.SEARCHKEY, buzzapp.BSEARCHKEY));
+        buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
+        buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
+        buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        add_query_data();
     }
 }
 

@@ -11,7 +11,7 @@ public class BootUpReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Intent myIntent = new Intent(context, BuzzNotification.class);
+        Intent myIntent = new Intent(context, BuzzingaNotification.class);
         context.startService(myIntent);
     }
 }

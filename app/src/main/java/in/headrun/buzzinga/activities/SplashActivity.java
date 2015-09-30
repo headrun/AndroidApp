@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
@@ -69,6 +67,4 @@ public class SplashActivity extends Activity {
         else
             startActivity(new Intent(this, TwitterLogin.class));
     }
-
-
 }
