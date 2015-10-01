@@ -47,7 +47,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
@@ -86,10 +85,19 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     View filterpanel;
     @Bind(R.id.webview_lay)
     View webview_lay;
+
     @Bind(R.id.filtersource_lay)
     View filtersource_lay;
+    @Bind(R.id.filter_image)
+    ImageView filter_image;
+    @Bind(R.id.filtersource)
+    TextView filtersource;
+
     @Bind(R.id.filterdate_lay)
     View filterdate_lay;
+    @Bind(R.id.sort_iamge)
+    ImageView sort_iamge;
+
 
     @Bind(R.id.filterdate)
     TextView filtersourcebtn;
@@ -144,15 +152,20 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
         alertDialog = new AlertDialog.Builder(this).create();
         inflater = this.getLayoutInflater();
-        filtersourcebtn.setOnClickListener(this);
+
         bydatefilter.setOnClickListener(this);
         closebtn.setOnClickListener(this);
 
         fromdate.setOnClickListener(this);
         todate.setOnClickListener(this);
+
         filtersource_lay.setOnClickListener(this);
+        filter_image.setOnClickListener(this);
+        filtersource.setOnClickListener(this);
 
-
+        filterdate_lay.setOnClickListener(this);
+        sort_iamge.setOnClickListener(this);
+        filtersourcebtn.setOnClickListener(this);
         search_adapter = new SearchListData(HomeScreen.this, 1);
 
         content_lay.setVisibility(View.GONE);
@@ -359,8 +372,28 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 startActivity(new Intent(this, Filtering.class));
                 break;
 
+            case R.id.filter_image:
+                startActivity(new Intent(this, Filtering.class));
+                break;
+
+            case R.id.filtersource:
+                startActivity(new Intent(this, Filtering.class));
+                break;
+
+
             case R.id.filterdate:
                 //ActionBar.hide();
+                filterpanel.setVisibility(View.VISIBLE);
+                content_lay.setVisibility(View.VISIBLE);
+                webview_lay.setVisibility(View.GONE);
+                break;
+            case R.id.sort_iamge:
+                filterpanel.setVisibility(View.VISIBLE);
+                content_lay.setVisibility(View.VISIBLE);
+                webview_lay.setVisibility(View.GONE);
+                break;
+
+            case R.id.filterdate_lay:
                 filterpanel.setVisibility(View.VISIBLE);
                 content_lay.setVisibility(View.VISIBLE);
                 webview_lay.setVisibility(View.GONE);
@@ -389,7 +422,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 userSession.setFROM_DATE(fromdate.getText().toString().trim());
                 userSession.setTO_DATE(todate.getText().toString().trim());
                 break;
-
 
 
         }
@@ -441,7 +473,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 Intent intent = new Intent(context, BuzzingaNotification.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1 * 60 * 1000, pendingIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 5 * 60 * 1000, pendingIntent);
                 Log.i(TAG, "start the service");
             }
         }
@@ -463,7 +495,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                             Intent intent = new Intent(context, BuzzingaNotification.class);
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
                             alarmManager.cancel(pendingIntent);
-                           // stopService(new Intent(HomeScreen.this, .class));
+                            // stopService(new Intent(HomeScreen.this, .class));
                             new UserSession(HomeScreen.this).clearsession();
                             startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
                             progress.setVisibility(View.GONE);
