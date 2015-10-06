@@ -25,6 +25,7 @@ import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.QueryData;
+import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.ConnectionSettings;
 
 /**
@@ -42,6 +43,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     ProgressBar trak_progress;
     UserSession usersession;
     BuzzingaApplication buzzapp;
+    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         usersession = new UserSession(getApplication());
         buzzapp = new BuzzingaApplication();
-
-        if (usersession.getTrackKey().length()<0) {
+        utils = new Utils(TrackKeyWord.this);
+        if (usersession.getTrackKey().length() < 0) {
             Trackkeyword.setText(usersession.getTrackKey());
         }
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -84,7 +86,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         hideKeyboard();
 
-        if(ConnectionSettings.isConnected(TrackKeyWord.this)) {
+        if (ConnectionSettings.isConnected(TrackKeyWord.this)) {
 
             String track = Trackkeyword.getText().toString().trim().toString();
             ArrayList<String> track_word = new ArrayList<>();
@@ -95,13 +97,11 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
                 track_word.add(track);
                 trak_progress.setVisibility(View.VISIBLE);
                 usersession.setTrackKey(track_word.get(0));
-                //usersession.setBTRACKKEY("BTACK_KEY", track_word.get(0));
 
-                clear_all_data();
 
-                Log.i(TAG, "track key is" + usersession.getTrackKey());
+                utils.clear_all_data();
                 new BuzzingaApplication().BTRACKKEY.add(usersession.getTrackKey());
-                add_query_data();
+                utils.add_query_data();
                 Constants.listdetails.clear();
 
                 Intent intent = new Intent(getApplication(), HomeScreen.class);
@@ -111,7 +111,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
             } else
                 Toast.makeText(this, "Enter your brand", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
         }
     }
@@ -125,36 +125,9 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-    public void clear_all_data() {
-        Constants.SEARCHSTRING = "";
-        buzzapp.BTRACKKEY.clear();
-        buzzapp.BSEARCHKEY.clear();
-        buzzapp.BTODATE.clear();
-        buzzapp.BFROMDATE.clear();
-        buzzapp.BLOCATION.clear();
-        buzzapp.BLANGUAGE.clear();
-        buzzapp.BSOURCES.clear();
-        buzzapp.BGENDER.clear();
-        buzzapp.BSENTIMENT.clear();
-    }
-
-    public void add_query_data() {
-        buzzapp.QueryString.clear();
-        buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
-        buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
-        buzzapp.QueryString.add(new QueryData(Constants.TODATE, buzzapp.BTODATE));
-        buzzapp.QueryString.add(new QueryData(Constants.LOCATION, buzzapp.BLOCATION));
-        buzzapp.QueryString.add(new QueryData(Constants.LANGUAGE, buzzapp.BLANGUAGE));
-        buzzapp.QueryString.add(new QueryData(Constants.SEARCHKEY, buzzapp.BSEARCHKEY));
-        buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
-        buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
-        buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        add_query_data();
+        utils.add_query_data();
     }
 }

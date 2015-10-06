@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.headrun.buzzinga.doto.Listitems;
+import in.headrun.buzzinga.doto.QueryData;
 import in.headrun.buzzinga.doto.SearchDetails;
 
 /**
@@ -80,6 +81,16 @@ public class Constants {
     public static ArrayList<Listitems> FILTERLOC = new ArrayList<Listitems>();
     public static ArrayList<Listitems> FILTERLANG = new ArrayList<Listitems>();
 
+    public static ArrayList<String> BTRACKKEY = new ArrayList<>();
+    public static ArrayList<String> BSEARCHKEY = new ArrayList<>();
+    public static ArrayList<String> BSOURCES = new ArrayList<>();
+    public static ArrayList<String> BGENDER = new ArrayList<>();
+    public static ArrayList<String> BSENTIMENT = new ArrayList<>();
+    public static ArrayList<String> BLOCATION = new ArrayList<>();
+    public static ArrayList<String> BLANGUAGE = new ArrayList<>();
+    public static ArrayList<String> BFROMDATE = new ArrayList<>();
+    public static ArrayList<String> BTODATE = new ArrayList<>();
+    public static ArrayList<QueryData> QueryString = new ArrayList<QueryData>();
 
 
     public static ArrayList<String> sourceslist = new ArrayList<>();

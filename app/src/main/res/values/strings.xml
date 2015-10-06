@@ -55,6 +55,6 @@
     <string name="search">Search By Keyword</string>
     <string name="loading_text">Loading</string>
     <string name="track">Track</string>
-    <string name="keyword">Track your Brand</string>
+    <string name="keyword">Track your Brand Ex:iphone</string>
 
 </resources>

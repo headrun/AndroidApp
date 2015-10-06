@@ -50,13 +50,18 @@ public class BuzzingaRequest {
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-           mRequestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
         }
         return mRequestQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
+    }
+
+    public void cancelRequestQueue(Object req) {
+        if (mRequestQueue != null)
+            getRequestQueue().cancelAll(req);
     }
 
     public ImageLoader getImageLoader() {

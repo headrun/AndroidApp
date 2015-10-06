@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:text="source"
         android:textColor="#4baadf" />
 </RelativeLayout>
-<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/source_titles.xml -->
+<!-- From: file:/home/headrun/Documents/BuzzingaApp/AndroidApp/app/src/main/res/layout/source_titles.xml -->

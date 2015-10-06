@@ -50,10 +50,13 @@ public class BuzzingaNotification extends BroadcastReceiver {
                                 JSONObject jobj_reult = new JSONObject(response);
                                 if (jobj_reult.optInt("error") == 0) {
                                     JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
-                                    int article_count = json_result.optInt("count");
-                                    if (article_count > 0)
-                                        //new Utils(context).Buzz_notify(article_count);
+                                    long article_count = json_result.optInt("count");
+
+                                    try {
                                         new Utils(context).Buzz_notification(article_count);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -79,8 +82,6 @@ public class BuzzingaNotification extends BroadcastReceiver {
                     return params;
                 }
 
-                ;
-
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<String, String>();
@@ -100,8 +101,6 @@ public class BuzzingaNotification extends BroadcastReceiver {
 
                     return headers;
                 }
-
-                ;
 
             };
             stringRequest.setTag(TAG);

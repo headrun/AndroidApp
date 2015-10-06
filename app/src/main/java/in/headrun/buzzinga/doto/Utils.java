@@ -53,6 +53,7 @@ public class Utils {
         Calendar mCalendar = new GregorianCalendar();
         TimeZone mTimeZone = mCalendar.getTimeZone();
         int mGMTOffset = mTimeZone.getRawOffset();
+        Log.i("TAG", "GMToffset" + mGMTOffset);
         long tz = TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS);
 
         if (tz > 0)
@@ -60,7 +61,6 @@ public class Utils {
         else
             return String.valueOf(Math.abs(tz));
     }
-
 
     public String getquerydata(ArrayList<QueryData> data) {
 
@@ -112,9 +112,10 @@ public class Utils {
             }
 
             return formquery(trackkey_query, search_query, source_query, sentiment_query, gender_query, location_query, language_query, fromdate_query, todate_queruy);
-        } else {
-            return formquery(userSession.getTrackKey(), userSession.gettTACK_SEARCH_KEY(), source_query, sentiment_query, gender_query, location_query, language_query, userSession.getFROM_DATE(), userSession.getTO_DATE());
         }
+        Log.i(TAG, "no values for search");
+        return "";
+
     }
 
     public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
@@ -255,8 +256,8 @@ public class Utils {
 
         String pref = "";
 
-        if (buzzapp.BLOCATION.size() > 0) {
-            Log.i(TAG, "loc size is query_loc_source" + buzzapp.BLOCATION.size());
+        if (BuzzingaApplication.BLOCATION.size() > 0) {
+            Log.i(TAG, "loc size is query_loc_source" + BuzzingaApplication.BLOCATION.size());
 
             Constants.rss_specific_xtags = "";
             Constants.twitter_specific_xtags = "";
@@ -268,8 +269,8 @@ public class Utils {
             Constants.googleplus_specific_xtags += "(";
             Constants.facebook_specific_xtags += "(";
 
-            for (int i = 0; i < buzzapp.BLOCATION.size(); i++) {
-                String loc = buzzapp.BLOCATION.get(i).toLowerCase();
+            for (int i = 0; i < BuzzingaApplication.BLOCATION.size(); i++) {
+                String loc = BuzzingaApplication.BLOCATION.get(i).toLowerCase();
 
                 Log.i(TAG, "loc valus is" + loc);
 
@@ -319,7 +320,7 @@ public class Utils {
                 for (Map.Entry<String, String> gender_xtag : Constants.gender_map.entrySet()) {
                     queryvalue.append(pref);
                     pref = " OR ";
-                    queryvalue.append((String) Constants.source_map.get(gender_xtag));
+                    queryvalue.append(Constants.source_map.get(gender_xtag));
                 }
                 return " AND (" + queryvalue.toString() + ")";
             } else if (Math.abs(gen_value) == 1)
@@ -350,26 +351,36 @@ public class Utils {
     }
 
     public String query_fromdate(ArrayList<String> item) {
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
         Log.i(TAG, "from date item is" + item.size());
+        Calendar now = Calendar.getInstance();
+        long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
+        now.setTimeInMillis(offset);
+        Log.i(TAG, "time mills" + offset);
         if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
-            Calendar now = Calendar.getInstance();
             now.add(Calendar.DATE, -30);
-            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T00:00:00";
-
+            //return String.format(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + sdf.format(now.getTime()));
+            return sdf.format(now.getTime());
         } else {
-            return item.get(0) + "T00:00:00";
+            return item.get(0) + sdf1.format(now.getTime());
         }
 
     }
 
     public String query_todate(ArrayList<String> item) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
+        Calendar now = Calendar.getInstance();
+        long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
+        now.setTimeInMillis(offset);
+        Log.i(TAG, "time mills" + offset);
         if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
-            Calendar now = Calendar.getInstance();
-            return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + "T23:59:59";
+            //return now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + sdf.format(now.getTime());
+            return sdf.format(now.getTime());
         } else {
-            return item.get(0) + "T23:59:59";
+
+            return item.get(0) + sdf1.format(now.getTime());
         }
     }
 
@@ -520,33 +531,15 @@ public class Utils {
 
     }
 
-    public void Buzz_notify(int article_count) {
 
-        Intent intent = new Intent(context, HomeScreen.class);
-        intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setContentTitle(article_count + "New Articles are come")
-                .setSmallIcon(R.drawable.buzz_logo)
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)
-                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-        mNotifyMgr.notify(0, mBuilder.build());
-
-    }
-
-
-    public void Buzz_notification(int article_count) {
+    public void Buzz_notification(long article_count) throws Exception {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.buzz_logo)
                         .setContentTitle("My notification")
                         .setAutoCancel(true)
-                        .setContentText(article_count + "New Articles are come");
+                        .setContentText(article_count + "New Articles are come \t\t"+userSession.getTrackKey());
 
         Intent resultIntent = new Intent(context, HomeScreen.class);
         resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
@@ -572,9 +565,17 @@ public class Utils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         if (ecpoch_value != 0) {
             long millis = ecpoch_value * 1000;
-            return sdf.format(new Date(millis));
-        } else
-            return sdf.format(new Date());
+            Calendar now = Calendar.getInstance();
+            now.setTimeInMillis(millis);
+            long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
+            now.setTimeInMillis(offset);
+            return sdf.format(now.getTime());
+        } else {
+            Calendar now = Calendar.getInstance();
+            long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
+            now.setTimeInMillis(offset);
+            return sdf.format(now.getTime());
+        }
 
     }
 
@@ -583,9 +584,35 @@ public class Utils {
         String from_date = timestamp(Long.parseLong(userSession.getLatestDate()));
         String to_date = timestamp(0);
         String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + from_date + " TO " + to_date + "]";
-
         setupdate(from_date, to_date);
-
         return count_clubbed_query;
+    }
+
+
+    public void clear_all_data() {
+        Constants.SEARCHSTRING = "";
+        Constants.BTRACKKEY.clear();
+        Constants.BSEARCHKEY.clear();
+        Constants.BTODATE.clear();
+        Constants.BFROMDATE.clear();
+        Constants.BLOCATION.clear();
+        Constants.BLANGUAGE.clear();
+        Constants.BSOURCES.clear();
+        Constants.BGENDER.clear();
+        Constants.BSENTIMENT.clear();
+    }
+
+    public void add_query_data() {
+        Constants.QueryString.clear();
+        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
+        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
+        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
+        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
+        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
+        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
+        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
+        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
+        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
+
     }
 }

@@ -56,10 +56,10 @@ public class FilterTitleAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.source_titles, null);
             holder = new TitleHolder();
 
-            holder.title = (TextView) convertView.findViewById(R.id.texttilte);
+            TitleHolder.title = (TextView) convertView.findViewById(R.id.texttilte);
             // holder.titleimage = (ImageView) convertView.findViewById(R.id.titleimage);
 
-            holder.title.setText(titles[position]);
+            TitleHolder.title.setText(titles[position]);
 
             //  holder.titleimage.setImageResource(images.getResourceId(position,-1));
             //  holder.titleimage.setTag(titles[position]);

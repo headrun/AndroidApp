@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_androidapp" default="compile.module.androidapp">
+  <dirname property="module.androidapp.basedir" file="${ant.file.module_androidapp}"/>
+  
+  <property name="module.jdk.home.androidapp" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.androidapp" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.androidapp" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.androidapp" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="androidapp.output.dir" value="${module.androidapp.basedir}/build/classes/production/AndroidApp"/>
+  <property name="androidapp.testoutput.dir" value="${module.androidapp.basedir}/build/classes/test/AndroidApp"/>
+  
+  <path id="androidapp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="androidapp.module.production.classpath">
+    <path refid="${module.jdk.classpath.androidapp}"/>
+  </path>
+  
+  <path id="androidapp.runtime.production.module.classpath">
+    <pathelement location="${androidapp.output.dir}"/>
+  </path>
+  
+  <path id="androidapp.module.classpath">
+    <path refid="${module.jdk.classpath.androidapp}"/>
+    <pathelement location="${androidapp.output.dir}"/>
+  </path>
+  
+  <path id="androidapp.runtime.module.classpath">
+    <pathelement location="${androidapp.testoutput.dir}"/>
+    <pathelement location="${androidapp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.androidapp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.androidapp">
+    <patternset refid="excluded.from.module.androidapp"/>
+  </patternset>
+  
+  
+  <target name="compile.module.androidapp" depends="compile.module.androidapp.production,compile.module.androidapp.tests" description="Compile module AndroidApp"/>
+  
+  <target name="compile.module.androidapp.production" depends="register.custom.compilers" description="Compile module AndroidApp; production classes"/>
+  
+  <target name="compile.module.androidapp.tests" depends="register.custom.compilers,compile.module.androidapp.production" description="compile module AndroidApp; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.androidapp" description="cleanup module">
+    <delete dir="${androidapp.output.dir}"/>
+    <delete dir="${androidapp.testoutput.dir}"/>
+  </target>
+</project>

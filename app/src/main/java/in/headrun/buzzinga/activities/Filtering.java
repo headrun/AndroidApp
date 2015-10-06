@@ -32,6 +32,7 @@ import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
 import in.headrun.buzzinga.doto.QueryData;
+import in.headrun.buzzinga.doto.Utils;
 import in.headrun.buzzinga.utils.FilterTitleAdapter;
 import in.headrun.buzzinga.utils.ListViewAdapter;
 
@@ -68,6 +69,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
 
     FilterTitleAdapter titleadapter;
+    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.buzz_logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Filters");
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         listOfFilterSources();
         listOfFilterSentiment();
@@ -87,6 +91,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         searchmanager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         buzzapp = new BuzzingaApplication();
+        utils=new Utils(Filtering.this);
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
@@ -99,16 +104,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
         filter_titles.setAdapter(titleadapter);
-      /*  filter_titles.performItemClick(
-                filter_titles.getAdapter().getView(0, null, null),
-                0,
-                filter_titles.getAdapter().getItemId(0));
-      */
-
-        // filter_titles.getChildAt(0).setBackgroundColor(Color.parseColor("#d62a2a2a"));
-        //filter_titles.setSelection(0);
-        //filter_titles.getAdapter().getView(0,null,null).setBackgroundColor(Color.parseColor("#FFCFCACA"));
-
 
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,7 +119,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-        // cereatelists();
 
         autosearch.addTextChangedListener(new TextWatcher() {
                                               @Override
@@ -169,7 +163,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
@@ -358,6 +352,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     public void listOfFilterSources() {
         Constants.FILTERSOURSOURE.clear();
 
+        Log.i(TAG,"get filter source data");
+
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSOURSOURE.add(new Listitems(entry.getKey(), value, source_check(value)));
@@ -371,7 +367,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void listOfFilterSentiment() {
         Constants.FILTERSENTIMENT.clear();
-
+        Log.i(TAG, "get filter sentiment data");
         for (Map.Entry<String, String> entry : Constants.sentiment_map.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, sentiment_check(value)));
@@ -384,7 +380,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void listOfFilterGender() {
         Constants.FILTERGENDER.clear();
-
+        Log.i(TAG, "get filter gender data");
         for (Map.Entry<String, String> gendervalue : Constants.gender_map.entrySet()) {
             String value = gendervalue.getKey().toUpperCase();
             Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, gender_check(value)));
@@ -748,9 +744,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean sentiment_check(String sentiment) {
-        Log.i("Log_tag", "BSENTIMENT size is" + buzzapp.BSENTIMENT.size() + "sentiment is" + sentiment);
-        if (buzzapp.BSENTIMENT.size() > 0)
-            if (buzzapp.BSENTIMENT.contains(sentiment)) {
+        Log.i("Log_tag", "BSENTIMENT size is" + Constants.BSENTIMENT.size() + "sentiment is" + sentiment);
+        if (Constants.BSENTIMENT.size() > 0)
+            if (Constants.BSENTIMENT.contains(sentiment)) {
                 Log.i("Log_tag", "seniment  is" + true);
                 return true;
             }
@@ -758,9 +754,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean source_check(String source) {
-        Log.i("Log_tag", "BSOURCES size is" + buzzapp.BSOURCES.size() + "source is" + source);
-        if (buzzapp.BSOURCES.size() > 0)
-            if (buzzapp.BSOURCES.contains(source)) {
+        Log.i("Log_tag", "BSOURCES size is" + Constants.BSOURCES.size() + "source is" + source);
+        if (Constants.BSOURCES.size() > 0)
+            if (Constants.BSOURCES.contains(source)) {
                 Log.i("Log_tag", "source  is" + true);
                 return true;
             }
@@ -768,9 +764,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean gender_check(String gender) {
-        Log.i("Log_tag", "BGENDER size is" + buzzapp.BGENDER.size() + "gender is" + gender);
-        if (buzzapp.BGENDER.size() > 0)
-            if (buzzapp.BGENDER.contains(gender)) {
+        Log.i("Log_tag", "BGENDER size is" + Constants.BGENDER.size() + "gender is" + gender);
+        if (Constants.BGENDER.size() > 0)
+            if (Constants.BGENDER.contains(gender)) {
                 Log.i("Log_tag", "gender is" + true);
                 return true;
             }
@@ -778,9 +774,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean lang_check(String lang) {
-        Log.i("Log_tag", "BLANGUAGE size is" + buzzapp.BLANGUAGE.size() + " langs aree " + buzzapp.BLANGUAGE.toString() + "lang is" + lang);
-        if (buzzapp.BLANGUAGE.size() > 0)
-            if (buzzapp.BLANGUAGE.contains(lang)) {
+        Log.i("Log_tag", "BLANGUAGE size is" + Constants.BLANGUAGE.size() + " langs aree " + Constants.BLANGUAGE.toString() + "lang is" + lang);
+        if (Constants.BLANGUAGE.size() > 0)
+            if (Constants.BLANGUAGE.contains(lang)) {
                 Log.i("Log_tag", "lang_check  is" + true);
                 return true;
 
@@ -789,9 +785,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public boolean loc_check(String loc) {
-        Log.i("Log_tag", "BLOCATION size is" + buzzapp.BLOCATION.size() + "locs are" + buzzapp.BLOCATION.toString() + "loc is" + loc);
-        if (buzzapp.BLOCATION.size() > 0)
-            if (buzzapp.BLOCATION.contains(loc)) {
+        Log.i("Log_tag", "BLOCATION size is" + Constants.BLOCATION.size() + "locs are" + Constants.BLOCATION.toString() + "loc is" + loc);
+        if (Constants.BLOCATION.size() > 0)
+            if (Constants.BLOCATION.contains(loc)) {
                 Log.i("Log_tag", "loc_check is" + true);
                 return true;
             }
@@ -800,13 +796,13 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public void clearfilters() {
 
-        buzzapp.BSOURCES.clear();
-        buzzapp.BSENTIMENT.clear();
-        buzzapp.BGENDER.clear();
-        buzzapp.BLANGUAGE.clear();
-        buzzapp.BLOCATION.clear();
+        Constants.BSOURCES.clear();
+        Constants.BSENTIMENT.clear();
+        Constants.BGENDER.clear();
+        Constants.BLANGUAGE.clear();
+        Constants.BLOCATION.clear();
 
-        Log.i(TAG, "loc size is" + buzzapp.BLOCATION.size() + "\n lang is" + buzzapp.BLANGUAGE.size());
+        Log.i(TAG, "loc size is" + Constants.BLOCATION.size() + "\n lang is" + Constants.BLANGUAGE.size());
 
         listOfFilterSources();
         listOfFilterSentiment();
@@ -830,66 +826,66 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     public void sentimentquery() {
-        buzzapp.BSENTIMENT.clear();
+        Constants.BSENTIMENT.clear();
         for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
             if (sentimentlist.isSelectd())
-                buzzapp.BSENTIMENT.add(sentimentlist.getSourcename());
+                Constants.BSENTIMENT.add(sentimentlist.getSourcename());
     }
 
     public void genderquery() {
-        buzzapp.BGENDER.clear();
+        Constants.BGENDER.clear();
         for (Listitems genderlist : Constants.FILTERGENDER)
             if (genderlist.isSelectd())
-                buzzapp.BGENDER.add(genderlist.getSourcename());
+                Constants.BGENDER.add(genderlist.getSourcename());
     }
 
     public void locquery() {
-        buzzapp.BLOCATION.clear();
+        Constants.BLOCATION.clear();
         for (Listitems loclist : Constants.FILTERLOC)
             if (loclist.isSelectd())
-                buzzapp.BLOCATION.add(loclist.getXtag());
+                Constants.BLOCATION.add(loclist.getXtag());
 
     }
 
     public void langquery() {
 
-        buzzapp.BLANGUAGE.clear();
+        Constants.BLANGUAGE.clear();
         for (Listitems langlist : Constants.FILTERLANG)
             if (langlist.isSelectd())
-                buzzapp.BLANGUAGE.add(langlist.getXtag());
+                Constants.BLANGUAGE.add(langlist.getXtag());
 
     }
 
     public void sourcequery() {
 
-        buzzapp.BSOURCES.clear();
+        Constants.BSOURCES.clear();
         for (Listitems sourceslist : Constants.FILTERSOURSOURE)
             if (sourceslist.isSelectd()) {
-                buzzapp.BSOURCES.add(sourceslist.getSourcename());
+                Constants.BSOURCES.add(sourceslist.getSourcename());
                 Log.i(TAG, "selected source is" + sourceslist.getSourcename());
             }
     }
 
     public void add_query_data() {
-        buzzapp.QueryString.clear();
-        buzzapp.QueryString.add(new QueryData(Constants.TRACKKEY, buzzapp.BTRACKKEY));
-        buzzapp.QueryString.add(new QueryData(Constants.FROMDATE, buzzapp.BFROMDATE));
-        buzzapp.QueryString.add(new QueryData(Constants.TODATE, buzzapp.BTODATE));
-        buzzapp.QueryString.add(new QueryData(Constants.LOCATION, buzzapp.BLOCATION));
-        buzzapp.QueryString.add(new QueryData(Constants.LANGUAGE, buzzapp.BLANGUAGE));
-        buzzapp.QueryString.add(new QueryData(Constants.SEARCHKEY, buzzapp.BSEARCHKEY));
-        buzzapp.QueryString.add(new QueryData(Constants.SOURCES, buzzapp.BSOURCES));
-        buzzapp.QueryString.add(new QueryData(Constants.GENDER, buzzapp.BGENDER));
-        buzzapp.QueryString.add(new QueryData(Constants.SENTIMENT, buzzapp.BSENTIMENT));
+        Constants.QueryString.clear();
+        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
+        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
+        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
+        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
+        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
+        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
+        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
+        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
+        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
 
-        Log.i(TAG, "buzzapp.BLOCATION" + Arrays.asList(buzzapp.BLOCATION));
+        Log.i(TAG, "buzzapp.BLOCATION" + Arrays.asList(Constants.BLOCATION));
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        add_query_data();
+        utils.add_query_data();
     }
 
 

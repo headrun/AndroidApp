@@ -57,9 +57,10 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         return count;
     }
 
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.search_data, parent, false);
 
         Log.i(TAG, "searchDetails view");
@@ -79,7 +80,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         if (item.getTitle().length() > 0)
             holder.title.setText(item.getTitle());
         else {
-            Log.i(TAG, "articley type" + item.getArticle_type());
+            // Log.i(TAG, "articley type" + item.getArticle_type());
             if (item.getArticle_type() != null)
                 if (item.getArticle_type().equals(Constants.TWITTER))
                     holder.title.setText("@" + item.getAuthor());
@@ -92,22 +93,24 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
             holder.text.setVisibility(View.VISIBLE);
         }
 
-        if (item.getAuthor() != null)
+        if (item.getAuthor() != null && item.getAuthor().toString().trim().length() > 0) {
             holder.author.setText("By - " + item.getAuthor());
-
+        } else {
+            holder.author.setText("");
+        }
 
         int icon = source_icon(item.article_type);
         if (icon != 0)
             holder.article_icon.setImageResource(icon);
 
-        long seconds = Long.parseLong(item.getArticledate());
-        Log.i(TAG, "article time is" + seconds);
+            long seconds = Long.parseLong(item.getArticledate());
+        // Log.i(TAG, "article time is" + seconds);
         long millis = seconds * 1000;
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
         holder.articledate.setText(sdf.format(date));
 
-        Log.i(TAG, "epoch time is\t" + item.getArticledate() + "\ntime is\t" + sdf.format(date));
+        // Log.i(TAG, "epoch time is\t" + item.getArticledate() + "\ntime is\t" + sdf.format(date));
 
         holder.article_lay.setBackgroundResource(applySentimentColor(item.getSentiment()));
 

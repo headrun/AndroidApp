@@ -75,8 +75,9 @@
         android:gravity="left"
         android:padding="5dp"
         android:text="BY-sujith"
-        android:textColor="#f0ad4e" />
+        android:textColor="#f0ad4e"
+        />
 
 </RelativeLayout>
 
-<!-- From: file:/home/headrun/Documents/buzz/AndroidApp/app/src/main/res/layout/search_data.xml -->
+<!-- From: file:/home/headrun/Documents/BuzzingaApp/AndroidApp/app/src/main/res/layout/search_data.xml -->
