@@ -63,7 +63,6 @@ public class SplashActivity extends Activity {
 
     }
 
-
     public void checkSession() {
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
@@ -72,14 +71,11 @@ public class SplashActivity extends Activity {
             if (userSession.getTrackKey().trim().length() < 0 || userSession.getTrackKey() == null)
                 startActivity(new Intent(this, TrackKeyWord.class));
             else {
-                utils.clear_all_data();
-
                 Log.i(TAG, "track key is" + userSession.getTrackKey());
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
                 utils.add_query_data();
-                Constants.listdetails.clear();
                 Intent intent = new Intent(getApplication(), HomeScreen.class);
-                intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
+                intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
                 startActivity(intent);
             }
         else

@@ -1,13 +1,18 @@
 package in.headrun.buzzinga.doto;
 
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.display.DisplayManager;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.view.Display;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -534,31 +540,38 @@ public class Utils {
 
     public void Buzz_notification(long article_count) throws Exception {
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.buzz_logo)
-                        .setContentTitle("My notification")
-                        .setAutoCancel(true)
-                        .setContentText(article_count + "New Articles are come \t\t"+userSession.getTrackKey());
+        if (screendisplay()) {
+            HomeScreen.newarticle.setText(article_count + " New Articles");
+            HomeScreen.newarticle.setVisibility(View.VISIBLE);
+            Log.i(TAG, "article count" + article_count);
+        } else {
+            Log.i(TAG, "Buzz Notification article count" + article_count);
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.drawable.buzz_logo)
+                            .setContentTitle("BUzzinga Alert")
+                            .setAutoCancel(true)
+                            .setContentText(article_count + "New Articles are come \t" + userSession.getTrackKey());
 
-        Intent resultIntent = new Intent(context, HomeScreen.class);
-        resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
+            Intent resultIntent = new Intent(context, HomeScreen.class);
+            resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOtify);
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(HomeScreen.class);
-        stackBuilder.addNextIntent(resultIntent);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addParentStack(HomeScreen.class);
+            stackBuilder.addNextIntent(resultIntent);
 
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(
+                            0,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
-        mNotificationManager.notify(0, mBuilder.build());
+            mNotificationManager.notify(0, mBuilder.build());
 
+        }
     }
 
     public String timestamp(long ecpoch_value) {
@@ -567,11 +580,13 @@ public class Utils {
             long millis = ecpoch_value * 1000;
             Calendar now = Calendar.getInstance();
             now.setTimeInMillis(millis);
+            Log.i(TAG, "article time is" + now.getTime());
             long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
             now.setTimeInMillis(offset);
             return sdf.format(now.getTime());
         } else {
             Calendar now = Calendar.getInstance();
+            Log.i(TAG, "current time is" + now.getTime());
             long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
             now.setTimeInMillis(offset);
             return sdf.format(now.getTime());
@@ -614,5 +629,28 @@ public class Utils {
         Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
         Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
 
+    }
+
+
+    public boolean screendisplay() {
+
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> services = activityManager.getRunningTasks(Integer.MAX_VALUE);
+        boolean isActivityFound = false;
+
+        for (ActivityManager.RunningTaskInfo i : services)
+            if (services.get(0).topActivity.getPackageName().toString().
+                    equalsIgnoreCase(context.getPackageName().toString())) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH) {
+                    isActivityFound = pm.isInteractive();
+                } else {
+                    isActivityFound = pm.isScreenOn();
+                }
+                Log.i(TAG, "is screen on" + isActivityFound);
+                return isActivityFound;
+            }
+        Log.i(TAG, "is screen on" + isActivityFound);
+        return isActivityFound;
     }
 }

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Set;
 
+import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchDetails;
 
@@ -17,7 +18,7 @@ public class JsonData {
 
 
     public ArrayList<SearchDetails> swipelist;
-    String title, url, text, date, author, sentiment, gender, article_type;
+    String title, url, text, date, author, sentiment, gender, article_type,article_id;
     String TAG = JsonData.this.getClass().getSimpleName();
     int article_count=0;
 
@@ -26,7 +27,6 @@ public class JsonData {
 
         logLargeString(data);
         swipelist = new ArrayList<SearchDetails>();
-
 
         try {
             JSONObject jobj = new JSONObject(data);
@@ -45,7 +45,7 @@ public class JsonData {
                         url = jobj_source.getString("url");
                         text = jobj_source.optString("text");
                         date = jobj_source.getString("dt_added");
-
+                        article_id=jobj_source.getString("_id");
                         JSONArray json_xtags = jobj_source.getJSONArray("xtags");
                         Log.i(TAG,"json_xtags"+json_xtags +"length"+json_xtags.length());
                         JSONObject json_author = jobj_source.optJSONObject("author");
@@ -54,11 +54,11 @@ public class JsonData {
 
                         xtags_separate(json_xtags);
 
-                        if (Constants.swipedata)
-                            swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
+                        if (Constants.swipedata || HomeScreen.isScreeOn)
+                            swipelist.add(new SearchDetails(title, url, text, date, author, sentiment, article_type,article_id));
 
                         else
-                            Constants.listdetails.add(new SearchDetails(title, url, text, date, author, sentiment, article_type));
+                            Constants.listdetails.add(new SearchDetails(title, url, text, date, author, sentiment, article_type,article_id));
 
                     }
                     Constants.scroolid = jobj_result.optString("_scroll_id");
@@ -72,6 +72,7 @@ public class JsonData {
                                 if (swipelist.get(i).getUrl().contains(Constants.listdetails.get(0).getUrl())) {
                                     Constants.newarticles = i;
                                     Constants.swipedata = false;
+                                    HomeScreen.isScreeOn=false;
                                     Log.i("Log_tag", "search pos is" + Constants.newarticles);
                                 }
                             }
@@ -158,8 +159,6 @@ public class JsonData {
                     gender = gender_key;
                     break;
                 }
-
-
             }
 
         }

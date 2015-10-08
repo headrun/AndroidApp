@@ -31,8 +31,6 @@
         android:layout_alignStart="@+id/source_icon"
         android:layout_below="@+id/title"
         android:layout_marginRight="10dp"
-        android:ellipsize="end"
-        android:maxLines="1"
         android:paddingTop="10dp"
         android:textColor="#287742" />
 

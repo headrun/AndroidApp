@@ -11,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"></ProgressBar>
 
+
     <RelativeLayout
         android:id="@+id/content_lay"
         android:layout_width="match_parent"
@@ -70,6 +71,16 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@+id/filterbuttons"
+            android:indeterminate="true"
+            android:indeterminateBehavior="cycle"
+            android:visibility="gone" />
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
@@ -85,8 +96,20 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/newarticle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/swipe_refresh_layout"
+            android:layout_centerHorizontal="true"
+            android:background="#4baad3"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="New Articles"
+            android:textColor="#ffffff"
+            android:visibility="gone" />
 
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/webview_lay"

@@ -12,11 +12,12 @@ public class SearchDetails {
     public String author;
     public String sentiment;
     public String article_type;
+    public String articleid;
 
     public SearchDetails() {
     }
 
-    public SearchDetails(String title, String url, String text, String articledate,String author,String sentiment,String article_type ) {
+    public SearchDetails(String title, String url, String text, String articledate,String author,String sentiment,String article_type,String articleid  ) {
         this.title = title;
         this.url = url;
         this.text = text;
@@ -24,6 +25,7 @@ public class SearchDetails {
         this.author=author;
         this.article_type=article_type;
         this.sentiment=sentiment;
+        this.articleid=articleid;
     }
 
     public String getSentiment() {
@@ -80,5 +82,13 @@ public class SearchDetails {
 
     public void setAuthor(String articledate) {
         this.author = author;
+    }
+
+    public String getArticleid() {
+        return articleid;
+    }
+
+    public void setArticleid(String articleid) {
+        this.articleid = articleid;
     }
 }

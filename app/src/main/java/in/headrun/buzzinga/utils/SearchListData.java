@@ -63,12 +63,14 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.search_data, parent, false);
 
-        Log.i(TAG, "searchDetails view");
+       // Log.i(TAG, "searchDetails view");
         SearchHolder holder = new SearchHolder();
 
         holder.title = (TextView) itemView.findViewById(R.id.title);
         holder.text = (TextView) itemView.findViewById(R.id.text);
         holder.url = (TextView) itemView.findViewById(R.id.url);
+
+
         holder.articledate = (TextView) itemView.findViewById(R.id.articledate);
         holder.author = (TextView) itemView.findViewById(R.id.author);
 
@@ -87,7 +89,7 @@ public class SearchListData extends ArrayAdapter<SearchDetails> {
         }
 
         holder.url.setText(item.getUrl());
-
+        //Log.i(TAG, "show url is" + holder.url);
         if (item.getText() != null) {
             holder.text.setText(item.getText());
             holder.text.setVisibility(View.VISIBLE);
