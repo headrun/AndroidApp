@@ -3,10 +3,12 @@ package in.headrun.buzzinga.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -55,7 +57,8 @@ public class TwitterLogin extends Activity {
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().getAllowContentAccess();
-        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setUseWideViewPort(true);
         webview.getSettings().setLoadWithOverviewMode(true);
         // webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -85,6 +88,7 @@ public class TwitterLogin extends Activity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
             Log.i(TAG, "url loading");
+            Log.i(TAG,"loading url is"+url);
             view.loadUrl(url);
 
             return true;
@@ -95,7 +99,7 @@ public class TwitterLogin extends Activity {
             super.onPageFinished(view, url);
             progressbar.setProgress(100);
             progressbar.setVisibility(View.GONE);
-            Log.d(TAG, "TITLE is" + view.getTitle() + "\nurl is" + view.getOriginalUrl());
+            Log.d(TAG, "TITLE is" + view.getTitle() + "\nurl is" +url);
 
 
             if (view.getOriginalUrl() != null) {
@@ -123,6 +127,14 @@ public class TwitterLogin extends Activity {
             super.onPageStarted(view, url, favicon);
             progressbar.setProgress(0);
             progressbar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            super.onReceivedSslError(view, handler, error);
+            Log.i(TAG,"error"+error.getUrl());
+            handler.proceed(); // Ignore SSL certificate errors
+
         }
     }
 

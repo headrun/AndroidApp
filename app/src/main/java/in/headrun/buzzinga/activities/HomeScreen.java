@@ -192,8 +192,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                 int lastIndexInScreen = visibleItemCount + firstVisibleItem;
                 int visibleChildCount = (display_data.getLastVisiblePosition() - display_data.getFirstVisiblePosition()) + 1;
-
-                if (display_data.getCount() != 0 && lastIndexInScreen > visibleChildCount && lastIndexInScreen >= totalItemCount - 5 && !Config.SwipeLoading) {
+                Log.i(TAG, "scrooling Config.SwipeLoading\t" + Config.SwipeLoading +
+                        "\nisScreeOn\t" +!isScreeOn + "\nConstants.swipedata\t" + Constants.swipedata);
+                if (display_data.getCount() != 0 && lastIndexInScreen > visibleChildCount && lastIndexInScreen >= totalItemCount - 5 && Config.SwipeLoading && isScreeOn && Constants.swipedata) {
 
                     if (!Constants.scroolid.equals("1")) {
                         Log.i(TAG, "Scrolling" + Constants.scroolid);
@@ -204,6 +205,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     }
 
                 }
+
+
             }
         });
 
@@ -213,15 +216,21 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Color.parseColor("#0000ff"),
                 Color.parseColor("#f234ab"));
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (isScreeOn) {
+
+                Log.i(TAG, "swipe refresh isScreeOn\t" + isScreeOn + "\nConfig.SwipeLoading\t" + Config.SwipeLoading);
+                if (isScreeOn || Config.SwipeLoading) {
                     swipeRefreshLayout.setRefreshing(false);
-                }else{
+                } else {
+
+                    if (newarticle.getVisibility() == View.VISIBLE)
+                        newarticle.setVisibility(View.GONE);
+
                     Constants.swipedata = true;
                     getServer_response(ServerConfig.search);
+
                 }
             }
         });
@@ -452,12 +461,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case R.id.newarticle:
-                Log.i(TAG, "new article arived");
-                newarticle.setVisibility(View.GONE);
-                display_data.getItemAtPosition(0);
-                progress_bar.setVisibility(View.VISIBLE);
-                isScreeOn = true;
-                getServer_response(ServerConfig.search);
+                Log.i(TAG, "new article arived \n" + "!Constants.swipedata" + !Constants.swipedata + "\t!Config.SwipeLoading" + !Config.SwipeLoading);
+                if (!Constants.swipedata && !Config.SwipeLoading) {
+                    newarticle.setVisibility(View.GONE);
+                    display_data.getItemAtPosition(0);
+                    progress_bar.setVisibility(View.VISIBLE);
+                    isScreeOn = true;
+                    getServer_response(ServerConfig.search);
+                }
                 break;
         }
     }
@@ -696,8 +707,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
             };
             serverRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    2000,
-                    5,
+                    3000,
+                    3,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
             serverRequest.setTag(TAG);
