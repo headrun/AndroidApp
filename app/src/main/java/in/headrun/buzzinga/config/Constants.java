@@ -1,16 +1,17 @@
 package in.headrun.buzzinga.config;
 
 
-
 import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import in.headrun.buzzinga.doto.Listitems;
 import in.headrun.buzzinga.doto.QueryData;
-import in.headrun.buzzinga.doto.SearchDetails;
+import in.headrun.buzzinga.doto.SearchArticles;
+
 
 /**
  * Created by headrun on 30/7/15.
@@ -48,6 +49,7 @@ public class Constants {
     public static String scroolid = "1";
     public static String FIRSTURL = "";
     public static boolean swipedata = false;
+    public static boolean isScreenOn = false;
     public static boolean REQUEST_ENABLE = true;
     public static boolean BUZZ_NOTIFY = false;
     public static String SEARCHSTRING;
@@ -59,8 +61,7 @@ public class Constants {
     public static String Intent_TRACK = "search";
     public static String Intent_NOtify = "notification";
     public static String Intent_NOTHING = "nothing";
-    public static int newarticles = 0;
-
+    public static int newarticles = -1;
 
     public static Map<String, String> sources_list = new HashMap<>();
     public static Map<String, String> source_map = new HashMap<>();
@@ -68,38 +69,37 @@ public class Constants {
     public static Map<String, Integer> gender_map_values = new HashMap<>();
     public static Map<String, String> sentiment_map = new HashMap<>();
 
-
     public static String facebook_specific_xtags = "";
     public static String twitter_specific_xtags = "";
     public static String rss_specific_xtags = "";
     public static String googleplus_specific_xtags = "";
 
-    public static ArrayList<SearchDetails> listdetails = new ArrayList<SearchDetails>();
-    public static ArrayList<Listitems> FILTERSOURSOURE = new ArrayList<Listitems>();
-    public static ArrayList<Listitems> FILTERSENTIMENT = new ArrayList<Listitems>();
-    public static ArrayList<Listitems> FILTERGENDER = new ArrayList<Listitems>();
-    public static ArrayList<Listitems> FILTERLOC = new ArrayList<Listitems>();
-    public static ArrayList<Listitems> FILTERLANG = new ArrayList<Listitems>();
+    public static ArrayList<SearchArticles> SEARCHARTICLES = new ArrayList<SearchArticles>();
 
-    public static ArrayList<String> BTRACKKEY = new ArrayList<>();
-    public static ArrayList<String> BSEARCHKEY = new ArrayList<>();
-    public static ArrayList<String> BSOURCES = new ArrayList<>();
-    public static ArrayList<String> BGENDER = new ArrayList<>();
-    public static ArrayList<String> BSENTIMENT = new ArrayList<>();
-    public static ArrayList<String> BLOCATION = new ArrayList<>();
-    public static ArrayList<String> BLANGUAGE = new ArrayList<>();
-    public static ArrayList<String> BFROMDATE = new ArrayList<>();
-    public static ArrayList<String> BTODATE = new ArrayList<>();
-    public static ArrayList<QueryData> QueryString = new ArrayList<QueryData>();
+    public static List<Listitems> FILTERSOURSOURE = new ArrayList<Listitems>();
+    public static List<Listitems> FILTERSENTIMENT = new ArrayList<Listitems>();
+    public static List<Listitems> FILTERGENDER = new ArrayList<Listitems>();
+    public static List<Listitems> FILTERLOC = new ArrayList<Listitems>();
+    public static List<Listitems> FILTERLANG = new ArrayList<Listitems>();
+
+    public static List<String> BTRACKKEY = new ArrayList<>();
+    public static List<String> BSEARCHKEY = new ArrayList<>();
+    public static List<String> BSOURCES = new ArrayList<>();
+    public static List<String> BGENDER = new ArrayList<>();
+    public static List<String> BSENTIMENT = new ArrayList<>();
+    public static List<String> BLOCATION = new ArrayList<>();
+    public static List<String> BLANGUAGE = new ArrayList<>();
+    public static List<String> BFROMDATE = new ArrayList<>();
+    public static List<String> BTODATE = new ArrayList<>();
+    public static List<QueryData> QueryString = new ArrayList<QueryData>();
+
+    public static List<Listitems> filterList;
+
+    public static int NO_RECORD = 1;
+    public static int NO_WIFI = 2;
 
 
-    public static ArrayList<String> sourceslist = new ArrayList<>();
-    public static ArrayList<String> sentimentlist = new ArrayList<>();
-    public static ArrayList<String> genderlist = new ArrayList<>();
-
-    public static ArrayList<Listitems> filterList;
-
-    public static void xtags() {
+    public static void sourse_xtags() {
 
         sources_list.put(FACEBOOK, FACEBOOK);
         sources_list.put(TWITTER, TWITTER);
@@ -131,7 +131,9 @@ public class Constants {
         source_map.put(LINKDIN, "(xtags:linkedin_search_sourcetype_manual)");
         source_map.put(QUORA, "(xtags:quora_sourcetype_manual_parent)");
 
+    }
 
+    public static void gender_xtags() {
         gender_map_values.put(MALE, 1);
         gender_map_values.put(FEMALE, 2);
         gender_map_values.put(UNCLASSIFIED, -3);
@@ -141,9 +143,11 @@ public class Constants {
         gender_map.put(UNCLASSIFIED, "-((xtags: male_gender_final OR xtags: male_gender_final_parent)" +
                 " OR (xtags: female_gender_final OR xtags: female_gender_final_parent))");
 
+    }
+
+    public static void sentiment_xtags() {
         sentiment_map.put(NEUTRAL, "xtags:neutral_sentiment_final");
         sentiment_map.put(NEGATIVE, "xtags:negative_sentiment_final");
         sentiment_map.put(POSITIVE, "xtags:positive_sentiment_final");
     }
-
 }

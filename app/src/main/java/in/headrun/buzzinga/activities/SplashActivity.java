@@ -10,12 +10,11 @@ import android.widget.ProgressBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
-import in.headrun.buzzinga.doto.Utils;
+import in.headrun.buzzinga.utils.Utils;
 
 
 /**
@@ -48,7 +47,13 @@ public class SplashActivity extends Activity {
         splash_progress.setVisibility(View.VISIBLE);
         if (Config.SPLASH)
             Log.i(TAG, "splash activty");
-        Constants.xtags();
+
+        Constants.sourse_xtags();
+        Constants.gender_xtags();
+        Constants.sentiment_xtags();
+
+       // utils.addtoList();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -59,8 +64,6 @@ public class SplashActivity extends Activity {
 
             }
         }, Config.SPLASH_DISPLAY_LENGTH);
-
-
     }
 
     public void checkSession() {
@@ -68,15 +71,16 @@ public class SplashActivity extends Activity {
         loged = new UserSession(SplashActivity.this).getTSESSION();
         Log.i("Log_tag", "loged session is" + loged);
         if (loged.length() > 0)
-            if (userSession.getTrackKey().trim().length() < 0 || userSession.getTrackKey() == null)
+            if (userSession.getTrackKey() == null && userSession.getTrackKey().trim().length() < 0)
                 startActivity(new Intent(this, TrackKeyWord.class));
             else {
-                Log.i(TAG, "track key is" + userSession.getTrackKey());
+                // Constants.listdetails = Constants.articlelist_Details;
+                // Log.i(TAG, "track key is" + userSession.getTrackKey() + "article size " + Constants.listdetails + "Constants.articlelist_Details" + Constants.articlelist_Details);
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
                 utils.add_query_data();
-                Intent intent = new Intent(getApplication(), HomeScreen.class);
-                intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
-                startActivity(intent);
+                startActivity(new Intent(getApplication(), HomeScreen.class).
+                        putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
+
             }
         else
             startActivity(new Intent(this, TwitterLogin.class));

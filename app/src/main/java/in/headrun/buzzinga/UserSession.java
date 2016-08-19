@@ -6,6 +6,10 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import in.headrun.buzzinga.doto.Listitems;
 
 /**
  * Created by headrun on 22/7/15.
@@ -21,11 +25,17 @@ public class UserSession {
     public static final String TO_DATE = "to";
     public static final String LATEST_DATE = "laestdate";
     public static final String TRACK_KEY = "trackkey";
+    public static final String CSRFTOKEN = "csrftoken";
     private static final String PREFER_NAME = "BUZZINGA";
-    private static final boolean BUZZ_NOTIFY_SEL = false;
+    private static final boolean BUZZ_NOTIFY_SEL = true;
 
-    private static final String TACK_SEARCH_KEY = "";
+    public static final String Sources_data = "source";
+    public static final String Gender_data = "gender";
+    public static final String Sentiment_data = "sentiment";
+    public static final String Lang_data = "lang";
+    public static final String Loc_data = "loc";
 
+    public static final String TACK_SEARCH_KEY = "";
     public static String BTRACKKEY = "";
     public static String BSources = "";
 
@@ -37,7 +47,6 @@ public class UserSession {
 
     public UserSession(Context context) {
         this._context = context;
-
         pref = _context.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
         editor = pref.edit();
         editor.commit();
@@ -45,7 +54,6 @@ public class UserSession {
 
     public String getTSESSION() {
         String sess = pref.getString(TSESSION, "");
-
         return sess;
     }
 
@@ -55,9 +63,20 @@ public class UserSession {
         editor.commit();
     }
 
-    public void clearsession() {
+    public String getCSRFTOKEN() {
+        String sess = pref.getString(CSRFTOKEN, "");
+        return sess;
+    }
 
-        editor.remove(TSESSION);
+    public void setCSRFTOKEN(String csrftoken) {
+
+        editor.putString(CSRFTOKEN, csrftoken);
+        editor.commit();
+    }
+
+    public void clearsession(String data) {
+
+        editor.remove(data);
         editor.commit();
 
     }
@@ -93,8 +112,8 @@ public class UserSession {
     }
 
     public boolean isBUZZ_NOTIFY_SEL() {
-        Log.i(TAG, "BUZZ_NOTIFY_SEL" + pref.getBoolean("BUZZ_NOTIFY_SEL", false));
-        return pref.getBoolean("BUZZ_NOTIFY_SEL", false);
+        Log.i(TAG, "BUZZ_NOTIFY_SEL" + pref.getBoolean("BUZZ_NOTIFY_SEL", true));
+        return pref.getBoolean("BUZZ_NOTIFY_SEL", true);
     }
 
     public void setBUZZ_NOTIFY_SEL(boolean notifysel) {
@@ -189,17 +208,50 @@ public class UserSession {
         editor.commit();
     }
 
-    public void setBTRACKKEY(String btrackkey, ArrayList<String> list) {
-        editor.putString(BTRACKKEY, list.toString());
+    public String getSources_data() {
+        return pref.getString(Sources_data, "");
+    }
+
+    public void setSources_data(String sourcedata) {
+        editor.putString(Sources_data, sourcedata);
         editor.commit();
     }
 
-    public String getBTRACKKEY() {
-        return pref.getString(BTRACKKEY, "");
+    public String getGender_data() {
+        return pref.getString(Gender_data, "");
     }
 
-    public void seetBSources(String Bsource, ArrayList<String> list) {
-        editor.putString(BSources, list.toString());
+    public void setGender_data(String genderdata) {
+        editor.putString(Gender_data, genderdata);
+        editor.commit();
     }
+
+    public String getSentiment_data() {
+        return pref.getString(Sentiment_data, "");
+    }
+
+    public void setSentiment_data(String sentimentdata) {
+        editor.putString(Sentiment_data, sentimentdata);
+        editor.commit();
+    }
+
+
+    public String getLang_data() {
+        return pref.getString(Lang_data, "");
+    }
+
+    public void setLang_data(String langtdata) {
+        editor.putString(Lang_data, langtdata);
+        editor.commit();
+    }
+
+    public String getLoc_data() {
+        return pref.getString(Loc_data, "");
+    }
+
+    public void setLoc_data(String locdata) {
+        editor.putString(Loc_data, locdata);
+        editor.commit();
+    }
+
 }
-

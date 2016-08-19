@@ -11,30 +11,36 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
-import in.headrun.buzzinga.doto.QueryData;
-import in.headrun.buzzinga.doto.Utils;
-import in.headrun.buzzinga.utils.FilterTitleAdapter;
-import in.headrun.buzzinga.utils.ListViewAdapter;
+import in.headrun.buzzinga.utils.Utils;
+import in.headrun.buzzinga.adapters.FilterTitleAdapter;
+import in.headrun.buzzinga.adapters.ListViewAdapter;
 
 /**
  * Created by headrun on 6/8/15.
@@ -43,33 +49,37 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     // public static StringBuilder sourcequery = new StringBuilder();
     public String TAG = Filtering.this.getClass().getSimpleName();
-    BuzzingaApplication buzzapp;
+
     @Bind(R.id.filter_titles)
     ListView filter_titles;
-    @Bind(R.id.filter_sourceslist)
-    ListView filter_sourceslist;
-    @Bind(R.id.filter_sentiment)
-    ListView filter_sentiment;
-    @Bind(R.id.filter_gender)
-    ListView filter_gender;
-    @Bind(R.id.filter_location)
-    ListView filter_location;
-    @Bind(R.id.filter_language)
-    ListView filter_language;
-    @Bind(R.id.clearfilter)
+    @Bind(R.id.filter_items)
+    ListView filter_items;
 
+    @Bind(R.id.clearfilter)
     Button clearfilter;
     @Bind(R.id.applyfilter)
     Button applyfilter;
+
     @Bind(R.id.autosearch)
     EditText autosearch;
-    ListViewAdapter adapter;
-    SearchManager searchmanager;
-    String Sourcestatus;
 
+    String Sourcestatus = "";
+    FilterStatus sel_source_items;
+    List<String> list_items;
 
     FilterTitleAdapter titleadapter;
+    UserSession usersession;
     Utils utils;
+
+    public static SparseBooleanArray sel_source_array;
+    public static SparseBooleanArray sel_sentiment_array;
+    public static SparseBooleanArray sel_gender_array;
+    public static SparseBooleanArray sel_loc_array;
+    public static SparseBooleanArray sel_lang_array;
+
+    String[] filtertitles;
+
+    public static int first_source, first_sentiment, first_gender, first_loc, first_lang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,86 +87,91 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.sourcefilterlay);
         ButterKnife.bind(this);
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.buzz_logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Filters");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        listOfFilterSources();
-        listOfFilterSentiment();
-        listOfFilterGender();
-        listOfFilterLocation();
-        listOfFilterLang();
+        utils = new Utils(Filtering.this);
+        usersession = new UserSession(getApplication());
 
-        searchmanager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        buzzapp = new BuzzingaApplication();
-        utils=new Utils(Filtering.this);
+        first_source = first_sentiment = first_gender = first_loc = first_lang = 0;
 
         clearfilter.setOnClickListener(this);
         applyfilter.setOnClickListener(this);
 
-        filter_sourceslist.setVisibility(View.VISIBLE);
+        sel_loc_array = new SparseBooleanArray();
+        sel_source_array = new SparseBooleanArray();
+        sel_sentiment_array = new SparseBooleanArray();
+        sel_gender_array = new SparseBooleanArray();
+        sel_lang_array = new SparseBooleanArray();
 
-        String[] filtertitles = getResources().getStringArray(R.array.filtertitles);
-        TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
 
+        filtertitles = getResources().getStringArray(R.array.filtertitles);
+        final TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
 
+        utils.add_query_data();
         titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
         filter_titles.setAdapter(titleadapter);
+        filterselection(FilterStatus.SOURCES);
+
+        filter_titles.setItemChecked(0, true);
+        filter_titles.setSelection(0);
+
 
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                for (int i = 0; i < filter_titles.getAdapter().getCount(); i++) {
+
+                view.setSelected(true);
+
+                /*for (int i = 0; i < filter_titles.getAdapter().getCount(); i++) {
                     filter_titles.getChildAt(i).setBackgroundColor(Color.parseColor("#d62a2a2a"));
                 }
+
                 parent.getChildAt(position).setBackgroundColor(Color.parseColor("#FFCFCACA"));
+*/
                 String filteritem = filter_titles.getItemAtPosition(position).toString().toUpperCase();
+
                 FilterStatus filtering = FilterStatus.valueOf(filteritem);
                 filterselection(filtering);
             }
         });
 
 
+        filter_items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                selSourceItem(sel_source_items);
+            }
+        });
+
+
         autosearch.addTextChangedListener(new TextWatcher() {
-                                              @Override
-                                              public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                                              }
+            }
 
-                                              @Override
-                                              public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                                  // adapter.getFilter().filter(s.toString());
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-                                                  if (Sourcestatus.contains("lang")) {
-                                                      if (TextUtils.isEmpty(s.toString()))
-                                                          filter_language.clearTextFilter();
-                                                      else {
-                                                          Log.i(TAG, "get the lang" + s.toString());
-                                                          filter_language.setFilterText(s.toString());
+                if (TextUtils.isEmpty(s.toString()))
+                    filter_items.clearTextFilter();
+                else
+                    filter_items.setFilterText(s.toString());
+            }
 
-                                                      }
-                                                  } else {
-                                                      if (TextUtils.isEmpty(s.toString()))
-                                                          filter_location.clearTextFilter();
-                                                      else {
-                                                          Log.i(TAG, "get the loc" + s.toString());
-                                                          filter_location.setFilterText(s.toString());
-                                                      }
-                                                  }
+            @Override
+            public void afterTextChanged(Editable s) {
 
-                                              }
-
-                                              @Override
-                                              public void afterTextChanged(Editable s) {
-
-                                              }
-                                          }
-        );
+            }
+        });
 
     }
 
@@ -182,144 +197,35 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-
     public void filterselection(FilterStatus filtering) {
+        sel_source_items = null;
 
         switch (filtering) {
 
             case SOURCES:
-                filterSource();
+                sel_source_items = FilterStatus.SOURCES;
+                listOfFilterSources();
                 break;
             case SENTIMENT:
-                filterSentiment();
+                sel_source_items = FilterStatus.SENTIMENT;
+                listOfFilterSentiment();
                 break;
             case GENDER:
-                filterGender();
+                sel_source_items = FilterStatus.GENDER;
+                listOfFilterGender();
                 break;
             case LANGUAGE:
+                sel_source_items = FilterStatus.LANGUAGE;
                 autosearch.getText().clear();
                 Sourcestatus = "lang";
-                filterLang();
+                listOfFilterLang();
                 break;
             case LOCATION:
+                sel_source_items = FilterStatus.LOCATION;
                 autosearch.getText().clear();
                 Sourcestatus = "loc";
-                filterLocation();
+                listOfFilterLocation();
                 break;
-        }
-
-    }
-
-    public void filterSource() {
-        Log.i("filter by", " source");
-
-        filter_sourceslist.setVisibility(View.VISIBLE);
-        filter_sentiment.setVisibility(View.GONE);
-        filter_gender.setVisibility(View.GONE);
-        filter_language.setVisibility(View.GONE);
-        filter_location.setVisibility(View.GONE);
-        autosearch.setVisibility(View.GONE);
-
-        if (filter_sourceslist.getCount() <= 0) {
-            new Runnable() {
-                @Override
-                public void run() {
-
-                    listOfFilterSources();
-
-                }
-            };
-        }
-    }
-
-    public void filterSentiment() {
-        Log.i("filter by", " Sentiment");
-
-        filter_sourceslist.setVisibility(View.GONE);
-        filter_sentiment.setVisibility(View.VISIBLE);
-        filter_gender.setVisibility(View.GONE);
-        filter_language.setVisibility(View.GONE);
-        filter_location.setVisibility(View.GONE);
-        autosearch.setVisibility(View.GONE);
-
-        if (filter_sentiment.getCount() <= 0) {
-
-            new Runnable() {
-
-                @Override
-                public void run() {
-                    listOfFilterSentiment();
-
-                }
-            };
-        }
-
-
-    }
-
-    public void filterGender() {
-        Log.i("filter by", " gender");
-        filter_sourceslist.setVisibility(View.GONE);
-        filter_sentiment.setVisibility(View.GONE);
-        filter_gender.setVisibility(View.VISIBLE);
-        filter_language.setVisibility(View.GONE);
-        filter_location.setVisibility(View.GONE);
-        autosearch.setVisibility(View.GONE);
-
-        if (filter_gender.getCount() <= 0) {
-
-            new Runnable() {
-                @Override
-                public void run() {
-                    listOfFilterGender();
-
-                }
-            };
-        }
-
-    }
-
-    public void filterLang() {
-        Log.i("filter by", " Lang");
-
-        filter_sourceslist.setVisibility(View.GONE);
-        filter_sentiment.setVisibility(View.GONE);
-        filter_gender.setVisibility(View.GONE);
-        filter_language.setVisibility(View.VISIBLE);
-        filter_location.setVisibility(View.GONE);
-        autosearch.setVisibility(View.VISIBLE);
-
-        if (filter_language.getCount() <= 0) {
-
-            new Runnable() {
-                @Override
-                public void run() {
-                    listOfFilterLang();
-
-                }
-            };
-        }
-
-    }
-
-    public void filterLocation() {
-        Log.i("filter by", " Location");
-        filter_sourceslist.setVisibility(View.GONE);
-        filter_sentiment.setVisibility(View.GONE);
-        filter_gender.setVisibility(View.GONE);
-        filter_language.setVisibility(View.GONE);
-        filter_location.setVisibility(View.VISIBLE);
-        autosearch.setVisibility(View.VISIBLE);
-
-        if (filter_location.getCount() <= 0) {
-
-            new Runnable() {
-                @Override
-                public void run() {
-                    listOfFilterLang();
-
-                }
-            };
         }
 
     }
@@ -332,64 +238,92 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         } else if (v.getId() == R.id.applyfilter) {
 
-            sourcequery();
-            sentimentquery();
-            genderquery();
-            locquery();
-            langquery();
+            if (first_source != 0)
+                sourcequery();
 
-            add_query_data();
-            Constants.listdetails.clear();
-            HomeScreen.display_data.setAdapter(null);
+            if (first_sentiment != 0)
+                sentimentquery();
+
+            if (first_gender != 0)
+                genderquery();
+
+            if (first_loc != 0)
+                locquery();
+
+            if (first_lang != 0)
+                langquery();
+
+            Log.i(TAG, "filtering sel data sources " + usersession.getSources_data() +
+                    " \nsentiment " + usersession.getSentiment_data() +
+                    " \ngender " + usersession.getGender_data() +
+                    "\n language " + usersession.getLang_data() +
+                    "\n location " + usersession.getLoc_data());
 
             Intent i = new Intent(Filtering.this, HomeScreen.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
             startActivity(i);
 
+
         }
     }
 
+    ////prepare the source list
     public void listOfFilterSources() {
         Constants.FILTERSOURSOURE.clear();
 
-        Log.i(TAG,"get filter source data");
+        if (Constants.sources_list.size() <= 0)
+            Constants.sourse_xtags();
 
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSOURSOURE.add(new Listitems(entry.getKey(), value, source_check(value)));
         }
-        sortlist(Constants.FILTERSOURSOURE);
-        adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSOURSOURE);
-        filter_sourceslist.setAdapter(adapter);
 
+        sortlist(Constants.FILTERSOURSOURE);
+
+
+        fillAdapter(Constants.FILTERSOURSOURE, false, sel_source_array, first_source);
 
     }
 
+    ////prepare the sentiment list
     public void listOfFilterSentiment() {
         Constants.FILTERSENTIMENT.clear();
+
         Log.i(TAG, "get filter sentiment data");
+
+        if (Constants.sentiment_map.size() <= 0)
+            Constants.sentiment_xtags();
+
         for (Map.Entry<String, String> entry : Constants.sentiment_map.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, sentiment_check(value)));
         }
         sortlist(Constants.FILTERSENTIMENT);
-        adapter = new ListViewAdapter(Filtering.this, Constants.FILTERSENTIMENT);
-        filter_sentiment.setAdapter(adapter);
+
+        fillAdapter(Constants.FILTERSENTIMENT, false, sel_sentiment_array, first_sentiment);
+
 
     }
 
+    ////prepare the gender list
     public void listOfFilterGender() {
         Constants.FILTERGENDER.clear();
-        Log.i(TAG, "get filter gender data");
+
+        if (Constants.gender_map.size() <= 0)
+            Constants.gender_xtags();
+
         for (Map.Entry<String, String> gendervalue : Constants.gender_map.entrySet()) {
             String value = gendervalue.getKey().toUpperCase();
             Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, gender_check(value)));
         }
         sortlist(Constants.FILTERGENDER);
-        adapter = new ListViewAdapter(Filtering.this, Constants.FILTERGENDER);
-        filter_gender.setAdapter(adapter);
+
+        fillAdapter(Constants.FILTERGENDER, false, sel_gender_array, first_gender);
+
     }
 
+    ////prepare the  Language list
     public void listOfFilterLang() {
         Constants.FILTERLANG.clear();
 
@@ -556,11 +490,12 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLANG.add(new Listitems("sd", "SINDHI", lang_check("sd")));
 
         sortlist(Constants.FILTERLANG);
-        adapter = new ListViewAdapter(Filtering.this, Constants.FILTERLANG);
-        filter_language.setAdapter(adapter);
-        filter_language.setTextFilterEnabled(true);
+        fillAdapter(Constants.FILTERLANG, true, sel_lang_array, first_lang);
+
+        filter_items.setTextFilterEnabled(true);
     }
 
+    ////prepare the  Location list
     public void listOfFilterLocation() {
         Constants.FILTERLOC.clear();
 
@@ -737,63 +672,77 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.FILTERLOC.add(new Listitems("hong_kong", "Hong Kong", loc_check("hong_kong")));
 
         sortlist(Constants.FILTERLOC);
-        adapter = new ListViewAdapter(Filtering.this, Constants.FILTERLOC);
-        filter_location.setAdapter(adapter);
-        filter_location.setTextFilterEnabled(true);
+        fillAdapter(Constants.FILTERLOC, true, sel_loc_array, first_loc);
+
+        filter_items.setTextFilterEnabled(true);
 
     }
 
+    //// check the sentiment existing or not in previous selection
     public boolean sentiment_check(String sentiment) {
-        Log.i("Log_tag", "BSENTIMENT size is" + Constants.BSENTIMENT.size() + "sentiment is" + sentiment);
+
         if (Constants.BSENTIMENT.size() > 0)
-            if (Constants.BSENTIMENT.contains(sentiment)) {
-                Log.i("Log_tag", "seniment  is" + true);
-                return true;
+            for (int i = 0; i < Constants.BSENTIMENT.size(); i++) {
+                if (Constants.BSENTIMENT.get(i).toLowerCase().contains(sentiment.toLowerCase())) {
+                    return true;
+                }
             }
         return false;
     }
 
+    //// check the source existing or not in previous selection
     public boolean source_check(String source) {
-        Log.i("Log_tag", "BSOURCES size is" + Constants.BSOURCES.size() + "source is" + source);
-        if (Constants.BSOURCES.size() > 0)
-            if (Constants.BSOURCES.contains(source)) {
-                Log.i("Log_tag", "source  is" + true);
-                return true;
+
+        if (Constants.BSOURCES.size() > 0) {
+            for (int i = 0; i < Constants.BSOURCES.size(); i++) {
+                if (Constants.BSOURCES.get(i).toLowerCase().contains(source.toLowerCase())) {
+                    return true;
+                }
+
             }
+        }
         return false;
     }
 
+    //// check the gender existing or not in previous selection
     public boolean gender_check(String gender) {
-        Log.i("Log_tag", "BGENDER size is" + Constants.BGENDER.size() + "gender is" + gender);
+
         if (Constants.BGENDER.size() > 0)
-            if (Constants.BGENDER.contains(gender)) {
-                Log.i("Log_tag", "gender is" + true);
-                return true;
+            for (int i = 0; i < Constants.BGENDER.size(); i++) {
+                if (Constants.BGENDER.get(i).toLowerCase().contains(gender.toLowerCase())) {
+                    return true;
+                }
             }
         return false;
     }
 
+    //// check the Language existing or not in previous selection
     public boolean lang_check(String lang) {
-        Log.i("Log_tag", "BLANGUAGE size is" + Constants.BLANGUAGE.size() + " langs aree " + Constants.BLANGUAGE.toString() + "lang is" + lang);
+
         if (Constants.BLANGUAGE.size() > 0)
-            if (Constants.BLANGUAGE.contains(lang)) {
-                Log.i("Log_tag", "lang_check  is" + true);
-                return true;
-
+            for (int i = 0; i < Constants.BLANGUAGE.size(); i++) {
+                if (Constants.BLANGUAGE.get(i).toLowerCase().contains(lang.toLowerCase())) {
+                    return true;
+                }
             }
+
         return false;
     }
 
+    //// check the Loaction existing or not in previous selection
     public boolean loc_check(String loc) {
-        Log.i("Log_tag", "BLOCATION size is" + Constants.BLOCATION.size() + "locs are" + Constants.BLOCATION.toString() + "loc is" + loc);
+
         if (Constants.BLOCATION.size() > 0)
-            if (Constants.BLOCATION.contains(loc)) {
-                Log.i("Log_tag", "loc_check is" + true);
-                return true;
+            for (int i = 0; i < Constants.BLOCATION.size(); i++) {
+                if (Constants.BLOCATION.get(i).toLowerCase().contains(loc.toLowerCase())) {
+                    return true;
+                }
             }
+
         return false;
     }
 
+    ////clear all the selection filters
     public void clearfilters() {
 
         Constants.BSOURCES.clear();
@@ -802,14 +751,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.BLANGUAGE.clear();
         Constants.BLOCATION.clear();
 
-        Log.i(TAG, "loc size is" + Constants.BLOCATION.size() + "\n lang is" + Constants.BLANGUAGE.size());
-
-        listOfFilterSources();
-        listOfFilterSentiment();
-        listOfFilterGender();
-        listOfFilterLocation();
-        listOfFilterLang();
-
         Intent i = new Intent(Filtering.this, HomeScreen.class);
         i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
         startActivity(i);
@@ -817,7 +758,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    public void sortlist(ArrayList<Listitems> list) {
+    ////sort the list items based on the source name
+    public void sortlist(List<Listitems> list) {
         Collections.sort(list, new Comparator<Listitems>() {
             public int compare(Listitems item1, Listitems item2) {
                 return item1.getSourcename().compareToIgnoreCase(item2.getSourcename());
@@ -825,76 +767,235 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         });
     }
 
+    ////prepare the Sentiment Query
     public void sentimentquery() {
         Constants.BSENTIMENT.clear();
-        for (Listitems sentimentlist : Constants.FILTERSENTIMENT)
-            if (sentimentlist.isSelectd())
-                Constants.BSENTIMENT.add(sentimentlist.getSourcename());
+        usersession.clearsession(usersession.Sentiment_data);
+
+        for (int i = 0; i < sel_sentiment_array.size(); i++) {
+            int key = sel_sentiment_array.keyAt(i);
+            if (sel_sentiment_array.get(key)) {
+                Constants.BSENTIMENT.add(Constants.FILTERSENTIMENT.get(key).getSourcename().toLowerCase());
+            }
+        }
+
+
+        String sentiment = Constants.BSENTIMENT.toString();
+        usersession.setSentiment_data(sentiment);
+
+        Log.i(TAG, "selected session sentimentquery is" + usersession.getSentiment_data());
     }
 
+    ////prepare the  Gender Query
     public void genderquery() {
+        usersession.clearsession(usersession.Gender_data);
         Constants.BGENDER.clear();
-        for (Listitems genderlist : Constants.FILTERGENDER)
-            if (genderlist.isSelectd())
-                Constants.BGENDER.add(genderlist.getSourcename());
+
+        for (int i = 0; i < sel_gender_array.size(); i++) {
+            int key = sel_gender_array.keyAt(i);
+            if (sel_gender_array.get(key)) {
+                Constants.BGENDER.add(Constants.FILTERGENDER.get(key).getSourcename().toLowerCase());
+            }
+        }
+
+
+        String gender = Constants.BGENDER.toString();
+        usersession.setGender_data(gender);
+
+        Log.i(TAG, "selected session genderquery is" + usersession.getGender_data());
     }
 
+    ////prepare the Location Query
     public void locquery() {
+        usersession.clearsession(usersession.Loc_data);
         Constants.BLOCATION.clear();
-        for (Listitems loclist : Constants.FILTERLOC)
-            if (loclist.isSelectd())
-                Constants.BLOCATION.add(loclist.getXtag());
 
+        for (int i = 0; i < sel_loc_array.size(); i++) {
+            int key = sel_loc_array.keyAt(i);
+            if (sel_loc_array.get(key)) {
+                Constants.BLOCATION.add(Constants.FILTERLOC.get(key).getXtag().toLowerCase());
+            }
+        }
+
+        String loc = Constants.BLOCATION.toString();
+        usersession.setLoc_data(loc);
+        Log.i(TAG, "selected session locquery is" + usersession.getLoc_data());
     }
 
+    ////prepare the Language Query
     public void langquery() {
-
+        usersession.clearsession(usersession.Lang_data);
         Constants.BLANGUAGE.clear();
-        for (Listitems langlist : Constants.FILTERLANG)
-            if (langlist.isSelectd())
-                Constants.BLANGUAGE.add(langlist.getXtag());
 
+        for (int i = 0; i < sel_lang_array.size(); i++) {
+            int key = sel_lang_array.keyAt(i);
+            if (sel_lang_array.get(key)) {
+                Constants.BLANGUAGE.add(Constants.FILTERLANG.get(key).getXtag().toLowerCase());
+            }
+        }
+
+
+        String lang = Constants.BLANGUAGE.toString();
+        usersession.setLang_data(lang);
+
+        Log.i(TAG, "selected session langquery is" + usersession.getLang_data());
     }
 
+    ////prepare the Source Query
     public void sourcequery() {
 
+
+        usersession.clearsession(usersession.Sources_data);
         Constants.BSOURCES.clear();
-        for (Listitems sourceslist : Constants.FILTERSOURSOURE)
-            if (sourceslist.isSelectd()) {
-                Constants.BSOURCES.add(sourceslist.getSourcename());
-                Log.i(TAG, "selected source is" + sourceslist.getSourcename());
+
+        for (int i = 0; i < sel_source_array.size(); i++) {
+            int key = sel_source_array.keyAt(i);
+            if (sel_source_array.get(key)) {
+                Constants.BSOURCES.add(Constants.FILTERSOURSOURE.get(key).getSourcename().toLowerCase());
             }
+        }
+
+        String source = Constants.BSOURCES.toString();
+        usersession.setSources_data(source);
+        Log.i(TAG, "selected session sourcequery is" + usersession.getSources_data());
+
     }
 
-    public void add_query_data() {
-        Constants.QueryString.clear();
-        Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
-        Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
-        Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
-        Constants.QueryString.add(new QueryData(Constants.LOCATION, Constants.BLOCATION));
-        Constants.QueryString.add(new QueryData(Constants.LANGUAGE, Constants.BLANGUAGE));
-        Constants.QueryString.add(new QueryData(Constants.SEARCHKEY, Constants.BSEARCHKEY));
-        Constants.QueryString.add(new QueryData(Constants.SOURCES, Constants.BSOURCES));
-        Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
-        Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
+    ////clear the Listview adapter items
+    public void clearAdapter() {
+        filter_items.setAdapter(null);
+    }
 
-        Log.i(TAG, "buzzapp.BLOCATION" + Arrays.asList(Constants.BLOCATION));
+    //// prepare the listview items
+    public void fillAdapter(List<Listitems> items, boolean autoSearch, SparseBooleanArray sel_array, int first_time_load) {
 
+        if (autoSearch)
+            autosearch.setVisibility(View.VISIBLE);
+        else
+            autosearch.setVisibility(View.GONE);
+
+        clearAdapter();
+        filter_items.setAdapter(null);
+        //  adapter = new ListViewAdapter(Filtering.this, items);
+
+        list_items = new ArrayList<>(items.size());
+        list_items.clear();
+
+        for (int i = 0; i < items.size(); i++) {
+            Listitems source_item = items.get(i);
+            list_items.add(source_item.getSourcename());
+        }
+
+        filter_items.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, list_items));
+        //filter_items.setAdapter(new ListViewAdapter(Filtering.this, items));
+
+        if (first_time_load == 0) {
+
+            for (int i = 0; i < items.size(); i++) {
+                Listitems source_item = items.get(i);
+                if (source_item.isSelectd() == true)
+                    filter_items.setItemChecked(i, true);
+                else
+                    filter_items.setItemChecked(i, false);
+            }
+        } else {
+            utils.showLog(TAG, "sparese array sel items are " + sel_array.toString(), Config.Filtering);
+            for (int i = 0; i < sel_array.size(); i++) {
+                int key = sel_array.keyAt(i);
+                if (sel_array.get(key) == true)
+                    filter_items.setItemChecked(key, sel_array.get(key));
+
+                utils.showLog(TAG, "key is " + sel_array.get(key), Config.Filtering);
+            }
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, " on Destroy");
         utils.add_query_data();
+        Log.i(TAG, " add query data");
     }
 
-
+    //// filter Status
     public enum FilterStatus {
         SOURCES,
         SENTIMENT,
         GENDER,
         LANGUAGE,
         LOCATION
+    }
+
+    //// update the selection items count
+    public void selSourceItem(FilterStatus filtering) {
+
+        switch (filtering) {
+
+            case SOURCES:
+
+                if (first_source == 0)
+                    first_source++;
+
+                copySparseArray(sel_source_array);
+                updateListview("Sources");
+                break;
+            case SENTIMENT:
+
+                if (first_sentiment == 0)
+                    first_sentiment++;
+
+                copySparseArray(sel_sentiment_array);
+                updateListview("Sentiment");
+                break;
+            case GENDER:
+
+                if (first_gender == 0)
+                    first_gender++;
+
+                copySparseArray(sel_gender_array);
+                updateListview("Gender");
+                break;
+            case LANGUAGE:
+
+                if (first_lang == 0)
+                    first_lang++;
+
+                copySparseArray(sel_lang_array);
+                updateListview("Language");
+                break;
+            case LOCATION:
+
+                if (first_loc == 0)
+                    first_loc++;
+
+                copySparseArray(sel_loc_array);
+                updateListview("Location");
+                break;
+        }
+    }
+
+    ////update the Title selectin count
+    public void updateListview(String value) {
+
+        int pos = utils.getArrayPos(filtertitles, value);
+        if (pos != -1)
+            utils.updateListviewItem(filter_titles, pos);
+    }
+
+    //// copy the sparseboolean array
+    public void copySparseArray(SparseBooleanArray sparseArrayTO) {
+
+        sparseArrayTO.clear();
+
+        SparseBooleanArray sparsearrayFrom = filter_items.getCheckedItemPositions();
+        utils.showLog(TAG, "from items are " + sparsearrayFrom.toString(), Config.Filtering);
+        for (int i = 0; i < sparsearrayFrom.size(); i++) {
+            int key = sparsearrayFrom.keyAt(i);
+            if (sparsearrayFrom.get(key))
+                sparseArrayTO.put(key, sparsearrayFrom.get(key));
+        }
+        utils.showLog(TAG, "to items are " + sparseArrayTO.toString(), Config.Filtering);
     }
 
 }

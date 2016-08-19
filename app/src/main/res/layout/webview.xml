@@ -9,8 +9,8 @@
         android:id="@+id/browser_headder"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:weightSum="1"
-        android:background="#000000">
+        android:background="#000000"
+        android:weightSum="1">
 
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/browsertitle"
             android:layout_weight="0.1"
-            android:padding="10dp"
+            android:padding="5dp"
             android:src="@drawable/abc_ic_clear_mtrl_alpha" />
 
         <TextView
@@ -28,13 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.9"
-            android:editable="false"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingLeft="5dp"
-            android:singleLine="true"
-
-            />
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -46,7 +43,6 @@
 
     <ProgressBar
         android:id="@+id/article_browser_progress"
-        style="@android:style/Widget.ProgressBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

@@ -8,53 +8,29 @@ import butterknife.ButterKnife.ViewBinder;
 public class HomeScreen$$ViewBinder<T extends in.headrun.buzzinga.activities.HomeScreen> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131624015, "field 'filterpanel'");
-    target.filterpanel = view;
-    view = finder.findRequiredView(source, 2131624035, "field 'webview_lay'");
-    target.webview_lay = view;
-    view = finder.findRequiredView(source, 2131624025, "field 'filtersource_lay'");
-    target.filtersource_lay = view;
-    view = finder.findRequiredView(source, 2131624026, "field 'filter_image'");
-    target.filter_image = finder.castView(view, 2131624026, "field 'filter_image'");
-    view = finder.findRequiredView(source, 2131624027, "field 'filtersource'");
-    target.filtersource = finder.castView(view, 2131624027, "field 'filtersource'");
-    view = finder.findRequiredView(source, 2131624028, "field 'filterdate_lay'");
-    target.filterdate_lay = view;
-    view = finder.findRequiredView(source, 2131624029, "field 'sort_iamge'");
-    target.sort_iamge = finder.castView(view, 2131624029, "field 'sort_iamge'");
-    view = finder.findRequiredView(source, 2131624030, "field 'filtersourcebtn'");
-    target.filtersourcebtn = finder.castView(view, 2131624030, "field 'filtersourcebtn'");
-    view = finder.findRequiredView(source, 2131624036, "field 'webview'");
-    target.webview = finder.castView(view, 2131624036, "field 'webview'");
-    view = finder.findRequiredView(source, 2131624016, "field 'closebtn'");
-    target.closebtn = finder.castView(view, 2131624016, "field 'closebtn'");
-    view = finder.findRequiredView(source, 2131624021, "field 'bydatefilter'");
-    target.bydatefilter = finder.castView(view, 2131624021, "field 'bydatefilter'");
-    view = finder.findRequiredView(source, 2131624039, "field 'Listfooter'");
-    target.Listfooter = view;
-    view = finder.findRequiredView(source, 2131624022, "field 'progress'");
-    target.progress = finder.castView(view, 2131624022, "field 'progress'");
-    view = finder.findRequiredView(source, 2131624038, "field 'browser_progress'");
-    target.browser_progress = finder.castView(view, 2131624038, "field 'browser_progress'");
-    view = finder.findRequiredView(source, 2131624031, "field 'progress_bar'");
-    target.progress_bar = finder.castView(view, 2131624031, "field 'progress_bar'");
+    view = finder.findRequiredView(source, 2131755164, "field 'filtersource'");
+    target.filtersource = finder.castView(view, 2131755164, "field 'filtersource'");
+    view = finder.findRequiredView(source, 2131755165, "field 'filterdate'");
+    target.filterdate = finder.castView(view, 2131755165, "field 'filterdate'");
+    view = finder.findRequiredView(source, 2131755168, "field 'newarticle'");
+    target.newarticle = finder.castView(view, 2131755168, "field 'newarticle'");
+    view = finder.findRequiredView(source, 2131755169, "field 'txt_info'");
+    target.txt_info = finder.castView(view, 2131755169, "field 'txt_info'");
+    view = finder.findRequiredView(source, 2131755161, "field 'progressbar'");
+    target.progressbar = finder.castView(view, 2131755161, "field 'progressbar'");
+    view = finder.findRequiredView(source, 2131755166, "field 'swipeRefreshLayout'");
+    target.swipeRefreshLayout = finder.castView(view, 2131755166, "field 'swipeRefreshLayout'");
+    view = finder.findRequiredView(source, 2131755167, "field 'display_data'");
+    target.display_data = finder.castView(view, 2131755167, "field 'display_data'");
   }
 
   @Override public void unbind(T target) {
-    target.filterpanel = null;
-    target.webview_lay = null;
-    target.filtersource_lay = null;
-    target.filter_image = null;
     target.filtersource = null;
-    target.filterdate_lay = null;
-    target.sort_iamge = null;
-    target.filtersourcebtn = null;
-    target.webview = null;
-    target.closebtn = null;
-    target.bydatefilter = null;
-    target.Listfooter = null;
-    target.progress = null;
-    target.browser_progress = null;
-    target.progress_bar = null;
+    target.filterdate = null;
+    target.newarticle = null;
+    target.txt_info = null;
+    target.progressbar = null;
+    target.swipeRefreshLayout = null;
+    target.display_data = null;
   }
 }

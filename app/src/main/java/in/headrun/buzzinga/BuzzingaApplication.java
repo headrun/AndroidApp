@@ -8,6 +8,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
 import in.headrun.buzzinga.doto.QueryData;
@@ -17,21 +20,16 @@ import in.headrun.buzzinga.doto.QueryData;
  */
 public class BuzzingaApplication extends Application {
 
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "Tabj139fabGgqyg8pOBSnw";
+    private static final String TWITTER_SECRET = "eIULy4JeljkZN8JpWXXa4o2b2puUjq73PP6zaVIVk";
+
+
     private static final String TAG = BuzzingaApplication.class.getSimpleName();
 
     private static BuzzingaApplication instance = null;
 
-    public static ArrayList<String> BTRACKKEY = new ArrayList<>();
-    public static ArrayList<String> BSEARCHKEY = new ArrayList<>();
-    public static ArrayList<String> BSOURCES = new ArrayList<>();
-    public static ArrayList<String> BGENDER = new ArrayList<>();
-    public static ArrayList<String> BSENTIMENT = new ArrayList<>();
-    public static ArrayList<String> BLOCATION = new ArrayList<>();
-    public static ArrayList<String> BLANGUAGE = new ArrayList<>();
-    public static ArrayList<String> BFROMDATE = new ArrayList<>();
-    public static ArrayList<String> BTODATE = new ArrayList<>();
 
-    public static ArrayList<QueryData> QueryString = new ArrayList<QueryData>();
 
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
@@ -44,6 +42,8 @@ public class BuzzingaApplication extends Application {
     public void onCreate() {
 
         super.onCreate();
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
 
 
         instance = this;

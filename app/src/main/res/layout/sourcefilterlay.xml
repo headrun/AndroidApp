@@ -6,7 +6,8 @@
     <RelativeLayout
         android:id="@+id/filerlayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/filterbtn">
 
 
         <RelativeLayout
@@ -20,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
+                android:background="@drawable/listview_sel"
                 android:dividerHeight="5dp" />
         </RelativeLayout>
 
@@ -28,48 +30,19 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/sourcelistview">
 
-
             <EditText
                 android:id="@+id/autosearch"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/roundborder"
-                android:hint="Search"
-                android:visibility="gone" />
-
+                android:hint="Search" />
 
             <ListView
-                android:id="@+id/filter_sourceslist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"></ListView>
-
-            <ListView
-                android:id="@+id/filter_sentiment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"></ListView>
-
-            <ListView
-                android:id="@+id/filter_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"></ListView>
-
-
-            <ListView
-                android:id="@+id/filter_location"
+                android:id="@+id/filter_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/autosearch"
-                android:visibility="gone"></ListView>
-
-            <ListView
-                android:id="@+id/filter_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/autosearch"
-                android:visibility="gone"></ListView>
+                android:choiceMode="multipleChoice" />
 
         </RelativeLayout>
 

@@ -1,110 +1,109 @@
 package in.headrun.buzzinga.activities;
 
-import android.app.*;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.format.Time;
 import android.util.Log;
-import android.view.*;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import com.android.volley.*;
-import com.android.volley.toolbox.StringRequest;
-
-import in.headrun.buzzinga.*;
+import in.headrun.buzzinga.BuzzingaNotification;
+import in.headrun.buzzinga.BuzzingaRequest;
+import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.adapters.SearchListDataAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
-import in.headrun.buzzinga.doto.QueryData;
-import in.headrun.buzzinga.doto.SearchDetails;
-import in.headrun.buzzinga.doto.Utils;
-import in.headrun.buzzinga.utils.ConnectionSettings;
-import in.headrun.buzzinga.utils.FilterByDate;
-import in.headrun.buzzinga.utils.JsonData;
-import in.headrun.buzzinga.utils.SearchListData;
-
-import junit.framework.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import in.headrun.buzzinga.dashboard.ListViewMultiChartActivity;
+import in.headrun.buzzinga.doto.SearchArticles;
+import in.headrun.buzzinga.utils.Utils;
 
 /**
  * Created by headrun on 7/7/15.
  */
-public class HomeScreen extends AppCompatActivity implements View.OnClickListener {
+public class HomeScreen extends AppCompatActivity implements View.OnClickListener, Utils.setOnItemClickListner {
 
-    public static ListView display_data;
-    public static View content_lay;
-    public static TextView fromdate, todate, newarticle;
-    public static SwipeRefreshLayout swipeRefreshLayout;
-    public static String Intent_opt;
-    public static int DATEFLAG;
-    public static View footerView;
-    static Context context;
+
     public String TAG = HomeScreen.this.getClass().getSimpleName();
-    public static boolean isScreeOn = false;
 
-    ArrayList<SearchDetails> articlelist_Details = new ArrayList<SearchDetails>();
-    BuzzingaApplication buzzapp;
-    AlertDialog alertDialog;
-    Timer time = new Timer();
-
-    UserSession userSession;
-    SearchListData search_adapter;
-    LayoutInflater inflater;
-    StringRequest stringRequest, serverRequest;
-    android.support.v7.app.ActionBar actionBar;
-
-    Utils utils;
-    @Bind(R.id.filterpanel)
-    View filterpanel;
-    @Bind(R.id.webview_lay)
-    View webview_lay;
-
-    @Bind(R.id.filtersource_lay)
-    View filtersource_lay;
-    @Bind(R.id.filter_image)
-    ImageView filter_image;
     @Bind(R.id.filtersource)
     TextView filtersource;
 
-    @Bind(R.id.filterdate_lay)
-    View filterdate_lay;
-    @Bind(R.id.sort_iamge)
-    ImageView sort_iamge;
-
     @Bind(R.id.filterdate)
-    TextView filtersourcebtn;
-    @Bind(R.id.webview)
-    WebView webview;
-    @Bind(R.id.closebtn)
-    ImageView closebtn;
+    TextView filterdate;
 
-    @Bind(R.id.bydatefilter)
-    Button bydatefilter;
-    @Bind(R.id.listfooter)
-    View Listfooter;
+    @Bind(R.id.newarticle)
+    TextView newarticle;
+
+    @Bind(R.id.txt_info)
+    TextView txt_info;
 
     @Bind(R.id.progressBar)
-    ProgressBar progress;
-    @Bind(R.id.browser_progress)
-    ProgressBar browser_progress;
-    @Bind(R.id.progress_bar)
-    ProgressBar progress_bar;
+    ProgressBar progressbar;
+
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @Bind(R.id.result_listview)
+    RecyclerView display_data;
+
+    Utils utils;
+    public String Intent_opt;
+
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+    StringRequest stringRequest, serverRequest;
+
+
+    SearchListDataAdapter searchAdapter;
+    JSONObject jobj, jobj_result, jobj_hit;
+    JSONArray jobj_hits;
+
+    LinearLayoutManager mLinearLayout;
+    boolean scroll_loading = true;
+    public static boolean Swipe_loading = true;
+    ArrayList<SearchArticles> searchArticleSwipe;
+
+    public static Parcelable state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,100 +112,59 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.homescreen);
         ButterKnife.bind(this);
 
+        utils = new Utils(this);
+        mLinearLayout = new LinearLayoutManager(this);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.buzz_logo);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(utils.userSession.getTrackKey());
+
         Bundle data = getIntent().getExtras();
         Intent_opt = data.getString(Constants.Intent_OPERATION);
 
         handleIntent(getIntent());
-        if (Config.HOME_SCREEN)
-            Log.i(TAG, "HOME SCREEN");
-        utils = new Utils(getApplication());
-        display_data = (ListView) findViewById(R.id.result_listview);
-        content_lay = findViewById(R.id.content_lay);
-        fromdate = (TextView) findViewById(R.id.fromdate);
-        todate = (TextView) findViewById(R.id.todate);
-        newarticle = (TextView) findViewById(R.id.newarticle);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        Constants.SEARCHARTICLES.clear();
 
-        context = getApplication();
+        display_data.setHasFixedSize(true);
+        display_data.setLayoutManager(mLinearLayout);
+        searchAdapter = new SearchListDataAdapter(this, Constants.SEARCHARTICLES);
+        display_data.setAdapter(searchAdapter);
+        searchAdapter.setClickListener(this);
 
-        userSession = new UserSession(HomeScreen.this);
-        buzzapp = new BuzzingaApplication();
 
-        alertDialog = new AlertDialog.Builder(this).create();
-        inflater = this.getLayoutInflater();
+        //inflater = this.getLayoutInflater();
 
-        bydatefilter.setOnClickListener(this);
-        closebtn.setOnClickListener(this);
-
-        fromdate.setOnClickListener(this);
-        todate.setOnClickListener(this);
         newarticle.setOnClickListener(this);
-
-        filtersource_lay.setOnClickListener(this);
-        filter_image.setOnClickListener(this);
         filtersource.setOnClickListener(this);
+        filterdate.setOnClickListener(this);
 
-        filterdate_lay.setOnClickListener(this);
-        sort_iamge.setOnClickListener(this);
-        filtersourcebtn.setOnClickListener(this);
+        display_data.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        content_lay.setVisibility(View.GONE);
-        filterpanel.setVisibility(View.GONE);
-        webview_lay.setVisibility(View.GONE);
-        progress.setVisibility(View.GONE);
-        Listfooter.setVisibility(View.GONE);
-
-        actionBar = getSupportActionBar();
-        actionBar.setLogo(R.drawable.buzz_logo);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setTitle(userSession.getTrackKey());
-
-        display_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                SearchDetails details = (SearchDetails) display_data.getAdapter().getItem(position);
-                String geturl = details.getUrl();
-
-                if (ConnectionSettings.isConnected(HomeScreen.this)) {
-                    Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
-                    i.putExtra("url", geturl);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        display_data.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
 
-                int lastIndexInScreen = visibleItemCount + firstVisibleItem;
-                int visibleChildCount = (display_data.getLastVisiblePosition() - display_data.getFirstVisiblePosition()) + 1;
-                Log.i(TAG, "scrooling Config.SwipeLoading\t" + Config.SwipeLoading +
-                        "\nisScreeOn\t" +!isScreeOn + "\nConstants.swipedata\t" + Constants.swipedata);
-                if (display_data.getCount() != 0 && lastIndexInScreen > visibleChildCount && lastIndexInScreen >= totalItemCount - 5 && Config.SwipeLoading && isScreeOn && Constants.swipedata) {
+                if (dy > 0) {
+                    visibleItemCount = mLinearLayout.getChildCount();
+                    totalItemCount = mLinearLayout.getItemCount();
+                    pastVisiblesItems = mLinearLayout.findFirstCompletelyVisibleItemPosition();
 
-                    if (!Constants.scroolid.equals("1")) {
-                        Log.i(TAG, "Scrolling" + Constants.scroolid);
-                        footerView = inflater.inflate(R.layout.listviewfooter, null);
-                        display_data.addFooterView(footerView);
-                        Config.SwipeLoading = true;
-                        getServer_response(ServerConfig.SCROLL);
+                    if (scroll_loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        if (swipeRefreshLayout.isRefreshing() == false && !Constants.scroolid.equals("1") && utils.isNetwrokConnection()) {
+
+                            scroll_loading = false;
+                            utils.add_query_data();
+                            getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
+                        }
                     }
-
                 }
-
-
             }
         });
 
@@ -220,90 +178,62 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onRefresh() {
 
-                Log.i(TAG, "swipe refresh isScreeOn\t" + isScreeOn + "\nConfig.SwipeLoading\t" + Config.SwipeLoading);
-                if (isScreeOn || Config.SwipeLoading) {
-                    swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(true);
+                if (newarticle.getVisibility() == View.VISIBLE)
+                    newarticle.setVisibility(View.GONE);
+
+                if (utils.isNetwrokConnection()) {
+                    Swipe_loading = false;
+                    utils.add_query_data();
+                    getServer_response(ServerConfig.search, utils.searchQuery());
                 } else {
-
-                    if (newarticle.getVisibility() == View.VISIBLE)
-                        newarticle.setVisibility(View.GONE);
-
-                    Constants.swipedata = true;
-                    getServer_response(ServerConfig.search);
-
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });
 
-        if (Constants.state != null) {
-            display_data.onRestoreInstanceState(Constants.state);
+        if (state != null) {
+            display_data.getLayoutManager().onRestoreInstanceState(state);
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i(TAG, "onstart");
+        utils.add_query_data();
+        getServer_response(ServerConfig.search, utils.searchQuery());
 
-        if (Intent_opt.contains(Constants.Intent_TRACK)) {
-            Constants.listdetails.clear();
-            getServer_response(ServerConfig.search);
-        } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
-            Log.i(TAG, "clear data for notification");
-
-            Constants.listdetails.clear();
-            getServer_response(ServerConfig.search);
-        } else if (Intent_opt.equals(Constants.Intent_NOTHING)) {
-
-            Log.i(TAG, "Constants.listdetails count is" + Constants.listdetails.size());
-            if (Constants.listdetails.size() > 0) {
-                article_loading(Constants.listdetails);
-                content_lay.setVisibility(View.VISIBLE);
-            } else {
-                Constants.listdetails.clear();
-                getServer_response(ServerConfig.search);
-                Intent_opt = "";
-            }
-        } else {
-
-            Constants.listdetails.clear();
-            getServer_response(ServerConfig.search);
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.i(TAG, "onresume");
 
-        webview.onResume();
-        Constants.state = display_data.onSaveInstanceState();
+        state = display_data.getLayoutManager().onSaveInstanceState();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        utils.add_query_data();
-        webview.onPause();
-        Constants.state = display_data.onSaveInstanceState();
+        Log.i(TAG, "onpause");
+        Intent_opt = Constants.Intent_NOTHING;
+        //
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (serverRequest != null)
-            BuzzingaRequest.getInstance(getApplication()).cancelRequestQueue(TAG);
+        Log.i(TAG, "onstop");
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        articlelist_Details = Constants.listdetails;
-        Log.i(TAG, " 1st Constants.listdetails count is" + articlelist_Details.size());
-        Constants.listdetails.clear();
-        Constants.listdetails = articlelist_Details;
-        Log.i(TAG, "2nd Constants.listdetails count is" + Constants.listdetails.size());
-        utils.add_query_data();
-
+        Log.i(TAG, "onDestory");
     }
 
     @Override
@@ -316,14 +246,17 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
             if (Constants.SEARCHSTRING.trim().length() > 0) {
-                Constants.listdetails.clear();
-                userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
-                BuzzingaApplication.BSEARCHKEY.clear();
-                BuzzingaApplication.BSEARCHKEY.add(userSession.gettTACK_SEARCH_KEY());
-                HomeScreen.display_data.setAdapter(null);
-                Log.i(TAG, "key word search");
-                actionBar.setTitle(userSession.getTrackKey() + "," + Constants.SEARCHSTRING);
-                getServer_response(ServerConfig.search);
+
+                if (utils.isNetwrokConnection()) {
+                    utils.userSession.setTrackKey(Constants.SEARCHSTRING);
+
+                    Constants.SEARCHARTICLES.clear();
+                    searchAdapter.notifyDataSetChanged();
+
+                    getSupportActionBar().setTitle(utils.userSession.getTrackKey());
+                    utils.add_query_data();
+                    getServer_response(ServerConfig.search, utils.searchQuery());
+                }
             }
         }
 
@@ -331,144 +264,54 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     public void getdate() {
 
-        FragmentManager fm = getFragmentManager();
+       /* FragmentManager fm = getFragmentManager();
         DialogFragment newFragment = new FilterByDate();
-        newFragment.show(fm, "datePicker");
-    }
-
-    private void webSettings(String url) {
-
-        webview.getSettings().setLoadsImagesAutomatically(true);
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.clearCache(true);
-        webview.clearHistory();
-        webview.loadUrl("");
+        newFragment.show(fm, "datePicker");*/
 
 
-        webview.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
-            }
+        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
+                SmoothDateRangePickerFragment
+                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                            @Override
+                            public void onDateRangeSet(SmoothDateRangePickerFragment view,
+                                                       int yearStart, int monthStart,
+                                                       int dayStart, int yearEnd,
+                                                       int monthEnd, int dayEnd) {
+                                String date = "You picked the following date range: \n"
+                                        + "From " + dayStart + "/" + (++monthStart)
+                                        + "/" + yearStart + " To " + dayEnd + "/"
+                                        + (++monthEnd) + "/" + yearEnd;
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                Log.i(TAG, "started webview");
-                browser_progress.setProgress(0);
-                browser_progress.setVisibility(View.VISIBLE);
-            }
+                                utils.userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                utils.userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                Log.i(TAG, "finished webview");
-                browser_progress.setProgress(100);
-                browser_progress.setVisibility(View.GONE);
-                super.onPageFinished(view, url);
-            }
+                                utils.showLog(TAG, "date is " + utils.userSession.getFROM_DATE() + "  to  " +
+                                        utils.userSession.getTO_DATE(), Config.HOME_SCREEN);
 
-            @Override
-            public void onLoadResource(WebView view, String url) {
-                super.onLoadResource(view, url);
-                Log.i(TAG, "load resource" + url);
-            }
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
-                Log.i(TAG, "webview error code" + errorCode + "\n description" + description);
-            }
-        });
-
-
-        webview.loadUrl(url.toString());
-
+                                utils.add_query_data();
+                                getServer_response(ServerConfig.search, utils.searchQuery());
+                            }
+                        });
+        smoothDateRangePickerFragment.show(getFragmentManager(), "Buzzinga");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.filtersource_lay:
-                // cancelRequest();
-                Config.SwipeLoading = false;
-                startActivity(new Intent(this, Filtering.class));
-                break;
-
-            case R.id.filter_image:
-                //cancelRequest();
-                Config.SwipeLoading = false;
-                startActivity(new Intent(this, Filtering.class));
-                break;
 
             case R.id.filtersource:
-                //cancelRequest();
-                Config.SwipeLoading = false;
                 startActivity(new Intent(this, Filtering.class));
                 break;
 
-
             case R.id.filterdate:
-                //ActionBar.hide();
-                filterpanel.setVisibility(View.VISIBLE);
-                content_lay.setVisibility(View.VISIBLE);
-                webview_lay.setVisibility(View.GONE);
-                break;
-            case R.id.sort_iamge:
-                filterpanel.setVisibility(View.VISIBLE);
-                content_lay.setVisibility(View.VISIBLE);
-                webview_lay.setVisibility(View.GONE);
-                break;
-
-            case R.id.filterdate_lay:
-                filterpanel.setVisibility(View.VISIBLE);
-                content_lay.setVisibility(View.VISIBLE);
-                webview_lay.setVisibility(View.GONE);
-                break;
-
-            case R.id.closebtn:
-                filterpanel.setVisibility(View.GONE);
-                break;
-
-            case R.id.fromdate:
-                BuzzingaApplication.BFROMDATE.clear();
-                DATEFLAG = 0;
                 getdate();
-                utils.add_query_data();
-                break;
-
-            case R.id.todate:
-                BuzzingaApplication.BTODATE.clear();
-                getdate();
-                utils.add_query_data();
-                break;
-
-            case R.id.bydatefilter:
-                Config.SwipeLoading = false;
-                filterpanel.setVisibility(View.GONE);
-                Constants.listdetails.clear();
-                display_data.setAdapter(null);
-                Constants.BFROMDATE.clear();
-                Constants.BTODATE.clear();
-                Constants.BFROMDATE.add(fromdate.getText().toString());
-                Constants.BTODATE.add(todate.getText().toString());
-                utils.add_query_data();
-                getServer_response(ServerConfig.search);
-                userSession.setFROM_DATE(fromdate.getText().toString().trim());
-                userSession.setTO_DATE(todate.getText().toString().trim());
                 break;
 
             case R.id.newarticle:
-                Log.i(TAG, "new article arived \n" + "!Constants.swipedata" + !Constants.swipedata + "\t!Config.SwipeLoading" + !Config.SwipeLoading);
-                if (!Constants.swipedata && !Config.SwipeLoading) {
-                    newarticle.setVisibility(View.GONE);
-                    display_data.getItemAtPosition(0);
-                    progress_bar.setVisibility(View.VISIBLE);
-                    isScreeOn = true;
-                    getServer_response(ServerConfig.search);
-                }
+                newarticle.setVisibility(View.GONE);
+                utils.add_query_data();
+                getServer_response(ServerConfig.search, utils.searchQuery());
                 break;
         }
     }
@@ -480,8 +323,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        Log.i(TAG, "userSession.isBUZZ_NOTIFY_SEL()" + userSession.isBUZZ_NOTIFY_SEL());
-        menu.findItem(R.id.action_track).setChecked(userSession.isBUZZ_NOTIFY_SEL());
+        menu.findItem(R.id.action_track).setChecked(utils.userSession.isBUZZ_NOTIFY_SEL());
 
         return true;
     }
@@ -491,37 +333,45 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             stringrequest();
+        } else if (id == R.id.dashboard) {
+            Log.i(TAG, "TAG is" + TAG);
+            if (TAG.equals("ListViewMultiChartActivity")) {
+                startActivity(new Intent(this, HomeScreen.class));
+            } else {
+                startActivity(new Intent(this, ListViewMultiChartActivity.class));
+            }
 
         } else if (id == R.id.action_track) {
+
             Boolean track_check;
-            track_check = userSession.isBUZZ_NOTIFY_SEL();
-            Log.i(TAG, "track_check" + track_check);
+            track_check = utils.userSession.isBUZZ_NOTIFY_SEL();
+
             item.setChecked(track_check);
-            Log.i(TAG, " item.setChecked(track_check)" + item.setChecked(track_check));
+
             if (item.isChecked()) {
-                userSession.setBUZZ_NOTIFY_SEL(false);
-                item.setChecked(userSession.isBUZZ_NOTIFY_SEL());
+                utils.userSession.setBUZZ_NOTIFY_SEL(false);
+                item.setChecked(utils.userSession.isBUZZ_NOTIFY_SEL());
                 Log.i(TAG, "stop the service");
                 // stopService(new Intent(getBaseContext(), BuzzNotification.class));
                 try {
-                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(context, BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(this, BuzzingaNotification.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
                     alarmManager.cancel(pendingIntent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             } else {
-                userSession.setBUZZ_NOTIFY_SEL(true);
-                track_check = userSession.isBUZZ_NOTIFY_SEL();
+                utils.userSession.setBUZZ_NOTIFY_SEL(true);
+                track_check = utils.userSession.isBUZZ_NOTIFY_SEL();
+
                 item.setChecked(track_check);
                 Log.i(TAG, "false  item.setChecked(track_check)" + item.setChecked(track_check));
                 try {
-                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(context, BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 3 * 60 * 1000, pendingIntent);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(this, BuzzingaNotification.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1 * 1000, 3 * 60 * 1000, pendingIntent);
                     Log.i(TAG, "start the service");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -529,38 +379,37 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Log.i(TAG, "start the service");
             }
         } else if (id == android.R.id.home) {
-            Config.SwipeLoading = false;
-            Intent i = new Intent(HomeScreen.this, TrackKeyWord.class);
-            startActivity(i);
+            startActivity(new Intent(HomeScreen.this, TrackKeyWord.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void stringrequest() {
-        if (new ConnectionSettings().isConnected(getApplication())) {
-            progress.setVisibility(View.VISIBLE);
+        if (utils.isNetwrokConnection()) {
+            progressbar.setVisibility(View.VISIBLE);
             stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
                     new Response.Listener<String>() {
                         @Override
-                        public ArrayList<SearchDetails> onResponse(String response) {
+                        public void onResponse(String response) {
 
                             Log.d(TAG, "string response is" + response);
 
-                            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                            Intent intent = new Intent(context, BuzzingaNotification.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                            Intent intent = new Intent(HomeScreen.this, BuzzingaNotification.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeScreen.this, 0, intent, 0);
                             alarmManager.cancel(pendingIntent);
                             // stopService(new Intent(HomeScreen.this, .class));
-                            new UserSession(HomeScreen.this).clearsession();
+                            ;
+                            utils.userSession.clearsession(utils.userSession.TSESSION);
                             startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
-                            progress.setVisibility(View.GONE);
-                            return null;
+                            progressbar.setVisibility(View.GONE);
+
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d(TAG, "string error response is" + error);
-                    progress.setVisibility(View.GONE);
+                    progressbar.setVisibility(View.GONE);
                 }
             }) {
                 @Override
@@ -569,7 +418,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     params.put("sessionid", new UserSession(HomeScreen.this).getTSESSION());
                     return params;
                 }
-
             };
             stringRequest.setTag(TAG);
 
@@ -579,93 +427,64 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void getServer_response(String URL_request) {
+    public void getServer_response(String URL_request, String clubbedquery) {
 
-        final String clubbed_query;
-        if (new ConnectionSettings().isConnected(getApplication())) {
-            if (swipeRefreshLayout.isRefreshing() || Config.SwipeLoading)
-                progress.setVisibility(View.GONE);
-            else {
-                progress.setVisibility(View.VISIBLE);
-            }
+        BuzzingaRequest.getInstance(getApplication()).cancelRequestQueue(TAG);
+        txt_info.setVisibility(View.GONE);
+        final String clubbed_query = clubbedquery;
 
-            Log.i(TAG, "Config.SwipeLoading" + Config.SwipeLoading);
-            if (Config.SwipeLoading) {
-                clubbed_query = "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
-            } else if (Intent_opt.equals(Constants.Intent_NOtify)) {
+        if (utils.isNetwrokConnection()) {
 
-                Constants.BFROMDATE.clear();
-                Constants.BTODATE.clear();
-                Constants.BFROMDATE.add("");
-                Constants.BTODATE.add("");
-                utils.add_query_data();
+            if (swipeRefreshLayout.isRefreshing() == true)
+                progressbar.setVisibility(View.GONE);
+            else
+                progressbar.setVisibility(View.VISIBLE);
 
-                //clubbed_query = query.queryform(query.Date_added_toquery());
-                userSession.set_search_Clubbedquery(utils.getquerydata(Constants.QueryString));
-                clubbed_query = userSession.get_search_Clubbedquery();
-            } else {
-                Log.i(TAG, "search");
-                userSession.set_search_Clubbedquery(utils.getquerydata(Constants.QueryString));
-                clubbed_query = userSession.get_search_Clubbedquery();
-            }
 
-            Intent_opt = "";
-
-            userSession.setSETUP(Constants.SETUP);
-            userSession.setTIMEZONE(Utils.timezone());
+            utils.userSession.setSETUP(Constants.SETUP);
+            utils.userSession.setTIMEZONE(Utils.timezone());
 
             Log.i(TAG, "url is" + ServerConfig.SERVER_ENDPOINT + URL_request);
             serverRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + URL_request,
                     new Response.Listener<String>() {
                         @Override
-                        public ArrayList<SearchDetails> onResponse(String response) {
-                            int artilceList_Size = Constants.listdetails.size();
-                            ArrayList<SearchDetails> list_response = new JsonData().getJsonData(response);
-                            if (list_response.isEmpty()) {
-                                Toast.makeText(HomeScreen.this, "No  articles found", Toast.LENGTH_LONG).show();
-                            } else {
-                                Log.i(TAG, "list_response count is" + list_response.size());
-                                article_loading(list_response);
-                            }
-                            progress.setVisibility(View.GONE);
-                            progress_bar.setVisibility(View.GONE);
-                            content_lay.setVisibility(View.VISIBLE);
+                        public void onResponse(String response) {
 
-                            if (swipeRefreshLayout.isRefreshing()) {
+                            utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
+
+                            article_loading(response);
+
+                            if (swipeRefreshLayout.isRefreshing() == true) {
+                                Swipe_loading = true;
                                 swipeRefreshLayout.setRefreshing(false);
-                            } else if (Config.SwipeLoading) {
-                                display_data.removeFooterView(footerView);
-                                Config.SwipeLoading = false;
-                            }
-                            return null;
+                            } else
+                                progressbar.setVisibility(View.GONE);
+                            scroll_loading = true;
                         }
+
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
                     error.printStackTrace();
 
+                    if (error instanceof AuthFailureError && error.networkResponse.data != null) {
 
-                    if (error instanceof TimeoutError) {
+                    } else if (error instanceof TimeoutError) {
 
                         Log.i(TAG, "time out error");
 
                     } else if (error.networkResponse != null && error.networkResponse.data != null) {
                         byte[] error_resp = error.networkResponse.data;
-                        webview.loadData(new String(error.networkResponse.data), "text/html", "UTF-8");
-                        webview_lay.setVisibility(View.VISIBLE);
+
                     }
 
-                    progress_bar.setVisibility(View.GONE);
-                    if (swipeRefreshLayout.isRefreshing())
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        Swipe_loading = true;
                         swipeRefreshLayout.setRefreshing(false);
-                    if (Config.SwipeLoading) {
-
-                        display_data.removeFooterView(footerView);
-                        Config.SwipeLoading = false;
-                    }
-                    progress.setVisibility(View.GONE);
-                    content_lay.setVisibility(View.VISIBLE);
+                    } else
+                        progressbar.setVisibility(View.GONE);
+                    scroll_loading = true;
                 }
             }) {
 
@@ -673,15 +492,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     UserSession usersess = new UserSession(HomeScreen.this);
-                    Log.i(TAG, "!Config.SwipeLoading" + !Config.SwipeLoading);
-                    if (!Config.SwipeLoading) {
+
+                    if (swipeRefreshLayout.isRefreshing() == true)
                         params.put("tz", usersess.getTIMEZONE());
-                        Log.i(TAG, "time zone is" + usersess.getTIMEZONE());
-                    }
+
                     params.put("clubbed_query", clubbed_query);
                     params.put("setup", usersess.getSETUP());
-                    Log.i(TAG, "query" + clubbed_query + "\nsetup" + usersess.getSETUP());
 
+                    utils.showLog(TAG, "params are " + params, Config.HOME_SCREEN);
                     return params;
                 }
 
@@ -690,7 +508,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     Map<String, String> headers = new HashMap<String, String>();
                     String sessionid = new UserSession(HomeScreen.this).getTSESSION();
                     if (sessionid.length() > 0) {
-                        Log.i(TAG, "session id is" + sessionid);
                         StringBuilder builder = new StringBuilder();
                         builder.append("sessionid");
                         builder.append("=");
@@ -702,12 +519,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                         headers.put("Cookie", builder.toString());
                     }
 
+                    utils.showLog(TAG, "headers are " + headers, Config.HOME_SCREEN);
                     return headers;
                 }
-
             };
             serverRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    3000,
+                    30 * 1000,
                     3,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -715,38 +532,151 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(serverRequest);
 
         } else {
-            progress.setVisibility(View.GONE);
-            content_lay.setVisibility(View.VISIBLE);
 
-            if (swipeRefreshLayout.isRefreshing())
+            if (swipeRefreshLayout.isRefreshing()) {
+                Swipe_loading = true;
                 swipeRefreshLayout.setRefreshing(false);
-            if (Config.SwipeLoading) {
-                display_data.removeFooterView(footerView);
-                Config.SwipeLoading = false;
-            }
-            Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
+            } else
+                progressbar.setVisibility(View.GONE);
+            scroll_loading = true;
+
         }
+
     }
 
-    public void article_loading(ArrayList<SearchDetails> list_response) {
+    public void article_loading(String response) {
 
-        Constants.state = display_data.onSaveInstanceState();
-        search_adapter = new SearchListData(getApplication(), list_response);
-        display_data.setAdapter(search_adapter);
+        getJsonData(response);
 
-        if (Config.SwipeLoading || Intent_opt.equals(Constants.Intent_NOTHING)) {
-            Log.i(TAG, "Constant state is" + Constants.state.toString());
-            display_data.onRestoreInstanceState(Constants.state);
+        state = display_data.getLayoutManager().onSaveInstanceState();
+
+        searchAdapter = new SearchListDataAdapter(this, Constants.SEARCHARTICLES);
+        display_data.setAdapter(searchAdapter);
+        searchAdapter.setClickListener(this);
+        display_data.getLayoutManager().onRestoreInstanceState(state);
+
+        if (swipeRefreshLayout.isRefreshing() == true || Intent_opt.equals(Constants.Intent_NOTHING)) {
             Intent_opt = "";
+        }
+        /*if (Constants.SEARCHARTICLES.size() > 0) {
+            utils.userSession.setLatestDate(Constants.SEARCHARTICLES.get(0).source.DATE_ADDED);
+        }*/
+
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+
+        String geturl = "";
+        if (Constants.SEARCHARTICLES.size() > position)
+            geturl = Constants.SEARCHARTICLES.get(position).source.URL;
+
+        if (utils.isNetwrokConnection()) {
+            Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
+            i.putExtra("url", geturl);
+            startActivity(i);
         } else {
-            if (display_data.getCount() > 0) {
-                SearchDetails fistitem = (SearchDetails) display_data.getItemAtPosition(0);
-                userSession.setLatestDate(fistitem.getArticledate());
-                Log.i(TAG, "last date is" + userSession.getLatestDate());
+            Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public void getJsonData(String data) {
+
+        try {
+            jobj = new JSONObject(data);
+            if (jobj.getString("error").equals("0")) {
+
+                jobj_result = new JSONObject(jobj.getString("result"));
+                jobj_hit = new JSONObject(jobj_result.getString("hits"));
+                jobj_hits = new JSONArray(jobj_hit.getString("hits"));
+                Constants.scroolid = jobj_result.optString("_scroll_id");
+
+                /*if (jobj_hits.length() > 0) {
+                    if (swipeRefreshLayout.isRefreshing() == true) {
+                        if (Constants.scroolid.equals("1")) Constants.scroolid = scroll_id;
+                    } else {
+                        Constants.scroolid = scroll_id;
+                    }
+                } else {
+                    Constants.scroolid = "1";
+                }*/
+
+                if (jobj_hits.length() > 0) {
+
+
+                    if (swipeRefreshLayout.isRefreshing() == true) {
+                        searchArticleSwipe = new ArrayList<SearchArticles>();
+                        addArticletoList(searchArticleSwipe, jobj_hits.toString());
+                        Constants.SEARCHARTICLES.clear();
+                        Constants.SEARCHARTICLES.addAll(searchArticleSwipe);
+                    } else {
+                        addArticletoList(Constants.SEARCHARTICLES, jobj_hits.toString());
+                    }
+
+
+
+
+                    /*if (searchArticleSwipe != null) {
+                        if (!searchArticleSwipe.isEmpty()) {
+                            if (Constants.SEARCHARTICLES.size() > 0) {
+                                for (int i = 0; i < searchArticleSwipe.size(); i++)
+                                    if (searchArticleSwipe.get(i).source.URL.contains(Constants.SEARCHARTICLES.get(0).source.URL)) {
+                                        Constants.newarticles = i;
+                                        break;
+                                    }
+
+                                if (Constants.newarticles != 0)
+                                    for (int j = 0; j < Constants.newarticles; j++)
+                                        Constants.SEARCHARTICLES.add(j, searchArticleSwipe.get(j));
+                                else if (Constants.newarticles == -1)
+                                    for (int j = 0; j < searchArticleSwipe.size(); j++)
+                                        Constants.SEARCHARTICLES.add(j, searchArticleSwipe.get(j));
+                            } else
+                                Constants.SEARCHARTICLES = searchArticleSwipe;
+                        }
+                        Constants.newarticles = -1;
+                        searchArticleSwipe.clear();
+                    }*/
+                } else {
+                    Constants.scroolid = "1";
+                }
+
+                if (Constants.SEARCHARTICLES.size() <= 0) {
+                    txt_info.setVisibility(View.VISIBLE);
+                    utils.warning_info(txt_info, Constants.NO_RECORD);
+                } else {
+                    txt_info.setVisibility(View.GONE);
+                }
             }
-            search_adapter.notifyDataSetChanged();
-            Constants.state = display_data.onSaveInstanceState();
-            display_data.onRestoreInstanceState(Constants.state);
+            Log.i(TAG, "Articles size " + Constants.SEARCHARTICLES.size());
+
+            articleDetails();
+        } catch (JSONException e) {
+            Log.i(TAG, "exception" + e);
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addArticletoList(ArrayList<SearchArticles> list, String response) {
+
+        list.addAll((ArrayList<SearchArticles>) new Gson().fromJson(response,
+                new TypeToken<ArrayList<SearchArticles>>() {
+                }.getType()));
+
+    }
+
+    public void articleDetails() {
+        for (SearchArticles item : Constants.SEARCHARTICLES) {
+            long seconds = Long.parseLong(item.source.DATE_ADDED);
+            // Log.i(TAG, "article time is" + seconds);
+            long millis = seconds * 1000;
+            Date date = new Date(millis);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+
+            utils.showLog(TAG, "url is \t" + item.source.URL + "\ntime is\t" + sdf.format(date) + "\nauthor is" +
+                    item.source.AUTHOR.NAME, Config.SearchListDataAdapter);
         }
     }
 }

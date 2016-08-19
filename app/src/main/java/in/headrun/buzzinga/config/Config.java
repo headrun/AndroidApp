@@ -13,4 +13,9 @@ public class Config {
     public static boolean TRACKKEYWORD = true;
 
     public static boolean SwipeLoading = false;
+    public static boolean BuzzingaNotification = true;
+    public static boolean SearchListDataAdapter = true;
+    public static boolean ListViewAdapter = true;
+    public static boolean Filtering = true;
+    public static boolean FilterTitleAdapter = true;
 }

@@ -13,7 +13,7 @@
     <item
         android:id="@+id/action_track"
         android:checkable="true"
-        android:checked="false"
+        android:checked="true"
         android:title="Notify"
         android:titleCondensed="Persist" />
 
@@ -21,5 +21,9 @@
         android:id="@+id/action_logout"
         android:title="Logout"
         app:showAsAction="never" />
+
+    <item android:id="@+id/dashboard"
+        android:title="Dashboard"
+        app:showAsAction="never"/>
 
 </menu>

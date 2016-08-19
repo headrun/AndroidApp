@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -15,18 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
-import in.headrun.buzzinga.UserSession;
-import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
-import in.headrun.buzzinga.doto.QueryData;
-import in.headrun.buzzinga.doto.Utils;
-import in.headrun.buzzinga.utils.ConnectionSettings;
+import in.headrun.buzzinga.utils.Utils;
+
 
 /**
  * Created by headrun on 4/9/15.
@@ -41,8 +34,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     Button trackbtn;
     @Bind(R.id.track_progress)
     ProgressBar trak_progress;
-    UserSession usersession;
-    BuzzingaApplication buzzapp;
+
+
     Utils utils;
 
     @Override
@@ -50,15 +43,16 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackkeyword);
         ButterKnife.bind(this);
-        trak_progress.setVisibility(View.GONE);
+        utils = new Utils(this);
+
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-        usersession = new UserSession(getApplication());
-        buzzapp = new BuzzingaApplication();
-        utils = new Utils(TrackKeyWord.this);
-        if (usersession.getTrackKey().length() < 0) {
-            Trackkeyword.setText(usersession.getTrackKey());
+
+
+        if (utils.userSession.getTrackKey().length() < 0) {
+            Trackkeyword.setText(utils.userSession.getTrackKey());
         }
+
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -86,27 +80,20 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         hideKeyboard();
 
-        if (ConnectionSettings.isConnected(TrackKeyWord.this)) {
+        if (utils.isNetwrokConnection()) {
 
-            String track = Trackkeyword.getText().toString().trim().toString();
-            ArrayList<String> track_word = new ArrayList<>();
+            String track = Trackkeyword.getText().toString().trim();
 
-            if (Config.TRACKKEYWORD)
-                Log.i(TAG, "track key word is" + track);
             if (track.length() > 0) {
-                track_word.add(track);
+
                 trak_progress.setVisibility(View.VISIBLE);
-                usersession.setTrackKey(track_word.get(0));
 
-
-                utils.clear_all_data();
-                new BuzzingaApplication().BTRACKKEY.add(usersession.getTrackKey());
+                utils.userSession.setTrackKey(track);
                 utils.add_query_data();
-                Constants.listdetails.clear();
 
-                Intent intent = new Intent(getApplication(), HomeScreen.class);
-                intent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
-                startActivity(intent);
+                startActivity(new Intent(getApplication(), HomeScreen.class)
+                        .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
+
                 trak_progress.setVisibility(View.GONE);
 
             } else

@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/twitter_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/twitter_btn">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/buzz_logo1"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
-
+        android:layout_height="match_parent">
 
         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/buzz_logo1" />
+
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
             android:id="@+id/twitter_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/twitterbtn"
-            android:layout_marginBottom="42dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:id="@+id/twitter_login_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_marginBottom="42dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/twitterbtn" />
 
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btnuserdetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User details"
+        android:visibility="gone" />
+
+    />
+
     <RelativeLayout
+        android:id="@+id/twitter_auth_lay"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/twitter_auth_lay">
+        android:visibility="gone">
 
 
         <WebView
+            android:id="@+id/webview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/webview"></WebView>
+            android:layout_height="fill_parent"></WebView>
 
         <ProgressBar
+            android:id="@+id/progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical"
-            android:id="@+id/progressbar"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:gravity="center_horizontal|center_vertical"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </RelativeLayout>
-<!-- From: file:/home/headrun/Documents/BuzzingaApp/AndroidApp/app/src/main/res/layout/twitterlogin.xml -->
