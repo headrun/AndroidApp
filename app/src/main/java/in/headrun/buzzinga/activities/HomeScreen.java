@@ -4,11 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +28,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -253,12 +256,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             if (Constants.SEARCHSTRING.trim().length() > 0) {
 
                 if (utils.isNetwrokConnection()) {
-                    utils.userSession.setTrackKey(Constants.SEARCHSTRING);
+                    utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
 
                     Constants.SEARCHARTICLES.clear();
                     searchAdapter.notifyDataSetChanged();
 
-                    getSupportActionBar().setTitle(utils.userSession.getTrackKey());
+                    getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
+                            utils.userSession.gettTACK_SEARCH_KEY());
+
                     utils.add_query_data();
                     getServer_response(ServerConfig.search, utils.searchQuery());
                 }
@@ -474,7 +479,18 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                     error.printStackTrace();
 
-                    if (error instanceof AuthFailureError && error.networkResponse.data != null) {
+                    if (error instanceof ServerError) {
+
+                        new AlertDialog.Builder(HomeScreen.this).setTitle("Buzzing Error Message").
+                                setMessage("Serer error").
+                                setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+
+                                    }
+                                }).show();
+                    } else if (error instanceof AuthFailureError && error.networkResponse.data != null) {
 
                     } else if (error instanceof TimeoutError) {
 

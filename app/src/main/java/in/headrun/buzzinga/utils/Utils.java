@@ -140,7 +140,7 @@ public class Utils {
 
 
         setupdate(fromdate, todate);
-        String query = "(" + trackkey + ")" + check_query_value(searckkey) + check_query_value(source)
+        String query = "(" + trackkey + " AND " + check_query_value(searckkey) + ")" + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
 
         userSession.setClubbedquery(query);
@@ -165,7 +165,7 @@ public class Utils {
         Log.i(TAG, "search key size is" + item.size());
         if (item.size() > 1) {
             if (item.get(0) != null) {
-                String pref = "AND";
+                String pref = "";
                 for (String skey : item) {
                     queryvalue.append(pref);
                     pref = " AND ";
@@ -813,4 +813,6 @@ public class Utils {
 
 
     }
+
+
 }

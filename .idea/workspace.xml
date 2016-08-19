@@ -39,21 +39,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8f655f0-90c9-46e6-85ec-a751087804ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/progess_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$mipmap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$mipmap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$2.class" />
@@ -65,30 +50,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/in/headrun/buzzinga/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/in/headrun/buzzinga/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$$ViewBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
     </list>
     <ignored path="AndroidApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -179,46 +143,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="613" column="0" selection-start-line="613" selection-start-column="0" selection-end-line="613" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7719298">
+              <caret line="480" column="0" selection-start-line="480" selection-start-column="0" selection-end-line="480" selection-end-column="0" />
               <folding>
                 <element signature="docComment;class#HomeScreen#0" expanded="false" />
-                <element signature="method#onScrollStateChanged#0;class#4517:5859" expanded="false" />
+                <element signature="method#onCreate#0;class#HomeScreen#0" expanded="false" />
+                <element signature="class#4639:5981" expanded="false" />
+                <element signature="method#onScrollStateChanged#0;class#4639:5981" expanded="false" />
+                <element signature="method#onScrolled#0;class#4639:5981" expanded="false" />
+                <element signature="method#onStart#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onResume#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onPause#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onStop#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onDestroy#0;class#HomeScreen#0" expanded="false" />
                 <element signature="method#onNewIntent#0;class#HomeScreen#0" expanded="false" />
                 <element signature="method#handleIntent#0;class#HomeScreen#0" expanded="false" />
-                <element signature="class#14263:16009" expanded="false" />
-                <element signature="method#getHeaders#0;class#14263:16009" expanded="false" />
-                <element signature="class#16970:20332" expanded="false" />
-                <element signature="method#getParams#0;class#16970:20332" expanded="false" />
-                <element signature="method#getHeaders#0;class#16970:20332" expanded="false" />
+                <element signature="method#getdate#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onClick#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#stringrequest#0;class#HomeScreen#0" expanded="false" />
+                <element signature="class#14473:16219" expanded="false" />
+                <element signature="method#getHeaders#0;class#14473:16219" expanded="false" />
+                <element signature="class#17180:21083" expanded="false" />
+                <element signature="method#getParams#0;class#17180:21083" expanded="false" />
+                <element signature="method#getHeaders#0;class#17180:21083" expanded="false" />
+                <element signature="method#article_loading#0;class#HomeScreen#0" expanded="false" />
                 <element signature="method#itemClicked#0;class#HomeScreen#0" expanded="false" />
+                <element signature="method#getJsonData#0;class#HomeScreen#0" expanded="false" />
                 <element signature="method#addArticletoList#0;class#HomeScreen#0" expanded="false" />
-                <element signature="class#23969:24027" expanded="false" />
+                <element signature="class#24720:24778" expanded="false" />
                 <element signature="method#articleDetails#0;class#HomeScreen#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74338084">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exclude" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.git/info/exclude">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -237,18 +196,21 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="795" column="0" selection-start-line="795" selection-start-column="0" selection-end-line="795" selection-end-column="0" />
+              <caret line="815" column="0" selection-start-line="815" selection-start-column="0" selection-end-line="815" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="false" />
                 <element signature="docComment;class#Utils#0" expanded="false" />
                 <element signature="method#Utils#0;class#Utils#0" expanded="false" />
                 <element signature="method#timezone#0;class#Utils#0" expanded="false" />
+                <element signature="method#getquerydata#0;class#Utils#0" expanded="false" />
                 <element signature="method#formquery#0;class#Utils#0" expanded="false" />
                 <element signature="method#check_query_value#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_searchkey#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_trackkey#0;class#Utils#0" expanded="false" />
+                <element signature="method#query_sources#0;class#Utils#0" expanded="false" />
+                <element signature="method#get_source_xtag#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
+                <element signature="method#query_sentiment#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_language#0;class#Utils#0" expanded="false" />
@@ -257,15 +219,25 @@
                 <element signature="method#count_query#0;class#Utils#0" expanded="false" />
                 <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
                 <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
-                <element signature="e#22174#22240#0" expanded="false" />
+                <element signature="e#22181#22247#0" expanded="false" />
                 <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
                 <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
+                <element signature="method#clear_all_data#0;class#Utils#0" expanded="false" />
+                <element signature="method#add_filtering_data#0;class#Utils#0" expanded="false" />
+                <element signature="method#stringtoArray#0;class#Utils#0" expanded="false" />
+                <element signature="method#countIS#0;class#Utils#0" expanded="false" />
+                <element signature="method#add_query_data#0;class#Utils#0" expanded="false" />
                 <element signature="method#screendisplay#0;class#Utils#0" expanded="false" />
+                <element signature="method#searchQuery#0;class#Utils#0" expanded="false" />
                 <element signature="method#refreshSearchQuery#0;class#Utils#0" expanded="false" />
                 <element signature="method#scrollQuery#0;class#Utils#0" expanded="false" />
                 <element signature="class#setOnItemClickListner#0;class#Utils#0" expanded="false" />
+                <element signature="method#showLog#0;class#Utils#0" expanded="false" />
                 <element signature="method#isNetwrokConnection#0;class#Utils#0" expanded="false" />
                 <element signature="method#warning_info#0;class#Utils#0" expanded="false" />
+                <element signature="method#updateListviewItem#0;class#Utils#0" expanded="false" />
+                <element signature="method#getArrayPos#0;class#Utils#0" expanded="false" />
+                <element signature="method#addtoList#0;class#Utils#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2232,12 +2204,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/progess_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
       </list>
     </option>
   </component>
@@ -2277,7 +2249,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages AndroidView="false" />
       <showMembers />
       <showModules />
@@ -2361,22 +2333,8 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane subId="Changed Files" />
+        <subPane subId="Default" />
         <subPane subId="Project Files">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
@@ -2423,84 +2381,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="AndroidApp" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="buzzinga" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="buzzinga" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2996,7 +2876,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -3004,12 +2884,12 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4887097" sideWeight="0.50278884" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="165" y="196" width="1101" height="572" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58387095" sideWeight="0.49721116" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="165" y="224" width="1101" height="572" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58387095" sideWeight="0.49721116" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31474105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7709677" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.019354839" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44516128" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -3096,7 +2976,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="664" />
+      <option name="time" value="668" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3503,42 +3383,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="795" column="0" selection-start-line="795" selection-start-column="0" selection-end-line="795" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#Utils#0" expanded="false" />
-            <element signature="method#Utils#0;class#Utils#0" expanded="false" />
-            <element signature="method#timezone#0;class#Utils#0" expanded="false" />
-            <element signature="method#formquery#0;class#Utils#0" expanded="false" />
-            <element signature="method#check_query_value#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_searchkey#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_trackkey#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_language#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_location#0;class#Utils#0" expanded="false" />
-            <element signature="method#queryform#0;class#Utils#0" expanded="false" />
-            <element signature="method#count_query#0;class#Utils#0" expanded="false" />
-            <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
-            <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
-            <element signature="e#22174#22240#0" expanded="false" />
-            <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
-            <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
-            <element signature="method#screendisplay#0;class#Utils#0" expanded="false" />
-            <element signature="method#refreshSearchQuery#0;class#Utils#0" expanded="false" />
-            <element signature="method#scrollQuery#0;class#Utils#0" expanded="false" />
-            <element signature="class#setOnItemClickListner#0;class#Utils#0" expanded="false" />
-            <element signature="method#isNetwrokConnection#0;class#Utils#0" expanded="false" />
-            <element signature="method#warning_info#0;class#Utils#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3597,28 +3441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="613" column="0" selection-start-line="613" selection-start-column="0" selection-end-line="613" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#HomeScreen#0" expanded="false" />
-            <element signature="method#onScrollStateChanged#0;class#4517:5859" expanded="false" />
-            <element signature="method#onNewIntent#0;class#HomeScreen#0" expanded="false" />
-            <element signature="method#handleIntent#0;class#HomeScreen#0" expanded="false" />
-            <element signature="class#14263:16009" expanded="false" />
-            <element signature="method#getHeaders#0;class#14263:16009" expanded="false" />
-            <element signature="class#16970:20332" expanded="false" />
-            <element signature="method#getParams#0;class#16970:20332" expanded="false" />
-            <element signature="method#getHeaders#0;class#16970:20332" expanded="false" />
-            <element signature="method#itemClicked#0;class#HomeScreen#0" expanded="false" />
-            <element signature="method#addArticletoList#0;class#HomeScreen#0" expanded="false" />
-            <element signature="class#23969:24027" expanded="false" />
-            <element signature="method#articleDetails#0;class#HomeScreen#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.git/info/exclude">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3629,9 +3451,95 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74338084">
+        <state vertical-scroll-proportion="1.6681416">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="815" column="0" selection-start-line="815" selection-start-column="0" selection-end-line="815" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Utils#0" expanded="false" />
+            <element signature="method#Utils#0;class#Utils#0" expanded="false" />
+            <element signature="method#timezone#0;class#Utils#0" expanded="false" />
+            <element signature="method#getquerydata#0;class#Utils#0" expanded="false" />
+            <element signature="method#formquery#0;class#Utils#0" expanded="false" />
+            <element signature="method#check_query_value#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_searchkey#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_trackkey#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_sources#0;class#Utils#0" expanded="false" />
+            <element signature="method#get_source_xtag#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_sentiment#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_language#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_location#0;class#Utils#0" expanded="false" />
+            <element signature="method#queryform#0;class#Utils#0" expanded="false" />
+            <element signature="method#count_query#0;class#Utils#0" expanded="false" />
+            <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
+            <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
+            <element signature="e#22181#22247#0" expanded="false" />
+            <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
+            <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
+            <element signature="method#clear_all_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#add_filtering_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#stringtoArray#0;class#Utils#0" expanded="false" />
+            <element signature="method#countIS#0;class#Utils#0" expanded="false" />
+            <element signature="method#add_query_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#screendisplay#0;class#Utils#0" expanded="false" />
+            <element signature="method#searchQuery#0;class#Utils#0" expanded="false" />
+            <element signature="method#refreshSearchQuery#0;class#Utils#0" expanded="false" />
+            <element signature="method#scrollQuery#0;class#Utils#0" expanded="false" />
+            <element signature="class#setOnItemClickListner#0;class#Utils#0" expanded="false" />
+            <element signature="method#showLog#0;class#Utils#0" expanded="false" />
+            <element signature="method#isNetwrokConnection#0;class#Utils#0" expanded="false" />
+            <element signature="method#warning_info#0;class#Utils#0" expanded="false" />
+            <element signature="method#updateListviewItem#0;class#Utils#0" expanded="false" />
+            <element signature="method#getArrayPos#0;class#Utils#0" expanded="false" />
+            <element signature="method#addtoList#0;class#Utils#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7719298">
+          <caret line="480" column="0" selection-start-line="480" selection-start-column="0" selection-end-line="480" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onCreate#0;class#HomeScreen#0" expanded="false" />
+            <element signature="class#4639:5981" expanded="false" />
+            <element signature="method#onScrollStateChanged#0;class#4639:5981" expanded="false" />
+            <element signature="method#onScrolled#0;class#4639:5981" expanded="false" />
+            <element signature="method#onStart#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onResume#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onPause#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onStop#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onNewIntent#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#handleIntent#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#getdate#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onClick#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#stringrequest#0;class#HomeScreen#0" expanded="false" />
+            <element signature="class#14473:16219" expanded="false" />
+            <element signature="method#getHeaders#0;class#14473:16219" expanded="false" />
+            <element signature="class#17180:21083" expanded="false" />
+            <element signature="method#getParams#0;class#17180:21083" expanded="false" />
+            <element signature="method#getHeaders#0;class#17180:21083" expanded="false" />
+            <element signature="method#article_loading#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#itemClicked#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#getJsonData#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#addArticletoList#0;class#HomeScreen#0" expanded="false" />
+            <element signature="class#24720:24778" expanded="false" />
+            <element signature="method#articleDetails#0;class#HomeScreen#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
