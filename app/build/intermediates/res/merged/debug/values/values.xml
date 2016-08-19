@@ -524,7 +524,7 @@
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="clearfilter">Clear Filter</string>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">63882930-0a8a-44a3-81c3-075ea9fa7e3d</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">cbb4d611-07d7-4c27-b031-034c30117f41</string>
     <string name="day">\u0020day</string>
     <string name="days">\u0020days</string>
     <string name="dgts__call_me">Call me</string>

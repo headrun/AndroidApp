@@ -125,7 +125,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         Intent_opt = data.getString(Constants.Intent_OPERATION);
 
         handleIntent(getIntent());
-        Constants.SEARCHARTICLES.clear();
+
+        if (Intent_opt.equals(Constants.TRACKKEY))
+            Constants.SEARCHARTICLES.clear();
 
         display_data.setHasFixedSize(true);
         display_data.setLayoutManager(mLinearLayout);
@@ -133,8 +135,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         display_data.setAdapter(searchAdapter);
         searchAdapter.setClickListener(this);
 
-
-        //inflater = this.getLayoutInflater();
 
         newarticle.setOnClickListener(this);
         filtersource.setOnClickListener(this);
@@ -161,6 +161,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                             scroll_loading = false;
                             utils.add_query_data();
+
+                            Constants.SEARCHARTICLES.add(null);
+                            searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
+
                             getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
                         }
                     }
@@ -202,7 +206,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
         Log.i(TAG, "onstart");
         utils.add_query_data();
-        getServer_response(ServerConfig.search, utils.searchQuery());
+        if (Intent_opt.equals(Constants.Intent_TRACK))
+            getServer_response(ServerConfig.search, utils.searchQuery());
 
     }
 
@@ -452,6 +457,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                             utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
 
+
                             article_loading(response);
 
                             if (swipeRefreshLayout.isRefreshing() == true) {
@@ -459,7 +465,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                                 swipeRefreshLayout.setRefreshing(false);
                             } else
                                 progressbar.setVisibility(View.GONE);
-                            scroll_loading = true;
+
                         }
 
                     }, new Response.ErrorListener() {
@@ -546,21 +552,23 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     public void article_loading(String response) {
 
+
+        if (scroll_loading == false) {
+            Constants.SEARCHARTICLES.remove(Constants.SEARCHARTICLES.size() - 1);
+            searchAdapter.notifyItemRemoved(Constants.SEARCHARTICLES.size());
+            scroll_loading = true;
+        }
+
         getJsonData(response);
 
         state = display_data.getLayoutManager().onSaveInstanceState();
 
-        searchAdapter = new SearchListDataAdapter(this, Constants.SEARCHARTICLES);
-        display_data.setAdapter(searchAdapter);
-        searchAdapter.setClickListener(this);
+        searchAdapter.notifyDataSetChanged();
         display_data.getLayoutManager().onRestoreInstanceState(state);
 
         if (swipeRefreshLayout.isRefreshing() == true || Intent_opt.equals(Constants.Intent_NOTHING)) {
             Intent_opt = "";
         }
-        /*if (Constants.SEARCHARTICLES.size() > 0) {
-            utils.userSession.setLatestDate(Constants.SEARCHARTICLES.get(0).source.DATE_ADDED);
-        }*/
 
     }
 
@@ -592,18 +600,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 jobj_hits = new JSONArray(jobj_hit.getString("hits"));
                 Constants.scroolid = jobj_result.optString("_scroll_id");
 
-                /*if (jobj_hits.length() > 0) {
-                    if (swipeRefreshLayout.isRefreshing() == true) {
-                        if (Constants.scroolid.equals("1")) Constants.scroolid = scroll_id;
-                    } else {
-                        Constants.scroolid = scroll_id;
-                    }
-                } else {
-                    Constants.scroolid = "1";
-                }*/
-
                 if (jobj_hits.length() > 0) {
-
 
                     if (swipeRefreshLayout.isRefreshing() == true) {
                         searchArticleSwipe = new ArrayList<SearchArticles>();
@@ -614,30 +611,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                         addArticletoList(Constants.SEARCHARTICLES, jobj_hits.toString());
                     }
 
-
-
-
-                    /*if (searchArticleSwipe != null) {
-                        if (!searchArticleSwipe.isEmpty()) {
-                            if (Constants.SEARCHARTICLES.size() > 0) {
-                                for (int i = 0; i < searchArticleSwipe.size(); i++)
-                                    if (searchArticleSwipe.get(i).source.URL.contains(Constants.SEARCHARTICLES.get(0).source.URL)) {
-                                        Constants.newarticles = i;
-                                        break;
-                                    }
-
-                                if (Constants.newarticles != 0)
-                                    for (int j = 0; j < Constants.newarticles; j++)
-                                        Constants.SEARCHARTICLES.add(j, searchArticleSwipe.get(j));
-                                else if (Constants.newarticles == -1)
-                                    for (int j = 0; j < searchArticleSwipe.size(); j++)
-                                        Constants.SEARCHARTICLES.add(j, searchArticleSwipe.get(j));
-                            } else
-                                Constants.SEARCHARTICLES = searchArticleSwipe;
-                        }
-                        Constants.newarticles = -1;
-                        searchArticleSwipe.clear();
-                    }*/
                 } else {
                     Constants.scroolid = "1";
                 }
@@ -651,7 +624,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             }
             Log.i(TAG, "Articles size " + Constants.SEARCHARTICLES.size());
 
-            articleDetails();
+            //   articleDetails();
         } catch (JSONException e) {
             Log.i(TAG, "exception" + e);
             e.printStackTrace();

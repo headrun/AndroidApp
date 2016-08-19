@@ -8,16 +8,16 @@ import butterknife.ButterKnife.ViewBinder;
 public class Filtering$$ViewBinder<T extends in.headrun.buzzinga.activities.Filtering> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131755242, "field 'filter_titles'");
-    target.filter_titles = finder.castView(view, 2131755242, "field 'filter_titles'");
-    view = finder.findRequiredView(source, 2131755244, "field 'filter_items'");
-    target.filter_items = finder.castView(view, 2131755244, "field 'filter_items'");
-    view = finder.findRequiredView(source, 2131755245, "field 'clearfilter'");
-    target.clearfilter = finder.castView(view, 2131755245, "field 'clearfilter'");
-    view = finder.findRequiredView(source, 2131755246, "field 'applyfilter'");
-    target.applyfilter = finder.castView(view, 2131755246, "field 'applyfilter'");
-    view = finder.findRequiredView(source, 2131755243, "field 'autosearch'");
-    target.autosearch = finder.castView(view, 2131755243, "field 'autosearch'");
+    view = finder.findRequiredView(source, 2131755243, "field 'filter_titles'");
+    target.filter_titles = finder.castView(view, 2131755243, "field 'filter_titles'");
+    view = finder.findRequiredView(source, 2131755245, "field 'filter_items'");
+    target.filter_items = finder.castView(view, 2131755245, "field 'filter_items'");
+    view = finder.findRequiredView(source, 2131755246, "field 'clearfilter'");
+    target.clearfilter = finder.castView(view, 2131755246, "field 'clearfilter'");
+    view = finder.findRequiredView(source, 2131755247, "field 'applyfilter'");
+    target.applyfilter = finder.castView(view, 2131755247, "field 'applyfilter'");
+    view = finder.findRequiredView(source, 2131755244, "field 'autosearch'");
+    target.autosearch = finder.castView(view, 2131755244, "field 'autosearch'");
   }
 
   @Override public void unbind(T target) {
