@@ -18,6 +18,8 @@ import in.headrun.buzzinga.doto.SearchArticles;
  */
 public class Constants {
 
+
+
     public static final String TRACKKEY = "trackkey";
     public static final String SEARCHKEY = "searchkey";
     public static final String SOURCES = "sources";
@@ -62,6 +64,7 @@ public class Constants {
     public static String Intent_NOtify = "notification";
     public static String Intent_NOTHING = "nothing";
     public static int newarticles = -1;
+    public static int JOBID = 1;
 
     public static Map<String, String> sources_list = new HashMap<>();
     public static Map<String, String> source_map = new HashMap<>();

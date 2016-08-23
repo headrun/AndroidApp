@@ -39,7 +39,7 @@ public class ArticleWebDisplay extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
-         ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         Bundle data = getIntent().getExtras();
         url = data.getString("url");
@@ -54,7 +54,7 @@ public class ArticleWebDisplay extends Activity {
             public void onClick(View v) {
 
                 article_webview.destroy();
-                Intent i = new Intent(ArticleWebDisplay.this, HomeScreen.class);
+                Intent i = new Intent(ArticleWebDisplay.this, MainActivity.class);
                 i.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
                 startActivity(i);
                 //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
@@ -65,12 +65,10 @@ public class ArticleWebDisplay extends Activity {
 
     private void webSettings(String url) {
 
-
         article_webview.getSettings().setJavaScriptEnabled(true);
         article_webview.clearCache(true);
         article_webview.clearHistory();
         article_webview.loadUrl("");
-
 
         article_webview.setWebViewClient(new WebViewClient() {
             @Override

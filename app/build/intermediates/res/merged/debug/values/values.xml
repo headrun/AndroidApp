@@ -7,6 +7,11 @@
         <item>Location</item>
         <item>Language</item>
     </string-array>
+    <string-array name="notify_hours">
+        <item>1 hour</item>
+        <item>2 hour</item>
+        <item>3 hour</item>
+    </string-array>
     <string-array name="sourecselection">
         <item>news_sourcetype_manual_parent</item>
         <item>blogs_sourcetype_manual_parent</item>
@@ -55,6 +60,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="black">#000000</color>
     <color name="blue">#4baad3</color>
     <color name="blue_focused">#c1e8f7</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
@@ -351,6 +357,7 @@
     <dimen name="dgts__title_text_size">22sp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="fab_margin">16dp</dimen>
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
@@ -393,10 +400,13 @@
     <dimen name="mdtp_time_picker_height">280dip</dimen>
     <dimen name="mdtp_year_label_height">64dp</dimen>
     <dimen name="mdtp_year_label_text_size">22dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
+    <dimen name="toolbar_height">75dp</dimen>
     <dimen name="tw__btn_bar_margin_left">8dp</dimen>
     <dimen name="tw__btn_bar_margin_right">8dp</dimen>
     <dimen name="tw__compact_tweet_action_bar_offset_left">-12dp</dimen>
@@ -465,6 +475,11 @@
     <dimen name="tw__tweet_timestamp_padding_left">4dp</dimen>
     <dimen name="tw__tweet_verified_check_padding_left">3dp</dimen>
     <dimen name="tw__tweet_verified_margin_bottom">3dp</dimen>
+    <item name="edit_keyword" type="drawable">@android:drawable/ic_menu_edit</item>
+    <item name="filter" type="drawable">@drawable/article_filter</item>
+    <item name="ic_menu_manage" type="drawable">@android:drawable/ic_menu_manage</item>
+    <item name="ic_menu_send" type="drawable">@android:drawable/ic_menu_send</item>
+    <item name="ic_menu_share" type="drawable">@android:drawable/ic_menu_share</item>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -524,7 +539,7 @@
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="clearfilter">Clear Filter</string>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">cbb4d611-07d7-4c27-b031-034c30117f41</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">b6816592-cd1f-4ceb-b67f-9cd6af53da82</string>
     <string name="day">\u0020day</string>
     <string name="days">\u0020days</string>
     <string name="dgts__call_me">Call me</string>
@@ -614,9 +629,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="norecord">Articles Not Found</string>
+    <string name="notifyme">Notify me</string>
     <string name="search">Search By Keyword</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="subtitle">Quantify the Social</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="title_section1">Search</string>
     <string name="title_section2">Facebook</string>
     <string name="title_section3">Google +</string>
@@ -648,6 +665,12 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
         <item name="listLayout">@layout/abc_select_dialog_material</item>

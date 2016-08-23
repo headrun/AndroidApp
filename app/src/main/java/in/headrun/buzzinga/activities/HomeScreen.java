@@ -1,25 +1,21 @@
 package in.headrun.buzzinga.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +44,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
@@ -57,23 +51,21 @@ import in.headrun.buzzinga.adapters.SearchListDataAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
-import in.headrun.buzzinga.dashboard.ListViewMultiChartActivity;
 import in.headrun.buzzinga.doto.SearchArticles;
 import in.headrun.buzzinga.utils.Utils;
 
 /**
  * Created by headrun on 7/7/15.
  */
-public class HomeScreen extends AppCompatActivity implements View.OnClickListener, Utils.setOnItemClickListner {
-
+public class HomeScreen extends Fragment implements View.OnClickListener, Utils.setOnItemClickListner {
 
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
-    @Bind(R.id.filtersource)
+   /* @Bind(R.id.filtersource)
     TextView filtersource;
 
     @Bind(R.id.filterdate)
-    TextView filterdate;
+    TextView filterdate;*/
 
     @Bind(R.id.newarticle)
     TextView newarticle;
@@ -91,7 +83,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     RecyclerView display_data;
 
     Utils utils;
-    public String Intent_opt;
+    public String Intent_opt = "";
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     StringRequest stringRequest, serverRequest;
@@ -108,40 +100,55 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     public static Parcelable state;
 
+/*
+    public static HomeScreen newInstance(String track_key) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Intent_OPERATION, track_key);
+        HomeScreen fragment = new HomeScreen();
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+*/
+
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            Intent_opt = bundle.getString(Constants.Intent_OPERATION);
+
+        }
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_PROGRESS);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.homescreen);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        View v = inflater.inflate(R.layout.homescreen, container, false);
+        ButterKnife.bind(this, v);
 
-        utils = new Utils(this);
-        mLinearLayout = new LinearLayoutManager(this);
+        utils = new Utils(getActivity());
+        mLinearLayout = new LinearLayoutManager(getActivity());
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.buzz_logo);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(utils.userSession.getTrackKey());
+        readBundle(getArguments());
 
-        Bundle data = getIntent().getExtras();
-        Intent_opt = data.getString(Constants.Intent_OPERATION);
 
-        handleIntent(getIntent());
+//        handleIntent(getIntent());
 
-        if (Intent_opt.equals(Constants.TRACKKEY))
+
+        if (Constants.Intent_TRACK.equals(Intent_opt))
             Constants.SEARCHARTICLES.clear();
+
 
         display_data.setHasFixedSize(true);
         display_data.setLayoutManager(mLinearLayout);
-        searchAdapter = new SearchListDataAdapter(this, Constants.SEARCHARTICLES);
+        searchAdapter = new SearchListDataAdapter(getActivity(), Constants.SEARCHARTICLES);
         display_data.setAdapter(searchAdapter);
         searchAdapter.setClickListener(this);
 
 
         newarticle.setOnClickListener(this);
-        filtersource.setOnClickListener(this);
-        filterdate.setOnClickListener(this);
+        //filtersource.setOnClickListener(this);
+        //filterdate.setOnClickListener(this);
 
         display_data.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -202,16 +209,17 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if (state != null) {
             display_data.getLayoutManager().onRestoreInstanceState(state);
         }
+
+        return v;
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         Log.i(TAG, "onstart");
         utils.add_query_data();
         if (Intent_opt.equals(Constants.Intent_TRACK))
             getServer_response(ServerConfig.search, utils.searchQuery());
-
     }
 
     @Override
@@ -232,23 +240,23 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         Log.i(TAG, "onstop");
 
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "onDestory");
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        setIntent(intent);
+   /* @Override
+    public void onNewIntent(Intent intent) {
+        //setIntent(intent);
         handleIntent(intent);
-    }
+    }*/
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -261,9 +269,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     Constants.SEARCHARTICLES.clear();
                     searchAdapter.notifyDataSetChanged();
 
-                    getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
-                            utils.userSession.gettTACK_SEARCH_KEY());
 
+                    /*getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
+                            utils.userSession.gettTACK_SEARCH_KEY());
+*/
                     utils.add_query_data();
                     getServer_response(ServerConfig.search, utils.searchQuery());
                 }
@@ -272,51 +281,18 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    public void getdate() {
-
-       /* FragmentManager fm = getFragmentManager();
-        DialogFragment newFragment = new FilterByDate();
-        newFragment.show(fm, "datePicker");*/
-
-
-        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
-                SmoothDateRangePickerFragment
-                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
-                            @Override
-                            public void onDateRangeSet(SmoothDateRangePickerFragment view,
-                                                       int yearStart, int monthStart,
-                                                       int dayStart, int yearEnd,
-                                                       int monthEnd, int dayEnd) {
-                                String date = "You picked the following date range: \n"
-                                        + "From " + dayStart + "/" + (++monthStart)
-                                        + "/" + yearStart + " To " + dayEnd + "/"
-                                        + (++monthEnd) + "/" + yearEnd;
-
-                                utils.userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
-                                utils.userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
-
-                                utils.showLog(TAG, "date is " + utils.userSession.getFROM_DATE() + "  to  " +
-                                        utils.userSession.getTO_DATE(), Config.HOME_SCREEN);
-
-                                utils.add_query_data();
-                                getServer_response(ServerConfig.search, utils.searchQuery());
-                            }
-                        });
-        smoothDateRangePickerFragment.show(getFragmentManager(), "Buzzinga");
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
 
-            case R.id.filtersource:
-                startActivity(new Intent(this, Filtering.class));
+            /*case R.id.filtersource:
+                // startActivity(new Intent(this, Filtering.class));
                 break;
 
             case R.id.filterdate:
-                getdate();
-                break;
+                //getdate();
+                break;*/
 
             case R.id.newarticle:
                 newarticle.setVisibility(View.GONE);
@@ -326,7 +302,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    @Override
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main, menu);
@@ -334,7 +310,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         menu.findItem(R.id.action_track).setChecked(utils.userSession.isBUZZ_NOTIFY_SEL());
-
         return true;
     }
 
@@ -346,9 +321,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         } else if (id == R.id.dashboard) {
             Log.i(TAG, "TAG is" + TAG);
             if (TAG.equals("ListViewMultiChartActivity")) {
-                startActivity(new Intent(this, HomeScreen.class));
+                startActivity(new Intent(getActivity(), HomeScreen.class));
             } else {
-                startActivity(new Intent(this, ListViewMultiChartActivity.class));
+                startActivity(new Intent(getActivity(), ListViewMultiChartActivity.class));
             }
 
         } else if (id == R.id.action_track) {
@@ -364,9 +339,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Log.i(TAG, "stop the service");
                 // stopService(new Intent(getBaseContext(), BuzzNotification.class));
                 try {
-                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(this, BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
                     alarmManager.cancel(pendingIntent);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -378,9 +353,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 item.setChecked(track_check);
                 Log.i(TAG, "false  item.setChecked(track_check)" + item.setChecked(track_check));
                 try {
-                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(this, BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1 * 1000, 3 * 60 * 1000, pendingIntent);
                     Log.i(TAG, "start the service");
                 } catch (Exception e) {
@@ -389,12 +364,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 Log.i(TAG, "start the service");
             }
         } else if (id == android.R.id.home) {
-            startActivity(new Intent(HomeScreen.this, TrackKeyWord.class));
+            BuzzingaRequest.getInstance(getActivity()).cancelRequestQueue(TAG);
+            startActivity(new Intent(getActivity(), TrackKeyWord.class));
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void stringrequest() {
+*/
+   /* public void stringrequest() {
         if (utils.isNetwrokConnection()) {
             progressbar.setVisibility(View.VISIBLE);
             stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
@@ -404,14 +380,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                             Log.d(TAG, "string response is" + response);
 
-                            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                            Intent intent = new Intent(HomeScreen.this, BuzzingaNotification.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeScreen.this, 0, intent, 0);
+                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                            Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
                             alarmManager.cancel(pendingIntent);
                             // stopService(new Intent(HomeScreen.this, .class));
                             ;
                             utils.userSession.clearsession(utils.userSession.TSESSION);
-                            startActivity(new Intent(HomeScreen.this, TwitterLogin.class));
+                            startActivity(new Intent(getActivity(), TwitterLogin.class));
                             progressbar.setVisibility(View.GONE);
 
                         }
@@ -425,21 +401,21 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("sessionid", new UserSession(HomeScreen.this).getTSESSION());
+                    params.put("sessionid", new UserSession(getActivity()).getTSESSION());
                     return params;
                 }
             };
             stringRequest.setTag(TAG);
 
-            BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
+            BuzzingaRequest.getInstance(getActivity()).addToRequestQueue(stringRequest);
         } else {
-            Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
     public void getServer_response(String URL_request, String clubbedquery) {
 
-        BuzzingaRequest.getInstance(getApplication()).cancelRequestQueue(TAG);
+        BuzzingaRequest.getInstance(getActivity()).cancelRequestQueue(TAG);
         txt_info.setVisibility(View.GONE);
         final String clubbed_query = clubbedquery;
 
@@ -481,7 +457,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
                     if (error instanceof ServerError) {
 
-                        new AlertDialog.Builder(HomeScreen.this).setTitle("Buzzing Error Message").
+                        new AlertDialog.Builder(getActivity()).setTitle("Buzzing Error Message").
                                 setMessage("Serer error").
                                 setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
@@ -513,7 +489,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 @Override
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    UserSession usersess = new UserSession(HomeScreen.this);
+                    UserSession usersess = new UserSession(getActivity());
 
                     if (swipeRefreshLayout.isRefreshing() == true)
                         params.put("tz", usersess.getTIMEZONE());
@@ -528,7 +504,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<String, String>();
-                    String sessionid = new UserSession(HomeScreen.this).getTSESSION();
+                    String sessionid = new UserSession(getActivity()).getTSESSION();
                     if (sessionid.length() > 0) {
                         StringBuilder builder = new StringBuilder();
                         builder.append("sessionid");
@@ -551,7 +527,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
             serverRequest.setTag(TAG);
-            BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(serverRequest);
+            BuzzingaRequest.getInstance(getActivity()).addToRequestQueue(serverRequest);
 
         } else {
 
@@ -575,11 +551,19 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             scroll_loading = true;
         }
 
+        if (swipeRefreshLayout.isRefreshing())
+            Constants.SEARCHARTICLES.clear();
+
+
         getJsonData(response);
 
         state = display_data.getLayoutManager().onSaveInstanceState();
 
         searchAdapter.notifyDataSetChanged();
+        if (Constants.SEARCHARTICLES.size() > 0) {
+            utils.userSession.setLatestDate(Constants.SEARCHARTICLES.get(0).source.DATE_ADDED);
+        }
+
         display_data.getLayoutManager().onRestoreInstanceState(state);
 
         if (swipeRefreshLayout.isRefreshing() == true || Intent_opt.equals(Constants.Intent_NOTHING)) {
@@ -596,11 +580,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             geturl = Constants.SEARCHARTICLES.get(position).source.URL;
 
         if (utils.isNetwrokConnection()) {
-            Intent i = new Intent(HomeScreen.this, ArticleWebDisplay.class);
+            Intent i = new Intent(getActivity(), ArticleWebDisplay.class);
             i.putExtra("url", geturl);
             startActivity(i);
         } else {
-            Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -621,7 +605,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     if (swipeRefreshLayout.isRefreshing() == true) {
                         searchArticleSwipe = new ArrayList<SearchArticles>();
                         addArticletoList(searchArticleSwipe, jobj_hits.toString());
-                        Constants.SEARCHARTICLES.clear();
                         Constants.SEARCHARTICLES.addAll(searchArticleSwipe);
                     } else {
                         addArticletoList(Constants.SEARCHARTICLES, jobj_hits.toString());

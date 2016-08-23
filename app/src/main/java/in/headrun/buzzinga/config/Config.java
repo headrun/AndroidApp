@@ -18,4 +18,5 @@ public class Config {
     public static boolean ListViewAdapter = true;
     public static boolean Filtering = true;
     public static boolean FilterTitleAdapter = true;
+    public static boolean MainActivity = true;
 }

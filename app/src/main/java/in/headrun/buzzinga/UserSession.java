@@ -34,6 +34,7 @@ public class UserSession {
     public static final String Sentiment_data = "sentiment";
     public static final String Lang_data = "lang";
     public static final String Loc_data = "loc";
+    public static final String NOTIFY_HOUR = "notify_hour";
 
     public static final String TACK_SEARCH_KEY = "";
     public static String BTRACKKEY = "";
@@ -169,7 +170,6 @@ public class UserSession {
 
     public String getTrackKey() {
         String getTrackKey = pref.getString(TRACK_KEY, "");
-
         return getTrackKey;
     }
 
@@ -254,4 +254,14 @@ public class UserSession {
         editor.commit();
     }
 
+    ////set the notify value
+    public void setNotifyHour(int value) {
+        editor.putInt(NOTIFY_HOUR, value);
+        editor.commit();
+    }
+
+    ////get the notify value
+    public int getNotifyHour() {
+        return pref.getInt(NOTIFY_HOUR, 1);
+    }
 }

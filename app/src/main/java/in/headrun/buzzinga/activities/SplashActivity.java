@@ -30,21 +30,20 @@ public class SplashActivity extends Activity {
     private static final String TWITTER_SECRET = "eIULy4JeljkZN8JpWXXa4o2b2puUjq73PP6zaVIVk";
     public static String TAG = SplashActivity.class.getClass().getSimpleName();
     public String loged;
-    @Bind(R.id.splash_progress)
-    ProgressBar splash_progress;
+    /* @Bind(R.id.splash_progress)
+     ProgressBar splash_progress;*/
     UserSession userSession;
     Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        userSession = new UserSession(SplashActivity.this);
         setContentView(R.layout.splashscren);
-        ButterKnife.bind(this);
-        utils = new Utils(SplashActivity.this);
 
-        splash_progress.setVisibility(View.VISIBLE);
+        //  ButterKnife.bind(this);
+        utils = new Utils(SplashActivity.this);
+        userSession = new UserSession(SplashActivity.this);
+        //  splash_progress.setVisibility(View.VISIBLE);
         if (Config.SPLASH)
             Log.i(TAG, "splash activty");
 
@@ -52,14 +51,14 @@ public class SplashActivity extends Activity {
         Constants.gender_xtags();
         Constants.sentiment_xtags();
 
-       // utils.addtoList();
+        // utils.addtoList();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 checkSession();
-                splash_progress.setVisibility(View.GONE);
+                //   splash_progress.setVisibility(View.GONE);
                 finish();
 
             }
@@ -78,7 +77,7 @@ public class SplashActivity extends Activity {
                 // Log.i(TAG, "track key is" + userSession.getTrackKey() + "article size " + Constants.listdetails + "Constants.articlelist_Details" + Constants.articlelist_Details);
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
                 utils.add_query_data();
-                startActivity(new Intent(getApplication(), HomeScreen.class).
+                startActivity(new Intent(getApplication(), MainActivity.class).
                         putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
             }

@@ -1,2 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="b068965b1347f34c1918a6d606358e7b357a1229">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-tweet-ui-1.5.0_3b0cfb93a724b18d3d621190b99a5a3fd49f6ffc/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_f38ba69562e38ee6a0b34763774faffd695c2aa3/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-multidex-1.0.1_758418a6e8b4b3e6fb66e1ba3b6f36ef5382c87c/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_723e6f51a8da1d69d9b4151acf78149b4c9d1933/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_418fbd36bf8c7456f3cb83de89c8de3f747d29f8/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter/1.8.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="6fc144eac80d908c45c4308e9aaa55622cae086f">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-twitter-1.8.0_dde1fc329662bd22fecfc48530dca8d0558013c0/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.19_50155861b5051f6862c381ed35d26ecf88a0bbe8/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.leavjenn.smoothdaterangepicker/library/0.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="e43dfb901be773fe178bb52e47613e21e0b7411f">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.leavjenn.smoothdaterangepicker-library-0.2.0_61e111c7ad4aa11a15ff31d4f7159f2d922dee22/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.8.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="074b93197194a0225023845f90cceba9518be74c">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.digits.sdk.android-digits-1.8.0_fffd49e53f29927354d8fc65004b5ca39dc067bb/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_64ca52a66e1dc89cc64d7e96944e812dfd5f49c7/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-composer/0.9.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="de76a31d4a478cd8fcd7e30ec63261c18ba4f5a5">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-tweet-composer-0.9.0_8d335bf7ba48643f8509308e95ac766e8ab001c9/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="e0e22cb99d61654a701bcaa72730591edf621930">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_f46b6d444ad12777eba51a73b7d75b102bd5f14f/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.8.0/a517f29ed06be2b2879524fcd94b6e9b36e2e0b5/retrofit-1.8.0.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="a517f29ed06be2b2879524fcd94b6e9b36e2e0b5">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-1.8.0_dd093153d77fb4700acb59424fe99f90b605c611/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.3_3959a97662cfda0d980e22b211ce2d09b86cfbc2/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-7.0.1_274d0e5f7d0dafc53c3322412739263c0a445f9a/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="8820227eb5b0c9ffa5eab629f80c292610483845">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_58bb046ade5b974df0e7b1fc303068e5767b9b1e/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/libs/mpandroidchartlibrary-2-1-5.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="a7650f11d4eb03995f4450562cc271d5f790c992">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/2/mpandroidchartlibrary-2-1-5_3c29a2943ea7f19786aab27bc34ee51961af254e/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_7fc642627e152f622c328f05fe475cb78ef184d1/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.5/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="6e65060ef2ec6ec98365250d2119d7968626fd3f">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/io.fabric.sdk.android-fabric-1.3.5_94d4b7d963a10f700396dcc8d6793d36ab4864d5/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_96c9b4501b1a4a361f542048a78ce6e5feb44d6b/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_1fc2ee5b7d1e17fbc0009524b9dd5dc2021fbad1/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="3c598243d9616e3c6132e054d43f50ff8f8dee63">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-twitter-core-1.5.0_732a93a338ff8c69e388d01da945a3e5cc921d86/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_4b0fb0a5932eadc971c53a09b4b96ebc18e3c004/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_613bf106a3b8d56c471f39733971d90c7bbf818f/classes.dex" />
+    </item>
+    <item
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-23.4.0_956d7bc48b3bc74872a2eda54f189d153c27d4f2/classes.dex" />
+    </item>
+
+</items>

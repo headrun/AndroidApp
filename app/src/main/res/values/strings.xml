@@ -50,6 +50,13 @@
         <item>@drawable/language</item>
     </string-array>
 
+
+    <string-array name="notify_hours">
+        <item>1 hour</item>
+        <item>2 hour</item>
+        <item>3 hour</item>
+    </string-array>
+
     <string name="clearfilter">Clear Filter</string>
     <string name="applyfilter">Apply Filter</string>
     <string name="search">Search By Keyword</string>
@@ -57,5 +64,7 @@
     <string name="track">Track</string>
     <string name="keyword">Track your Brand Ex:iphone</string>
     <string name="norecord">Articles Not Found</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="notifyme">Notify me</string>
 
 </resources>

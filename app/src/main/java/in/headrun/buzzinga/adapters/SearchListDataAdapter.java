@@ -96,9 +96,12 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             String author = "";
 
-            if (item.source.AUTHOR.NAME != null)
-                author = item.source.AUTHOR.NAME;
-
+            try {
+                if (item.source.AUTHOR.NAME != null)
+                    author = item.source.AUTHOR.NAME;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (!author.isEmpty())
                 item_holder.author.setText("By - " + author);
 

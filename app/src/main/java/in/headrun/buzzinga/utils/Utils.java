@@ -1,24 +1,35 @@
 package in.headrun.buzzinga.utils;
 
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.PowerManager;
-
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
-
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +43,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -42,11 +54,15 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import in.headrun.buzzinga.BuzzingaApplication;
+import in.headrun.buzzinga.BuzzingaNotification;
+import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.HomeScreen;
+import in.headrun.buzzinga.activities.MainActivity;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.QueryData;
 
 /**
@@ -62,6 +78,8 @@ public class Utils {
     public UserSession userSession;
 
     BuzzingaApplication buzzapp = new BuzzingaApplication();
+    JobScheduler job_scheduler;
+    AlarmManager alarmManager;
 
     public Utils(Context context) {
         this.context = context;
@@ -140,8 +158,13 @@ public class Utils {
 
 
         setupdate(fromdate, todate);
-        String query = "(" + trackkey + " AND " + check_query_value(searckkey) + ")" + check_query_value(source)
-                + check_query_value(sentiment) + check_query_value(gender) + check_query_value(loc) + check_query_value(lang);
+        String search_key = "(\"" + trackkey + "\"" +
+                (!check_query_value(searckkey).isEmpty() ?
+                        " AND \"" + check_query_value(searckkey) + "\"" : "") + ")";
+
+        String query = search_key + check_query_value(source)
+                + check_query_value(sentiment) + check_query_value(gender) +
+                check_query_value(loc) + check_query_value(lang);
 
         userSession.setClubbedquery(query);
 
@@ -569,38 +592,38 @@ public class Utils {
 
     public void Buzz_notification(long article_count) throws Exception {
 
-        if (screendisplay()) {
+        /*if (screendisplay()) {
             // HomeScreen.newarticle.setText(article_count + " New Articles");
             // HomeScreen.newarticle.setVisibility(View.VISIBLE);
             Log.i(TAG, "article count" + article_count);
-        } else {
-            Log.i(TAG, "Buzz Notification article count" + article_count);
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.buzz_logo)
-                            .setContentTitle("BUzzinga Alert")
-                            .setAutoCancel(true)
-                            .setContentText(article_count + "New Articles are come \t" + userSession.getTrackKey());
+        } else {*/
+        Log.i(TAG, "Buzz Notification article count" + article_count);
 
-            Intent resultIntent = new Intent(context, HomeScreen.class);
-            resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.buzz_logo)
+                        .setContentTitle("Buzzinga " + "keyword" + " Alert")
+                        .setAutoCancel(true)
+                        .setContentText(article_count + "new articles found for your keyword \t" + userSession.getTrackKey() +
+                                (!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : ""));
 
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            stackBuilder.addParentStack(HomeScreen.class);
-            stackBuilder.addNextIntent(resultIntent);
+        Intent resultIntent = new Intent(context, MainActivity.class);
+        resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
 
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(
-                            0,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    );
-            mBuilder.setContentIntent(resultPendingIntent);
-            NotificationManager mNotificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
-            mNotificationManager.notify(0, mBuilder.build());
+        mNotificationManager.notify(0, mBuilder.build());
 
-        }
+        //}
     }
 
     public String timestamp(long ecpoch_value) {
@@ -772,7 +795,6 @@ public class Utils {
         }
     }
 
-
     ////update listview items
     public void updateListviewItem(ListView listview, int pos) {
         int visiblePosition = listview.getFirstVisiblePosition();
@@ -784,7 +806,6 @@ public class Utils {
         return Arrays.asList(values).indexOf(title);
 
     }
-
 
     public void addtoList() {
 
@@ -814,5 +835,259 @@ public class Utils {
 
     }
 
+    public void getdate() {
 
+  /*      FragmentManager fm = getFragmentManager();
+        DialogFragment newFragment = new FilterByDate();
+        newFragment.show(fm, "datePicker");
+*/
+
+        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
+                SmoothDateRangePickerFragment
+                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                            @Override
+                            public void onDateRangeSet(SmoothDateRangePickerFragment view,
+                                                       int yearStart, int monthStart,
+                                                       int dayStart, int yearEnd,
+                                                       int monthEnd, int dayEnd) {
+                                String date = "You picked the following date range: \n"
+                                        + "From " + dayStart + "/" + (++monthStart)
+                                        + "/" + yearStart + " To " + dayEnd + "/"
+                                        + (++monthEnd) + "/" + yearEnd;
+
+                                userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
+
+                                showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
+                                        userSession.getTO_DATE(), Config.HOME_SCREEN);
+
+                                add_query_data();
+                                call_homeFragment(Constants.Intent_TRACK);
+                            }
+                        });
+
+        smoothDateRangePickerFragment.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
+    }
+
+    public void call_homeFragment(String value) {
+        Bundle bundle = new Bundle();
+        if (value == null)
+            value = "";
+        bundle.putString(Constants.Intent_OPERATION, value);
+        Fragment fragment = new HomeScreen();
+        fragment.setArguments(bundle);
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+
+    }
+
+    public void notimyme(final int sel_item) {
+
+        if (context != null) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            builder.setTitle(context.getString(R.string.notifyme));
+
+            final String[] items = context.getResources().getStringArray(R.array.notify_hours);
+
+            int pos = -1;
+
+            showLog(TAG, "sel item is" + sel_item, Config.Utils);
+
+            if (sel_item != -1)
+                pos = Arrays.asList(items).indexOf(sel_item + " hour");
+
+            showLog(TAG, "sel item pos is " + pos, Config.Utils);
+
+            builder.setSingleChoiceItems(items, pos, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    String sel_value = "" + Arrays.asList(items).get(which).trim().charAt(0);
+                    int sel_hour = Integer.valueOf(sel_value);
+                    showLog(TAG, "sel item are " + sel_hour, Config.Utils);
+                    if (which != -1)
+                        userSession.setNotifyHour(sel_hour);
+                }
+            });
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    callService();
+                }
+            });
+
+            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            builder.create().show();
+        } else {
+            showLog(TAG, "contex is null", Config.Utils);
+        }
+    }
+
+    public void callService() {
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+            job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
+            stopService();
+
+            JobInfo job = new JobInfo.Builder(Constants.JOBID, new ComponentName(context,
+                    BuzzingaNotificationService.class))
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .setRequiresCharging(true)
+                    .setPeriodic(getNotify_IntervellMills())
+                    .build();
+
+            int jobId = job_scheduler.schedule(job);
+            if (job_scheduler.schedule(job) > 0) {
+                showLog(TAG,
+                        "Successfully scheduled job: " + jobId,
+                        Config.Utils);
+            } else {
+                showLog(TAG,
+                        "RESULT_FAILURE: " + jobId,
+                        Config.Utils);
+            }
+        } else {
+
+            alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, BuzzingaNotification.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                    System.currentTimeMillis() + 1 * 1 * 1000,
+                    getNotify_IntervellMills(),
+                    pendingIntent);
+
+        }
+    }
+
+    public void stopService() {
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+            if (job_scheduler == null)
+                job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
+            List<JobInfo> allPendingJobs = job_scheduler.getAllPendingJobs();
+            String s = "";
+            for (JobInfo j : allPendingJobs) {
+                int jId = j.getId();
+                job_scheduler.cancel(jId);
+                s += "jobScheduler.cancel(" + jId + " )";
+            }
+            showLog(TAG, s, Config.Utils);
+
+            job_scheduler.cancelAll();
+
+        } else {
+            if (alarmManager == null)
+                alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            Intent intent = new Intent(context, BuzzingaNotification.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            alarmManager.cancel(pendingIntent);
+        }
+
+    }
+
+    public Long getNotify_IntervellMills() {
+        showLog(TAG, "notify hour is" + userSession.getNotifyHour() +
+                        " mills are " + (userSession.getNotifyHour() * 60 * 60 * 1000),
+                Config.Utils);
+
+        return Long.valueOf(userSession.getNotifyHour() * 60 * 60 * 1000);
+    }
+
+    public void serverCallnotificationCount() {
+
+        showLog(TAG, "call count call " + ServerConfig.SERVER_ENDPOINT + ServerConfig.count, Config.Utils);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        showLog(TAG, "count response  " + response, Config.BuzzingaNotification);
+                        try {
+                            JSONObject jobj_reult = new JSONObject(response);
+
+
+                            if (jobj_reult.optInt("error") == 0) {
+                                JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
+                                long article_count = json_result.optInt("count");
+
+                                if (article_count > 0) {
+                                    try {
+                                        Buzz_notification(article_count);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showLog(TAG, "error are " + error.toString(), Config.BuzzingaNotification);
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("clubbed_utils", count_query());
+                params.put("tz", userSession.getTIMEZONE());
+                params.put("setup", userSession.getSETUP());
+
+                showLog(TAG, "params are " + params, Config.BuzzingaNotification);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                String sessionid = new UserSession(context).getTSESSION();
+                if (sessionid.length() > 0) {
+                    Log.i(TAG, "session id is" + sessionid);
+                    StringBuilder builder = new StringBuilder();
+                    builder.append("sessionid");
+                    builder.append("=");
+                    builder.append(sessionid);
+                    if (headers.containsKey("Cookie")) {
+                        builder.append("; ");
+                        builder.append(headers.get("Cookie"));
+                    }
+                    headers.put("Cookie", builder.toString());
+                }
+                showLog(TAG, "headers are " + headers, Config.BuzzingaNotification);
+                return headers;
+            }
+
+        };
+        stringRequest.setTag(TAG);
+        BuzzingaRequest.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public String setTitle() {
+
+        StringBuilder title = new StringBuilder();
+        title.append(userSession.getTrackKey());
+        title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " AND " + userSession.gettTACK_SEARCH_KEY() : "");
+        return title.toString();
+    }
 }
+

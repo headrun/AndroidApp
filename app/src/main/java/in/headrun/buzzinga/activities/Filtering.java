@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -117,9 +118,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_titles.setAdapter(titleadapter);
         filterselection(FilterStatus.SOURCES);
 
-        filter_titles.setItemChecked(0, true);
-        filter_titles.setSelection(0);
-
 
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -149,7 +147,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 selSourceItem(sel_source_items);
             }
         });
-
 
         autosearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -187,7 +184,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(Filtering.this, HomeScreen.class);
+                Intent i = new Intent(Filtering.this, MainActivity.class);
                 i.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
                 startActivity(i);
                 break;
@@ -259,10 +256,9 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                     "\n language " + usersession.getLang_data() +
                     "\n location " + usersession.getLoc_data());
 
-            Intent i = new Intent(Filtering.this, HomeScreen.class);
+            Intent i = new Intent(Filtering.this, MainActivity.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
             startActivity(i);
-
 
         }
     }
@@ -751,12 +747,17 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.BLANGUAGE.clear();
         Constants.BLOCATION.clear();
 
-        Intent i = new Intent(Filtering.this, HomeScreen.class);
+        utils.userSession.clearsession(utils.userSession.Sources_data);
+        utils.userSession.clearsession(utils.userSession.Sentiment_data);
+        utils.userSession.clearsession(utils.userSession.Gender_data);
+        utils.userSession.clearsession(utils.userSession.Loc_data);
+        utils.userSession.clearsession(utils.userSession.Lang_data);
+
+        Intent i = new Intent(Filtering.this, MainActivity.class);
         i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
         startActivity(i);
 
     }
-
 
     ////sort the list items based on the source name
     public void sortlist(List<Listitems> list) {
@@ -886,7 +887,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             list_items.add(source_item.getSourcename());
         }
 
+
         filter_items.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, list_items));
+       /* autosearch.setAdapter(null);
+        autosearch.setAdapter(new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, list_items));
+        autosearch.setThreshold(1);*/
         //filter_items.setAdapter(new ListViewAdapter(Filtering.this, items));
 
         if (first_time_load == 0) {

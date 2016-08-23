@@ -18,9 +18,16 @@ repositories {
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'buzz'
+            keyPassword 'buzz^43'
+            storeFile file('/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/buzzinga.jks')
+            storePassword 'buzz^43'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "21.1.2"
-
     defaultConfig {
 
         applicationId "in.headrun.buzzinga"
