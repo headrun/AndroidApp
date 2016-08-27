@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,7 +23,7 @@ import in.headrun.buzzinga.config.Constants;
 /**
  * Created by headrun on 22/9/15.
  */
-public class ArticleWebDisplay extends Activity {
+public class ArticleWebDisplay extends AppCompatActivity {
 
     public String TAG = ArticleWebDisplay.this.getClass().getSimpleName();
 
@@ -44,9 +47,17 @@ public class ArticleWebDisplay extends Activity {
         Bundle data = getIntent().getExtras();
         url = data.getString("url");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setElevation(7);
+
         Log.i(TAG, "artcile url is" + url.toString());
-        if (!url.toString().isEmpty())
-            article_url_disp.setText(url.toString());
+        if (!url.toString().isEmpty()) {
+            //article_url_disp.setText(url.toString());
+            article_url_disp.setVisibility(View.GONE);
+            getSupportActionBar().setTitle(url.toString());
+        }
         webSettings(url.toString());
 
         articlebrowser_close.setOnClickListener(new View.OnClickListener() {
@@ -112,5 +123,14 @@ public class ArticleWebDisplay extends Activity {
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+
+        return super.onOptionsItemSelected(item);
+    }
 }
 

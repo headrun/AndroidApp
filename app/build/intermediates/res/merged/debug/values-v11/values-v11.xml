@@ -52,9 +52,6 @@
     </style>
     <style name="Base.Widget.AppCompat.ProgressBar.Horizontal" parent="android:Widget.Holo.ProgressBar.Horizontal">
     </style>
-    <style name="Digits_default" parent="@android:style/Theme.Holo.Light">
-        <item name="dgts__accentColor">@color/dgts__default_accent</item>
-    </style>
     <style name="Platform.AppCompat" parent="Platform.V11.AppCompat"/>
     <style name="Platform.AppCompat.Light" parent="Platform.V11.AppCompat.Light"/>
     <style name="Platform.V11.AppCompat" parent="android:Theme.Holo">

@@ -69,8 +69,13 @@ public class FilterTitleAdapter extends BaseAdapter {
 
         holder.title.setText(titles[position]);
         utils.showLog(TAG, "sel " + titles[position] + " item count is " + selCount(titles[position]), Config.FilterTitleAdapter);
-        holder.sel_count.setText(selCount(titles[position]));
-
+        String count_is = selCount(titles[position]);
+        if (!count_is.isEmpty()) {
+            holder.sel_count.setVisibility(View.VISIBLE);
+            holder.sel_count.setText(count_is);
+        } else {
+            holder.sel_count.setVisibility(View.GONE);
+        }
         return convertView;
     }
 

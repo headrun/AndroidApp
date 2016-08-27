@@ -67,4 +67,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="notifyme">Notify me</string>
 
+
+    <string name="grey">#000000</string>
+    <string name="white">#ffffff</string>
 </resources>

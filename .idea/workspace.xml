@@ -27,6 +27,16 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/splashscren.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -52,6 +62,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/navigation_icon.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AndroidLogFilters">
@@ -59,45 +74,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8f655f0-90c9-46e6-85ec-a751087804ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/article_filter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/article_filter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/article_filter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/article_filter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/article_filter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaNotificationService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_camera.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_gallery.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_manage.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_send.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_share.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_slideshow.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/side_nav_bar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/drawables.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaNotification$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaNotification$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaNotification$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$10.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$7.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$8.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$9.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$$ViewBinder.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/actionbar_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/actionbar_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/actionbar_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/actionbar_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/menu.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/SearchActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/circle_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/count_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/listview_text_color.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/text_color_default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/text_color_select.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/menu_counter.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navigation_icon.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/values/drawables.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Buzzinga.apk" afterPath="$PROJECT_DIR$/app/Buzzinga.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$bool.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$integer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaNotification.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaNotification.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaApplication$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaApplication$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaApplication.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/BuzzingaApplication.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$array.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$array.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$bool.class" />
@@ -113,7 +122,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$style.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/UserSession.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/UserSession.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/R.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$$ViewBinder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/ArticleWebDisplay$2.class" />
@@ -127,25 +136,24 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$FilterStatus.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering$FilterStatus.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/Filtering.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/HomeScreen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/SplashActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$MyBrowser.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$MyBrowser.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/config/Config.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/config/Config.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/config/Constants.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/config/Constants.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
@@ -158,32 +166,72 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TrackKeyWord$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/in/headrun/buzzinga/activities/TwitterLogin$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/homescreen.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/homescreen.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable/rightborder.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable/rightborder.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/source_titles.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/source_titles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/sourcefilterlay.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/sourcefilterlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/twitterlogin.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/twitterlogin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/webview.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/webview.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu/main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ar/values-ar.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ar/values-ar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-cs/values-cs.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-cs/values-cs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-da/values-da.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-da/values-da.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-de/values-de.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-de/values-de.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-en-rGB/values-en-rGB.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-en-rGB/values-en-rGB.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-es/values-es.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-es/values-es.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fa/values-fa.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fa/values-fa.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fi/values-fi.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fi/values-fi.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fr/values-fr.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-fr/values-fr.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-hi/values-hi.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-hi/values-hi.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-hu/values-hu.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-hu/values-hu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-in/values-in.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-in/values-in.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-it/values-it.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-it/values-it.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-iw/values-iw.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-iw/values-iw.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ja/values-ja.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ja/values-ja.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ko/values-ko.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ko/values-ko.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nb/values-nb.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nb/values-nb.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl/values-nl.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl/values-nl.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-pl/values-pl.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-pl/values-pl.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-pt/values-pt.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-pt/values-pt.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ro/values-ro.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ro/values-ro.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ru/values-ru.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-ru/values-ru.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-sv/values-sv.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-sv/values-sv.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-th/values-th.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-th/values-th.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-tl/values-tl.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-tl/values-tl.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-tr/values-tr.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-tr/values-tr.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-uk/values-uk.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-uk/values-uk.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-v11/values-v11.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-v11/values-v11.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-v21/values-v21.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-v21/values-v21.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-vi/values-vi.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-vi/values-vi.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-zh-rCN/values-zh-rCN.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-zh-rCN/values-zh-rCN.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-zh-rTW/values-zh-rTW.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-zh-rTW/values-zh-rTW.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaNotification.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaNotification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/UserSession.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/UserSession.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TwitterLogin.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TwitterLogin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/listview_sel.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/listview_sel.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/homescreen.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/homescreen.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rightborder.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rightborder.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/twitterlogin.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/twitterlogin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/webview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/webview.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/color.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="AndroidApp.iws" />
@@ -229,40 +277,21 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="10" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
+              <caret line="294" column="11" selection-start-line="294" selection-start-column="11" selection-end-line="294" selection-end-column="11" />
               <folding>
-                <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3771#4112#0" expanded="true" />
+                <element signature="e#4111#4112#0" expanded="true" />
                 <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#stringrequest#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#7206:8962" expanded="false" />
-                <element signature="method#getHeaders#0;class#7206:8962" expanded="false" />
+                <element signature="method#setMenuCounter#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#5511#5554#0" expanded="false" />
+                <element signature="class#6595:8351" expanded="false" />
+                <element signature="method#getHeaders#0;class#6595:8351" expanded="false" />
+                <element signature="method#handleIntent#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#searchview_text#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#10530:10681" expanded="false" />
+                <element signature="method#onClick#0;class#10530:10681" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app_bar_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -270,28 +299,41 @@
       <file leaf-file-name="main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.6666665">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <file leaf-file-name="app_bar_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.3448277">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="circle_bg.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle_bg.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchable.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/searchable.xml">
+      <file leaf-file-name="activity_main_drawer.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+            <state vertical-scroll-proportion="-6.6666665">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -301,7 +343,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+              <caret line="1144" column="15" selection-start-line="1144" selection-start-column="15" selection-end-line="1144" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#Utils#0" expanded="false" />
@@ -317,14 +359,12 @@
                 <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_sentiment#0;class#Utils#0" expanded="false" />
-                <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_language#0;class#Utils#0" expanded="false" />
                 <element signature="method#query_location#0;class#Utils#0" expanded="false" />
                 <element signature="method#queryform#0;class#Utils#0" expanded="false" />
                 <element signature="method#count_query#0;class#Utils#0" expanded="false" />
                 <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
-                <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
                 <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
                 <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
                 <element signature="method#clear_all_data#0;class#Utils#0" expanded="false" />
@@ -343,83 +383,88 @@
                 <element signature="method#updateListviewItem#0;class#Utils#0" expanded="false" />
                 <element signature="method#getArrayPos#0;class#Utils#0" expanded="false" />
                 <element signature="method#addtoList#0;class#Utils#0" expanded="false" />
-                <element signature="method#getdate#0;class#Utils#0" expanded="false" />
                 <element signature="method#call_homeFragment#0;class#Utils#0" expanded="false" />
-                <element signature="method#notimyme#0;class#Utils#0" expanded="false" />
-                <element signature="class#36845:37012" expanded="false" />
-                <element signature="method#onClick#0;class#36845:37012" expanded="false" />
-                <element signature="method#callService#0;class#Utils#0" expanded="false" />
+                <element signature="class#38770:38937" expanded="false" />
+                <element signature="method#onClick#0;class#38770:38937" expanded="false" />
                 <element signature="method#stopService#0;class#Utils#0" expanded="false" />
                 <element signature="method#getNotify_IntervellMills#0;class#Utils#0" expanded="false" />
-                <element signature="method#serverCallnotificationCount#0;class#Utils#0" expanded="false" />
-                <element signature="class#40212:43185" expanded="false" />
-                <element signature="method#getParams#0;class#40212:43185" expanded="false" />
-                <element signature="method#getHeaders#0;class#40212:43185" expanded="false" />
+                <element signature="class#42197:45394" expanded="false" />
+                <element signature="method#getParams#0;class#42197:45394" expanded="false" />
+                <element signature="method#getHeaders#0;class#42197:45394" expanded="false" />
                 <element signature="method#setTitle#0;class#Utils#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Config.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java">
+      <file leaf-file-name="DatePickerDialog.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.borax12/MaterialDateRangePicker/1.1/3c545f90fb3a8038a7067086427a34d0f97442df/MaterialDateRangePicker-1.1-sources.jar!/com/borax12/materialdaterangepicker/date/DatePickerDialog.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/ServerConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Filtering.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="748" column="0" selection-start-line="748" selection-start-column="0" selection-end-line="748" selection-end-column="0" />
+              <caret line="203" column="5" selection-start-line="203" selection-start-column="5" selection-end-line="203" selection-end-column="5" />
               <folding>
-                <element signature="docComment;class#Filtering#0" expanded="false" />
-                <element signature="method#onCreate#0;class#Filtering#0" expanded="false" />
-                <element signature="class#5046:5611" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#5046:5611" expanded="false" />
-                <element signature="method#onTextChanged#0;class#5046:5611" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#5046:5611" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#Filtering#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#Filtering#0" expanded="false" />
-                <element signature="method#filterselection#0;class#Filtering#0" expanded="false" />
-                <element signature="method#onClick#0;class#Filtering#0" expanded="false" />
-                <element signature="method#listOfFilterSources#0;class#Filtering#0" expanded="false" />
-                <element signature="method#listOfFilterSentiment#0;class#Filtering#0" expanded="false" />
-                <element signature="method#listOfFilterGender#0;class#Filtering#0" expanded="false" />
-                <element signature="method#listOfFilterLang#0;class#Filtering#0" expanded="false" />
-                <element signature="method#listOfFilterLocation#0;class#Filtering#0" expanded="false" />
-                <element signature="method#sentiment_check#0;class#Filtering#0" expanded="false" />
-                <element signature="method#source_check#0;class#Filtering#0" expanded="false" />
-                <element signature="method#gender_check#0;class#Filtering#0" expanded="false" />
-                <element signature="method#lang_check#0;class#Filtering#0" expanded="false" />
-                <element signature="method#loc_check#0;class#Filtering#0" expanded="false" />
-                <element signature="method#sortlist#0;class#Filtering#0" expanded="false" />
-                <element signature="method#sentimentquery#0;class#Filtering#0" expanded="false" />
-                <element signature="method#genderquery#0;class#Filtering#0" expanded="false" />
-                <element signature="method#locquery#0;class#Filtering#0" expanded="false" />
-                <element signature="method#langquery#0;class#Filtering#0" expanded="false" />
-                <element signature="method#sourcequery#0;class#Filtering#0" expanded="false" />
-                <element signature="method#fillAdapter#0;class#Filtering#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#Filtering#0" expanded="false" />
-                <element signature="class#FilterStatus#0;class#Filtering#0" expanded="false" />
-                <element signature="method#selSourceItem#0;class#Filtering#0" expanded="false" />
-                <element signature="method#updateListview#0;class#Filtering#0" expanded="false" />
-                <element signature="method#copySparseArray#0;class#Filtering#0" expanded="false" />
+                <element signature="e#0#38787#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#29264#29265#0" expanded="false" />
+                <element signature="e#29298#29299#0" expanded="false" />
+                <element signature="e#29588#29589#0" expanded="false" />
+                <element signature="e#29636#29637#0" expanded="false" />
+                <element signature="e#29857#29858#0" expanded="false" />
+                <element signature="e#29895#29896#0" expanded="false" />
+                <element signature="e#30112#30113#0" expanded="false" />
+                <element signature="e#30145#30146#0" expanded="false" />
+                <element signature="e#30307#30308#0" expanded="false" />
+                <element signature="e#30349#30350#0" expanded="false" />
+                <element signature="e#30471#30472#0" expanded="false" />
+                <element signature="e#30506#30507#0" expanded="false" />
+                <element signature="e#32249#32250#0" expanded="false" />
+                <element signature="e#32280#32281#0" expanded="false" />
+                <element signature="e#32974#32975#0" expanded="false" />
+                <element signature="e#33005#33006#0" expanded="false" />
+                <element signature="e#33781#33782#0" expanded="false" />
+                <element signature="e#33819#33820#0" expanded="false" />
+                <element signature="e#34785#34786#0" expanded="false" />
+                <element signature="e#34822#34823#0" expanded="false" />
+                <element signature="e#34923#34924#0" expanded="false" />
+                <element signature="e#34959#34960#0" expanded="false" />
+                <element signature="e#38362#38363#0" expanded="false" />
+                <element signature="e#38395#38396#0" expanded="false" />
+                <element signature="e#38716#38717#0" expanded="false" />
+                <element signature="e#38783#38784#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DrawerLayout.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/widget/DrawerLayout.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1675" column="19" selection-start-line="1675" selection-start-column="19" selection-end-line="1675" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.5172415">
+              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.15384616">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -430,9 +475,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="resourceFile" />
         <option value="valueResourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -723,16 +768,6 @@
                 <option name="name" value="connectedDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Uploads an APK to Crashlytics for distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="crashlyticsUploadDistributionDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Uploads an APK to Crashlytics for distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="crashlyticsUploadDistributionRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="deviceAndroidTest" />
@@ -741,16 +776,6 @@
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="deviceCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Injects the build id used by the Fabric SDK." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="fabricGenerateResourcesDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Injects the build id used by the Fabric SDK." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="fabricGenerateResourcesRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1017,34 +1042,9 @@
                 <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2340Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.digits.sdk.android:digits:1.8.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComDigitsSdkAndroidDigits180Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.leavjenn.smoothdaterangepicker:library:0.2.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComLeavjennSmoothdaterangepickerLibrary020Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:tweet-composer:0.9.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComTwitterSdkAndroidTweetComposer090Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:tweet-ui:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComTwitterSdkAndroidTweetUi150Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:twitter:1.8.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComTwitterSdkAndroidTwitter180Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:twitter-core:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComTwitterSdkAndroidTwitterCore150Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1057,11 +1057,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareDebugUnitTestDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare io.fabric.sdk.android:fabric:1.3.5" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareIoFabricSdkAndroidFabric135Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1442,16 +1437,6 @@
                 <option name="name" value="connectedDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Uploads an APK to Crashlytics for distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="crashlyticsUploadDistributionDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Uploads an APK to Crashlytics for distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="crashlyticsUploadDistributionRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Displays all dependencies declared in project ':app'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="dependencies" />
@@ -1470,16 +1455,6 @@
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="deviceCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Injects the build id used by the Fabric SDK." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="fabricGenerateResourcesDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Injects the build id used by the Fabric SDK." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="fabricGenerateResourcesRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1756,34 +1731,9 @@
                 <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2340Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.digits.sdk.android:digits:1.8.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComDigitsSdkAndroidDigits180Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.leavjenn.smoothdaterangepicker:library:0.2.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareComLeavjennSmoothdaterangepickerLibrary020Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:tweet-composer:0.9.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComTwitterSdkAndroidTweetComposer090Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:tweet-ui:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComTwitterSdkAndroidTweetUi150Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:twitter:1.8.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComTwitterSdkAndroidTwitter180Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.twitter.sdk.android:twitter-core:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComTwitterSdkAndroidTwitterCore150Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1796,11 +1746,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareDebugUnitTestDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare io.fabric.sdk.android:fabric:1.3.5" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareIoFabricSdkAndroidFabric135Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1997,7 +1942,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4378350989739" />
+        <entry key="$PROJECT_DIR$" value="4378879804207" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2188,19 +2133,10 @@
                             <option value="$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.leavjenn.smoothdaterangepicker/library/0.2.0/d14dcb4fb77a195737aa3dcc02e0695f0092272c/library-0.2.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.twitter.sdk.android/twitter/1.8.0/7dc9a6203691b4e1e496c557d6ed0f93e961ea14/twitter-1.8.0.aar" />
                             <option value="$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/animated-vector-drawable/23.4.0/animated-vector-drawable-23.4.0.aar" />
                             <option value="$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.4.0/support-vector-drawable-23.4.0.aar" />
                             <option value="$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fabric.sdk.android/fabric/1.3.5/2cdf38d65c07570d887cf6ac3023794b1974230/fabric-1.3.5.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.twitter.sdk.android/tweet-ui/1.5.0/79dfe2de58e8d140dc435672373e084c4130b1ac/tweet-ui-1.5.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.twitter.sdk.android/tweet-composer/0.9.0/4fa2b99bd16b3cf178587baca7172bd5859d8377/tweet-composer-0.9.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.twitter.sdk.android/twitter-core/1.5.0/15194d88936f75a6afe19530f49bf35a263239bf/twitter-core-1.5.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.digits.sdk.android/digits/1.8.0/15fbd02fe24eb55ae0f657dadd2a26de5846708d/digits-1.8.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.8.0/a517f29ed06be2b2879524fcd94b6e9b36e2e0b5/retrofit-1.8.0.jar" />
                             <option value="$MODULE_DIR$/libs/mpandroidchartlibrary-2-1-5.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fabric.tools/gradle/1.21.7/4a8867b9d33fd9457b1cbe8da5c01893d9efec4d/gradle-1.21.7.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/app" />
@@ -2341,57 +2277,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TwitterLogin.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/search_data.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/progress_bar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/twitterlogin.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/info_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/neg_sentiment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/neu_sentiment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/search_article_lay.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/webview.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/QueryData.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitlesAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/lsitview_sel.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/ListViewAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/progess_layout.xml" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/listview_sel.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/drawables.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/homescreen.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values/values.xml" />
         <option value="$PROJECT_DIR$/app/build/generated/source/r/debug/in/headrun/buzzinga/R.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaNotificationService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaNotification.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/UserSession.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/SearchActiviy.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/SearchActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/rightborder.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/twitterlogin.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/listview_sel.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/text_color_select.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/text_color_default.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/listview_text_color.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/menu_counter.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/count_bg.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/navigation_icon.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/webview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TwitterLogin.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/circle_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -2431,7 +2367,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="AndroidView" proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages AndroidView="false" />
       <showMembers />
       <showModules />
@@ -2445,16 +2381,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2471,6 +2397,26 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="AndroidApp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2591,7 +2537,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.CaptureAnalysis.SHOW" value="true" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../androidsample/Android-Searchview-Example-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../androidsample/MaterialDateTimePicker-master" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/values" />
     <property name="SearchEverywhereHistoryKey" value="source&#9;FILE&#9;file:///home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/res/layout/sourcefilterlay.xml&#10;home&#9;FILE&#9;file:///home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/res/layout/homescreen.xml" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
@@ -3067,7 +3013,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -3075,29 +3021,30 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58387095" sideWeight="0.5059761" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58387095" sideWeight="0.49243027" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="146" y="196" width="1101" height="572" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48225805" sideWeight="0.49243027" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2820717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7709677" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.81935483" sideWeight="0.49721116" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5322581" sideWeight="0.49721116" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58387095" sideWeight="0.50756973" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24462152" sideWeight="0.47258064" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24462152" sideWeight="0.46612903" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Script Monkey" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Sympli" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23904383" sideWeight="0.5274193" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24462152" sideWeight="0.533871" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47580644" sideWeight="0.49721116" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18565737" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="146" y="205" width="1101" height="572" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31474105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3117,67 +3064,67 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>818</line>
+          <line>825</line>
           <properties />
           <option name="timeStamp" value="636" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>824</line>
+          <line>831</line>
           <properties />
           <option name="timeStamp" value="637" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>823</line>
+          <line>830</line>
           <properties />
           <option name="timeStamp" value="638" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>826</line>
+          <line>833</line>
           <properties />
           <option name="timeStamp" value="639" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>827</line>
+          <line>834</line>
           <properties />
           <option name="timeStamp" value="640" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>829</line>
+          <line>836</line>
           <properties />
           <option name="timeStamp" value="641" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>830</line>
+          <line>837</line>
           <properties />
           <option name="timeStamp" value="643" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java</url>
-          <line>819</line>
+          <line>826</line>
           <properties />
           <option name="timeStamp" value="644" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java</url>
-          <line>93</line>
+          <line>94</line>
           <properties />
           <option name="timeStamp" value="684" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java</url>
-          <line>94</line>
+          <line>95</line>
           <properties />
           <option name="timeStamp" value="685" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java</url>
-          <line>96</line>
+          <line>97</line>
           <properties />
           <option name="timeStamp" value="686" />
         </line-breakpoint>
@@ -3185,7 +3132,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="708" />
+      <option name="time" value="787" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3194,398 +3141,342 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/ServerConfig.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/progress_bar.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/platforms/android-23/data/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/twitterlogin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.586207">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/UserSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="46" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/text_color_select.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6666667">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/listview_text_color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_lay.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rightborder.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="748" column="0" selection-start-line="748" selection-start-column="0" selection-end-line="748" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Filtering#0" expanded="false" />
-            <element signature="method#onCreate#0;class#Filtering#0" expanded="false" />
-            <element signature="class#5046:5611" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#onTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#Filtering#0" expanded="false" />
-            <element signature="method#filterselection#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onClick#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterSources#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterSentiment#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterGender#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterLang#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterLocation#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sentiment_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#source_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#gender_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#lang_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#loc_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sortlist#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sentimentquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#genderquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#locquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#langquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sourcequery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#fillAdapter#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Filtering#0" expanded="false" />
-            <element signature="class#FilterStatus#0;class#Filtering#0" expanded="false" />
-            <element signature="method#selSourceItem#0;class#Filtering#0" expanded="false" />
-            <element signature="method#updateListview#0;class#Filtering#0" expanded="false" />
-            <element signature="method#copySparseArray#0;class#Filtering#0" expanded="false" />
-          </folding>
+          <caret line="33" column="51" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_article_lay.xml">
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.862069">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/progess_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.206897">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.git/info/exclude">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6681416">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/listview_sel.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3333333">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sourcefilterlay.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/text_color_default.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/in/headrun/buzzinga/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2116" column="30" selection-start-line="2116" selection-start-column="30" selection-end-line="2116" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/source_titles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.448276">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.965517">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+        <state vertical-scroll-proportion="-12.387096">
+          <caret line="213" column="59" selection-start-line="213" selection-start-column="59" selection-end-line="213" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_action_search.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v21/ic_menu_camera.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/FilterTitleAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/drawer_shadow.9.png">
-      <provider editor-type-id="images">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="ninepatcheditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Android/Sdk/platforms/android-23/data/res/drawable-hdpi/ic_menu_gallery.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/count_bg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.333333">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/homescreen.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/menu_counter.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.862069">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.137931">
-          <caret line="83" column="33" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/info_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6551723">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5172415">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/splashscreen.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/splashscren.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/side_nav_bar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.178571">
-          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/global.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/drawables.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values/values.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.435294">
-          <caret line="1409" column="12" selection-start-line="1409" selection-start-column="12" selection-end-line="1409" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1420" column="12" selection-start-line="1420" selection-start-column="12" selection-end-line="1420" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+    <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/design/23.4.0/design-23.4.0-sources.jar!/android/support/design/widget/NavigationView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3322034">
+          <caret line="434" column="21" selection-start-line="434" selection-start-column="21" selection-end-line="434" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-23/java/util/List.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/navigation_icon.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3516874">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.071429">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.30337077">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Constants.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/homescreen.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BootUpReceiver.java">
+    <entry file="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-hdpi-v4/abc_ic_clear_mtrl_alpha.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/webview.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/BuzzingaNotification.java">
+    <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/view/MotionEventCompat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaNotificationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-23/java/lang/StringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="449" column="22" selection-start-line="449" selection-start-column="20" selection-end-line="449" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/UserSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="40" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/Filtering.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="748" column="0" selection-start-line="748" selection-start-column="0" selection-end-line="748" selection-end-column="0" />
+          <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
           <folding>
-            <element signature="docComment;class#Filtering#0" expanded="false" />
-            <element signature="method#onCreate#0;class#Filtering#0" expanded="false" />
-            <element signature="class#5046:5611" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#onTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#5046:5611" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#Filtering#0" expanded="false" />
-            <element signature="method#filterselection#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onClick#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterSources#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterSentiment#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterGender#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterLang#0;class#Filtering#0" expanded="false" />
-            <element signature="method#listOfFilterLocation#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sentiment_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#source_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#gender_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#lang_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#loc_check#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sortlist#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sentimentquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#genderquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#locquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#langquery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#sourcequery#0;class#Filtering#0" expanded="false" />
-            <element signature="method#fillAdapter#0;class#Filtering#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Filtering#0" expanded="false" />
-            <element signature="class#FilterStatus#0;class#Filtering#0" expanded="false" />
-            <element signature="method#selSourceItem#0;class#Filtering#0" expanded="false" />
-            <element signature="method#updateListview#0;class#Filtering#0" expanded="false" />
-            <element signature="method#copySparseArray#0;class#Filtering#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#HomeScreen#0" expanded="false" />
+            <element signature="method#readBundle#0;class#HomeScreen#0" expanded="false" />
+            <element signature="e#3408#3417#0" expanded="false" />
+            <element signature="e#4355#4395#0" expanded="false" />
+            <element signature="method#onScrollStateChanged#0;class#4489:5831" expanded="false" />
+            <element signature="method#onStart#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onResume#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onPause#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onStop#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#getHeaders#0;class#15450:19278" expanded="false" />
+            <element signature="method#itemClicked#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#getJsonData#0;class#HomeScreen#0" expanded="false" />
+            <element signature="method#addArticletoList#0;class#HomeScreen#0" expanded="false" />
+            <element signature="class#22888:22946" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TrackKeyWord.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/SplashActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/TwitterLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.leavjenn.smoothdaterangepicker/library/0.2.0/6b222a8257806b5d1025696de46bd7bc82711205/library-0.2.0-sources.jar!/com/leavjenn/smoothdaterangepicker/date/SmoothDateRangePickerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.1355932">
+          <caret line="419" column="58" selection-start-line="419" selection-start-column="58" selection-end-line="419" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.4.0/appcompat-v7-23.4.0-sources.jar!/android/support/v7/app/ActionBarDrawerToggle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45762712">
+          <caret line="318" column="7" selection-start-line="318" selection-start-column="7" selection-end-line="318" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="1" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -3593,7 +3484,68 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/ServerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.borax12/MaterialDateRangePicker/1.1/3c545f90fb3a8038a7067086427a34d0f97442df/MaterialDateRangePicker-1.1-sources.jar!/com/borax12/materialdaterangepicker/date/DatePickerDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="5" selection-start-line="203" selection-start-column="5" selection-end-line="203" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#38787#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#29264#29265#0" expanded="false" />
+            <element signature="e#29298#29299#0" expanded="false" />
+            <element signature="e#29588#29589#0" expanded="false" />
+            <element signature="e#29636#29637#0" expanded="false" />
+            <element signature="e#29857#29858#0" expanded="false" />
+            <element signature="e#29895#29896#0" expanded="false" />
+            <element signature="e#30112#30113#0" expanded="false" />
+            <element signature="e#30145#30146#0" expanded="false" />
+            <element signature="e#30307#30308#0" expanded="false" />
+            <element signature="e#30349#30350#0" expanded="false" />
+            <element signature="e#30471#30472#0" expanded="false" />
+            <element signature="e#30506#30507#0" expanded="false" />
+            <element signature="e#32249#32250#0" expanded="false" />
+            <element signature="e#32280#32281#0" expanded="false" />
+            <element signature="e#32974#32975#0" expanded="false" />
+            <element signature="e#33005#33006#0" expanded="false" />
+            <element signature="e#33781#33782#0" expanded="false" />
+            <element signature="e#33819#33820#0" expanded="false" />
+            <element signature="e#34785#34786#0" expanded="false" />
+            <element signature="e#34822#34823#0" expanded="false" />
+            <element signature="e#34923#34924#0" expanded="false" />
+            <element signature="e#34959#34960#0" expanded="false" />
+            <element signature="e#38362#38363#0" expanded="false" />
+            <element signature="e#38395#38396#0" expanded="false" />
+            <element signature="e#38716#38717#0" expanded="false" />
+            <element signature="e#38783#38784#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/widget/DrawerLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1675" column="19" selection-start-line="1675" selection-start-column="19" selection-end-line="1675" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6666665">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6666665">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3601,7 +3553,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+          <caret line="1144" column="15" selection-start-line="1144" selection-start-column="15" selection-end-line="1144" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#Utils#0" expanded="false" />
@@ -3617,14 +3569,12 @@
             <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
             <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
             <element signature="method#query_sentiment#0;class#Utils#0" expanded="false" />
-            <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
             <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
             <element signature="method#query_language#0;class#Utils#0" expanded="false" />
             <element signature="method#query_location#0;class#Utils#0" expanded="false" />
             <element signature="method#queryform#0;class#Utils#0" expanded="false" />
             <element signature="method#count_query#0;class#Utils#0" expanded="false" />
             <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
-            <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
             <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
             <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
             <element signature="method#clear_all_data#0;class#Utils#0" expanded="false" />
@@ -3643,76 +3593,74 @@
             <element signature="method#updateListviewItem#0;class#Utils#0" expanded="false" />
             <element signature="method#getArrayPos#0;class#Utils#0" expanded="false" />
             <element signature="method#addtoList#0;class#Utils#0" expanded="false" />
-            <element signature="method#getdate#0;class#Utils#0" expanded="false" />
             <element signature="method#call_homeFragment#0;class#Utils#0" expanded="false" />
-            <element signature="method#notimyme#0;class#Utils#0" expanded="false" />
-            <element signature="class#36845:37012" expanded="false" />
-            <element signature="method#onClick#0;class#36845:37012" expanded="false" />
-            <element signature="method#callService#0;class#Utils#0" expanded="false" />
+            <element signature="class#38770:38937" expanded="false" />
+            <element signature="method#onClick#0;class#38770:38937" expanded="false" />
             <element signature="method#stopService#0;class#Utils#0" expanded="false" />
             <element signature="method#getNotify_IntervellMills#0;class#Utils#0" expanded="false" />
-            <element signature="method#serverCallnotificationCount#0;class#Utils#0" expanded="false" />
-            <element signature="class#40212:43185" expanded="false" />
-            <element signature="method#getParams#0;class#40212:43185" expanded="false" />
-            <element signature="method#getHeaders#0;class#40212:43185" expanded="false" />
+            <element signature="class#42197:45394" expanded="false" />
+            <element signature="method#getParams#0;class#42197:45394" expanded="false" />
+            <element signature="method#getHeaders#0;class#42197:45394" expanded="false" />
             <element signature="method#setTitle#0;class#Utils#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle_bg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/searchable.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.3448277">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="10" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
+          <caret line="294" column="11" selection-start-line="294" selection-start-column="11" selection-end-line="294" selection-end-column="11" />
           <folding>
-            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3771#4112#0" expanded="true" />
+            <element signature="e#4111#4112#0" expanded="true" />
             <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#stringrequest#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#7206:8962" expanded="false" />
-            <element signature="method#getHeaders#0;class#7206:8962" expanded="false" />
+            <element signature="method#setMenuCounter#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#5511#5554#0" expanded="false" />
+            <element signature="class#6595:8351" expanded="false" />
+            <element signature="method#getHeaders#0;class#6595:8351" expanded="false" />
+            <element signature="method#handleIntent#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#searchview_text#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#10530:10681" expanded="false" />
+            <element signature="method#onClick#0;class#10530:10681" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.5172415">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15384616">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
           <folding />
         </state>
       </provider>

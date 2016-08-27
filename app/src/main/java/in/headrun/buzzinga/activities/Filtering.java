@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -88,7 +90,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.sourcefilterlay);
         ButterKnife.bind(this);
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.buzz_logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -116,22 +117,48 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         utils.add_query_data();
         titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
         filter_titles.setAdapter(titleadapter);
-        filterselection(FilterStatus.SOURCES);
+
+
+        titleadapter.notifyDataSetChanged();
+
+        filter_titles.clearFocus();
+        filter_titles.post(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    if (filter_titles.getAdapter().getCount() > 0) {
+
+                        View view = filter_titles.getChildAt(0);
+                        view.setBackgroundColor(ContextCompat.getColor(Filtering.this, R.color.white));
+                        TextView item = (TextView) view.findViewById(R.id.texttilte);
+                        item.setTextColor(ContextCompat.getColor(Filtering.this, R.color.black));
+
+                        filterselection(FilterStatus.SOURCES);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                for (int i = 0; i < filter_titles.getAdapter().getCount(); i++) {
 
-                view.setSelected(true);
-
-                /*for (int i = 0; i < filter_titles.getAdapter().getCount(); i++) {
-                    filter_titles.getChildAt(i).setBackgroundColor(Color.parseColor("#d62a2a2a"));
+                    View item_view = filter_titles.getChildAt(i);
+                    item_view.setBackgroundColor(ContextCompat.getColor(Filtering.this, R.color.grey));
+                    TextView item = (TextView) item_view.findViewById(R.id.texttilte);
+                    item.setTextColor(ContextCompat.getColor(Filtering.this, R.color.white));
                 }
 
-                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#FFCFCACA"));
-*/
+                view.setBackgroundColor(ContextCompat.getColor(Filtering.this, R.color.white));
+                TextView item = (TextView) view.findViewById(R.id.texttilte);
+                item.setTextColor(ContextCompat.getColor(Filtering.this, R.color.black));
+
                 String filteritem = filter_titles.getItemAtPosition(position).toString().toUpperCase();
 
                 FilterStatus filtering = FilterStatus.valueOf(filteritem);

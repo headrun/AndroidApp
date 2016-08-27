@@ -18,13 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
-import com.twitter.sdk.android.core.models.User;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +37,7 @@ import in.headrun.buzzinga.utils.Utils;
 public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
-    TwitterSession session;
+
 
     @Bind(R.id.twitter_login_button1)
     ImageView loginButton;
@@ -56,7 +50,7 @@ public class TwitterLogin extends Activity {
     @Bind(R.id.webview)
     WebView webview;
 
-    private TwitterLoginButton TloginButton;
+
     private Button btnuserdetails;
     public String stoken, token, userid, username;
     Utils utils;
@@ -101,128 +95,7 @@ public class TwitterLogin extends Activity {
             }
         });
 
-        TloginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
-        TloginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
 
-                session = result.data;
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-
-                stoken = session.getAuthToken().secret;
-                token = session.getAuthToken().token;
-                userid = String.valueOf(session.getUserId());
-                username = session.getUserName();
-
-                Log.i(TAG, "secreat key " + session.getAuthToken().secret +
-                        "\ntoken " + session.getAuthToken().token +
-                        "\nuser id " + session.getUserId() +
-                        "\nuser name " + session.getUserName());
-
-                twitter_btn.setVisibility(View.GONE);
-                twitter_auth_lay.setVisibility(View.GONE);
-                btnuserdetails.setVisibility(View.VISIBLE);
-
-                getTwitterdata();
-
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
-            }
-        });
-
-
-        btnuserdetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-              /*  Twitter.getApiClient(session).getAccountService()
-                        .verifyCredentials(true, false, new Callback<User>() {
-
-                            @Override
-                            public void success(Result<User> userResult) {
-
-                                User user = userResult.data;
-                                //twitterImage = user.profileImageUrl;
-
-                                Log.i(TAG, "user email" + user.email+
-                                            "user id string"+user.idStr+
-                                                "user name"+user.name
-                                );
-
-                            }
-
-                            @Override
-                            public void failure(TwitterException e) {
-
-                            }
-
-                        });
-                        */
-
-                /*
-                TwitterAuthClient authClient = new TwitterAuthClient();
-                authClient.requestEmail(session, new Callback<String>() {
-                    @Override
-                    public void success(Result<String> result) {
-                        // Do something with the result, which provides the email address
-
-                   Log.i(TAG,"email address is"+result.data.toString());
-                   Log.i(TAG,"email address is"+result.response.toString());
-                    }
-
-                    @Override
-                    public void failure(TwitterException exception) {
-                        // Do something on failure
-                    }
-                });
-                */
-
-            }
-        });
-
-
-    }
-
-    public void getTwitterdata() {
-        Twitter.getApiClient(session).getAccountService()
-                .verifyCredentials(true, false, new Callback<User>() {
-
-                    @Override
-                    public void success(Result<User> userResult) {
-
-                        User user = userResult.data;
-                        //twitterImage = user.profileImageUrl;
-
-                        Log.i(TAG, "user Screen name" + userResult.data.screenName +
-                                "\nuser email" + userResult.data.email +
-                                "\nuser name" + userResult.data.name
-                        );
-
-                    }
-
-                    @Override
-                    public void failure(TwitterException e) {
-
-                    }
-
-                });
-
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Make sure that the loginButton hears the result from any
-        // Activity that it triggered.
-        Log.i(TAG, "data is" + data.getDataString());
-        TloginButton.onActivityResult(requestCode, resultCode, data);
     }
 
 
@@ -245,26 +118,6 @@ public class TwitterLogin extends Activity {
 
             if (view.getOriginalUrl() != null) {
 
-               /* if (view.getOriginalUrl().equals("http://beta.buzzinga.com/link_socialmedia/")) {
-                    cookie = CookieManager.getInstance().getCookie(url);
-                    new UserSession(TwitterLogin.this).clearsession(new UserSession(TwitterLogin.this).TSESSION);
-
-                    if (cookie.contains("csrftoken")) {
-                        Log.i(TAG, "csrf token has exists " + cookie.getBytes().toString());
-                    } else {
-                        Log.i(TAG, "csrf token has not exists ");
-                    }
-
-                    // if (cookie.contains("sessionid") && cookie.contains("csrftoken"))
-                    new UserSession(TwitterLogin.this).setTSESSION(cookie.toString());
-
-                    Log.i(TAG, "url cookie is" + cookie.toString());
-
-                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0)
-                        startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
-
-                }*/
-
                 cookie = CookieManager.getInstance().getCookie(url);
 
                 if (cookie != null) {
@@ -283,8 +136,10 @@ public class TwitterLogin extends Activity {
                         }
                     }
 
-                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0)
+                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0) {
                         startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
+                        utils.callService();
+                    }
                 }
             }
         }

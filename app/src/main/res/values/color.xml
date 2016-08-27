@@ -4,4 +4,9 @@
     <color name="blue">#4baad3</color>
     <color name="orange">#f48f1f</color>
     <color name="white">#ffffff</color>
+    <color name="yellow">#edbc09</color>
+    <color name="grey">#d62a2a2a</color>
+    <color name="black">#000000</color>
+    <color name="listview_sel">#d62a2a2a</color>
+    <color name="black_color">#000000</color>
 </resources>

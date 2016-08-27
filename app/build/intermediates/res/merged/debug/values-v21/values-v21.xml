@@ -214,9 +214,6 @@
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem"/>
     <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="android:Widget.Material.Toolbar.Button.Navigation">
     </style>
-    <style name="Digits_default" parent="@android:style/Theme.Material.Light">
-        <item name="dgts__accentColor">?android:attr/colorAccent</item>
-    </style>
     <style name="Platform.AppCompat" parent="android:Theme.Material">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
@@ -249,8 +246,4 @@
     </style>
     <style name="Platform.ThemeOverlay.AppCompat.Dark"/>
     <style name="Platform.ThemeOverlay.AppCompat.Light"/>
-    <style name="tw__TweetFullName" parent="tw__TweetFullNameBase">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:importantForAccessibility">no</item>
-    </style>
 </resources>

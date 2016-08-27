@@ -89,6 +89,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
                 trak_progress.setVisibility(View.VISIBLE);
 
                 utils.userSession.setTrackKey(track);
+                utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
                 utils.add_query_data();
 
                 startActivity(new Intent(getApplication(), MainActivity.class)

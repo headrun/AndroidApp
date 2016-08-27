@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="in.headrun.buzzinga.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -12,34 +11,62 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-        <!-- <android.support.v7.widget.Toolbar
-             android:id="@+id/toolbar"
-             android:layout_width="match_parent"
-             android:layout_height="?attr/actionBarSize"
-             android:background="?attr/colorPrimary"
-             app:layout_scrollFlags="scroll|enterAlways|snap"
-             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-             app:popupTheme="@style/AppTheme.PopupOverlay" />
- -->
+            <FrameLayout
+                android:id="@+id/indicaer_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/openMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/menu" />
+
+                    <TextView
+                        android:id="@+id/badger"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignEnd="@+id/openMenu"
+                        android:layout_alignRight="@+id/openMenu"
+                        android:layout_alignTop="@+id/openMenu"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="5"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity=""
+                        android:layout_toRightOf="@+id/openMenu"
+                        android:ellipsize="end"
+                        android:gravity="left|center_vertical|center_horizontal"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </FrameLayout>
+
+
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
-    <!-- <android.support.design.widget.FloatingActionButton
-         android:id="@+id/fab"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="bottom|end"
-         android:layout_margin="@dimen/fab_margin"
-         android:src="@android:drawable/ic_dialog_email" />
- -->
 </android.support.design.widget.CoordinatorLayout>

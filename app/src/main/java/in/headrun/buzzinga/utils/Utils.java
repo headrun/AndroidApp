@@ -3,6 +3,8 @@ package in.headrun.buzzinga.utils;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
@@ -15,6 +17,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -29,7 +32,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -155,7 +160,6 @@ public class Utils {
     }
 
     public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
-
 
         setupdate(fromdate, todate);
         String search_key = "(\"" + trackkey + "\"" +
@@ -599,13 +603,16 @@ public class Utils {
         } else {*/
         Log.i(TAG, "Buzz Notification article count" + article_count);
 
+        String context_text = article_count + "new articles found for your keyword \t" + userSession.getTrackKey() +
+                (!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.buzz_logo)
                         .setContentTitle("Buzzinga " + "keyword" + " Alert")
                         .setAutoCancel(true)
-                        .setContentText(article_count + "new articles found for your keyword \t" + userSession.getTrackKey() +
-                                (!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : ""));
+                        .setContentText(context_text)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(context_text));
 
         Intent resultIntent = new Intent(context, MainActivity.class);
         resultIntent.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
@@ -837,10 +844,12 @@ public class Utils {
 
     public void getdate() {
 
-  /*      FragmentManager fm = getFragmentManager();
+/*
+        FragmentManager fm = getFragmentManager();
         DialogFragment newFragment = new FilterByDate();
         newFragment.show(fm, "datePicker");
 */
+
 
         SmoothDateRangePickerFragment smoothDateRangePickerFragment =
                 SmoothDateRangePickerFragment
@@ -868,6 +877,47 @@ public class Utils {
 
         smoothDateRangePickerFragment.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
     }
+
+
+  /*  public void getdate() {
+
+  *//*      FragmentManager fm = getFragmentManager();
+        DialogFragment newFragment = new FilterByDate();
+        newFragment.show(fm, "datePicker");
+*//*
+
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+
+                        String date = "You picked the following date range: \n"
+                                + "From " + dayOfMonth + "/" + (++monthOfYear)
+                                + "/" + year + " To " + dayOfMonthEnd + "/"
+                                + (++monthOfYearEnd) + "/" + yearEnd;
+
+                        userSession.setFROM_DATE(year + "-" + monthOfYear + "-" + dayOfMonth);
+                        userSession.setTO_DATE(yearEnd + "-" + monthOfYearEnd + "-" + dayOfMonthEnd);
+
+                        showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
+                                userSession.getTO_DATE(), Config.HOME_SCREEN);
+
+                        add_query_data();
+                        call_homeFragment(Constants.Intent_TRACK);
+                    }
+                },
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH));
+
+        Calendar max_date = Calendar.getInstance();
+        dpd.setMaxDate(max_date);
+
+
+        dpd.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
+
+    }*/
 
     public void call_homeFragment(String value) {
         Bundle bundle = new Bundle();
@@ -1009,85 +1059,128 @@ public class Utils {
 
     public void serverCallnotificationCount() {
 
-        showLog(TAG, "call count call " + ServerConfig.SERVER_ENDPOINT + ServerConfig.count, Config.Utils);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+        if (!userSession.getTrackKey().isEmpty()) {
+            showLog(TAG, "call count call " + ServerConfig.SERVER_ENDPOINT + ServerConfig.count, Config.Utils);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                        showLog(TAG, "count response  " + response, Config.BuzzingaNotification);
-                        try {
-                            JSONObject jobj_reult = new JSONObject(response);
+                            showLog(TAG, "count response  " + response, Config.BuzzingaNotification);
+                            try {
+                                JSONObject jobj_reult = new JSONObject(response);
 
 
-                            if (jobj_reult.optInt("error") == 0) {
-                                JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
-                                long article_count = json_result.optInt("count");
+                                if (jobj_reult.optInt("error") == 0) {
+                                    JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
+                                    long article_count = json_result.optInt("count");
 
-                                if (article_count > 0) {
-                                    try {
-                                        Buzz_notification(article_count);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+                                    if (article_count > 0) {
+                                        try {
+                                            Buzz_notification(article_count);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
                         }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    showLog(TAG, "error are " + error.toString(), Config.BuzzingaNotification);
 
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                showLog(TAG, "error are " + error.toString(), Config.BuzzingaNotification);
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("clubbed_utils", count_query());
-                params.put("tz", userSession.getTIMEZONE());
-                params.put("setup", userSession.getSETUP());
-
-                showLog(TAG, "params are " + params, Config.BuzzingaNotification);
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                String sessionid = new UserSession(context).getTSESSION();
-                if (sessionid.length() > 0) {
-                    Log.i(TAG, "session id is" + sessionid);
-                    StringBuilder builder = new StringBuilder();
-                    builder.append("sessionid");
-                    builder.append("=");
-                    builder.append(sessionid);
-                    if (headers.containsKey("Cookie")) {
-                        builder.append("; ");
-                        builder.append(headers.get("Cookie"));
-                    }
-                    headers.put("Cookie", builder.toString());
                 }
-                showLog(TAG, "headers are " + headers, Config.BuzzingaNotification);
-                return headers;
-            }
+            }) {
 
-        };
-        stringRequest.setTag(TAG);
-        BuzzingaRequest.getInstance(context).addToRequestQueue(stringRequest);
+                @Override
+                protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("clubbed_query", count_query());
+                    params.put("tz", userSession.getTIMEZONE());
+                    params.put("setup", userSession.getSETUP());
+
+                    showLog(TAG, "params are " + params, Config.BuzzingaNotification);
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    String sessionid = new UserSession(context).getTSESSION();
+                    if (sessionid.length() > 0) {
+                        Log.i(TAG, "session id is" + sessionid);
+                        StringBuilder builder = new StringBuilder();
+                        builder.append("sessionid");
+                        builder.append("=");
+                        builder.append(sessionid);
+                        if (headers.containsKey("Cookie")) {
+                            builder.append("; ");
+                            builder.append(headers.get("Cookie"));
+                        }
+                        headers.put("Cookie", builder.toString());
+                    }
+                    showLog(TAG, "headers are " + headers, Config.BuzzingaNotification);
+                    return headers;
+                }
+
+            };
+            stringRequest.setTag(TAG);
+            BuzzingaRequest.getInstance(context).addToRequestQueue(stringRequest);
+        }
     }
 
     public String setTitle() {
 
         StringBuilder title = new StringBuilder();
         title.append(userSession.getTrackKey());
-        title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " AND " + userSession.gettTACK_SEARCH_KEY() : "");
+        title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
         return title.toString();
+    }
+
+    public int count_filter_sel() {
+
+        int count = 0;
+
+        add_filtering_data();
+
+        if (!Constants.BSOURCES.toString().replaceAll("\\[|\\]", "").isEmpty()) {
+            showLog(TAG, "source count is " + Constants.BSOURCES.size() +
+                    " string is " + Constants.BSOURCES.toString(), Config.Utils);
+            count++;
+        }
+        if (!Constants.BGENDER.toString().replaceAll("\\[|\\]", "").isEmpty()) {
+            showLog(TAG, "gender count is " + Constants.BGENDER.size() +
+                    " string is " + Constants.BGENDER.toString(), Config.Utils);
+            count++;
+        }
+        if (!Constants.BSENTIMENT.toString().replaceAll("\\[|\\]", "").isEmpty()) {
+
+            showLog(TAG, "sentiment count is " + Constants.BSENTIMENT.size() +
+                    " string is " + Constants.BSENTIMENT.toString(), Config.Utils);
+
+            count++;
+        }
+        if (!Constants.BLOCATION.toString().replaceAll("\\[|\\]", "").isEmpty()) {
+
+            showLog(TAG, "location count is " + Constants.BLOCATION.size() +
+                    " string is " + Constants.BLOCATION.toString(), Config.Utils);
+
+            count++;
+        }
+        if (!Constants.BLANGUAGE.toString().replaceAll("\\[|\\]", "").isEmpty()) {
+
+
+            showLog(TAG, "language count is " + Constants.BLANGUAGE.size() +
+                    " string is " + Constants.BLANGUAGE.toString(), Config.Utils);
+
+            count++;
+        }
+        return count;
     }
 }
 

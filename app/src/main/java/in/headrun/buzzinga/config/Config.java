@@ -19,4 +19,5 @@ public class Config {
     public static boolean Filtering = true;
     public static boolean FilterTitleAdapter = true;
     public static boolean MainActivity = true;
+    public static boolean SearchActivity = true;
 }

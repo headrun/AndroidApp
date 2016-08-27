@@ -206,6 +206,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             }
         });
 
+
         if (state != null) {
             display_data.getLayoutManager().onRestoreInstanceState(state);
         }
@@ -217,9 +218,11 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void onStart() {
         super.onStart();
         Log.i(TAG, "onstart");
+
         utils.add_query_data();
         if (Intent_opt.equals(Constants.Intent_TRACK))
             getServer_response(ServerConfig.search, utils.searchQuery());
+
     }
 
     @Override
@@ -257,7 +260,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         //setIntent(intent);
         handleIntent(intent);
     }*/
-
+/*
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
@@ -270,16 +273,16 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     searchAdapter.notifyDataSetChanged();
 
 
-                    /*getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
+                    *//*getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
                             utils.userSession.gettTACK_SEARCH_KEY());
-*/
+*//*
                     utils.add_query_data();
                     getServer_response(ServerConfig.search, utils.searchQuery());
                 }
             }
         }
 
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -421,7 +424,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         if (utils.isNetwrokConnection()) {
 
-            if (swipeRefreshLayout.isRefreshing() == true)
+            if (swipeRefreshLayout.isRefreshing() == true || scroll_loading == false)
                 progressbar.setVisibility(View.GONE);
             else
                 progressbar.setVisibility(View.VISIBLE);
@@ -482,20 +485,20 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                         swipeRefreshLayout.setRefreshing(false);
                     } else
                         progressbar.setVisibility(View.GONE);
-                    scroll_loading = true;
+                    removeScrollProgess();
+
                 }
             }) {
 
                 @Override
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    UserSession usersess = new UserSession(getActivity());
 
                     if (swipeRefreshLayout.isRefreshing() == true)
-                        params.put("tz", usersess.getTIMEZONE());
+                        params.put("tz", utils.userSession.getTIMEZONE());
 
                     params.put("clubbed_query", clubbed_query);
-                    params.put("setup", usersess.getSETUP());
+                    params.put("setup", utils.userSession.getSETUP());
 
                     utils.showLog(TAG, "params are " + params, Config.HOME_SCREEN);
                     return params;
@@ -504,7 +507,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<String, String>();
-                    String sessionid = new UserSession(getActivity()).getTSESSION();
+                    String sessionid = utils.userSession.getTSESSION();
                     if (sessionid.length() > 0) {
                         StringBuilder builder = new StringBuilder();
                         builder.append("sessionid");
@@ -545,12 +548,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void article_loading(String response) {
 
 
-        if (scroll_loading == false) {
-            Constants.SEARCHARTICLES.remove(Constants.SEARCHARTICLES.size() - 1);
-            searchAdapter.notifyItemRemoved(Constants.SEARCHARTICLES.size());
-            scroll_loading = true;
-        }
-
+        removeScrollProgess();
         if (swipeRefreshLayout.isRefreshing())
             Constants.SEARCHARTICLES.clear();
 
@@ -649,6 +647,14 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
             utils.showLog(TAG, "url is \t" + item.source.URL + "\ntime is\t" + sdf.format(date) + "\nauthor is" +
                     item.source.AUTHOR.NAME, Config.SearchListDataAdapter);
+        }
+    }
+
+    public void removeScrollProgess() {
+        if (scroll_loading == false) {
+            Constants.SEARCHARTICLES.remove(Constants.SEARCHARTICLES.size() - 1);
+            searchAdapter.notifyItemRemoved(Constants.SEARCHARTICLES.size());
+            scroll_loading = true;
         }
     }
 }

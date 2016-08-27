@@ -8,16 +8,16 @@ import butterknife.ButterKnife.ViewBinder;
 public class TwitterLogin$$ViewBinder<T extends in.headrun.buzzinga.activities.TwitterLogin> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131755278, "field 'loginButton'");
-    target.loginButton = finder.castView(view, 2131755278, "field 'loginButton'");
-    view = finder.findRequiredView(source, 2131755282, "field 'progressbar'");
-    target.progressbar = finder.castView(view, 2131755282, "field 'progressbar'");
-    view = finder.findRequiredView(source, 2131755276, "field 'twitter_btn'");
+    view = finder.findRequiredView(source, 2131624165, "field 'loginButton'");
+    target.loginButton = finder.castView(view, 2131624165, "field 'loginButton'");
+    view = finder.findRequiredView(source, 2131624169, "field 'progressbar'");
+    target.progressbar = finder.castView(view, 2131624169, "field 'progressbar'");
+    view = finder.findRequiredView(source, 2131624164, "field 'twitter_btn'");
     target.twitter_btn = view;
-    view = finder.findRequiredView(source, 2131755280, "field 'twitter_auth_lay'");
+    view = finder.findRequiredView(source, 2131624167, "field 'twitter_auth_lay'");
     target.twitter_auth_lay = view;
-    view = finder.findRequiredView(source, 2131755281, "field 'webview'");
-    target.webview = finder.castView(view, 2131755281, "field 'webview'");
+    view = finder.findRequiredView(source, 2131624168, "field 'webview'");
+    target.webview = finder.castView(view, 2131624168, "field 'webview'");
   }
 
   @Override public void unbind(T target) {
