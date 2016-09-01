@@ -14,8 +14,7 @@
         android:gravity="left"
         android:paddingRight="3dp"
         android:textAppearance="?android:textAppearanceListItem"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/sel_count"

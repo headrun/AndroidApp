@@ -55,6 +55,7 @@
         <item>1 hour</item>
         <item>2 hour</item>
         <item>3 hour</item>
+        <item>None</item>
     </string-array>
 
     <string name="clearfilter">Clear Filter</string>

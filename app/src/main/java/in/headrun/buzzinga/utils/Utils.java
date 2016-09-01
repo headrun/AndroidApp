@@ -2,22 +2,17 @@ package in.headrun.buzzinga.utils;
 
 import android.app.ActivityManager;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -32,9 +27,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -420,14 +412,20 @@ public class Utils {
         long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
         now.setTimeInMillis(offset);
         Log.i(TAG, "time mills" + offset);
-        if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
-            now.add(Calendar.DATE, -30);
-            //return String.format(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE) + sdf.format(now.getTime()));
-            return sdf.format(now.getTime());
-        } else {
 
-            return item.get(0) + sdf1.format(now.getTime());
+        String from_date = "";
+        for (String time_todate : item) {
+            if (time_todate != null && !time_todate.isEmpty()) {
+                from_date = item.get(0) + sdf1.format(now.getTime());
+                break;
+            }
         }
+
+        if (from_date.isEmpty()) {
+            now.add(Calendar.DATE, -30);
+            from_date = sdf.format(now.getTime());
+        }
+        return from_date;
     }
 
     public String query_todate(List<String> item) {
@@ -435,15 +433,23 @@ public class Utils {
         SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
         Calendar now = Calendar.getInstance();
 
-
         long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
         now.setTimeInMillis(offset);
         Log.i(TAG, "time mills" + offset);
-        if (item.isEmpty() || item.get(0) == null || item.get(0).isEmpty()) {
-            return sdf.format(now.getTime()) + sdf1.format(now.getTime());
-        } else {
-            return item.get(0) + sdf1.format(now.getTime());
+
+
+        String todate = "";
+        for (String time_todate : item) {
+            if (time_todate != null && !time_todate.isEmpty()) {
+                todate = item.get(0) + sdf1.format(now.getTime());
+                break;
+            }
         }
+
+        if (todate.isEmpty()) {
+            todate = sdf.format(now.getTime()) + sdf1.format(now.getTime());
+        }
+        return todate;
     }
 
     public String query_language(List<String> item) {
@@ -774,6 +780,7 @@ public class Utils {
 
         public void itemClicked(View view, int position);
 
+
     }
 
     public void showLog(String TAG, String msg, boolean value) {
@@ -842,13 +849,13 @@ public class Utils {
 
     }
 
-    public void getdate() {
+   /* public void getdate() {
 
-/*
+*//*
         FragmentManager fm = getFragmentManager();
         DialogFragment newFragment = new FilterByDate();
         newFragment.show(fm, "datePicker");
-*/
+*//*
 
 
         SmoothDateRangePickerFragment smoothDateRangePickerFragment =
@@ -876,7 +883,7 @@ public class Utils {
                         });
 
         smoothDateRangePickerFragment.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
-    }
+    }*/
 
 
   /*  public void getdate() {
@@ -930,7 +937,7 @@ public class Utils {
 
     }
 
-    public void notimyme(final int sel_item) {
+/*    public void notimyme(final int sel_item) {
 
         if (context != null) {
 
@@ -980,43 +987,52 @@ public class Utils {
         } else {
             showLog(TAG, "contex is null", Config.Utils);
         }
-    }
+    }*/
 
     public void callService() {
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        int hour = getNotify_IntervellMills();
 
-            job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        if (hour != 0) {
 
-            stopService();
+            Long mills = Long.valueOf(hour * 60 * 60 * 1000);
 
-            JobInfo job = new JobInfo.Builder(Constants.JOBID, new ComponentName(context,
-                    BuzzingaNotificationService.class))
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                    .setRequiresCharging(true)
-                    .setPeriodic(getNotify_IntervellMills())
-                    .build();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-            int jobId = job_scheduler.schedule(job);
-            if (job_scheduler.schedule(job) > 0) {
-                showLog(TAG,
-                        "Successfully scheduled job: " + jobId,
-                        Config.Utils);
+                job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
+                stopService();
+
+                JobInfo job = new JobInfo.Builder(Constants.JOBID, new ComponentName(context,
+                        BuzzingaNotificationService.class))
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                        .setRequiresCharging(true)
+                        .setPeriodic(mills)
+                        .build();
+
+                int jobId = job_scheduler.schedule(job);
+                if (job_scheduler.schedule(job) > 0) {
+                    showLog(TAG,
+                            "Successfully scheduled job: " + jobId,
+                            Config.Utils);
+                } else {
+                    showLog(TAG,
+                            "RESULT_FAILURE: " + jobId,
+                            Config.Utils);
+                }
             } else {
-                showLog(TAG,
-                        "RESULT_FAILURE: " + jobId,
-                        Config.Utils);
+
+                alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(context, BuzzingaNotification.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        System.currentTimeMillis() + 1 * 1 * 1000,
+                        mills,
+                        pendingIntent);
+
             }
         } else {
-
-            alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(context, BuzzingaNotification.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 1 * 1 * 1000,
-                    getNotify_IntervellMills(),
-                    pendingIntent);
-
+            stopService();
         }
     }
 
@@ -1049,12 +1065,27 @@ public class Utils {
 
     }
 
-    public Long getNotify_IntervellMills() {
-        showLog(TAG, "notify hour is" + userSession.getNotifyHour() +
-                        " mills are " + (userSession.getNotifyHour() * 60 * 60 * 1000),
-                Config.Utils);
+    public int getNotify_IntervellMills() {
 
-        return Long.valueOf(userSession.getNotifyHour() * 60 * 60 * 1000);
+        String item_hour = userSession.getNotifyHour();
+
+        showLog(TAG, "notify hour is" + userSession.getNotifyHour(), Config.Utils);
+
+        if (!item_hour.isEmpty())
+            if (!item_hour.equals("None")) {
+/*
+                int sel_hour = Integer.valueOf(item_hour.charAt(0));
+
+                // String hour = userSession.getNotifyHour();
+                showLog(TAG, "notify hour is" + userSession.getNotifyHour() +
+                                " mills are " + (sel_hour * 60 * 60 * 1000),
+                        Config.Utils);
+
+                //mills = Long.valueOf(hour * 60 * 60 * 1000);*/
+
+                return Integer.valueOf(item_hour.charAt(0));
+            }
+        return 0;
     }
 
     public void serverCallnotificationCount() {
@@ -1181,6 +1212,26 @@ public class Utils {
             count++;
         }
         return count;
+    }
+
+    public void source_xtags() {
+        if (Constants.sources_list.size() <= 0)
+            Constants.sourse_xtags();
+    }
+
+    public void sentiment_xtags() {
+        if (Constants.sentiment_map.size() <= 0)
+            Constants.sentiment_xtags();
+    }
+
+    public void genter_xtags() {
+        if (Constants.gender_map.size() <= 0)
+            Constants.gender_xtags();
+    }
+
+
+    public interface viewselected {
+        public void onclick(View view, int pos);
     }
 }
 

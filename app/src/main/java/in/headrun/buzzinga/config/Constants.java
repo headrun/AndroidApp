@@ -19,7 +19,6 @@ import in.headrun.buzzinga.doto.SearchArticles;
 public class Constants {
 
 
-
     public static final String TRACKKEY = "trackkey";
     public static final String SEARCHKEY = "searchkey";
     public static final String SOURCES = "sources";
@@ -54,6 +53,7 @@ public class Constants {
     public static boolean isScreenOn = false;
     public static boolean REQUEST_ENABLE = true;
     public static boolean BUZZ_NOTIFY = false;
+    public static boolean CHANGE_CAL = false;
     public static String SEARCHSTRING;
     public static String USERNAME;
     public static String SETUP = "";
@@ -101,6 +101,9 @@ public class Constants {
     public static int NO_RECORD = 1;
     public static int NO_WIFI = 2;
 
+
+    public static List<String> sel_loc_list = new ArrayList<>();
+    public static List<String> sel_lang_list = new ArrayList<>();
 
     public static void sourse_xtags() {
 

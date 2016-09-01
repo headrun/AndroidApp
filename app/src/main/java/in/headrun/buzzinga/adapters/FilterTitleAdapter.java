@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
@@ -68,7 +70,7 @@ public class FilterTitleAdapter extends BaseAdapter {
         }
 
         holder.title.setText(titles[position]);
-        utils.showLog(TAG, "sel " + titles[position] + " item count is " + selCount(titles[position]), Config.FilterTitleAdapter);
+        ///utils.showLog(TAG, "sel " + titles[position] + " item count is " + selCount(titles[position]), Config.FilterTitleAdapter);
         String count_is = selCount(titles[position]);
         if (!count_is.isEmpty()) {
             holder.sel_count.setVisibility(View.VISIBLE);
@@ -114,12 +116,12 @@ public class FilterTitleAdapter extends BaseAdapter {
                         count = utils.countIS(utils.userSession.getGender_data());
                     break;
                 case "location":
-                    count = sel_count(Filtering.sel_loc_array);
+                    count = sel_count(Filtering.sel_loc_list);
                     if (count <= 0 && Filtering.first_loc == 0)
                         count = utils.countIS(utils.userSession.getLoc_data());
                     break;
                 case "language":
-                    count = sel_count(Filtering.sel_lang_array);
+                    count = sel_count(Filtering.sel_lang_list);
                     if (count <= 0 && Filtering.first_lang == 0)
                         count = utils.countIS(utils.userSession.getLang_data());
                     break;
@@ -138,6 +140,11 @@ public class FilterTitleAdapter extends BaseAdapter {
         }
         return count;
 
+    }
+
+    public int sel_count(List<String> items) {
+        int count = items.size();
+        return count != 0 ? count : 0;
     }
 
 }

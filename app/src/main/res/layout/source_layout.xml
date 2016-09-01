@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filter_item_lay"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:paddingTop="5dp">
+    android:layout_height="match_parent">
 
     <!-- <CheckBox
          android:id="@+id/source_text"
@@ -12,7 +11,7 @@
          android:button="@null"
          android:drawablePadding="10dp"
          android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
-  -->
+
 
     <TextView
         android:id="@+id/filtertext"
@@ -21,8 +20,7 @@
         android:layout_gravity="left"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-
-        />
+        android:visibility="gone" />
 
     <CheckBox
         android:id="@+id/filtercheckbox"
@@ -31,5 +29,20 @@
         android:layout_alignBaseline="@+id/filtertext"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:paddingRight="5dp" />
+        android:paddingRight="5dp"
+        android:visibility="gone" />
+  -->
+
+    <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/item_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 </RelativeLayout>

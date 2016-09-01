@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,33 +25,34 @@ import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
 import in.headrun.buzzinga.utils.Utils;
 
-public class ListViewAdapter extends BaseAdapter implements Filterable {
+public class ListViewAdapter extends BaseAdapter {
 
     String TAG = ListViewAdapter.this.getClass().getSimpleName();
     // Declare Variables
     Context context;
+    Utils.setOnItemClickListner clicklistner;
     //String[] source;
     List<Listitems> source = null;
-    List<Listitems> selectlist = null;
+    List<Listitems> selectlist;
     LayoutInflater inflater;
-    ValueFilter valueFilter = new ValueFilter();
     Utils utils;
     ViewHolder holder = null;
     Listitems item;
+    public static int pos = -1;
 
     public ListViewAdapter(Context context, List<Listitems> source) {
         this.context = context;
         this.source = source;
-        this.selectlist = source;
+        this.selectlist = new ArrayList<Listitems>();
+        this.selectlist.addAll(source);
         utils = new Utils(context);
 
         utils.showLog(TAG, " filter len is " + source.size(), Config.ListViewAdapter);
 
     }
 
-    @Override
-    public Filter getFilter() {
-        return valueFilter;
+    public void setonitemclickListner(Utils.setOnItemClickListner cllicklistnerr) {
+        clicklistner = cllicklistnerr;
     }
 
 
@@ -67,7 +71,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
 
         if (convertView == null) {
@@ -80,10 +84,24 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         }
 
         item = source.get(position);
-
-        holder.filtertext.setText(item.getSourcename());
+        pos = position;
+     /*   holder.filtertext.setText(item.getSourcename());
         holder.filtercheckbox.setChecked(item.isSelectd());
         holder.filtercheckbox.setTag(item);
+*/
+
+
+        holder.item_view.setText(item.getSourcename());
+        holder.item_view.setChecked(item.isSelectd());
+
+        holder.item_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clicklistner != null)
+                    clicklistner.itemClicked(v, position);
+
+            }
+        });
 
       /*  holder.filtercheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,58 +118,50 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
     }
 
     class ViewHolder implements View.OnClickListener {
-        @Bind(R.id.filtertext)
+        /*@Bind(R.id.filtertext)
         TextView filtertext;
 
         @Bind(R.id.filtercheckbox)
-        CheckBox filtercheckbox;
+        CheckBox filtercheckbox;*/
+
+        @Bind(R.id.item_view)
+        CheckedTextView item_view;
+
+        @Bind(R.id.filter_item_lay)
+        RelativeLayout filter_item_lay;
 
         public ViewHolder(View v) {
             ButterKnife.bind(this, v);
             v.setOnClickListener(this);
-        }
 
+
+            filter_item_lay.setOnClickListener(this);
+        }
 
         @Override
         public void onClick(View v) {
 
-            if (item.isSelectd())
-                item.setSelectd(false);
-            else
-                item.setSelectd(true);
         }
     }
 
-
-    public class ValueFilter extends Filter {
-
-
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-
-            FilterResults results = new FilterResults();
-
-
-            Constants.filterList = new ArrayList<Listitems>(selectlist.size());
-            for (int i = 0; i < selectlist.size(); i++) {
-                Log.i(TAG, "source list string" + selectlist.get(i).getSourcename().toUpperCase() + " comparde strin " + constraint.toString().toUpperCase());
-                if ((selectlist.get(i).getSourcename().toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                    Constants.filterList.add(selectlist.get(i));
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        source.clear();
+        if (charText.length() == 0) {
+            source.addAll(selectlist);
+        } else {
+            for (Listitems wp : selectlist) {
+                if (wp.getSourcename().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    source.add(wp);
                 }
             }
-            results.count = Constants.filterList.size();
-            results.values = Constants.filterList;
-            return results;
         }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            source = (List<Listitems>) results.values;
-            notifyDataSetChanged();
-        }
-
+        notifyDataSetChanged();
     }
 
-
 }
+
+
+
+

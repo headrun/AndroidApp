@@ -77,6 +77,7 @@ public class SplashActivity extends Activity {
                 // Log.i(TAG, "track key is" + userSession.getTrackKey() + "article size " + Constants.listdetails + "Constants.articlelist_Details" + Constants.articlelist_Details);
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
                 utils.add_query_data();
+
                 startActivity(new Intent(getApplication(), MainActivity.class).
                         putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 

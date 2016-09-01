@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -35,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +46,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
@@ -100,6 +103,9 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     public static Parcelable state;
 
+    public final int SEARCH = 1;
+    public final int SCROLL = 2;
+
 /*
     public static HomeScreen newInstance(String track_key) {
 
@@ -115,7 +121,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
             Intent_opt = bundle.getString(Constants.Intent_OPERATION);
-
+            state = null;
         }
     }
 
@@ -175,7 +181,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                             Constants.SEARCHARTICLES.add(null);
                             searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
 
-                            getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
+                            servercall(SCROLL);
                         }
                     }
                 }
@@ -199,7 +205,9 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 if (utils.isNetwrokConnection()) {
                     Swipe_loading = false;
                     utils.add_query_data();
-                    getServer_response(ServerConfig.search, utils.searchQuery());
+
+
+                    servercall(SEARCH);
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -207,9 +215,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         });
 
 
-        if (state != null) {
-            display_data.getLayoutManager().onRestoreInstanceState(state);
-        }
+        setSate();
 
         return v;
     }
@@ -221,7 +227,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         utils.add_query_data();
         if (Intent_opt.equals(Constants.Intent_TRACK))
-            getServer_response(ServerConfig.search, utils.searchQuery());
+            servercall(SEARCH);
 
     }
 
@@ -229,9 +235,13 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void onResume() {
         super.onResume();
         Log.i(TAG, "onresume");
-
         state = display_data.getLayoutManager().onSaveInstanceState();
+    }
 
+    public void setSate() {
+        if (state != null) {
+            display_data.getLayoutManager().onRestoreInstanceState(state);
+        }
     }
 
     @Override
@@ -300,7 +310,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             case R.id.newarticle:
                 newarticle.setVisibility(View.GONE);
                 utils.add_query_data();
-                getServer_response(ServerConfig.search, utils.searchQuery());
+                servercall(SEARCH);
                 break;
         }
     }
@@ -457,6 +467,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 public void onErrorResponse(VolleyError error) {
 
                     error.printStackTrace();
+                    if (BuildConfig.DEBUG == true)
+                        if (error.networkResponse != null && error.networkResponse.data != null)
+                            startActivity(new Intent(getActivity(), ResponseErrorActivity.class).
+                                    putExtra("error", error.networkResponse.data.toString()));
 
                     if (error instanceof ServerError) {
 
@@ -474,9 +488,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     } else if (error instanceof TimeoutError) {
 
                         Log.i(TAG, "time out error");
-
-                    } else if (error.networkResponse != null && error.networkResponse.data != null) {
-                        byte[] error_resp = error.networkResponse.data;
 
                     }
 
@@ -547,22 +558,20 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     public void article_loading(String response) {
 
-
         removeScrollProgess();
         if (swipeRefreshLayout.isRefreshing())
             Constants.SEARCHARTICLES.clear();
 
-
         getJsonData(response);
 
         state = display_data.getLayoutManager().onSaveInstanceState();
-
+        // articleDetails();
         searchAdapter.notifyDataSetChanged();
         if (Constants.SEARCHARTICLES.size() > 0) {
             utils.userSession.setLatestDate(Constants.SEARCHARTICLES.get(0).source.DATE_ADDED);
         }
 
-        display_data.getLayoutManager().onRestoreInstanceState(state);
+        setSate();
 
         if (swipeRefreshLayout.isRefreshing() == true || Intent_opt.equals(Constants.Intent_NOTHING)) {
             Intent_opt = "";
@@ -645,8 +654,12 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             Date date = new Date(millis);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
 
-            utils.showLog(TAG, "url is \t" + item.source.URL + "\ntime is\t" + sdf.format(date) + "\nauthor is" +
-                    item.source.AUTHOR.NAME, Config.SearchListDataAdapter);
+            utils.showLog(TAG, "title is" + item.source.TITLE +
+                            "\nurl is \t" + item.source.URL +
+                            "\nxtags is \t" + item.source.XTAGS.toString() +
+                            "\ntime is\t" + sdf.format(date) +
+                            "\nauthor is" + item.source.AUTHOR.NAME,
+                    Config.SearchListDataAdapter);
         }
     }
 
@@ -656,5 +669,13 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             searchAdapter.notifyItemRemoved(Constants.SEARCHARTICLES.size());
             scroll_loading = true;
         }
+    }
+
+    @UiThread
+    public void servercall(int type) {
+        if (SEARCH == type)
+            getServer_response(ServerConfig.search, utils.searchQuery());
+        else if (SCROLL == type)
+            getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
     }
 }

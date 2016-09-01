@@ -20,6 +20,7 @@ import java.util.Set;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchArticles;
 import in.headrun.buzzinga.utils.Utils;
@@ -39,7 +40,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-
 
     private Utils.setOnItemClickListner onitemclicklistner = null;
 
@@ -90,9 +90,11 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             SearchArticles item = listdata.get(position);
 
-            if (item.source.TITLE != null && item.source.TITLE.length() > 0)
+            if (item.source.TITLE != null && item.source.TITLE.length() > 0) {
                 item_holder.item1.setText(item.source.TITLE);
-
+            } else {
+                utils.showLog(TAG, position + " title is empty ", Config.SearchListDataAdapter);
+            }
 
             String author = "";
 
@@ -102,9 +104,11 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (!author.isEmpty())
+            if (!author.isEmpty()) {
                 item_holder.author.setText("By - " + author);
-
+            } else {
+                utils.showLog(TAG, position + " author is empty ", Config.SearchListDataAdapter);
+            }
 
             item_holder.item2.setText(item.source.URL);
 
@@ -113,6 +117,10 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 item_holder.item3.setVisibility(View.VISIBLE);
             }
 
+            utils.showLog(TAG,
+                    "\nxtags 1  is \t" + item.source.XTAGS.toString(),
+
+                    Config.SearchListDataAdapter);
             String source = sourType(item.source.XTAGS);
             int icon = sourceicon(source);
             if (icon != 0) {
@@ -120,11 +128,13 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     item_holder.item1.setVisibility(View.VISIBLE);
                     item_holder.item1.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-                } else {
-                    item_holder.item1.setVisibility(View.GONE);
+               } else {
+                  item_holder.item1.setVisibility(View.GONE);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
-                }
+               }
+            } else {
+                utils.showLog(TAG, position + " icon is empty ", Config.SearchListDataAdapter);
             }
 
             item_holder.article_lay.setBackgroundResource(applySentimentColor(sentimentType(item.source.XTAGS)));
@@ -135,7 +145,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             Date date = new Date(millis);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
             item_holder.articledate.setText(sdf.format(date));
-        } else {
+       } else {
 
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
@@ -197,17 +207,21 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public String sourType(List<String> xtag) {
 
         if (xtag.size() > 0) {
+            utils.source_xtags();
             Set<String> source_keys = Constants.source_map.keySet();
 
             for (String key : source_keys) {
 
-                if (xtag.toString().toLowerCase().contains(key.toLowerCase() + "_"))
+                if (xtag.toString().toLowerCase().contains(key.toLowerCase() + "_")) {
                     return key;
-
+                }
                 if (key.contains("facebook") && (xtag.toString().toLowerCase().contains("fb" + "_") ||
-                        xtag.toString().toLowerCase().contains("fbpages" + "_")))
+                        xtag.toString().toLowerCase().contains("fbpages" + "_"))) {
                     return key;
+                }
             }
+        } else {
+            utils.showLog(TAG, " source items  are empty list ", Config.SearchListDataAdapter);
         }
         return "";
     }
@@ -234,6 +248,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public String genderType(List<String> xtag) {
 
         if (xtag.size() > 0) {
+            utils.genter_xtags();
             Set<String> gender_keys = Constants.gender_map.keySet();
             for (String gender_key : gender_keys)
                 if (xtag.contains(gender_key))
@@ -245,6 +260,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public String sentimentType(List<String> xtag) {
 
         if (xtag.size() > 0) {
+            utils.sentiment_xtags();
             Set<String> sentiment_keys = Constants.sentiment_map.keySet();
             for (String sentiment_key : sentiment_keys)
                 if (xtag.contains(sentiment_key + "_sentiment_final"))
@@ -268,7 +284,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private int sourceicon(String type) {
 
-        if (type != null)
+        if (type != null) {
+            utils.showLog(TAG, " source icon type " + type, Config.SearchListDataAdapter);
             switch (type) {
                 case Constants.FACEBOOK:
                     return R.drawable.fb;
@@ -295,7 +312,12 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 case Constants.LINKDIN:
                     return R.drawable.linkdin;
             }
+            return 0;
+        } else {
+            utils.showLog(TAG, " source icon type is null ", Config.SearchListDataAdapter);
+        }
         return 0;
     }
+
 }
 

@@ -38,8 +38,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="in.headrun.buzzinga.activities.MainActivity"
-            android:configChanges="orientation"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -68,6 +68,9 @@
             android:name="in.headrun.buzzinga.activities.Filtering"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="in.headrun.buzzinga.activities.ResponseErrorActivity"
+            android:configChanges="orientation" />
         <activity
             android:name="in.headrun.buzzinga.activities.TrackKeyWord"
             android:configChanges="orientation"

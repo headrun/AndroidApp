@@ -6,8 +6,7 @@ import android.webkit.WebView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import heardun.in.wms.R;
-
+import in.headrun.buzzinga.R;
 
 /**
  * Created by headrun on 12/10/15.
@@ -23,12 +22,11 @@ public class ResponseErrorActivity extends Activity {
         setContentView(R.layout.response_error);
         ButterKnife.bind(this);
 
-        Bundle data=getIntent().getExtras();
-        String error_data=data.getString("error");
+        Bundle data = getIntent().getExtras();
+        String error_data = data.getString("error");
 
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
-
 
         webview.loadData(error_data, "text/html", "UTF-8");
 

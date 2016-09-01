@@ -49,8 +49,9 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
 
-        if (utils.userSession.getTrackKey().length() < 0) {
+        if (utils.userSession.getTrackKey().length() > 0) {
             Trackkeyword.setText(utils.userSession.getTrackKey());
+            Trackkeyword.setSelection(utils.userSession.getTrackKey().length());
         }
 
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {

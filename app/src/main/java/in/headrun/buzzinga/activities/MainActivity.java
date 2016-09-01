@@ -7,22 +7,27 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,11 +39,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -112,11 +121,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         setMenuCounter(R.id.filter, R.drawable.count_bg, filter_count);
-        setMenuCounter(R.id.notify_me, R.drawable.count_bg, 1);
+        setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
 
         getSupportActionBar().setTitle("");
         title.setText(utils.setTitle());
-        utils.call_homeFragment(Intent_opt);
+        call_homeFragment(Intent_opt);
 
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
@@ -150,8 +159,12 @@ public class MainActivity extends AppCompatActivity
         text_filter_cnt.setBackgroundResource(drawable);
 
         if (count > 0) {
+            if (itemId == R.id.notify_me)
+                text_filter_cnt.setText("" + 1);
+            else
+                text_filter_cnt.setText(String.valueOf(count));
             text_filter_cnt.setVisibility(View.VISIBLE);
-            text_filter_cnt.setText(String.valueOf(count));
+
         } else {
             text_filter_cnt.setVisibility(View.GONE);
         }
@@ -182,7 +195,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.filter) {
             startActivity(new Intent(this, Filtering.class));
         } else if (id == R.id.date_filter) {
-            utils.getdate();
+            getdate();
         } else if (id == R.id.notify_me) {
             notimyme(utils.userSession.getNotifyHour());
         } else if (id == R.id.logout) {
@@ -209,9 +222,10 @@ public class MainActivity extends AppCompatActivity
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
                             alarmManager.cancel(pendingIntent);
                             // stopService(new Intent(HomeScreen.this, .class));
-                            ;
+
                             utils.userSession.clearsession(utils.userSession.TSESSION);
                             startActivity(new Intent(MainActivity.this, TwitterLogin.class));
+                            finish();
                             progress_bar.setVisibility(View.GONE);
 
                         }
@@ -256,7 +270,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void notimyme(final int sel_item) {
+    public void notimyme(final String sel_item) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -269,20 +283,27 @@ public class MainActivity extends AppCompatActivity
 
         utils.showLog(TAG, "sel item is" + sel_item, Config.Utils);
 
-        if (sel_item != -1)
-            pos = Arrays.asList(items).indexOf(sel_item + " hour");
+        if (!sel_item.toString().isEmpty())
+            pos = Arrays.asList(items).indexOf(sel_item);
 
         utils.showLog(TAG, "sel item pos is " + pos, Config.Utils);
-
+        final String[] sel_value = {""};
         builder.setSingleChoiceItems(items, pos, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String sel_value = "" + Arrays.asList(items).get(which).trim().charAt(0);
-                int sel_hour = Integer.valueOf(sel_value);
+                sel_value[0] = Arrays.asList(items).get(which).trim();
+                /*int sel_hour;
+                if (sel_value.contains("None")) {
+                    sel_hour = which;
+                } else {
+                    sel_value = "" + sel_value.charAt(0);
+                }
+                sel_hour = Integer.valueOf(sel_value);
                 utils.showLog(TAG, "sel item are " + sel_hour, Config.Utils);
-                if (which != -1)
-                    utils.userSession.setNotifyHour(sel_hour);
+*/
+
+
             }
         });
 
@@ -290,6 +311,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                utils.userSession.setNotifyHour(sel_value[0]);
+                setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
                 utils.callService();
             }
         });
@@ -304,5 +327,109 @@ public class MainActivity extends AppCompatActivity
         builder.create().show();
     }
 
+    public void getdate() {
 
+/*
+        FragmentManager fm = getFragmentManager();
+        DialogFragment newFragment = new FilterByDate();
+        newFragment.show(fm, "datePicker");
+*/
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+
+        String from_date = utils.query_fromdate(Arrays.asList(utils.userSession.getFROM_DATE()));
+
+        String to_date = utils.query_fromdate(Arrays.asList(utils.userSession.getTO_DATE()));
+
+        utils.showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.MainActivity);
+
+        Calendar from_cal = Calendar.getInstance();
+        Calendar to_cal = Calendar.getInstance();
+
+        try {
+            from_cal.setTime(sdf.parse(from_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            from_cal.setTime(new Date());
+        }
+
+        try {
+            to_cal.setTime(sdf.parse(to_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            to_cal.setTime(new Date());
+        }
+
+        utils.showLog(TAG, "calendar from mnth is " + from_cal.get(Calendar.MONTH) +
+                " to mnth is " + to_cal.get(Calendar.MONTH), Config.MainActivity);
+
+        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
+                SmoothDateRangePickerFragment
+                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                                         @Override
+                                         public void onDateRangeSet(SmoothDateRangePickerFragment view,
+                                                                    int yearStart, int monthStart,
+                                                                    int dayStart, int yearEnd,
+                                                                    int monthEnd, int dayEnd) {
+                                             String date = "You picked the following date range: \n"
+                                                     + "From " + dayStart + "/" + (++monthStart)
+                                                     + "/" + yearStart + " To " + dayEnd + "/"
+                                                     + (++monthEnd) + "/" + yearEnd;
+
+                                             utils.userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                             utils.userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
+
+                                             utils.showLog(TAG, "date is " + utils.userSession.getFROM_DATE() + "  to  " +
+                                                     utils.userSession.getTO_DATE(), Config.HOME_SCREEN);
+
+                                             setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
+                                             utils.add_query_data();
+                                             call_homeFragment(Constants.Intent_TRACK);
+                                         }
+                                     },
+                                from_cal.get(Calendar.YEAR), from_cal.get(Calendar.MONTH), from_cal.get(Calendar.DATE),
+                                to_cal.get(Calendar.YEAR), to_cal.get(Calendar.MONTH), to_cal.get(Calendar.DATE));
+
+        Calendar cal_max = Calendar.getInstance();
+        // cal.add(Calendar.DATE, 1);
+        utils.showLog(TAG, "set max date calendar is " + cal_max.get(Calendar.MONTH) + " date " +
+                cal_max.get(Calendar.DATE), Config.MainActivity);
+
+        smoothDateRangePickerFragment.setMaxDate(cal_max);
+        Calendar cal_main = Calendar.getInstance();
+        cal_main.add(Calendar.MONTH, -6);
+        smoothDateRangePickerFragment.setMinDate(cal_main);
+        smoothDateRangePickerFragment.show(getFragmentManager(), "Buzzinga");
+    }
+
+    public void swipedata() {
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+    }
+
+    public void call_homeFragment(String value) {
+        Bundle bundle = new Bundle();
+        if (value == null)
+            value = "";
+        bundle.putString(Constants.Intent_OPERATION, value);
+        Fragment fragment = new HomeScreen();
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+
+    }
 }

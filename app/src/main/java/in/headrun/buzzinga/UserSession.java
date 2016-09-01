@@ -255,13 +255,13 @@ public class UserSession {
     }
 
     ////set the notify value
-    public void setNotifyHour(int value) {
-        editor.putInt(NOTIFY_HOUR, value);
+    public void setNotifyHour(String value) {
+        editor.putString(NOTIFY_HOUR, value);
         editor.commit();
     }
 
     ////get the notify value
-    public int getNotifyHour() {
-        return pref.getInt(NOTIFY_HOUR, 1);
+    public String getNotifyHour() {
+        return pref.getString(NOTIFY_HOUR, "1 hour");
     }
 }
