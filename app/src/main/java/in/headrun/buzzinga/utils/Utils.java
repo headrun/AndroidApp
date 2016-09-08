@@ -1,5 +1,6 @@
 package in.headrun.buzzinga.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -19,6 +20,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -407,6 +409,7 @@ public class Utils {
     public String query_fromdate(List<String> item) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Log.i(TAG, "from date item is" + item.size());
         Calendar now = Calendar.getInstance();
         long offset = now.getTimeInMillis() - now.getTimeZone().getRawOffset();
@@ -424,6 +427,7 @@ public class Utils {
         if (from_date.isEmpty()) {
             now.add(Calendar.DATE, -30);
             from_date = sdf.format(now.getTime());
+            //userSession.setFROM_DATE(sdf2.format(now.getTime()));
         }
         return from_date;
     }
@@ -442,12 +446,14 @@ public class Utils {
         for (String time_todate : item) {
             if (time_todate != null && !time_todate.isEmpty()) {
                 todate = item.get(0) + sdf1.format(now.getTime());
+
                 break;
             }
         }
 
         if (todate.isEmpty()) {
             todate = sdf.format(now.getTime()) + sdf1.format(now.getTime());
+            //userSession.setTO_DATE(sdf.format(now.getTime()));
         }
         return todate;
     }
@@ -776,6 +782,11 @@ public class Utils {
         return "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
     }
 
+    public void clearSessionData() {
+        userSession.editor.clear();
+        userSession.editor.commit();
+    }
+
     public interface setOnItemClickListner {
 
         public void itemClicked(View view, int position);
@@ -816,188 +827,17 @@ public class Utils {
         listview.getAdapter().getView(pos, view, listview);
     }
 
-    public int getArrayPos(String[] values, String title) {
-        return Arrays.asList(values).indexOf(title);
-
-    }
-
-    public void addtoList() {
-
-        List<String> xtag = new ArrayList<>();
-        xtag.add("fbpages_sourcetype_manual");
-        xtag.add("facebook_sourcetype_manual");
-        xtag.add("fb_sourcetype_manual");
-
-
-        if (xtag.size() > 0) {
-            Set<String> source_keys = new HashSet<>();
-            source_keys.add("Facebok");
-
-            Iterator<String> iterater = source_keys.iterator();
-
-            while (iterater.hasNext()) {
-                String key = iterater.next().toLowerCase();
-
-                if (xtag.toString().contains(key.toLowerCase() + "_"))
-                    showLog(TAG, "matching to " + key, Config.Utils);
-
-                if (xtag.toString().contains("fb" + "_") || xtag.toString().contains("fbpages" + "_"))
-                    showLog(TAG, "matching to " + key, Config.Utils);
-            }
-        }
-
-
-    }
-
-   /* public void getdate() {
-
-*//*
-        FragmentManager fm = getFragmentManager();
-        DialogFragment newFragment = new FilterByDate();
-        newFragment.show(fm, "datePicker");
-*//*
-
-
-        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
-                SmoothDateRangePickerFragment
-                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
-                            @Override
-                            public void onDateRangeSet(SmoothDateRangePickerFragment view,
-                                                       int yearStart, int monthStart,
-                                                       int dayStart, int yearEnd,
-                                                       int monthEnd, int dayEnd) {
-                                String date = "You picked the following date range: \n"
-                                        + "From " + dayStart + "/" + (++monthStart)
-                                        + "/" + yearStart + " To " + dayEnd + "/"
-                                        + (++monthEnd) + "/" + yearEnd;
-
-                                userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
-                                userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
-
-                                showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
-                                        userSession.getTO_DATE(), Config.HOME_SCREEN);
-
-                                add_query_data();
-                                call_homeFragment(Constants.Intent_TRACK);
-                            }
-                        });
-
-        smoothDateRangePickerFragment.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
-    }*/
-
-
-  /*  public void getdate() {
-
-  *//*      FragmentManager fm = getFragmentManager();
-        DialogFragment newFragment = new FilterByDate();
-        newFragment.show(fm, "datePicker");
-*//*
-
-        Calendar now = Calendar.getInstance();
-        DatePickerDialog dpd = DatePickerDialog.newInstance(
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-
-                        String date = "You picked the following date range: \n"
-                                + "From " + dayOfMonth + "/" + (++monthOfYear)
-                                + "/" + year + " To " + dayOfMonthEnd + "/"
-                                + (++monthOfYearEnd) + "/" + yearEnd;
-
-                        userSession.setFROM_DATE(year + "-" + monthOfYear + "-" + dayOfMonth);
-                        userSession.setTO_DATE(yearEnd + "-" + monthOfYearEnd + "-" + dayOfMonthEnd);
-
-                        showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
-                                userSession.getTO_DATE(), Config.HOME_SCREEN);
-
-                        add_query_data();
-                        call_homeFragment(Constants.Intent_TRACK);
-                    }
-                },
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH));
-
-        Calendar max_date = Calendar.getInstance();
-        dpd.setMaxDate(max_date);
-
-
-        dpd.show(((MainActivity) context).getFragmentManager(), "Buzzinga");
-
-    }*/
-
-    public void call_homeFragment(String value) {
-        Bundle bundle = new Bundle();
-        if (value == null)
-            value = "";
-        bundle.putString(Constants.Intent_OPERATION, value);
-        Fragment fragment = new HomeScreen();
-        fragment.setArguments(bundle);
-        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
-
-    }
-
-/*    public void notimyme(final int sel_item) {
-
-        if (context != null) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-            builder.setTitle(context.getString(R.string.notifyme));
-
-            final String[] items = context.getResources().getStringArray(R.array.notify_hours);
-
-            int pos = -1;
-
-            showLog(TAG, "sel item is" + sel_item, Config.Utils);
-
-            if (sel_item != -1)
-                pos = Arrays.asList(items).indexOf(sel_item + " hour");
-
-            showLog(TAG, "sel item pos is " + pos, Config.Utils);
-
-            builder.setSingleChoiceItems(items, pos, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    String sel_value = "" + Arrays.asList(items).get(which).trim().charAt(0);
-                    int sel_hour = Integer.valueOf(sel_value);
-                    showLog(TAG, "sel item are " + sel_hour, Config.Utils);
-                    if (which != -1)
-                        userSession.setNotifyHour(sel_hour);
-                }
-            });
-
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    callService();
-                }
-            });
-
-            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-
-            builder.create().show();
-        } else {
-            showLog(TAG, "contex is null", Config.Utils);
-        }
-    }*/
-
     public void callService() {
 
-        int hour = getNotify_IntervellMills();
+        int is_hour = getNotify_IntervellMills();
 
-        if (hour != 0) {
+        if (is_hour != 0) {
 
-            Long mills = Long.valueOf(hour * 60 * 60 * 1000);
+            Long mills = Long.valueOf(is_hour * 60 * 60 * 1000);
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+                showLog(TAG, "worked on lollipop and above ", Config.Utils);
 
                 job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
@@ -1021,6 +861,8 @@ public class Utils {
                             Config.Utils);
                 }
             } else {
+
+                showLog(TAG, "worked on below lollipop  ", Config.Utils);
 
                 alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 Intent intent = new Intent(context, BuzzingaNotification.class);
@@ -1068,28 +910,22 @@ public class Utils {
     public int getNotify_IntervellMills() {
 
         String item_hour = userSession.getNotifyHour();
-
-        showLog(TAG, "notify hour is" + userSession.getNotifyHour(), Config.Utils);
+        int hour_is = 1;
 
         if (!item_hour.isEmpty())
             if (!item_hour.equals("None")) {
-/*
-                int sel_hour = Integer.valueOf(item_hour.charAt(0));
-
-                // String hour = userSession.getNotifyHour();
-                showLog(TAG, "notify hour is" + userSession.getNotifyHour() +
-                                " mills are " + (sel_hour * 60 * 60 * 1000),
-                        Config.Utils);
-
-                //mills = Long.valueOf(hour * 60 * 60 * 1000);*/
-
-                return Integer.valueOf(item_hour.charAt(0));
+                hour_is = Integer.valueOf("" + item_hour.charAt(0));
+            } else {
+                hour_is = 0;
             }
-        return 0;
+        showLog(TAG, "notify hour is" + hour_is, Config.Utils);
+
+        return hour_is;
     }
 
     public void serverCallnotificationCount() {
 
+        showLog(TAG, "start count call ", Config.Utils);
         if (!userSession.getTrackKey().isEmpty()) {
             showLog(TAG, "call count call " + ServerConfig.SERVER_ENDPOINT + ServerConfig.count, Config.Utils);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
@@ -1211,6 +1047,15 @@ public class Utils {
 
             count++;
         }
+
+        return count;
+    }
+
+    public int count_sel_notifyme() {
+        int count = 0;
+        if (getNotify_IntervellMills() != 0) {
+            count++;
+        }
         return count;
     }
 
@@ -1229,9 +1074,11 @@ public class Utils {
             Constants.gender_xtags();
     }
 
-
-    public interface viewselected {
-        public void onclick(View view, int pos);
+    public static void hideKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+        }
     }
 }
 

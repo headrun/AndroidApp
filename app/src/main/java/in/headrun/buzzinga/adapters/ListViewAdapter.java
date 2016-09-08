@@ -85,11 +85,6 @@ public class ListViewAdapter extends BaseAdapter {
 
         item = source.get(position);
         pos = position;
-     /*   holder.filtertext.setText(item.getSourcename());
-        holder.filtercheckbox.setChecked(item.isSelectd());
-        holder.filtercheckbox.setTag(item);
-*/
-
 
         holder.item_view.setText(item.getSourcename());
         holder.item_view.setChecked(item.isSelectd());

@@ -72,6 +72,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.trackbtn:
+
+                utils.hideKeyboard(this.getCurrentFocus());
                 trackkeyword();
                 break;
         }
@@ -79,7 +81,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
     public void trackkeyword() {
 
-        hideKeyboard();
 
         if (utils.isNetwrokConnection()) {
 
@@ -96,6 +97,8 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
+                this.overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+
                 trak_progress.setVisibility(View.GONE);
 
             } else
@@ -105,18 +108,16 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-    private void hideKeyboard() {
-
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         utils.add_query_data();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
 }

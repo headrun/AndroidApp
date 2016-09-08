@@ -20,7 +20,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/roundborder"
-        android:drawableRight="@drawable/abc_ic_search_api_mtrl_alpha"
         android:hint="@string/keyword"
         android:imeOptions="actionSearch"
         android:inputType="text"

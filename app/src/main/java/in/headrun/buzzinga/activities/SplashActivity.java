@@ -69,10 +69,13 @@ public class SplashActivity extends Activity {
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
         Log.i("Log_tag", "loged session is" + loged);
-        if (loged.length() > 0)
-            if (userSession.getTrackKey() == null && userSession.getTrackKey().trim().length() < 0)
+        if (loged.length() > 0) {
+
+            String track_key = userSession.getTrackKey() == null ? "" : userSession.getTrackKey().trim();
+
+            if (track_key.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
-            else {
+            } else {
                 // Constants.listdetails = Constants.articlelist_Details;
                 // Log.i(TAG, "track key is" + userSession.getTrackKey() + "article size " + Constants.listdetails + "Constants.articlelist_Details" + Constants.articlelist_Details);
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
@@ -82,7 +85,9 @@ public class SplashActivity extends Activity {
                         putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
             }
-        else
+        } else {
             startActivity(new Intent(this, TwitterLogin.class));
+        }
+        overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
     }
 }

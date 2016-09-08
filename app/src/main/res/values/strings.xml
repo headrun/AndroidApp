@@ -71,4 +71,20 @@
 
     <string name="grey">#000000</string>
     <string name="white">#ffffff</string>
+
+
+    <string name="time_ago_prefix"></string>
+    <string name="time_ago_suffix">ago</string>
+    <string name="time_ago_seconds">less than a m</string>
+    <string name="time_ago_minute">about a m</string>
+    <string name="time_ago_minutes">%d m</string>
+    <string name="time_ago_hour"> h</string>
+    <string name="time_ago_hours"> %d h</string>
+    <string name="time_ago_day">a day</string>
+    <string name="time_ago_days">%d days</string>
+    <string name="time_ago_month">month</string>
+    <string name="time_ago_months">%d months</string>
+    <string name="time_ago_year"> year</string>
+    <string name="time_ago_years">%d years</string>
+
 </resources>

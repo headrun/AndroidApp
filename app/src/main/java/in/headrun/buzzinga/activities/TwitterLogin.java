@@ -137,8 +137,10 @@ public class TwitterLogin extends Activity {
                     }
 
                     if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0) {
-                        startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
                         utils.callService();
+                        startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
+                        overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+                        finish();
                     }
                 }
             }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -64,12 +65,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
-   /* @Bind(R.id.filtersource)
-    TextView filtersource;
-
-    @Bind(R.id.filterdate)
-    TextView filterdate;*/
-
     @Bind(R.id.newarticle)
     TextView newarticle;
 
@@ -89,8 +84,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public String Intent_opt = "";
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
-    StringRequest stringRequest, serverRequest;
-
+    StringRequest serverRequest;
 
     SearchListDataAdapter searchAdapter;
     JSONObject jobj, jobj_result, jobj_hit;
@@ -105,18 +99,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     public final int SEARCH = 1;
     public final int SCROLL = 2;
-
-/*
-    public static HomeScreen newInstance(String track_key) {
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.Intent_OPERATION, track_key);
-        HomeScreen fragment = new HomeScreen();
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
-*/
 
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
@@ -138,9 +120,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         readBundle(getArguments());
 
 
-//        handleIntent(getIntent());
-
-
         if (Constants.Intent_TRACK.equals(Intent_opt))
             Constants.SEARCHARTICLES.clear();
 
@@ -153,8 +132,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
 
         newarticle.setOnClickListener(this);
-        //filtersource.setOnClickListener(this);
-        //filterdate.setOnClickListener(this);
+
 
         display_data.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -172,17 +150,23 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     totalItemCount = mLinearLayout.getItemCount();
                     pastVisiblesItems = mLinearLayout.findFirstCompletelyVisibleItemPosition();
 
-                    if (scroll_loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        if (swipeRefreshLayout.isRefreshing() == false && !Constants.scroolid.equals("1") && utils.isNetwrokConnection()) {
+                    if (utils.isNetwrokConnection()) {
 
-                            scroll_loading = false;
-                            utils.add_query_data();
+                        if (scroll_loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                            if (swipeRefreshLayout.isRefreshing() == false && !Constants.scroolid.equals("1")) {
 
-                            Constants.SEARCHARTICLES.add(null);
-                            searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
+                                scroll_loading = false;
+                                utils.add_query_data();
 
-                            servercall(SCROLL);
+                                Constants.SEARCHARTICLES.add(null);
+                                searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
+
+                                servercall(SCROLL);
+                            }
                         }
+                    } else {
+
+                        network_error_snackbar();
                     }
                 }
             }
@@ -210,6 +194,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     servercall(SEARCH);
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
+                    network_error_snackbar();
                 }
             }
         });
@@ -265,35 +250,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         Log.i(TAG, "onDestory");
     }
 
-   /* @Override
-    public void onNewIntent(Intent intent) {
-        //setIntent(intent);
-        handleIntent(intent);
-    }*/
-/*
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
-            if (Constants.SEARCHSTRING.trim().length() > 0) {
-
-                if (utils.isNetwrokConnection()) {
-                    utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
-
-                    Constants.SEARCHARTICLES.clear();
-                    searchAdapter.notifyDataSetChanged();
-
-
-                    *//*getSupportActionBar().setTitle(utils.userSession.getTrackKey() + " AND " +
-                            utils.userSession.gettTACK_SEARCH_KEY());
-*//*
-                    utils.add_query_data();
-                    getServer_response(ServerConfig.search, utils.searchQuery());
-                }
-            }
-        }
-
-    }*/
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -314,117 +270,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 break;
         }
     }
-
-  /*  @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        menu.findItem(R.id.action_track).setChecked(utils.userSession.isBUZZ_NOTIFY_SEL());
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            stringrequest();
-        } else if (id == R.id.dashboard) {
-            Log.i(TAG, "TAG is" + TAG);
-            if (TAG.equals("ListViewMultiChartActivity")) {
-                startActivity(new Intent(getActivity(), HomeScreen.class));
-            } else {
-                startActivity(new Intent(getActivity(), ListViewMultiChartActivity.class));
-            }
-
-        } else if (id == R.id.action_track) {
-
-            Boolean track_check;
-            track_check = utils.userSession.isBUZZ_NOTIFY_SEL();
-
-            item.setChecked(track_check);
-
-            if (item.isChecked()) {
-                utils.userSession.setBUZZ_NOTIFY_SEL(false);
-                item.setChecked(utils.userSession.isBUZZ_NOTIFY_SEL());
-                Log.i(TAG, "stop the service");
-                // stopService(new Intent(getBaseContext(), BuzzNotification.class));
-                try {
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-                    alarmManager.cancel(pendingIntent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                utils.userSession.setBUZZ_NOTIFY_SEL(true);
-                track_check = utils.userSession.isBUZZ_NOTIFY_SEL();
-
-                item.setChecked(track_check);
-                Log.i(TAG, "false  item.setChecked(track_check)" + item.setChecked(track_check));
-                try {
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1 * 1000, 3 * 60 * 1000, pendingIntent);
-                    Log.i(TAG, "start the service");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Log.i(TAG, "start the service");
-            }
-        } else if (id == android.R.id.home) {
-            BuzzingaRequest.getInstance(getActivity()).cancelRequestQueue(TAG);
-            startActivity(new Intent(getActivity(), TrackKeyWord.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-*/
-   /* public void stringrequest() {
-        if (utils.isNetwrokConnection()) {
-            progressbar.setVisibility(View.VISIBLE);
-            stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            Log.d(TAG, "string response is" + response);
-
-                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                            Intent intent = new Intent(getActivity(), BuzzingaNotification.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-                            alarmManager.cancel(pendingIntent);
-                            // stopService(new Intent(HomeScreen.this, .class));
-                            ;
-                            utils.userSession.clearsession(utils.userSession.TSESSION);
-                            startActivity(new Intent(getActivity(), TwitterLogin.class));
-                            progressbar.setVisibility(View.GONE);
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d(TAG, "string error response is" + error);
-                    progressbar.setVisibility(View.GONE);
-                }
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("sessionid", new UserSession(getActivity()).getTSESSION());
-                    return params;
-                }
-            };
-            stringRequest.setTag(TAG);
-
-            BuzzingaRequest.getInstance(getActivity()).addToRequestQueue(stringRequest);
-        } else {
-            Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
-        }
-    }*/
 
     public void getServer_response(String URL_request, String clubbedquery) {
 
@@ -552,6 +397,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 progressbar.setVisibility(View.GONE);
             scroll_loading = true;
 
+            network_error_snackbar();
         }
 
     }
@@ -582,16 +428,15 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     @Override
     public void itemClicked(View view, int position) {
 
-        String geturl = "";
-        if (Constants.SEARCHARTICLES.size() > position)
-            geturl = Constants.SEARCHARTICLES.get(position).source.URL;
 
         if (utils.isNetwrokConnection()) {
             Intent i = new Intent(getActivity(), ArticleWebDisplay.class);
-            i.putExtra("url", geturl);
+            i.putExtra("pos", position);
+
             startActivity(i);
+            getActivity().overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
         } else {
-            Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
+            network_error_snackbar();
         }
 
     }
@@ -599,7 +444,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void getJsonData(String data) {
 
         try {
+
             jobj = new JSONObject(data);
+            utils.showLog(TAG, "jobj is " + jobj.toString(), Config.HOME_SCREEN);
+
             if (jobj.getString("error").equals("0")) {
 
                 jobj_result = new JSONObject(jobj.getString("result"));
@@ -608,6 +456,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 Constants.scroolid = jobj_result.optString("_scroll_id");
 
                 if (jobj_hits.length() > 0) {
+                    utils.showLog(TAG, "jobj_hits is " + jobj_hits.toString(), Config.HOME_SCREEN);
 
                     if (swipeRefreshLayout.isRefreshing() == true) {
                         searchArticleSwipe = new ArrayList<SearchArticles>();
@@ -628,7 +477,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     txt_info.setVisibility(View.GONE);
                 }
             }
-            Log.i(TAG, "Articles size " + Constants.SEARCHARTICLES.size());
+            utils.showLog(TAG, "Articles size " + Constants.SEARCHARTICLES.size(), Config.HOME_SCREEN);
 
             //   articleDetails();
         } catch (JSONException e) {
@@ -677,5 +526,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             getServer_response(ServerConfig.search, utils.searchQuery());
         else if (SCROLL == type)
             getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
+    }
+
+    public void network_error_snackbar() {
+        Snackbar.make(getActivity().findViewById(R.id.homescreen_lay), "No internet connection!", Snackbar.LENGTH_SHORT)
+                .show();
     }
 }

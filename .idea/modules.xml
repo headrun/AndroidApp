@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidApp.iml" filepath="$PROJECT_DIR$/AndroidApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/daterangepicker/daterangepicker.iml" filepath="$PROJECT_DIR$/daterangepicker/daterangepicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialsearchview/materialsearchview.iml" filepath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" />
     </modules>
   </component>
 </project>

@@ -1,1 +1,1 @@
-include ':app', ':daterangepicker'
+include ':app', ':daterangepicker', ':materialsearchview'

@@ -23,6 +23,7 @@ import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchArticles;
+import in.headrun.buzzinga.utils.TimeAgo;
 import in.headrun.buzzinga.utils.Utils;
 
 /**
@@ -37,6 +38,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     LayoutInflater inflater;
     ViewItemHolder item_holder = null;
     Utils utils;
+    TimeAgo time_ago;
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
@@ -50,7 +52,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.context = context;
         this.listdata = listdata;
         utils = new Utils(context);
-
+        time_ago = new TimeAgo(context);
     }
 
     public void setClickListener(Utils.setOnItemClickListner onitemclicklistner) {
@@ -128,11 +130,11 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     item_holder.item1.setVisibility(View.VISIBLE);
                     item_holder.item1.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-               } else {
-                  item_holder.item1.setVisibility(View.GONE);
+                } else {
+                    item_holder.item1.setVisibility(View.GONE);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                     item_holder.item2.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
-               }
+                }
             } else {
                 utils.showLog(TAG, position + " icon is empty ", Config.SearchListDataAdapter);
             }
@@ -140,12 +142,22 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             item_holder.article_lay.setBackgroundResource(applySentimentColor(sentimentType(item.source.XTAGS)));
 
             long seconds = Long.parseLong(item.source.DATE_ADDED);
-            Log.i(TAG, "article time is" + seconds);
+
             long millis = seconds * 1000;
             Date date = new Date(millis);
+            String time = time_ago.timeAgo(seconds);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
-            item_holder.articledate.setText(sdf.format(date));
-       } else {
+
+            utils.showLog(TAG, "author is " + author + "epoch time is " + seconds + "local  date is  " + sdf.format(date),
+                    Config.SearchListDataAdapter);
+
+            item_holder.articledate.setText("" + time);
+
+            utils.showLog(TAG, "author is " + author + "epoch time is " + seconds + " time ago date is  " + time,
+                    Config.SearchListDataAdapter);
+
+
+        } else {
 
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
@@ -225,25 +237,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         return "";
     }
-
-
-    /*public String sourType(List<String> xtag) {
-
-        if (xtag.size() > 0) {
-            Set<String> source_keys = Constants.source_map.keySet();
-
-            Iterator<String> iterte = source_keys.iterator();
-
-            while (iterte.hasNext()) {
-                String key = iterte.next().toLowerCase();
-
-                if (xtag.toString().toLowerCase().contains(key) ||
-                        xtag.toString().toLowerCase().contains("fb") || xtag.toString().toLowerCase().contains("fbpages"))
-                    return key;
-            }
-        }
-        return "";
-    }*/
 
     public String genderType(List<String> xtag) {
 

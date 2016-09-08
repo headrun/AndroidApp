@@ -1,86 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homescreen_lay"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
-
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone" />
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/content_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
-                <LinearLayout
-                    android:id="@+id/filterbuttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:weightSum="2">
 
-                    <TextView
-                        android:id="@+id/filtersource"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/filter"
-                        android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="FILTER"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/filterdate"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:divider="#40000000"
-                        android:drawableLeft="@drawable/sort"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:paddingLeft="2dp"
-                        android:text="FILTER BY DATE" />
-
-                </LinearLayout>
-        -->
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/result_listview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:scrollingCache="true" />
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-        <TextView
-            android:id="@+id/newarticle"
+        <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/swipe_refresh_layout"
             android:layout_centerHorizontal="true"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="New Articles"
-            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
             android:visibility="gone" />
 
+        <RelativeLayout
+            android:id="@+id/content_lay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/result_listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollingCache="true" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <TextView
+                android:id="@+id/newarticle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/swipe_refresh_layout"
+                android:layout_centerHorizontal="true"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="New Articles"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/info_layout" />
+
     </RelativeLayout>
-
-    <include layout="@layout/info_layout" />
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

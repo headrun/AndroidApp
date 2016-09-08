@@ -101,17 +101,17 @@ public class FilterTitleAdapter extends BaseAdapter {
             switch (sel_source.toLowerCase()) {
 
                 case "sources":
-                    count = sel_count(Filtering.sel_source_array);
+                    count = sel_count(Filtering.sel_source_list);
                     if (count <= 0 && Filtering.first_source == 0)
                         count = utils.countIS(utils.userSession.getSources_data());
                     break;
                 case "sentiment":
-                    count = sel_count(Filtering.sel_sentiment_array);
+                    count = sel_count(Filtering.sel_sentiment_list);
                     if (count <= 0 && Filtering.first_sentiment == 0)
                         count = utils.countIS(utils.userSession.getSentiment_data());
                     break;
                 case "gender":
-                    count = sel_count(Filtering.sel_gender_array);
+                    count = sel_count(Filtering.sel_gender_list);
                     if (count <= 0 && Filtering.first_gender == 0)
                         count = utils.countIS(utils.userSession.getGender_data());
                     break;
@@ -128,18 +128,6 @@ public class FilterTitleAdapter extends BaseAdapter {
 
             }
         return count != 0 ? "" + count : "";
-    }
-
-    public int sel_count(SparseBooleanArray sparse_array) {
-
-        int count = 0;
-        for (int i = 0; i < sparse_array.size(); i++) {
-            int key = sparse_array.keyAt(i);
-            if (sparse_array.get(key))
-                count++;
-        }
-        return count;
-
     }
 
     public int sel_count(List<String> items) {

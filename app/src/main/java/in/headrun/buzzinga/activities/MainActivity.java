@@ -8,26 +8,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -40,9 +39,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity
     TextView title;
     @Bind(R.id.badger)
     TextView badger;
+    @Bind(R.id.search_view)
+    MaterialSearchView searchView;
 
     ActionBarDrawerToggle toggle;
 
@@ -93,16 +96,11 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setElevation(7);
-
-        toolbar.inflateMenu(R.menu.main);
 
         utils = new Utils(this);
 
         Bundle bundle = getIntent().getExtras();
         Intent_opt = bundle.getString(Constants.Intent_OPERATION);
-
-        handleIntent(getIntent());
 
         toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -111,20 +109,14 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        int filter_count = utils.count_filter_sel();
+        setbadge();
 
-        if (filter_count != 0) {
-            badger.setText("" + filter_count);
-            badger.setVisibility(View.VISIBLE);
-        } else {
-            badger.setVisibility(View.GONE);
-        }
-
-        setMenuCounter(R.id.filter, R.drawable.count_bg, filter_count);
+        setMenuCounter(R.id.filter, R.drawable.count_bg, utils.count_filter_sel());
         setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
 
         getSupportActionBar().setTitle("");
         title.setText(utils.setTitle());
+
         call_homeFragment(Intent_opt);
 
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
@@ -141,16 +133,69 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        searchView.setEllipsize(true);
+        searchView.setCursorDrawable(R.drawable.custom_cursor);
+        searchView.setVoiceSearch(false);
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                utils.showLog(TAG, "submit query is " + query, Config.MainActivity);
+                Constants.SEARCHSTRING = query;
+
+
+                utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
+                searchView.closeSearch();
+
+
+                searchview_text();
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                utils.showLog(TAG, "searchview text change" + newText, Config.MainActivity);
+                return true;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+                utils.showLog(TAG, "itemis expanded", Config.MainActivity);
+                String search_key = utils.userSession.gettTACK_SEARCH_KEY();
+                searchView.setQuery(search_key, false);
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+                utils.showLog(TAG, "itemis closed", Config.MainActivity);
+
+            }
+        });
+
+
     }
+
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (searchView.isSearchOpen()) {
+            searchView.closeSearch();
         } else {
             super.onBackPressed();
         }
+
     }
 
     private void setMenuCounter(@IdRes int itemId, int drawable, int count) {
@@ -172,11 +217,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        MenuItem searchItem = menu.findItem(R.id.item_search);
+        searchView.setMenuItem(searchItem);
 
         return true;
     }
@@ -192,8 +237,10 @@ public class MainActivity extends AppCompatActivity
         } else */
         if (id == R.id.edit_keyword) {
             startActivity(new Intent(this, TrackKeyWord.class));
+            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.filter) {
             startActivity(new Intent(this, Filtering.class));
+            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.date_filter) {
             getdate();
         } else if (id == R.id.notify_me) {
@@ -217,15 +264,12 @@ public class MainActivity extends AppCompatActivity
 
                             Log.d(TAG, "string response is" + response);
 
-                            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                            Intent intent = new Intent(MainActivity.this, BuzzingaNotification.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-                            alarmManager.cancel(pendingIntent);
-                            // stopService(new Intent(HomeScreen.this, .class));
 
-                            utils.userSession.clearsession(utils.userSession.TSESSION);
+                            utils.clearSessionData();
                             startActivity(new Intent(MainActivity.this, TwitterLogin.class));
+                            overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
                             finish();
+
                             progress_bar.setVisibility(View.GONE);
 
                         }
@@ -251,22 +295,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            Constants.SEARCHSTRING = intent.getStringExtra(SearchManager.QUERY);
-            searchview_text();
-        }
-
-    }
 
     private void searchview_text() {
-        if (Constants.SEARCHSTRING.trim().length() > 0) {
 
-            if (utils.isNetwrokConnection()) {
-                utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
-                utils.add_query_data();
-                Intent_opt = Constants.Intent_TRACK;
-            }
+        if (utils.isNetwrokConnection()) {
+
+            title.setText(utils.setTitle());
+            utils.add_query_data();
+            Intent_opt = Constants.Intent_TRACK;
+            call_homeFragment(Intent_opt);
+        } else {
+            Snackbar.make(this.findViewById(R.id.drawer_layout), "No internet connection!", Snackbar.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -293,16 +333,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which) {
 
                 sel_value[0] = Arrays.asList(items).get(which).trim();
-                /*int sel_hour;
-                if (sel_value.contains("None")) {
-                    sel_hour = which;
-                } else {
-                    sel_value = "" + sel_value.charAt(0);
-                }
-                sel_hour = Integer.valueOf(sel_value);
-                utils.showLog(TAG, "sel item are " + sel_hour, Config.Utils);
-*/
-
 
             }
         });
@@ -313,6 +343,7 @@ public class MainActivity extends AppCompatActivity
 
                 utils.userSession.setNotifyHour(sel_value[0]);
                 setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
+                setbadge();
                 utils.callService();
             }
         });
@@ -339,7 +370,7 @@ public class MainActivity extends AppCompatActivity
 
         String from_date = utils.query_fromdate(Arrays.asList(utils.userSession.getFROM_DATE()));
 
-        String to_date = utils.query_fromdate(Arrays.asList(utils.userSession.getTO_DATE()));
+        String to_date = utils.query_todate(Arrays.asList(utils.userSession.getTO_DATE()));
 
         utils.showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.MainActivity);
 
@@ -382,7 +413,7 @@ public class MainActivity extends AppCompatActivity
                                              utils.showLog(TAG, "date is " + utils.userSession.getFROM_DATE() + "  to  " +
                                                      utils.userSession.getTO_DATE(), Config.HOME_SCREEN);
 
-                                             setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
+                                             // setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
                                              utils.add_query_data();
                                              call_homeFragment(Constants.Intent_TRACK);
                                          }
@@ -430,6 +461,17 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new HomeScreen();
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+
+    }
+
+    public void setbadge() {
+
+        if (utils.count_filter_sel() != 0 || utils.count_sel_notifyme() != 0) {
+            badger.setText("");
+            badger.setVisibility(View.VISIBLE);
+        } else {
+            badger.setVisibility(View.GONE);
+        }
 
     }
 }

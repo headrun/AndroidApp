@@ -15,10 +15,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.doto.SearchArticles;
 
 /**
  * Created by headrun on 22/9/15.
@@ -36,7 +40,9 @@ public class ArticleWebDisplay extends AppCompatActivity {
     @Bind(R.id.article_browser_progress)
     ProgressBar article_progress;
 
-    String url;
+    String url = "", title = "";
+    int pos;
+    SearchArticles article_details;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +51,44 @@ public class ArticleWebDisplay extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Bundle data = getIntent().getExtras();
-        url = data.getString("url");
+        pos = data.getInt("pos");
+
+        if (Constants.SEARCHARTICLES.size() >= pos)
+            article_details = Constants.SEARCHARTICLES.get(pos);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setElevation(7);
 
-        Log.i(TAG, "artcile url is" + url.toString());
-        if (!url.toString().isEmpty()) {
-            //article_url_disp.setText(url.toString());
-            article_url_disp.setVisibility(View.GONE);
-            getSupportActionBar().setTitle(url.toString());
+
+        if (article_details != null) {
+
+            title = article_details.source.TITLE;
+
+            if (!title.isEmpty())
+                getSupportActionBar().setTitle(title);
+            else if (!article_details.source.AUTHOR.NAME.trim().isEmpty())
+                getSupportActionBar().setTitle("@ " + article_details.source.AUTHOR.NAME.trim().trim());
+            else
+                getSupportActionBar().setTitle("");
+
+            url = article_details.source.URL;
+            if (!url.isEmpty()) {
+                try {
+                    URL aURL = new URL(url.toString());
+                    getSupportActionBar().setSubtitle(aURL.getHost());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+            } else
+                getSupportActionBar().setSubtitle("");
+
         }
-        webSettings(url.toString());
+
+        if (!url.trim().isEmpty())
+            webSettings(url.toString());
 
         articlebrowser_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +161,12 @@ public class ArticleWebDisplay extends AppCompatActivity {
             onBackPressed();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.move_right_out_activity, R.anim.move_left_in_activity);
     }
 }
 
