@@ -1,15 +1,10 @@
 package in.headrun.buzzinga.activities;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,12 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -43,7 +36,6 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +45,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
@@ -117,8 +108,6 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("");
         title.setText(utils.setTitle());
 
-        call_homeFragment(Intent_opt);
-
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
         openMenu.setOnClickListener(new View.OnClickListener() {
@@ -181,9 +170,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
+        call_homeFragment(Intent_opt);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -193,7 +181,11 @@ public class MainActivity extends AppCompatActivity
         } else if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            super.onBackPressed();
+            startActivity(new Intent(this, TrackKeyWord.class).
+                    setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            Intent.FLAG_ACTIVITY_NEW_TASK));
+            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         }
 
     }
@@ -236,7 +228,10 @@ public class MainActivity extends AppCompatActivity
             setTitle();
         } else */
         if (id == R.id.edit_keyword) {
-            startActivity(new Intent(this, TrackKeyWord.class));
+            startActivity(new Intent(this, TrackKeyWord.class).
+                    setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            Intent.FLAG_ACTIVITY_NEW_TASK));
             this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.filter) {
             startActivity(new Intent(this, Filtering.class));
@@ -264,12 +259,13 @@ public class MainActivity extends AppCompatActivity
 
                             Log.d(TAG, "string response is" + response);
 
-
                             utils.clearSessionData();
-                            startActivity(new Intent(MainActivity.this, TwitterLogin.class));
-                            overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+                            startActivity(new Intent(MainActivity.this, TwitterLogin.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                            Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
-
+                            overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
                             progress_bar.setVisibility(View.GONE);
 
                         }
@@ -294,7 +290,6 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
         }
     }
-
 
     private void searchview_text() {
 
@@ -458,7 +453,7 @@ public class MainActivity extends AppCompatActivity
         if (value == null)
             value = "";
         bundle.putString(Constants.Intent_OPERATION, value);
-        Fragment fragment = new HomeScreen();
+        Fragment fragment = new Pager();
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
 

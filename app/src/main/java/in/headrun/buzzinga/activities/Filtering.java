@@ -199,16 +199,25 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(Filtering.this, MainActivity.class);
-                i.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
-                startActivity(i);
-                this.overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+                onBackPressed();
+
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(Filtering.this, MainActivity.class);
+        i.putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING);
+        startActivity(i);
+        this.overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+
+    }
+
 
     ////set the adapter to listview
     public void FilterAdapter(List<Listitems> items, boolean search_enable) {

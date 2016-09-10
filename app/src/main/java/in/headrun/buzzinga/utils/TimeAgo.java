@@ -58,11 +58,11 @@ public class TimeAgo {
         if (seconds < 45) {
             words = r.getString(R.string.time_ago_seconds, Math.abs(seconds));
         } else if (seconds < 90) {
-            words = r.getString(R.string.time_ago_minute, 1);
+            words = r.getString(R.string.time_ago_seconds, Math.abs(seconds));
         } else if (minutes < 45) {
             words = r.getString(R.string.time_ago_minutes, Math.round(minutes));
         } else if (minutes < 90) {
-            words = r.getString(R.string.time_ago_hour, 1);
+            words = r.getString(R.string.time_ago_hours, 1);
         } else if (hours < 24) {
             words = r.getString(R.string.time_ago_hours, Math.round(hours));
         } /*else if (hours < 42) {
@@ -75,14 +75,13 @@ public class TimeAgo {
             //words = r.getString(R.string.time_ago_months, Math.round(days / 30));
             words = sdf2.format(date);
             display_ago = false;
-        } else {
-            // words = r.getString(R.string.time_ago_year, 1);
+        } /*else if (years < 1.5) {
+            words = r.getString(R.string.time_ago_year, 1);
+        } */ else {
+            // words = r.getString(R.string.time_ago_years, Math.round(years));
             words = sdf1.format(date);
             display_ago = false;
-        } /*else {
-            words = r.getString(R.string.time_ago_years, Math.round(years));
-        }*/
-
+        }
         StringBuilder sb = new StringBuilder();
 
         if (prefix != null && prefix.length() > 0) {

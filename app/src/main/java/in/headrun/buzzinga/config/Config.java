@@ -20,4 +20,5 @@ public class Config {
     public static boolean FilterTitleAdapter = true;
     public static boolean MainActivity = true;
     public static boolean SearchActivity = true;
+    public static boolean Pager = true;
 }

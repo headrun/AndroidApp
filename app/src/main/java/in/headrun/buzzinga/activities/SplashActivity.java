@@ -2,6 +2,8 @@ package in.headrun.buzzinga.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -30,8 +32,8 @@ public class SplashActivity extends Activity {
     private static final String TWITTER_SECRET = "eIULy4JeljkZN8JpWXXa4o2b2puUjq73PP6zaVIVk";
     public static String TAG = SplashActivity.class.getClass().getSimpleName();
     public String loged;
-    /* @Bind(R.id.splash_progress)
-     ProgressBar splash_progress;*/
+    @Bind(R.id.splash_progress)
+    ProgressBar splash_progress;
     UserSession userSession;
     Utils utils;
 
@@ -40,9 +42,14 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscren);
 
-        //  ButterKnife.bind(this);
+        ButterKnife.bind(this);
         utils = new Utils(SplashActivity.this);
         userSession = new UserSession(SplashActivity.this);
+
+/*        splash_progress.getProgressDrawable().setColorFilter(
+                Color.WHITE
+                , android.graphics.PorterDuff.Mode.SRC_IN);*/
+
         //  splash_progress.setVisibility(View.VISIBLE);
         if (Config.SPLASH)
             Log.i(TAG, "splash activty");

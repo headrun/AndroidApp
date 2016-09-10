@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -28,26 +31,31 @@ import in.headrun.buzzinga.dashboard.listviewitems.ChartItem;
 import in.headrun.buzzinga.dashboard.listviewitems.LineChartItem;
 import in.headrun.buzzinga.dashboard.listviewitems.PieChartItem;
 
-public class ListViewMultiChartActivity extends AppCompatActivity {
+public class ListViewMultiChartActivity extends Fragment {
 
     public String TAG = ListViewMultiChartActivity.this.getClass().getSimpleName();
 
+
+    public ListViewMultiChartActivity() {
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN.WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_listview_chart);
+        View v = inflater.inflate(R.layout.activity_listview_chart, container, false);
 
-        ListView lv = (ListView) findViewById(R.id.listView1);
+        ListView lv = (ListView) v.findViewById(R.id.listView1);
 
         ArrayList<ChartItem> list = new ArrayList<ChartItem>();
 
-        list.add(new LineChartItem(generateDataLine(1), getApplicationContext()));
-        list.add(new PieChartItem(generateDataPie(2), getApplicationContext()));
+        list.add(new LineChartItem(generateDataLine(1), getActivity()));
+        list.add(new PieChartItem(generateDataPie(2), getActivity()));
 
-        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
+        ChartDataAdapter cda = new ChartDataAdapter(getActivity(), list);
         lv.setAdapter(cda);
+
+        return v;
     }
 
     /**

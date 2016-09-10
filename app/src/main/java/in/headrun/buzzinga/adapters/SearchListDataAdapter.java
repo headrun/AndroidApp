@@ -141,24 +141,22 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             item_holder.article_lay.setBackgroundResource(applySentimentColor(sentimentType(item.source.XTAGS)));
 
-            long seconds = Long.parseLong(item.source.DATE_ADDED);
+            //long seconds = Long.parseLong(item.source.DATE_ADDED);
 
-            long millis = seconds * 1000;
-            Date date = new Date(millis);
-            String time = time_ago.timeAgo(seconds);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+       /*     long millis = seconds * 1000;
+            Date date = new Date(millis);*/
+            //  String time = time_ago.timeAgo(seconds);
+           /* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
 
             utils.showLog(TAG, "author is " + author + "epoch time is " + seconds + "local  date is  " + sdf.format(date),
-                    Config.SearchListDataAdapter);
+                    Config.SearchListDataAdapter);*/
 
-            item_holder.articledate.setText("" + time);
+            item_holder.articledate.setText("" + time_ago.timeAgo(Long.parseLong(item.source.DATE_ADDED)));
 
-            utils.showLog(TAG, "author is " + author + "epoch time is " + seconds + " time ago date is  " + time,
-                    Config.SearchListDataAdapter);
-
+          /*  utils.showLog(TAG, "author is " + author + "epoch time is " + seconds + " time ago date is  " + time,
+                    Config.SearchListDataAdapter);*/
 
         } else {
-
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
     }

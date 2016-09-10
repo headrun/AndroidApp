@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-   android:background="#fc000000" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/splashscreen"
-        android:scaleType="fitXY"
+        android:id="@+id/splashscreen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/splashscreen"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/splash_buzzlogo" />
     <!--
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/splashscreen"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/splash_load" />-->
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/subtitle"
         android:layout_below="@id/splashscreen"
         android:layout_marginTop="15dip"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/splash_loading"
         android:layout_centerHorizontal="true"
     />
-
-    -->
+-->
     <ProgressBar
+        android:id="@+id/splash_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/splash_progress"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-    
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        android:indeterminateTintMode="src_atop" />
+
+
 </RelativeLayout>

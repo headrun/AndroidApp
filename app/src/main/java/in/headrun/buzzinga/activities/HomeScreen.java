@@ -107,6 +107,9 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         }
     }
 
+    public HomeScreen() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
