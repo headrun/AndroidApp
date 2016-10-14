@@ -30,6 +30,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -121,7 +122,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         mLinearLayout = new LinearLayoutManager(getActivity());
 
         readBundle(getArguments());
-
 
         if (Constants.Intent_TRACK.equals(Intent_opt))
             Constants.SEARCHARTICLES.clear();

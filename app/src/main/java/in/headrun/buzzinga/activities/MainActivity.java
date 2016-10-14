@@ -4,12 +4,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +39,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -45,9 +57,11 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.adapters.PageAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
@@ -74,12 +88,22 @@ public class MainActivity extends AppCompatActivity
     TextView badger;
     @Bind(R.id.search_view)
     MaterialSearchView searchView;
+    @Bind(R.id.tab_layout)
+    TabLayout tab_layout;
+    @Bind(R.id.view_pager)
+    ViewPager view_pager;
 
     ActionBarDrawerToggle toggle;
 
     Utils utils;
     String Intent_opt;
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+
+    //private GoogleApiClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +115,21 @@ public class MainActivity extends AppCompatActivity
         utils = new Utils(this);
 
         Bundle bundle = getIntent().getExtras();
-        Intent_opt = bundle.getString(Constants.Intent_OPERATION);
+        try {
+            Intent_opt = bundle.getString(Constants.Intent_OPERATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Intent_opt = Constants.Intent_NOTHING;
+        }
 
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.home));
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.dashboard));
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.filter_list));
+        tab_layout.setTabMode(TabLayout.MODE_FIXED);
+        tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tab_layout.getTabAt(0).getIcon()
+                .setColorFilter(Color.parseColor("#4baad3"), PorterDuff.Mode.SRC_IN);
+        toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         toggle.syncState();
 
@@ -134,10 +169,15 @@ public class MainActivity extends AppCompatActivity
                 utils.showLog(TAG, "submit query is " + query, Config.MainActivity);
                 Constants.SEARCHSTRING = query;
 
-
                 utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
                 searchView.closeSearch();
 
+                     /*Track key send to firebase*/
+                Bundle params = new Bundle();
+                params.putString(FirebaseAnalytics.Param.ITEM_NAME, utils.userSession.getTrackKey());
+                params.putString(FirebaseAnalytics.Param.SEARCH_TERM, utils.userSession.gettTACK_SEARCH_KEY());
+                utils.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, params);
+                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
                 searchview_text();
 
@@ -170,7 +210,35 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        call_homeFragment(Intent_opt);
+        //call_homeFragment(Intent_opt);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        //  client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+        PageAdapter adapter = new PageAdapter(getSupportFragmentManager(), tab_layout.getTabCount(), Intent_opt);
+        view_pager.setAdapter(adapter);
+        view_pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_layout));
+
+
+        tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                view_pager.setCurrentItem(tab.getPosition());
+                tab.getIcon().setColorFilter(Color.parseColor("#4baad3"), PorterDuff.Mode.SRC_IN);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(Color.parseColor("#616161"), PorterDuff.Mode.SRC_IN);
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -224,9 +292,6 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-/*        if (id == R.id.search_result) {
-            setTitle();
-        } else */
         if (id == R.id.edit_keyword) {
             startActivity(new Intent(this, TrackKeyWord.class).
                     setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -240,6 +305,9 @@ public class MainActivity extends AppCompatActivity
             getdate();
         } else if (id == R.id.notify_me) {
             notimyme(utils.userSession.getNotifyHour());
+        } else if (id == R.id.invite) {
+            // final Uri deepLink = buildDeepLink(Uri.parse(Constants.DEEP_LINK_URL), 0, false);
+            shareDeepLink(Constants.DEEP_LINK_URL);
         } else if (id == R.id.logout) {
             stringrequest();
         }
@@ -323,11 +391,16 @@ public class MainActivity extends AppCompatActivity
 
         utils.showLog(TAG, "sel item pos is " + pos, Config.Utils);
         final String[] sel_value = {""};
+        if (pos != -1)
+            sel_value[0] = Arrays.asList(items).get(pos);
+        final int position = pos;
         builder.setSingleChoiceItems(items, pos, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                sel_value[0] = Arrays.asList(items).get(which).trim();
+                if (which != -1)
+                    sel_value[0] = Arrays.asList(items).get(which).trim();
+
 
             }
         });
@@ -339,6 +412,13 @@ public class MainActivity extends AppCompatActivity
                 utils.userSession.setNotifyHour(sel_value[0]);
                 setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
                 setbadge();
+
+
+                Bundle params = new Bundle();
+                params.putString("notify", "apply_notify");
+                utils.mFirebaseAnalytics.logEvent("Apply_notify", params);
+                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+
                 utils.callService();
             }
         });
@@ -410,6 +490,12 @@ public class MainActivity extends AppCompatActivity
 
                                              // setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
                                              utils.add_query_data();
+
+                                             Bundle params = new Bundle();
+                                             params.putString("date", "apply_date");
+                                             utils.mFirebaseAnalytics.logEvent("Apply_Date", params);
+                                             utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+
                                              call_homeFragment(Constants.Intent_TRACK);
                                          }
                                      },
@@ -428,27 +514,8 @@ public class MainActivity extends AppCompatActivity
         smoothDateRangePickerFragment.show(getFragmentManager(), "Buzzinga");
     }
 
-    public void swipedata() {
-
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-        };
-    }
-
     public void call_homeFragment(String value) {
+
         Bundle bundle = new Bundle();
         if (value == null)
             value = "";
@@ -469,4 +536,18 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+
+    private void shareDeepLink(String deeplink) {
+
+        utils.showLog(TAG, "deep  link is" + deeplink, Config.SPLASH);
+        ShareCompat.IntentBuilder
+                .from(this) // getActivity() or activity field if within Fragment
+                .setText(deeplink)
+                .setType("text/plain") // most general text sharing MIME type
+                .setChooserTitle("Buzzinga Analytics")
+                .startChooser();
+    }
+
+
 }

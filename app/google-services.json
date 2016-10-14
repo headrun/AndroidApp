@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "977841282554",
+    "firebase_url": "https://buzzinga-339db.firebaseio.com",
+    "project_id": "buzzinga-339db",
+    "storage_bucket": "buzzinga-339db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977841282554:android:bd9505cecf340fad",
+        "android_client_info": {
+          "package_name": "in.headrun.buzzinga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977841282554-doc6ev0uvt15m4gv395sue5f5oh4ovms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.headrun.buzzinga",
+            "certificate_hash": "7F2A11081ED1FBFE617E99FA3E4B3CDB9E3D8584"
+          }
+        },
+        {
+          "client_id": "977841282554-nr64luqkl3efnlcjhjuv4rle57jmgr8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCctiF5C4TZimkDc_Od81vndNFt0Ga1uWg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977841282554-nr64luqkl3efnlcjhjuv4rle57jmgr8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

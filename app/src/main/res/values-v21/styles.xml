@@ -1,11 +1,17 @@
 <resources>
 
     <style name="AppTheme.NoActionBar">
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/light_gray</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="LinearProgress" parent="Theme.AppCompat.Light">f
+        <item name="colorAccent">@color/blue</item>
+    </style>
     <!--    <item name="android:statusBarColor">@color/colorPrimary</item>-->
 </resources>

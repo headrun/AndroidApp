@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
@@ -38,6 +40,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
     Utils utils;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-
 
         if (utils.userSession.getTrackKey().length() > 0) {
             Trackkeyword.setText(utils.userSession.getTrackKey());
@@ -79,7 +81,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-    public void trackkeyword() {
+    public  void trackkeyword() {
 
 
         if (utils.isNetwrokConnection()) {
@@ -88,18 +90,23 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
             if (track.length() > 0) {
 
-                trak_progress.setVisibility(View.VISIBLE);
+               // trak_progress.setVisibility(View.VISIBLE);
 
                 utils.userSession.setTrackKey(track);
                 utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
                 utils.add_query_data();
+
+                Bundle params = new Bundle();
+                params.putString(FirebaseAnalytics.Param.ITEM_NAME, track);
+                utils.mFirebaseAnalytics.logEvent("Track", params);
+                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
                 this.overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
 
-                trak_progress.setVisibility(View.GONE);
+               // trak_progress.setVisibility(View.GONE);
 
             } else
                 Toast.makeText(this, "Enter your brand", Toast.LENGTH_LONG).show();
@@ -107,7 +114,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
             Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
         }
     }
-
 
     @Override
     protected void onDestroy() {

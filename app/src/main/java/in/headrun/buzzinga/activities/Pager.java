@@ -20,7 +20,6 @@ import in.headrun.buzzinga.utils.Utils;
 
 public class Pager extends android.support.v4.app.Fragment {
 
-
     public String TAG = Pager.class.getSimpleName();
 
     public ViewPager pager;

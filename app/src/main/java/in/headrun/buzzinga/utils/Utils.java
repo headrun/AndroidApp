@@ -10,8 +10,10 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.Fragment;
@@ -29,6 +31,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +56,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
@@ -79,10 +84,12 @@ public class Utils {
     BuzzingaApplication buzzapp = new BuzzingaApplication();
     JobScheduler job_scheduler;
     AlarmManager alarmManager;
+    public FirebaseAnalytics mFirebaseAnalytics;
 
     public Utils(Context context) {
         this.context = context;
         userSession = new UserSession(context);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
     }
 
     public static String timezone() {
@@ -796,7 +803,7 @@ public class Utils {
 
     public void showLog(String TAG, String msg, boolean value) {
 
-        if (value) {
+        if (value && BuildConfig.DEBUG == true) {
             Log.wtf(TAG, msg);
         }
     }
@@ -912,14 +919,16 @@ public class Utils {
         String item_hour = userSession.getNotifyHour();
         int hour_is = 1;
 
-        if (!item_hour.isEmpty())
+        if (!item_hour.isEmpty()) {
             if (!item_hour.equals("None")) {
                 hour_is = Integer.valueOf("" + item_hour.charAt(0));
             } else {
                 hour_is = 0;
             }
-        showLog(TAG, "notify hour is" + hour_is, Config.Utils);
-
+            showLog(TAG, "notify hour is" + hour_is, Config.Utils);
+        } else {
+            userSession.setNotifyHour("1 hour");
+        }
         return hour_is;
     }
 
@@ -1080,5 +1089,6 @@ public class Utils {
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
         }
     }
+
 }
 

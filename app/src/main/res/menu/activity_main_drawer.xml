@@ -33,6 +33,14 @@
         android:title="Notify Me"
         app:actionLayout="@layout/menu_counter" />
 
+
+    <item
+        android:id="@+id/invite"
+        android:icon="@drawable/invite"
+        android:title="Invite"
+        app:actionLayout="@layout/menu_counter" />
+
+
     <item
         android:id="@+id/logout"
         android:icon="@drawable/exit"

@@ -90,4 +90,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="twitter_consumer_key">nwdQpLxZaHNtrW1w63MTM0eRw</string>
+    <string name="twitter_consumer_secret">eK5nPRmEHNZZ8LEybyZlK9dih9FyIKZzsmnOk07lVE3kSZZbPo</string>
+
+    <string name="twitter_status_fmt">Twitter User: %s</string>
+    <string name="twitter_title_text">Twitter Login</string>
+
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+
+    <string name="app_code">YOUR_APP_CODE</string>
+    <string name="deep_link_firebase">https://sh6q4.app.goo.gl/jdF1</string>
+
+
+
 </resources>

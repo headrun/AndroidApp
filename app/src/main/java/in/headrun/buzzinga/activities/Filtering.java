@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -94,6 +96,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         utils = new Utils(Filtering.this);
         usersession = new UserSession(getApplication());
+
+        Bundle params = new Bundle();
+        params.putString("Open_Filter", "Filter");
+        utils.mFirebaseAnalytics.logEvent("open_filter_event", params);
+        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
         first_source = first_sentiment = first_gender = first_loc = first_lang = 0;
 
@@ -328,6 +335,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                     " \ngender " + usersession.getGender_data() +
                     "\n language " + usersession.getLang_data() +
                     "\n location " + usersession.getLoc_data());
+
+            Bundle params = new Bundle();
+            params.putString("apply_filter", "filter");
+            utils.mFirebaseAnalytics.logEvent("apply_filter_event", params);
+            utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
             Intent i = new Intent(Filtering.this, MainActivity.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
@@ -843,6 +855,12 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         utils.userSession.clearsession(utils.userSession.Gender_data);
         utils.userSession.clearsession(utils.userSession.Loc_data);
         utils.userSession.clearsession(utils.userSession.Lang_data);
+
+        Bundle params = new Bundle();
+        params.putString("clear_Filter", "filter");
+        utils.mFirebaseAnalytics.logEvent("clear_Filter_event", params);
+        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+
 
         Intent i = new Intent(Filtering.this, MainActivity.class);
         i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);

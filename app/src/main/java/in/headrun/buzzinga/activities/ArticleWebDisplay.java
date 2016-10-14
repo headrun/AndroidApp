@@ -57,7 +57,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
             article_details = Constants.SEARCHARTICLES.get(pos);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_grey);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setElevation(7);
 
@@ -84,6 +84,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
             } else
                 getSupportActionBar().setSubtitle("");
+
 
         }
 

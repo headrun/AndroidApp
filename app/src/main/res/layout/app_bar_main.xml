@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,68 +11,90 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <FrameLayout
-            android:id="@+id/toolbar_lay"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary">
+            <FrameLayout
+                android:id="@+id/toolbar_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-                <FrameLayout
-                    android:id="@+id/indicater_lay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary">
 
-                    <RelativeLayout
+                    <FrameLayout
+                        android:id="@+id/indicater_lay"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/openMenu"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/menu" />
-
-                        <TextView
-                            android:id="@+id/badger"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginTop="14dp"
-                            android:background="@drawable/circle_bg"
-                            android:gravity="center"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/title"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity=""
-                            android:layout_toRightOf="@+id/openMenu"
-                            android:ellipsize="end"
-                            android:gravity="left|center_vertical|center_horizontal"
-                            android:maxLines="1"
-                            android:paddingLeft="5dp"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:layout_height="match_parent">
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:id="@+id/openMenu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/menu_blue1" />
 
-                </FrameLayout>
+                            <TextView
+                                android:id="@+id/badger"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginTop="14dp"
+                                android:background="@drawable/circle_bg"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
 
-            </android.support.v7.widget.Toolbar>
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity=""
+                                android:layout_toRightOf="@+id/openMenu"
+                                android:ellipsize="end"
+                                android:gravity="left|center_vertical|center_horizontal"
+                                android:maxLines="1"
+                                android:paddingLeft="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
-            <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                </android.support.v7.widget.Toolbar>
+
+                <com.miguelcatalan.materialsearchview.MaterialSearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/collapsing_toolbar"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabIndicatorHeight="5px"
+            app:tabPadding="10dp" />
 
     </android.support.design.widget.AppBarLayout>
 
