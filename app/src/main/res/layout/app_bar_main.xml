@@ -66,7 +66,7 @@
                                 android:gravity="left|center_vertical|center_horizontal"
                                 android:maxLines="1"
                                 android:paddingLeft="5dp"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -84,17 +84,6 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/collapsing_toolbar"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:tabIndicatorHeight="5px"
-            app:tabPadding="10dp" />
 
     </android.support.design.widget.AppBarLayout>
 

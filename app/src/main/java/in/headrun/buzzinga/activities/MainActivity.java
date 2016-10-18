@@ -88,10 +88,6 @@ public class MainActivity extends AppCompatActivity
     TextView badger;
     @Bind(R.id.search_view)
     MaterialSearchView searchView;
-    @Bind(R.id.tab_layout)
-    TabLayout tab_layout;
-    @Bind(R.id.view_pager)
-    ViewPager view_pager;
 
     ActionBarDrawerToggle toggle;
 
@@ -122,13 +118,6 @@ public class MainActivity extends AppCompatActivity
             Intent_opt = Constants.Intent_NOTHING;
         }
 
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.home));
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.dashboard));
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.filter_list));
-        tab_layout.setTabMode(TabLayout.MODE_FIXED);
-        tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tab_layout.getTabAt(0).getIcon()
-                .setColorFilter(Color.parseColor("#4baad3"), PorterDuff.Mode.SRC_IN);
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         toggle.syncState();
@@ -154,14 +143,12 @@ public class MainActivity extends AppCompatActivity
                 } else {
                     drawer.openDrawer(GravityCompat.START);
                 }
-
             }
         });
 
         searchView.setEllipsize(true);
         searchView.setCursorDrawable(R.drawable.custom_cursor);
         searchView.setVoiceSearch(false);
-
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -191,7 +178,6 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
-
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
@@ -210,35 +196,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //call_homeFragment(Intent_opt);
+        call_homeFragment(Intent_opt);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //  client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-        PageAdapter adapter = new PageAdapter(getSupportFragmentManager(), tab_layout.getTabCount(), Intent_opt);
-        view_pager.setAdapter(adapter);
-        view_pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_layout));
-
-
-        tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                view_pager.setCurrentItem(tab.getPosition());
-                tab.getIcon().setColorFilter(Color.parseColor("#4baad3"), PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(Color.parseColor("#616161"), PorterDuff.Mode.SRC_IN);
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override

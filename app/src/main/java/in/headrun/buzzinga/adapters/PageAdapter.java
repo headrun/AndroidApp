@@ -35,14 +35,14 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 fragment.setArguments(bundle);
                 break;
 
-            case 1:
+            /*case 1:
                 fragment = new ListViewMultiChartActivity();
                 break;
 
             case 2:
                 fragment = new ListViewMultiChartActivity();
                 break;
-
+*/
             default:
                 return null;
         }

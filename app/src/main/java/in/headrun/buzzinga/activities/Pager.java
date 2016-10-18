@@ -78,7 +78,6 @@ public class Pager extends android.support.v4.app.Fragment {
             }
         });
 
-
         return v;
 
     }
@@ -103,9 +102,9 @@ public class Pager extends android.support.v4.app.Fragment {
                     fragment = new HomeScreen();
                     fragment.setArguments(bundle);
                     break;
-                case 1:
+             /*   case 1:
                     fragment = new ListViewMultiChartActivity();
-                    break;
+                    break;*/
             }
 
             return fragment;
@@ -113,7 +112,7 @@ public class Pager extends android.support.v4.app.Fragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 }

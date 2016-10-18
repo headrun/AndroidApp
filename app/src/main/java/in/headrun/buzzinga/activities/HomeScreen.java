@@ -250,7 +250,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestory");
+        Log.i(TAG, "onDest1ory");
     }
 
     @Override
