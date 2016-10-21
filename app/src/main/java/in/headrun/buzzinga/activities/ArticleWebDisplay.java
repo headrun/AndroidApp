@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -14,6 +16,8 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,6 +27,7 @@ import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchArticles;
+import in.headrun.buzzinga.utils.Utils;
 
 /**
  * Created by headrun on 22/9/15.
@@ -31,10 +36,6 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
     public String TAG = ArticleWebDisplay.this.getClass().getSimpleName();
 
-    @Bind(R.id.article_closebrowser)
-    ImageView articlebrowser_close;
-    @Bind(R.id.article_browsertitle)
-    TextView article_url_disp;
     @Bind(R.id.article_webview)
     WebView article_webview;
     @Bind(R.id.article_browser_progress)
@@ -43,6 +44,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
     String url = "", title = "";
     int pos;
     SearchArticles article_details;
+    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         pos = data.getInt("pos");
-
+        utils = new Utils(this);
         if (Constants.SEARCHARTICLES.size() >= pos)
             article_details = Constants.SEARCHARTICLES.get(pos);
 
@@ -91,7 +93,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
         if (!url.trim().isEmpty())
             webSettings(url.toString());
 
-        articlebrowser_close.setOnClickListener(new View.OnClickListener() {
+       /* articlebrowser_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -102,7 +104,11 @@ public class ArticleWebDisplay extends AppCompatActivity {
                 //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
             }
         });
-
+*/
+        Bundle params = new Bundle();
+        params.putString("open_link", url);
+        utils.mFirebaseAnalytics.logEvent("article_open", params);
+        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
     }
 
     private void webSettings(String url) {
@@ -142,11 +148,11 @@ public class ArticleWebDisplay extends AppCompatActivity {
                 Log.i(TAG, "load resource" + url);
             }
 
-            @Override
+           /* @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 Log.i(TAG, "webview error code" + errorCode + "\n description" + description);
-            }
+            }*/
         });
 
 
@@ -154,12 +160,27 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.artical_details_menu, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home)
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+        } else if (item.getItemId() == R.id.invite) {
+
+            ShareCompat.IntentBuilder
+                    .from(this) // getActivity() or activity field if within Fragment
+                    .setText(title + "\n" + url)
+                    .setChooserTitle(title)
+                    .setType("text/plain") // most general text sharing MIME type
+                    .setChooserTitle("Buzzinga Analytics")
+                    .startChooser();
+        }
 
         return super.onOptionsItemSelected(item);
     }

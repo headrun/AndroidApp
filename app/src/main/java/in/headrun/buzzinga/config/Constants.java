@@ -4,6 +4,7 @@ package in.headrun.buzzinga.config;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,18 @@ public class Constants {
     public static int newarticles = -1;
     public static int JOBID = 1;
 
+    public static String CUSTOM_RANGE = "Custom Range";
+    public static String TO_DAY = "Today";
+    public static String YESTER_DAY = "Yesterday";
+    public static String WEEK = "Week";
+    public static String THIS_MONTH = "This Month";
+    public static String LAST_MONTH = "Last Month";
+
+    public static List<String> DATE_SEL_LIST = Arrays.asList(
+            "Custom Range", "Today", "Yesterday",
+            "Week", "This Month", "Last Month"
+    );
+
     public static Map<String, String> sources_list = new HashMap<>();
     public static Map<String, String> source_map = new HashMap<>();
     public static Map<String, String> gender_map = new HashMap<>();
@@ -97,6 +110,7 @@ public class Constants {
     public static List<String> BFROMDATE = new ArrayList<>();
     public static List<String> BTODATE = new ArrayList<>();
     public static List<QueryData> QueryString = new ArrayList<QueryData>();
+
 
     public static List<Listitems> filterList;
 

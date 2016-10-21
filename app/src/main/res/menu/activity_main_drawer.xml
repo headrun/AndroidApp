@@ -35,9 +35,15 @@
 
 
     <item
+        android:id="@+id/contact_us"
+        android:icon="@drawable/chat"
+        android:title="Contact us"
+        app:actionLayout="@layout/menu_counter" />
+
+    <item
         android:id="@+id/invite"
         android:icon="@drawable/invite"
-        android:title="Invite"
+        android:title="Share"
         app:actionLayout="@layout/menu_counter" />
 
 

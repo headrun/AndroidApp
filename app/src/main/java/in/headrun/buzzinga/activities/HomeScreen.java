@@ -1,6 +1,5 @@
 package in.headrun.buzzinga.activities;
 
-import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -30,7 +28,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,9 +35,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -51,7 +48,7 @@ import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
-import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.adapters.DateSelection_AdapterView;
 import in.headrun.buzzinga.adapters.SearchListDataAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
@@ -62,12 +59,14 @@ import in.headrun.buzzinga.utils.Utils;
 /**
  * Created by headrun on 7/7/15.
  */
-public class HomeScreen extends Fragment implements View.OnClickListener, Utils.setOnItemClickListner {
+public class HomeScreen extends Fragment implements View.OnClickListener, Utils.setOnItemClickListner, Utils.setOnItemDateSelClickListner {
 
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
     @Bind(R.id.newarticle)
     TextView newarticle;
+    @Bind(R.id.sel_date)
+    TextView sel_date;
 
     @Bind(R.id.txt_info)
     TextView txt_info;
@@ -80,6 +79,8 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     @Bind(R.id.result_listview)
     RecyclerView display_data;
+    @Bind(R.id.horizontal_recycler_view)
+    RecyclerView horizontal_recycler_view;
 
     Utils utils;
     public String Intent_opt = "";
@@ -88,6 +89,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     StringRequest serverRequest;
 
     SearchListDataAdapter searchAdapter;
+    DateSelection_AdapterView dateSelAdapter;
     JSONObject jobj, jobj_result, jobj_hit;
     JSONArray jobj_hits;
 
@@ -127,6 +129,11 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             Constants.SEARCHARTICLES.clear();
 
 
+        horizontal_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        dateSelAdapter = new DateSelection_AdapterView(getActivity(), Constants.DATE_SEL_LIST);
+        horizontal_recycler_view.setAdapter(dateSelAdapter);
+        dateSelAdapter.setClickListener(this);
+
         display_data.setHasFixedSize(true);
         display_data.setLayoutManager(mLinearLayout);
         searchAdapter = new SearchListDataAdapter(getActivity(), Constants.SEARCHARTICLES);
@@ -135,7 +142,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
 
         newarticle.setOnClickListener(this);
-
+        sel_date.setOnClickListener(this);
 
         display_data.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -205,6 +212,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         setSate();
 
+        setDisplayDate();
         return v;
     }
 
@@ -271,13 +279,22 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 utils.add_query_data();
                 servercall(SEARCH);
                 break;
+
+            case R.id.sel_date:
+                if (horizontal_recycler_view.getVisibility() == View.VISIBLE)
+                    horizontal_recycler_view.setVisibility(View.GONE);
+                else
+                    horizontal_recycler_view.setVisibility(View.VISIBLE);
         }
     }
 
-    public void getServer_response(String URL_request, String clubbedquery) {
+    public void getServer_response(int req_type, String URL_request, String clubbedquery) {
 
+        setDisplayDate();
+        final int type_req = req_type;
         BuzzingaRequest.getInstance(getActivity()).cancelRequestQueue(TAG);
         txt_info.setVisibility(View.GONE);
+
         final String clubbed_query = clubbedquery;
 
         if (utils.isNetwrokConnection()) {
@@ -299,8 +316,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
                             utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
 
-
-                            article_loading(response);
+                            article_loading(response, type_req);
 
                             if (swipeRefreshLayout.isRefreshing() == true) {
                                 Swipe_loading = true;
@@ -405,10 +421,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     }
 
-    public void article_loading(String response) {
+    public void article_loading(String response, int req_type) {
 
         removeScrollProgess();
-        if (swipeRefreshLayout.isRefreshing())
+        if (swipeRefreshLayout.isRefreshing() || SEARCH == req_type)
             Constants.SEARCHARTICLES.clear();
 
         getJsonData(response);
@@ -435,7 +451,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         if (utils.isNetwrokConnection()) {
             Intent i = new Intent(getActivity(), ArticleWebDisplay.class);
             i.putExtra("pos", position);
-
             startActivity(i);
             getActivity().overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
         } else {
@@ -526,13 +541,102 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     @UiThread
     public void servercall(int type) {
         if (SEARCH == type)
-            getServer_response(ServerConfig.search, utils.searchQuery());
+            getServer_response(type, ServerConfig.search, utils.searchQuery());
         else if (SCROLL == type)
-            getServer_response(ServerConfig.SCROLL, utils.scrollQuery());
+            getServer_response(type, ServerConfig.SCROLL, utils.scrollQuery());
     }
 
     public void network_error_snackbar() {
         Snackbar.make(getActivity().findViewById(R.id.homescreen_lay), "No internet connection!", Snackbar.LENGTH_SHORT)
                 .show();
+    }
+
+    @Override
+    public void date_sel_itemClicked(View view, int position) {
+
+        // Toast.makeText(getActivity(), "sel date is" + Constants.DATE_SEL_LIST.get(position), Toast.LENGTH_SHORT).show();
+        horizontal_recycler_view.setVisibility(View.GONE);
+
+        String sel_item = Constants.DATE_SEL_LIST.get(position);
+        Calendar today_cal = Calendar.getInstance();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        if (Constants.CUSTOM_RANGE.equals(sel_item.trim())) {
+            utils.getdate();
+        } else {
+
+            String from_date = "", to_date = "";
+            if (Constants.TO_DAY.equals(sel_item.trim())) {
+
+                to_date = sdf.format(today_cal.getTime());
+                from_date = sdf.format(today_cal.getTime());
+
+            } else if (Constants.YESTER_DAY.equals(sel_item.trim())) {
+
+                today_cal.add(Calendar.DAY_OF_MONTH, -1);
+
+                to_date = sdf.format(today_cal.getTime());
+                from_date = sdf.format(today_cal.getTime());
+
+
+            } else if (Constants.WEEK.equals(sel_item.trim())) {
+
+
+                //utils.userSession.setFROM_DATE(sdf.format(today_cal.getTime()));
+
+                to_date = sdf.format(today_cal.getTime());
+                today_cal.add(Calendar.WEEK_OF_MONTH, -1);
+                from_date = sdf.format(today_cal.getTime());
+                /*utils.userSession.setTO_DATE(sdf.format(today_cal.getTime()));
+                servercall(SEARCH);
+*/
+
+
+
+
+                /*
+            String from_date = sdf.format(today_cal.getTime());
+            today_cal.add(Calendar.DATE, -7);
+            String to_date = sdf.format(today_cal.getTime());
+
+            utils.showLog(TAG, "sel date is" + Constants.DATE_SEL_LIST.get(position) + "" +
+                    "form date is " + from_date + " to date is" + to_date, Config.HOME_SCREEN);
+*/
+
+
+            } else if (Constants.THIS_MONTH.equals(sel_item.trim())) {
+
+                today_cal.set(Calendar.DATE, 1);
+                from_date = sdf.format(today_cal.getTime());
+
+                to_date = sdf.format(Calendar.getInstance().getTime());
+
+
+            } else if (Constants.LAST_MONTH.equals(sel_item.trim())) {
+
+                to_date = sdf.format(today_cal.getTime());
+                today_cal.add(Calendar.DATE, -30);
+                from_date = sdf.format(today_cal.getTime());
+
+            }
+
+            utils.userSession.setFROM_DATE(from_date);
+            utils.userSession.setTO_DATE(to_date);
+
+            utils.add_query_data();
+            servercall(SEARCH);
+
+            // Toast.makeText(getActivity(), "sel date is" + Constants.DATE_SEL_LIST.get(position), Toast.LENGTH_SHORT).show();
+
+            utils.showLog(TAG, "sel date is" + Constants.DATE_SEL_LIST.get(position) + "" +
+                    "form date is " + utils.userSession.getFROM_DATE() + " to date is" + utils.userSession.getFROM_DATE(), Config.HOME_SCREEN);
+        }
+    }
+
+    public void setDisplayDate() {
+
+        sel_date.setText(utils.dispalyDateFormate(utils.userSession.getFROM_DATE()) + " TO " +
+                utils.dispalyDateFormate(utils.userSession.getTO_DATE()));
     }
 }

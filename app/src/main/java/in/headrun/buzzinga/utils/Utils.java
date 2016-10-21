@@ -10,13 +10,13 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.res.ResourcesCompat;
@@ -32,7 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crash.FirebaseCrash;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,12 +47,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -62,8 +59,8 @@ import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
-import in.headrun.buzzinga.activities.HomeScreen;
 import in.headrun.buzzinga.activities.MainActivity;
+import in.headrun.buzzinga.activities.Pager;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
@@ -426,17 +423,18 @@ public class Utils {
         String from_date = "";
         for (String time_todate : item) {
             if (time_todate != null && !time_todate.isEmpty()) {
-                from_date = item.get(0) + sdf1.format(now.getTime());
+                from_date = item.get(0);
                 break;
             }
         }
 
         if (from_date.isEmpty()) {
             now.add(Calendar.DATE, -30);
-            from_date = sdf.format(now.getTime());
-            //userSession.setFROM_DATE(sdf2.format(now.getTime()));
+            from_date = sdf2.format(now.getTime());
+            userSession.setFROM_DATE(sdf2.format(now.getTime()));
         }
-        return from_date;
+
+        return from_date + "T00:00:00";
     }
 
     public String query_todate(List<String> item) {
@@ -460,8 +458,26 @@ public class Utils {
 
         if (todate.isEmpty()) {
             todate = sdf.format(now.getTime()) + sdf1.format(now.getTime());
-            //userSession.setTO_DATE(sdf.format(now.getTime()));
+            userSession.setTO_DATE(sdf.format(now.getTime()));
         }
+        /*try {
+            Date sel_date = sdf.parse(todate);
+
+            String today_date_str = sdf.format(now.getTime());
+
+            Date today_date = sdf.parse(today_date_str);
+
+            if (today_date.equals(sel_date)) {
+
+                todate = todate + sdf1.format(now.getTime());
+            } else {
+                todate = todate + "T23:59:59";
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
         return todate;
     }
 
@@ -798,8 +814,14 @@ public class Utils {
 
         public void itemClicked(View view, int position);
 
+    }
+
+    public interface setOnItemDateSelClickListner {
+
+        public void date_sel_itemClicked(View view, int position);
 
     }
+
 
     public void showLog(String TAG, String msg, boolean value) {
 
@@ -1090,5 +1112,147 @@ public class Utils {
         }
     }
 
+    public static void callToMobile(String mobile_number) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + mobile_number));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
+
+    }
+
+    public void composeEmail(String[] addresses) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        //intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
+    }
+
+
+    public void getdate() {
+
+/*
+        FragmentManager fm = getFragmentManager();
+        DialogFragment newFragment = new FilterByDate();
+        newFragment.show(fm, "datePicker");
+*/
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+
+        String from_date = query_fromdate(Arrays.asList(userSession.getFROM_DATE()));
+
+        String to_date = query_todate(Arrays.asList(userSession.getTO_DATE()));
+
+        showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.Utils);
+
+        Calendar from_cal = Calendar.getInstance();
+        Calendar to_cal = Calendar.getInstance();
+
+        try {
+            from_cal.setTime(sdf.parse(from_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            from_cal.setTime(new Date());
+        }
+
+        try {
+            to_cal.setTime(sdf.parse(to_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            to_cal.setTime(new Date());
+        }
+
+        showLog(TAG, "calendar from mnth is " + from_cal.get(Calendar.MONTH) +
+                " to mnth is " + to_cal.get(Calendar.MONTH), Config.MainActivity);
+
+        SmoothDateRangePickerFragment smoothDateRangePickerFragment =
+                SmoothDateRangePickerFragment
+                        .newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                                         @Override
+                                         public void onDateRangeSet(SmoothDateRangePickerFragment view,
+                                                                    int yearStart, int monthStart,
+                                                                    int dayStart, int yearEnd,
+                                                                    int monthEnd, int dayEnd) {
+                                             String date = "You picked the following date range: \n"
+                                                     + "From " + dayStart + "/" + (++monthStart)
+                                                     + "/" + yearStart + " To " + dayEnd + "/"
+                                                     + (++monthEnd) + "/" + yearEnd;
+
+                                             userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                             userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
+
+                                             showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
+                                                     userSession.getTO_DATE(), Config.HOME_SCREEN);
+
+                                             // setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
+                                             add_query_data();
+
+                                            /* Bundle params = new Bundle();
+                                             params.putString("date", "apply_date");
+                                             mFirebaseAnalytics.logEvent("Apply_Date", params);
+                                             mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+*/
+                                             call_homeFragment(Constants.Intent_TRACK);
+                                         }
+                                     },
+                                from_cal.get(Calendar.YEAR), from_cal.get(Calendar.MONTH), from_cal.get(Calendar.DATE),
+                                to_cal.get(Calendar.YEAR), to_cal.get(Calendar.MONTH), to_cal.get(Calendar.DATE));
+
+        Calendar cal_max = Calendar.getInstance();
+        // cal.add(Calendar.DATE, 1);
+        showLog(TAG, "set max date calendar is " + cal_max.get(Calendar.MONTH) + " date " +
+                cal_max.get(Calendar.DATE), Config.MainActivity);
+
+        smoothDateRangePickerFragment.setMaxDate(cal_max);
+        Calendar cal_main = Calendar.getInstance();
+        cal_main.add(Calendar.MONTH, -6);
+        smoothDateRangePickerFragment.setMinDate(cal_main);
+        try {
+            smoothDateRangePickerFragment.show(((Activity) context).getFragmentManager(), "Buzzinga");
+        } catch (Exception ClassCastException) {
+            smoothDateRangePickerFragment.show(((FragmentActivity) context).getFragmentManager(), "Buzzinga");
+        }
+    }
+
+    public void call_homeFragment(String value) {
+
+        Bundle bundle = new Bundle();
+        if (value == null)
+            value = "";
+        bundle.putString(Constants.Intent_OPERATION, value);
+        Fragment fragment = new Pager();
+        fragment.setArguments(bundle);
+        ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+
+    }
+
+    public String dispalyDateFormate(String sel_date) {
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMM,yy ");
+        Date date;
+        String dsp_date="";
+        if (!sel_date.isEmpty()) {
+            try {
+                date = sdf.parse(sel_date);
+                dsp_date = sdf1.format(date);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+
+            }
+
+        }else{
+            dsp_date = sdf1.format(cal.getTime());
+        }
+        return dsp_date;
+    }
 }
+
+
+
 

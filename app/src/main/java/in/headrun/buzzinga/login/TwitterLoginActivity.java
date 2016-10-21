@@ -2,31 +2,12 @@ package in.headrun.buzzinga.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.TwitterAuthProvider;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
-import com.twitter.sdk.android.core.models.User;
 
 import in.headrun.buzzinga.R;
-import io.fabric.sdk.android.Fabric;
 
 public class TwitterLoginActivity extends BaseActivity
         implements View.OnClickListener {
@@ -36,7 +17,7 @@ public class TwitterLoginActivity extends BaseActivity
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
-    // [START declare_auth]
+   /* // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
@@ -45,17 +26,17 @@ public class TwitterLoginActivity extends BaseActivity
     // [END declare_auth_listener]
 
     private TwitterLoginButton mLoginButton;
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Configure Twitter SDK
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(
+  /*      TwitterAuthConfig authConfig = new TwitterAuthConfig(
                 getString(R.string.twitter_consumer_key),
                 getString(R.string.twitter_consumer_secret));
         Fabric.with(this, new Twitter(authConfig));
-
+*/
         // Inflate layout (must be done after Twitter is configured)
         setContentView(R.layout.activity_twitter);
 
@@ -66,7 +47,7 @@ public class TwitterLoginActivity extends BaseActivity
 
         // [START initialize_auth]
         // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+  /*      mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
         // [START auth_state_listener]
@@ -103,14 +84,14 @@ public class TwitterLoginActivity extends BaseActivity
                 updateUI(null);
             }
         });
-        // [END initialize_twitter_login]
+  */      // [END initialize_twitter_login]
     }
 
     // [START on_start_add_listener]
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+    //    mAuth.addAuthStateListener(mAuthListener);
     }
     // [END on_start_add_listener]
 
@@ -118,9 +99,9 @@ public class TwitterLoginActivity extends BaseActivity
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
+        /*if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
-        }
+        }*/
     }
     // [END on_stop_remove_listener]
 
@@ -129,12 +110,13 @@ public class TwitterLoginActivity extends BaseActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         // Pass the activity result to the Twitter login button.
-        mLoginButton.onActivityResult(requestCode, resultCode, data);
+       // mLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
     // [START auth_with_twitter]
-    private void handleTwitterSession(final TwitterSession session) {
+   /* private void handleTwitterSession(final TwitterSession session) {
         Log.d(TAG, "handleTwitterSession:" + session);
+
         // [START_EXCLUDE silent]
         showProgressDialog();
         // [END_EXCLUDE]
@@ -175,7 +157,7 @@ public class TwitterLoginActivity extends BaseActivity
 
         updateUI(null);
     }
-
+*/
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
@@ -197,12 +179,12 @@ public class TwitterLoginActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_twitter_signout:
-                signOut();
+               // signOut();
                 break;
         }
     }
 
-    void getUserData(TwitterSession session) {
+   /* void getUserData(TwitterSession session) {
         Twitter.getApiClient(session).getAccountService()
                 .verifyCredentials(true, false, new Callback<User>() {
 
@@ -234,7 +216,7 @@ public class TwitterLoginActivity extends BaseActivity
 
                 });
 
-    }
+    }*/
 
 
 }

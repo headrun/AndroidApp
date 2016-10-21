@@ -3,27 +3,17 @@ package in.headrun.buzzinga.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,9 +29,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -57,11 +44,9 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaRequest;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
-import in.headrun.buzzinga.adapters.PageAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
@@ -265,12 +250,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, Filtering.class));
             this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.date_filter) {
-            getdate();
+            utils.getdate();
         } else if (id == R.id.notify_me) {
             notimyme(utils.userSession.getNotifyHour());
         } else if (id == R.id.invite) {
             // final Uri deepLink = buildDeepLink(Uri.parse(Constants.DEEP_LINK_URL), 0, false);
             shareDeepLink(Constants.DEEP_LINK_URL);
+        } else if (id == R.id.contact_us) {
+            // final Uri deepLink = buildDeepLink(Uri.parse(Constants.DEEP_LINK_URL), 0, false);
+            startActivity(new Intent(this, Contact_Activiy.class));
+            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.logout) {
             stringrequest();
         }
@@ -500,17 +489,14 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
     private void shareDeepLink(String deeplink) {
 
         utils.showLog(TAG, "deep  link is" + deeplink, Config.SPLASH);
         ShareCompat.IntentBuilder
                 .from(this) // getActivity() or activity field if within Fragment
-                .setText(deeplink)
+                .setText("https://play.google.com/store/apps/details?id=in.headrun.buzzinga")
                 .setType("text/plain") // most general text sharing MIME type
                 .setChooserTitle("Buzzinga Analytics")
                 .startChooser();
     }
-
-
 }

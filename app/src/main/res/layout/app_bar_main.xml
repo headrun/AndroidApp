@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="exitUntilCollapsed">
 
             <FrameLayout
                 android:id="@+id/toolbar_lay"
@@ -28,7 +28,8 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary">
+                    android:background="?attr/colorPrimary"
+                    app:layout_collapseMode="pin">
 
                     <FrameLayout
                         android:id="@+id/indicater_lay"

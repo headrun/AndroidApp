@@ -1,56 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homescreen_lay"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activities.HomeScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent">
+        android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
+        <TextView
+            android:id="@+id/sel_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/date_range"
+            android:drawablePadding="5dp"
+            android:elevation="5sp"
+            android:gravity="center_horizontal|center"
+            android:padding="5dp"
+            android:text="21 Sep,16 TO 21 Oct,16"
+            android:textSize="18sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/horizontal_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sel_date"
+            android:background="#fff"
             android:visibility="gone" />
 
+
         <RelativeLayout
-            android:id="@+id/content_lay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/horizontal_recycler_view"
+            android:background="@android:color/transparent">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
+
+            <RelativeLayout
+                android:id="@+id/content_lay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/result_listview"
-                    android:layout_width="fill_parent"
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollingCache="true" />
-            </android.support.v4.widget.SwipeRefreshLayout>
+                    android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/newarticle"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/result_listview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollingCache="true" />
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+            </RelativeLayout>
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/swipe_refresh_layout"
                 android:layout_centerHorizontal="true"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="New Articles"
-                android:textColor="#ffffff"
+                android:layout_centerVertical="true"
                 android:visibility="gone" />
+
+            <include layout="@layout/info_layout" />
 
         </RelativeLayout>
 
-        <include layout="@layout/info_layout" />
+        <TextView
+            android:id="@+id/newarticle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="New Articles"
+            android:textColor="#ffffff"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

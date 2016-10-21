@@ -5,51 +5,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/browser_headder"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="#000000"
-        android:visibility="gone"
-        android:weightSum="1">
-
-
-        <ImageView
-            android:id="@+id/article_closebrowser"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/browsertitle"
-            android:layout_weight="0.1"
-            android:padding="5dp"
-            android:src="@drawable/close" />
-
-        <TextView
-            android:id="@+id/article_browsertitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.9"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingLeft="5dp"
-            android:singleLine="true" />
-
-    </LinearLayout>
-
-
-    <ProgressBar
-        android:id="@+id/article_browser_progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:indeterminate="false"
-        android:theme="@style/LinearProgress" />
-
     <WebView
         android:id="@+id/article_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/article_browser_progress" />
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/article_browser_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

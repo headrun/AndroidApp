@@ -2,28 +2,17 @@ package in.headrun.buzzinga.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ShareCompat;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appinvite.AppInvite;
-import com.google.android.gms.appinvite.AppInviteInvitationResult;
-import com.google.android.gms.appinvite.AppInviteReferral;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
@@ -103,7 +92,7 @@ public class SplashActivity extends Activity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+       // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         onNewIntent(getIntent());
 
 
@@ -179,7 +168,7 @@ public class SplashActivity extends Activity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
+        /*client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Splash Page", // TODO: Define a title for the content shown.
@@ -190,7 +179,7 @@ public class SplashActivity extends Activity {
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse(Constants.APP_INDEXING_URL)
         );
-        AppIndex.AppIndexApi.start(client, viewAction);
+        AppIndex.AppIndexApi.start(client, viewAction);*/
     }
 
     @Override
@@ -199,7 +188,7 @@ public class SplashActivity extends Activity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
+        /*Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Splash Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
@@ -210,6 +199,6 @@ public class SplashActivity extends Activity {
                 Uri.parse(Constants.APP_INDEXING_URL)
         );
         AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+        client.disconnect();*/
     }
 }

@@ -82,6 +82,7 @@ public class TimeAgo {
             words = sdf1.format(date);
             display_ago = false;
         }
+
         StringBuilder sb = new StringBuilder();
 
         if (prefix != null && prefix.length() > 0) {
