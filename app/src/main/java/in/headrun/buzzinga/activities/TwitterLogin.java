@@ -38,7 +38,6 @@ public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
 
-
     @Bind(R.id.twitter_login_button1)
     ImageView loginButton;
     @Bind(R.id.progressbar)

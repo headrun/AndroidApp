@@ -104,7 +104,7 @@
     <string name="deep_link_firebase">https://sh6q4.app.goo.gl/jdF1</string>
 
     <string name="mobile_title">Mobile</string>
-    <string name="mobile_no">+91 - 924 111 8163</string>
+    <string name="mobile_no">+91 - 96323 06600</string>
     <string name="email_title">E-Mail</string>
     <string name="contatct_email">sales＠buzzinga․com</string>
     <string name="location_title">Location</string>
@@ -115,7 +115,6 @@
     </string>
 
     <string name="call_permission_error">Call Permission Denied</string>
-
 
 
 </resources>

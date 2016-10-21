@@ -37,7 +37,7 @@
     <item
         android:id="@+id/contact_us"
         android:icon="@drawable/chat"
-        android:title="Contact us"
+        android:title="Contact Us"
         app:actionLayout="@layout/menu_counter" />
 
     <item

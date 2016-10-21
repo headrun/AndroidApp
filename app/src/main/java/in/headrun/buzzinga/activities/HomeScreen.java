@@ -98,7 +98,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public static boolean Swipe_loading = true;
     ArrayList<SearchArticles> searchArticleSwipe;
 
-    public static Parcelable state;
+   // public static Parcelable state;
 
     public final int SEARCH = 1;
     public final int SCROLL = 2;
@@ -106,7 +106,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
             Intent_opt = bundle.getString(Constants.Intent_OPERATION);
-            state = null;
         }
     }
 
@@ -125,9 +124,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         readBundle(getArguments());
 
-        if (Constants.Intent_TRACK.equals(Intent_opt))
+        if (Constants.Intent_TRACK.equals(Intent_opt)) {
             Constants.SEARCHARTICLES.clear();
-
+            Constants.state = null;
+        }
 
         horizontal_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         dateSelAdapter = new DateSelection_AdapterView(getActivity(), Constants.DATE_SEL_LIST);
@@ -231,12 +231,12 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void onResume() {
         super.onResume();
         Log.i(TAG, "onresume");
-        state = display_data.getLayoutManager().onSaveInstanceState();
+        Constants.state = display_data.getLayoutManager().onSaveInstanceState();
     }
 
     public void setSate() {
-        if (state != null) {
-            display_data.getLayoutManager().onRestoreInstanceState(state);
+        if (Constants.state != null) {
+            display_data.getLayoutManager().onRestoreInstanceState(Constants.state);
         }
     }
 
@@ -429,7 +429,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         getJsonData(response);
 
-        state = display_data.getLayoutManager().onSaveInstanceState();
+        Constants.state = display_data.getLayoutManager().onSaveInstanceState();
         // articleDetails();
         searchAdapter.notifyDataSetChanged();
         if (Constants.SEARCHARTICLES.size() > 0) {

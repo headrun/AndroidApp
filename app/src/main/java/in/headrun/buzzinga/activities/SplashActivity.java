@@ -2,11 +2,13 @@ package in.headrun.buzzinga.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -36,6 +38,9 @@ public class SplashActivity extends Activity {
     ProgressBar splash_progress;
     @Bind(R.id.splashscreen)
     ImageView splashscreen;
+    @Bind(R.id.version_name)
+    TextView version_name;
+
     UserSession userSession;
     Utils utils;
     Boolean action_type = false;
@@ -92,7 +97,7 @@ public class SplashActivity extends Activity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-       // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         onNewIntent(getIntent());
 
 
@@ -100,6 +105,13 @@ public class SplashActivity extends Activity {
                 .enableAutoManage(this, this)
                 .addApi(AppInvite.API)
                 .build();*/
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            version_name.setText("Version " + version);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void onNewIntent(Intent intent) {
@@ -121,10 +133,12 @@ public class SplashActivity extends Activity {
                 utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
                 utils.add_query_data();
 
+/*
                 Bundle params = new Bundle();
                 params.putString(FirebaseAnalytics.Param.ITEM_NAME, search_data);
                 utils.mFirebaseAnalytics.logEvent("Track", params);
                 utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+*/
 
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));

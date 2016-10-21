@@ -365,9 +365,8 @@ public class MainActivity extends AppCompatActivity
                 setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
                 setbadge();
 
-
                 Bundle params = new Bundle();
-                params.putString("notify", "apply_notify");
+                params.putString("notify", sel_value[0]);
                 utils.mFirebaseAnalytics.logEvent("Apply_notify", params);
                 utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
