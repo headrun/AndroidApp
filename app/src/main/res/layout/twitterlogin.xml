@@ -15,9 +15,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/buzz_logo1" />
-
-
+            android:src="@drawable/login_logo" />
 
         <ImageView
             android:id="@+id/twitter_login_button1"
@@ -29,7 +27,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/twitterbtn" />
-
 
     </RelativeLayout>
 

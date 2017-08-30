@@ -79,12 +79,6 @@ public class MainActivity extends AppCompatActivity
     Utils utils;
     String Intent_opt;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-
-    //private GoogleApiClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         title.setText(utils.setTitle());
 
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(false);
 
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,11 +192,12 @@ public class MainActivity extends AppCompatActivity
         } else if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            startActivity(new Intent(this, TrackKeyWord.class).
+            finish();
+           /* startActivity(new Intent(this, TrackKeyWord.class).
                     setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                             Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK));
-            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+            this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);*/
         }
 
     }
@@ -229,9 +225,17 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
 
         MenuItem searchItem = menu.findItem(R.id.item_search);
+
         searchView.setMenuItem(searchItem);
 
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

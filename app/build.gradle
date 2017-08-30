@@ -10,8 +10,14 @@ android {
         config {
             keyAlias 'buzz'
             keyPassword 'buzz^43'
-            storeFile file('/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/buzzinga.jks')
+            storeFile file('../buzzinga.jks')
             storePassword 'buzz^43'
+        }
+        devineniuma {
+            keyAlias 'devineniuma'
+            keyPassword 'devineniuma^123'
+            storeFile file('../devineniuma.jks')
+            storePassword 'devineniuma^123'
         }
     }
     compileSdkVersion 23
@@ -30,14 +36,20 @@ android {
              sourceCompatibility JavaVersion.VERSION_1_8
              targetCompatibility JavaVersion.VERSION_1_8
          }*/
-        signingConfig signingConfigs.config
+       // signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
+        }
+        debug{
+            minifyEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.config
         }
 
     }
@@ -52,7 +64,7 @@ android {
     productFlavors {
         DevineniUma {
             applicationId "in.headrun.buzzinga.devineniuma"
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.devineniuma
         }
         buzzinga {
             signingConfig signingConfigs.config
@@ -79,11 +91,11 @@ dependencies {
     //compile 'com.google.firebase:firebase-auth:9.4.0'
     //Twitter Login
     /*compile('com.twitter.sdk.android:twitter-core:1.6.6@aar') {
-                transitive = true
-            }
-            compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
-                transitive = true;
-            }*/
+                    transitive = true
+                }
+                compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
+                    transitive = true;
+                }*/
     //compile 'com.google.firebase:firebase-invites:9.4.0'
     //compile 'com.google.android.gms:play-services-appindexing:9.4.0'
 }

@@ -35,9 +35,11 @@ Proguard/
 captures/
 
 # Intellij
-.iml
+*.iml
 .idea/workspace.xml
 .idea/*
+*/*.iml
+*/app.iml
 
 # Keystore files
 #.jks

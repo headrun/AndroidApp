@@ -60,7 +60,7 @@ public class SplashActivity extends Activity {
 
         utils = new Utils(SplashActivity.this);
         userSession = new UserSession(SplashActivity.this);
-        userSession.setTACK_SEARCH_KEY("devineni uma");
+        userSession.setTrackKey("Devineni Uma");
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
 

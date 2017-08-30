@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "691891805214",
+    "firebase_url": "https://devineniuma-5a4ab.firebaseio.com",
+    "project_id": "devineniuma-5a4ab",
+    "storage_bucket": "devineniuma-5a4ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691891805214:android:f2034ff061ce634e",
+        "android_client_info": {
+          "package_name": "in.headrun.buzzinga.devineniuma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691891805214-ic5r5o6i7hspm379g5vhaqr35n8pb1u8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.headrun.buzzinga.devineniuma",
+            "certificate_hash": "06097892223814d0c24e2797c4153db1be6fbdeb"
+          }
+        },
+        {
+          "client_id": "691891805214-14cva8kl801bhcvgcsmlg7ufovueivfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_if-sMFrV6AO2RJbkwJAe6SYJq2sA1Q0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691891805214-14cva8kl801bhcvgcsmlg7ufovueivfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

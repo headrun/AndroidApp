@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/splashscreen"
@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/splash_buzzlogo" />
+        android:src="@mipmap/app_logo" />
     <!--
         <ImageView
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/white"
+        android:indeterminateTint="@color/blue"
         android:indeterminateTintMode="src_atop" />
 
     <TextView

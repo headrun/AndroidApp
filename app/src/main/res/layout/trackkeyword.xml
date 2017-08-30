@@ -10,7 +10,7 @@
         android:layout_above="@+id/track_progress"
         android:layout_centerHorizontal="true"
         android:paddingBottom="20dp"
-        android:src="@drawable/buzz_logo1" />
+        android:src="@drawable/login_logo" />
 
     <EditText
         android:id="@+id/keyword"

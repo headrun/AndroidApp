@@ -115,6 +115,7 @@
     </string>
 
     <string name="call_permission_error">Call Permission Denied</string>
+    <string name="nav_header_title">Buzzinga</string>
 
 
 </resources>
