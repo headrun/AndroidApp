@@ -1,0 +1,11 @@
+{
+  "buildFiles": [
+    "/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/jni/Android.mk",
+    "/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/jni/Application.mk"
+  ],
+  "cleanCommands": [],
+  "libraries": {},
+  "toolchains": {},
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}

@@ -37,7 +37,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     @Bind(R.id.track_progress)
     ProgressBar trak_progress;
 
-
     Utils utils;
 
 
@@ -81,7 +80,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         }
     }
 
-    public  void trackkeyword() {
+    public void trackkeyword() {
 
 
         if (utils.isNetwrokConnection()) {
@@ -90,7 +89,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
             if (track.length() > 0) {
 
-               // trak_progress.setVisibility(View.VISIBLE);
+                // trak_progress.setVisibility(View.VISIBLE);
 
                 utils.userSession.setTrackKey(track);
                 utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
@@ -106,7 +105,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
                 this.overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
 
-               // trak_progress.setVisibility(View.GONE);
+                // trak_progress.setVisibility(View.GONE);
 
             } else
                 Toast.makeText(this, "Enter your brand", Toast.LENGTH_LONG).show();

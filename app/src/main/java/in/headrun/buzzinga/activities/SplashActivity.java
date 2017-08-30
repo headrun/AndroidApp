@@ -60,6 +60,7 @@ public class SplashActivity extends Activity {
 
         utils = new Utils(SplashActivity.this);
         userSession = new UserSession(SplashActivity.this);
+        userSession.setTACK_SEARCH_KEY("devineni uma");
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
 
@@ -69,8 +70,6 @@ public class SplashActivity extends Activity {
         Constants.sourse_xtags();
         Constants.gender_xtags();
         Constants.sentiment_xtags();
-
-        // utils.addtoList();
 
         Bundle params = new Bundle();
         params.putString("Buzzinga", "opened");
@@ -84,27 +83,12 @@ public class SplashActivity extends Activity {
 
                 if (action_type == false)
                     checkSession();
-
-
-                //   splash_progress.setVisibility(View.GONE);
                 finish();
 
             }
         }, Config.SPLASH_DISPLAY_LENGTH);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         onNewIntent(getIntent());
 
-
-        /*mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(AppInvite.API)
-                .build();*/
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
@@ -121,10 +105,7 @@ public class SplashActivity extends Activity {
             action_type = true;
             String search_data = data.substring(data.lastIndexOf("/") + 1).trim();
             String all_data = data.toString();
-/*
-            Uri contentUri = Uri.parse("content://com.recipe_app/recipe/").buildUpon()
-                    .appendPath(recipeId).build();
-*/
+
             utils.showLog(TAG, "search data is" + all_data + "app indexing uri is" + search_data, Config.SPLASH);
 
             if (loged.length() > 0
@@ -133,12 +114,6 @@ public class SplashActivity extends Activity {
                 utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
                 utils.add_query_data();
 
-/*
-                Bundle params = new Bundle();
-                params.putString(FirebaseAnalytics.Param.ITEM_NAME, search_data);
-                utils.mFirebaseAnalytics.logEvent("Track", params);
-                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
-*/
 
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
@@ -161,8 +136,6 @@ public class SplashActivity extends Activity {
             if (track_key.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
             } else {
-                // Constants.listdetails = Constants.articlelist_Details;
-                // Log.i(TAG, "track key is" + userSession.getTrackKey() + "article size " + Constants.listdetails + "Constants.articlelist_Details" + Constants.articlelist_Details);
                 Constants.BTRACKKEY.add(userSession.getTrackKey());
                 utils.add_query_data();
 
@@ -180,39 +153,10 @@ public class SplashActivity extends Activity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        /*client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Splash Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse(Constants.BUZZINGA_URI),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse(Constants.APP_INDEXING_URL)
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);*/
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        /*Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Splash Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse(Constants.BUZZINGA_URI),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse(Constants.APP_INDEXING_URL)
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();*/
     }
 }

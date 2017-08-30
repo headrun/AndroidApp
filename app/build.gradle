@@ -50,6 +50,13 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
     productFlavors {
+        DevineniUma {
+            applicationId "in.headrun.buzzinga.devineniuma"
+            signingConfig signingConfigs.config
+        }
+        buzzinga {
+            signingConfig signingConfigs.config
+        }
     }
 }
 
@@ -63,27 +70,21 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:cardview-v7:23.4.0'
-
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-
     //compile 'com.google.android.gms:play-services-auth:9.4.0'
-
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-crash:9.4.0'
     //compile 'com.google.firebase:firebase-auth:9.4.0'
-
     //Twitter Login
     /*compile('com.twitter.sdk.android:twitter-core:1.6.6@aar') {
-        transitive = true
-    }
-    compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
-        transitive = true;
-    }*/
-
+                transitive = true
+            }
+            compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
+                transitive = true;
+            }*/
     //compile 'com.google.firebase:firebase-invites:9.4.0'
-
     //compile 'com.google.android.gms:play-services-appindexing:9.4.0'
 }
 apply plugin: 'com.google.gms.google-services'

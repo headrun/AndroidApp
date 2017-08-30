@@ -1,0 +1,7 @@
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/*
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/gdbserver
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/gdb.setup
+mkdir -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a
+echo [armeabi-v7a] "Install        ": "libkeys.so => /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/libkeys.so"
+install -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi-v7a/libkeys.so /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/libkeys.so
+/home/sujith/Android/Sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-strip --strip-unneeded  /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/armeabi-v7a/libkeys.so

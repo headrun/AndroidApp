@@ -98,7 +98,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public static boolean Swipe_loading = true;
     ArrayList<SearchArticles> searchArticleSwipe;
 
-   // public static Parcelable state;
+    // public static Parcelable state;
 
     public final int SEARCH = 1;
     public final int SCROLL = 2;
@@ -139,7 +139,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         searchAdapter = new SearchListDataAdapter(getActivity(), Constants.SEARCHARTICLES);
         display_data.setAdapter(searchAdapter);
         searchAdapter.setClickListener(this);
-
 
         newarticle.setOnClickListener(this);
         sel_date.setOnClickListener(this);
@@ -200,15 +199,14 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     Swipe_loading = false;
                     utils.add_query_data();
 
-
                     servercall(SEARCH);
+
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
                     network_error_snackbar();
                 }
             }
         });
-
 
         setSate();
 
@@ -252,7 +250,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     public void onStop() {
         super.onStop();
         Log.i(TAG, "onstop");
-
     }
 
     @Override
@@ -264,7 +261,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
 
             /*case R.id.filtersource:
                 // startActivity(new Intent(this, Filtering.class));
@@ -285,6 +281,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     horizontal_recycler_view.setVisibility(View.GONE);
                 else
                     horizontal_recycler_view.setVisibility(View.VISIBLE);
+
         }
     }
 

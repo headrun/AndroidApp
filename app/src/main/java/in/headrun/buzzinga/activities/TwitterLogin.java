@@ -27,6 +27,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
 
 import in.headrun.buzzinga.utils.Utils;
@@ -53,7 +54,7 @@ public class TwitterLogin extends Activity {
     private Button btnuserdetails;
     public String stoken, token, userid, username;
     Utils utils;
-
+    UserSession mUserSession;
     String cookie;
 
     @Override
@@ -63,7 +64,7 @@ public class TwitterLogin extends Activity {
 
         ButterKnife.bind(this);
         utils = new Utils(this);
-
+        mUserSession = new UserSession(this);
         twitter_btn.setVisibility(View.VISIBLE);
         twitter_auth_lay.setVisibility(View.GONE);
         btnuserdetails = (Button) findViewById(R.id.btnuserdetails);
@@ -137,7 +138,12 @@ public class TwitterLogin extends Activity {
 
                     if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0) {
                         utils.callService();
-                        startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
+                        //startActivity(new Intent(TwitterLogin.this, MainActivity.class));
+                        Constants.BTRACKKEY.add(mUserSession.getTrackKey());
+                        utils.add_query_data();
+                        startActivity(new Intent(getApplication(), MainActivity.class).
+                                putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
+
                         overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
                         finish();
                     }

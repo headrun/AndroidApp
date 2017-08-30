@@ -1,0 +1,7 @@
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/*
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/gdbserver
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/gdb.setup
+mkdir -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64
+echo [mips64] "Install        ": "libkeys.so => /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/libkeys.so"
+install -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/.externalNativeBuild/ndkBuild/release/obj/local/mips64/libkeys.so /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/libkeys.so
+/home/sujith/Android/Sdk/ndk-bundle/toolchains/mips64el-linux-android-4.9/prebuilt/linux-x86_64/bin/mips64el-linux-android-strip --strip-unneeded  /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/mips64/libkeys.so

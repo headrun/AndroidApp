@@ -1,0 +1,7 @@
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/*
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/gdbserver
+rm -f /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/gdb.setup
+mkdir -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86
+echo [x86] "Install        ": "libkeys.so => /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/libkeys.so"
+install -p /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/.externalNativeBuild/ndkBuild/release/obj/local/x86/libkeys.so /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/libkeys.so
+/home/sujith/Android/Sdk/ndk-bundle/toolchains/x86-4.9/prebuilt/linux-x86_64/bin/i686-linux-android-strip --strip-unneeded  /home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/ndkBuild/release/lib/x86/libkeys.so

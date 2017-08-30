@@ -6,7 +6,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "in.headrun.buzzinga.activities.Filtering"/>
+        className = "in.headrun.buzzinga.in.headrun.buzzinga.devineniuma.activities.Filtering"/>
       <point      
         x = "500"      
         y = "100"/>
@@ -14,7 +14,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "in.headrun.buzzinga.activities.SplashActivity"/>
+        className = "in.headrun.buzzinga.in.headrun.buzzinga.devineniuma.activities.SplashActivity"/>
       <point      
         x = "548"      
         y = "148"/>
@@ -22,7 +22,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "in.headrun.buzzinga.activities.HomeScreen"/>
+        className = "in.headrun.buzzinga.in.headrun.buzzinga.devineniuma.activities.HomeScreen"/>
       <point      
         x = "600"      
         y = "200"/>
@@ -30,7 +30,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "in.headrun.buzzinga.activities.TwitterLogin"/>
+        className = "in.headrun.buzzinga.in.headrun.buzzinga.devineniuma.activities.TwitterLogin"/>
       <point      
         x = "650"      
         y = "250"/>
@@ -38,7 +38,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "in.headrun.buzzinga.activities.Searchable"/>
+        className = "in.headrun.buzzinga.in.headrun.buzzinga.devineniuma.activities.Searchable"/>
       <point      
         x = "700"      
         y = "300"/>
