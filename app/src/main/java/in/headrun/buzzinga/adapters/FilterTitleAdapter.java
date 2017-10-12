@@ -33,7 +33,6 @@ public class FilterTitleAdapter extends BaseAdapter {
     Utils utils;
     TitleHolder holder = null;
 
-
     public FilterTitleAdapter(Context context, String[] titles, TypedArray images) {
 
         this.context = context;

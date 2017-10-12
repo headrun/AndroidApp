@@ -146,7 +146,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-
         filter_titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -171,7 +170,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
                 filterselection(filtering);
             }
         });
-
 
         autosearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -225,7 +223,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
     ////set the adapter to listview
     public void FilterAdapter(List<Listitems> items, boolean search_enable) {
 
@@ -240,7 +237,6 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filter_items.setTextFilterEnabled(true);
 
     }
-
 
     /*prepare the selected filter title list
     * @param enum of filter status title

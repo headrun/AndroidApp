@@ -27,6 +27,7 @@
         android:title="Date Filter"
         app:actionLayout="@layout/menu_counter" />
 
+
     <item
         android:id="@+id/notify_me"
         android:icon="@drawable/notify_me"
