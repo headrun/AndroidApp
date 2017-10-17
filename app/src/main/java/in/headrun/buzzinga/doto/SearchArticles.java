@@ -39,6 +39,44 @@ public class SearchArticles {
         @SerializedName("title")
         public String TITLE;
 
+        @SerializedName("original_data")
+        public OriginalData original_data;
+
+    }
+
+    public class OriginalData {
+
+        @SerializedName("user")
+        public UserData user_data;
+        @SerializedName("actor")
+        public GoogleUserData google_user;
+    }
+
+    public class GoogleUserData {
+        @SerializedName("image")
+        public GoogleImage google_img;
+    }
+
+    public class GoogleImage {
+        @SerializedName("url")
+        public String img_url;
+    }
+
+
+    public class UserData {
+
+        @SerializedName("profile_image_url_https")
+        public String profile_image_url_https;
+
+        @SerializedName("profile_image_url")
+        public String profile_image_url;
+
+        @SerializedName("name")
+        public String name;
+
+        @SerializedName("screen_name")
+        public String screen_name;
+
     }
 
     public class Author {
@@ -47,4 +85,5 @@ public class SearchArticles {
         public String NAME;
 
     }
+
 }

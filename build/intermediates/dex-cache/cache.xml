@@ -1,2 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.2.0/b76d4269b06b8bda96aac32342a05843b4c0be41/glide-4.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b76d4269b06b8bda96aac32342a05843b4c0be41">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/glide-4.2.0_05e211481d8e491f76b93ba02011e2fbbf56d98b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.0.2/8b68a849722b44f584e2d68c451c5e3844c10380/support-annotations-26.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8b68a849722b44f584e2d68c451c5e3844c10380">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/support-annotations-26.0.2_c728e10e7e3b062da9c88098545e12210b80d760/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/gifdecoder/4.2.0/f196283dab426e09559bfe7385f162b2b254cf72/gifdecoder-4.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f196283dab426e09559bfe7385f162b2b254cf72">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/gifdecoder-4.2.0_f35b105789c8fd3dab1289ac2d93ec27e9907829/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/disklrucache/4.2.0/fd3a444cc7987b5fa2a60fabb116395ca2a4da1c/disklrucache-4.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fd3a444cc7987b5fa2a60fabb116395ca2a4da1c">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/disklrucache-4.2.0_361972a052c55bfc35114e6d944cd81670f4e09e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/annotations/4.2.0/1d6fc29f2af61d8fdc31018416040c560423c4b3/annotations-4.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1d6fc29f2af61d8fdc31018416040c560423c4b3">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/annotations-4.2.0_cc2a5eb8e00743dea17b50788368d79e52bb28bc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/libs/mpandroidchartlibrary-2-1-5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a7650f11d4eb03995f4450562cc271d5f790c992">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/2/mpandroidchartlibrary-2-1-5_3c29a2943ea7f19786aab27bc34ee51961af254e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/materialsearchview/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="65fa1b06140efd3492d5a4d5e581122b1a846545">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/4/classes_ac1d1367cd85e1fdab75e0703ccc250d2171b03d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/daterangepicker/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bb14bfc46ff0593ea9733ed9fa1e286f46f96429">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/4/classes_36a9134bebba5d930a485d006f1502c323ab3c86/classes.dex" />
+    </item>
+
+</items>
