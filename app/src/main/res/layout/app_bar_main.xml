@@ -42,16 +42,17 @@
 
                             <ImageView
                                 android:id="@+id/openMenu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/menu_blue1" />
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerVertical="false"
+                                android:layout_gravity="left"
+                                android:src="@drawable/menu_icon" />
 
                             <TextView
                                 android:id="@+id/badger"
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
-                                android:layout_marginTop="14dp"
+                                android:layout_marginTop="5dp"
                                 android:background="@drawable/circle_bg"
                                 android:gravity="center"
                                 android:textColor="@color/white"
@@ -61,7 +62,6 @@
                                 android:id="@+id/title"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_gravity=""
                                 android:layout_toRightOf="@+id/openMenu"
                                 android:ellipsize="end"
                                 android:gravity="left|center_vertical|center_horizontal"

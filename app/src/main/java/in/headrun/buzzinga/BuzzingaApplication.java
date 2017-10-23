@@ -21,8 +21,6 @@ public class BuzzingaApplication extends Application {
 
     private static BuzzingaApplication instance = null;
 
-
-
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
 

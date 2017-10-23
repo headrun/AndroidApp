@@ -8,23 +8,30 @@
     android:layout_marginTop="1dp"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
     android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/article_img"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:elevation="6dp"
-        tools:src="@drawable/buzz_logo" />
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/article_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            tools:src="@drawable/ic_twitter" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
-        android:orientation="vertical"
-        android:paddingLeft="5dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,6 +57,21 @@
                 android:maxLines="1"
                 tools:text="@the_economist" />
 
+            <ImageView
+                android:id="@+id/sentiment_type"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@+id/source_icon"
+                tools:src="@drawable/neutral" />
+
+            <ImageView
+                android:id="@+id/source_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_toLeftOf="@+id/article_time"
+                tools:src="@drawable/ic_twitter" />
+
             <TextView
                 android:id="@+id/article_time"
                 android:layout_width="wrap_content"
@@ -61,7 +83,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
-                tools:drawableLeft="@drawable/twitter"
+                android:paddingTop="2dp"
                 tools:text="2h ago" />
 
         </RelativeLayout>
@@ -74,7 +96,7 @@
             android:autoLink="web"
             android:linksClickable="true"
             android:maxLines="4"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:textColor="#14171a"
             android:textColorLink="@color/blue"
             tools:text="Buzzinga political twiiter article" />
 

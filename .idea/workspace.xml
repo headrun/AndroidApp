@@ -7,135 +7,56 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="user" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf7e4a5-7ee6-4096-9c19-ab16162e1034" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/avatar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaGLidemodule.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.navigation/app/raw/main.nvg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.swp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AndroidApp .iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Buzzinga.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/androidapp.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/arm64-v8a/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/arm64-v8a/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/arm64-v8a/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi-v7a/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi-v7a/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi-v7a/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/armeabi/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips64/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips64/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/mips64/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/arm64-v8a/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/arm64-v8a/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/arm64-v8a/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi-v7a/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi-v7a/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi-v7a/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/armeabi/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips64/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips64/objs/keys/keys.c.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips64/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/mips64/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86_64/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86_64/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/obj/local/x86_64/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86_64/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86_64/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/debug/x86_64/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/arm64-v8a/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/arm64-v8a/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/arm64-v8a/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi-v7a/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi-v7a/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi-v7a/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/armeabi/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips64/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips64/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/mips64/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/arm64-v8a/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/arm64-v8a/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/arm64-v8a/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi-v7a/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi-v7a/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi-v7a/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/armeabi/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips64/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips64/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/mips64/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86_64/libkeys.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86_64/objs/keys/keys.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/obj/local/x86_64/objs/keys/keys.o.d" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86_64/android_gradle_build.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86_64/ndkBuild_build_command.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.externalNativeBuild/ndkBuild/release/x86_64/ndkBuild_build_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars/classes.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module_androidapp.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proguard-com.twitter.sdk.android.twitter.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/DevineniUma/res/drawable/menu_icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/assets/fonts/MuseoSans-300.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/assets/fonts/MuseoSans-500.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/assets/fonts/MuseoSans-700.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/flickr.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gplus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_blog.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_facebook.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_news.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_youtube.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/linkedin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/negative1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/neutral.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/neutral1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pintrust.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/positive1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/sad.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/smiley.jpeg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu_blue1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu_blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu_blue1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu_blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu_blue1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/menu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/menu_blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/menu_blue1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/menu_blue.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu_blue.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/menu_icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/forum.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/forum.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/instagram.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/instagram.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/quora.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/quora.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/tumblr.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tumblr.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/youtube.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/youtube.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidApp.iml" afterPath="$PROJECT_DIR$/AndroidApp.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/proguard-rules.pro" afterPath="$PROJECT_DIR$/app/proguard-rules.pro" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/neg_sentiment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/neg_sentiment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/neu_sentiment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/neu_sentiment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/daterangepicker/build.gradle" afterPath="$PROJECT_DIR$/daterangepicker/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/daterangepicker/daterangepicker.iml" afterPath="$PROJECT_DIR$/daterangepicker/daterangepicker.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialsearchview/build.gradle" afterPath="$PROJECT_DIR$/materialsearchview/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" afterPath="$PROJECT_DIR$/materialsearchview/materialsearchview.iml" />
     </list>
     <ignored path="AndroidApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -158,7 +79,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state />
+        </projects_view>
       </state>
     </system>
   </component>
@@ -167,81 +90,129 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchListDataAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SearchListDataAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="-33">
+              <caret line="337" column="65" selection-start-line="337" selection-start-column="65" selection-end-line="337" selection-end-column="65" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#SearchListDataAdapter#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#setClickListener#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#getItemViewType#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#onBindViewHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#ViewItemHolder#0;class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#onClick#0;class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#onClick#0;class#TwitterViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#ProgrssHolder#0;class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#onClick#0;class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#sourType#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#genderType#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#sentimentType#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#applySentimentColor#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#getEmoji#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#applySentimentemoji#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#sourceicon#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#setImage#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#TwitterImage#0;class#SearchListDataAdapter#0" expanded="false" />
+                <element signature="method#GoogleImage#0;class#SearchListDataAdapter#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
+      <file leaf-file-name="twitter_lay_adapter.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+            <state relative-caret-position="378">
+              <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neu_sentiment.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/neu_sentiment.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="neg_sentiment.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/neg_sentiment.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pos_sentiment.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4806">
-              <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#6534#7171#0" expanded="false" />
-                <element signature="e#7170#7171#0" expanded="false" />
-                <element signature="e#12395#12411#0" expanded="false" />
-                <element signature="e#13002#13018#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="158">
+              <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="color.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state relative-caret-position="234">
+              <caret line="84" column="42" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app_bar_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu_icon.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/menu_icon.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mail_blue.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/mail_blue.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login_logo.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/DevineniUma/res/drawable/login_logo.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -5577,18 +5548,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/search_new_lay.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/proguard-rules.pro" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/BuzzingaGLidemodule.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/neg_sentiment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/neu_sentiment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java" />
       </list>
     </option>
@@ -5624,76 +5596,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+      <pane id="Scratches">
+        <subPane />
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -5707,6 +5620,13 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/DevineniUma/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/DevineniUma/res/mipmap-hdpi" />
+      <recent name="$PROJECT_DIR$/assets/fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/assets/fonts" />
+      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -5918,7 +5838,7 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
       <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -5979,38 +5899,38 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14023905" sideWeight="0.50647247" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6569579" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41513944" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32847896" sideWeight="0.49721116" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9126214" sideWeight="0.49721116" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.90967745" sideWeight="0.50278884" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14023905" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24462152" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Fabric" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967638" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39967638" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="165" y="252" width="1101" height="544" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="165" y="224" width="1101" height="544" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -6060,249 +5980,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java</url>
-          <line>247</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java</url>
           <line>313</line>
           <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java</url>
-          <line>323</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java</url>
-          <line>322</line>
-          <properties />
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java</url>
-          <line>109</line>
-          <properties />
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java</url>
-          <line>108</line>
-          <properties />
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java</url>
-          <line>234</line>
-          <properties />
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="28" />
+      <option name="time" value="42" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/ListViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1723#1724#0" expanded="false" />
-            <element signature="e#1759#1760#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
-            <element signature="e#1947#1948#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2520">
-          <caret line="140" column="42" selection-start-line="140" selection-start-column="42" selection-end-line="140" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/config/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2934">
-          <caret line="173" column="5" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_article_lay.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_new_lay.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5832">
-          <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#6534#7171#0" expanded="false" />
-            <element signature="e#7170#7171#0" expanded="false" />
-            <element signature="e#12395#12411#0" expanded="false" />
-            <element signature="e#13002#13018#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_layout.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/ListViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1723#1724#0" expanded="false" />
-            <element signature="e#1759#1760#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
-            <element signature="e#1947#1948#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2736">
-          <caret line="152" column="14" selection-start-line="152" selection-start-column="14" selection-end-line="152" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Android/Sdk/platforms/android-25/data/res/layout/simple_list_item_2.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_article_lay.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_new_lay.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="63" column="27" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daterangepicker/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_layout.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/platforms/android-25/data/res/layout/simple_list_item_2.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -6370,11 +6058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/DevineniUma/res/drawable/login_logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/apt/DevineniUma/debug/in/headrun/buzzinga/adapters/SearchListDataAdapter$ViewItemHolder$$ViewBinder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -6390,13 +6073,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -6442,14 +6118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/doto/SearchArticles.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -6458,30 +6126,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/pos_sentiment.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6489,6 +6137,156 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/news.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/fb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/flikckr.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/gplus.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/flickr.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/linkdin.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/youtube.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/instagram.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tumblr.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/forum.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/blogs.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_twitter.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="1255" column="23" selection-start-line="1255" selection-start-column="23" selection-end-line="1255" selection-end-column="37" />
+          <folding>
+            <element signature="docComment;class#Utils#0" expanded="false" />
+            <element signature="method#Utils#0;class#Utils#0" expanded="false" />
+            <element signature="method#timezone#0;class#Utils#0" expanded="false" />
+            <element signature="method#getquerydata#0;class#Utils#0" expanded="false" />
+            <element signature="method#formquery#0;class#Utils#0" expanded="false" />
+            <element signature="method#check_query_value#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_searchkey#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_trackkey#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_sources#0;class#Utils#0" expanded="false" />
+            <element signature="method#get_source_xtag#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_loc_source#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_gender#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_sentiment#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_fromdate#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_todate#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_language#0;class#Utils#0" expanded="false" />
+            <element signature="method#query_location#0;class#Utils#0" expanded="false" />
+            <element signature="method#queryform#0;class#Utils#0" expanded="false" />
+            <element signature="method#count_query#0;class#Utils#0" expanded="false" />
+            <element signature="method#setupdate#0;class#Utils#0" expanded="false" />
+            <element signature="method#Buzz_notification#0;class#Utils#0" expanded="false" />
+            <element signature="method#timestamp#0;class#Utils#0" expanded="false" />
+            <element signature="method#Date_added_toquery#0;class#Utils#0" expanded="false" />
+            <element signature="method#clear_all_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#add_filtering_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#stringtoArray#0;class#Utils#0" expanded="false" />
+            <element signature="method#countIS#0;class#Utils#0" expanded="false" />
+            <element signature="method#add_query_data#0;class#Utils#0" expanded="false" />
+            <element signature="method#screendisplay#0;class#Utils#0" expanded="false" />
+            <element signature="method#searchQuery#0;class#Utils#0" expanded="false" />
+            <element signature="method#refreshSearchQuery#0;class#Utils#0" expanded="false" />
+            <element signature="method#scrollQuery#0;class#Utils#0" expanded="false" />
+            <element signature="method#clearSessionData#0;class#Utils#0" expanded="false" />
+            <element signature="class#setOnItemClickListner#0;class#Utils#0" expanded="false" />
+            <element signature="class#setOnItemDateSelClickListner#0;class#Utils#0" expanded="false" />
+            <element signature="method#showLog#0;class#Utils#0" expanded="false" />
+            <element signature="method#isNetwrokConnection#0;class#Utils#0" expanded="false" />
+            <element signature="method#warning_info#0;class#Utils#0" expanded="false" />
+            <element signature="method#updateListviewItem#0;class#Utils#0" expanded="false" />
+            <element signature="method#callService#0;class#Utils#0" expanded="false" />
+            <element signature="method#stopService#0;class#Utils#0" expanded="false" />
+            <element signature="method#getNotify_IntervellMills#0;class#Utils#0" expanded="false" />
+            <element signature="method#serverCallnotificationCount#0;class#Utils#0" expanded="false" />
+            <element signature="class#37481:40678" expanded="false" />
+            <element signature="method#getParams#0;class#37481:40678" expanded="false" />
+            <element signature="method#getHeaders#0;class#37481:40678" expanded="false" />
+            <element signature="method#setTitle#0;class#Utils#0" expanded="false" />
+            <element signature="method#count_filter_sel#0;class#Utils#0" expanded="false" />
+            <element signature="method#count_sel_notifyme#0;class#Utils#0" expanded="false" />
+            <element signature="method#source_xtags#0;class#Utils#0" expanded="false" />
+            <element signature="method#sentiment_xtags#0;class#Utils#0" expanded="false" />
+            <element signature="method#genter_xtags#0;class#Utils#0" expanded="false" />
+            <element signature="method#hideKeyboard#0;class#Utils#0" expanded="false" />
+            <element signature="method#callToMobile#0;class#Utils#0" expanded="false" />
+            <element signature="method#composeEmail#0;class#Utils#0" expanded="false" />
+            <element signature="method#getdate#0;class#Utils#0" expanded="false" />
+            <element signature="method#call_homeFragment#0;class#Utils#0" expanded="false" />
+            <element signature="method#dispalyDateFormate#0;class#Utils#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/ArticleWebDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="84" column="42" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -6501,55 +6299,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/utils/Utils.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu_blue.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/mail_blue.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu_blue.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu_blue1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/DevineniUma/res/drawable/login_logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="234">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/menu_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/uma_menu_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/twitter_lay_adapter.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33">
+          <caret line="337" column="65" selection-start-line="337" selection-start-column="65" selection-end-line="337" selection-end-column="65" />
+          <folding>
+            <element signature="docComment;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#SearchListDataAdapter#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#setClickListener#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#getItemViewType#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#onBindViewHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#ViewItemHolder#0;class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#onClick#0;class#ViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#onClick#0;class#TwitterViewItemHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#ProgrssHolder#0;class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#onClick#0;class#ProgrssHolder#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#sourType#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#genderType#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#sentimentType#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#applySentimentColor#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#getEmoji#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#applySentimentemoji#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#sourceicon#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#setImage#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#TwitterImage#0;class#SearchListDataAdapter#0" expanded="false" />
+            <element signature="method#GoogleImage#0;class#SearchListDataAdapter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/activities/HomeScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4806">
-          <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#6534#7171#0" expanded="false" />
-            <element signature="e#7170#7171#0" expanded="false" />
-            <element signature="e#12395#12411#0" expanded="false" />
-            <element signature="e#13002#13018#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/flikckr.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/news.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/blogs.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/forum.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/in/headrun/buzzinga/adapters/SearchListDataAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="158">
+          <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

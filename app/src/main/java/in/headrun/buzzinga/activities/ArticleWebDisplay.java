@@ -188,11 +188,11 @@ public class ArticleWebDisplay extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class).
+        /*startActivity(new Intent(this, MainActivity.class).
                 putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING).
                 setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                        Intent.FLAG_ACTIVITY_NEW_TASK));
+                        Intent.FLAG_ACTIVITY_NEW_TASK));*/
         overridePendingTransition(R.anim.move_right_out_activity, R.anim.move_left_in_activity);
     }
 }

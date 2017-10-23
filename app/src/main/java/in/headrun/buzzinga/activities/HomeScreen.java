@@ -311,7 +311,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                         @Override
                         public void onResponse(String response) {
 
-                            utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
+                            //utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
 
                             article_loading(response, type_req);
 
@@ -320,7 +320,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                                 swipeRefreshLayout.setRefreshing(false);
                             } else
                                 progressbar.setVisibility(View.GONE);
-
                         }
 
                     }, new Response.ErrorListener() {

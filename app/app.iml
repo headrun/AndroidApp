@@ -63,13 +63,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/assets" type="java-test-resource" />
@@ -77,6 +70,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />

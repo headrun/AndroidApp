@@ -10,6 +10,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -1234,7 +1235,7 @@ public class Utils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMM,yy ");
         Date date;
-        String dsp_date="";
+        String dsp_date = "";
         if (!sel_date.isEmpty()) {
             try {
                 date = sdf.parse(sel_date);
@@ -1245,10 +1246,16 @@ public class Utils {
 
             }
 
-        }else{
+        } else {
             dsp_date = sdf1.format(cal.getTime());
         }
         return dsp_date;
+    }
+
+
+    public static void changeFontFace(TextView txtview, String type, Context context) {
+
+        txtview.setTypeface(Typeface.createFromAsset(context.getAssets(), type));
     }
 }
 
