@@ -34,6 +34,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -160,7 +162,7 @@ public class Utils {
     public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
 
         setupdate(fromdate, todate);
-        String search_key = "(\"" + trackkey + "\"" +
+        String search_key = "(" + trackkey + "" +
                 (!check_query_value(searckkey).isEmpty() ?
                         " AND \"" + check_query_value(searckkey) + "\"" : "") + ")";
 
@@ -206,21 +208,20 @@ public class Utils {
 
     public String query_trackkey(List<String> item) {
         queryvalue.setLength(0);
-        if (item.size() > 1) {
+        if (item.size() > 0) {
             if (item.get(0) != null) {
                 String pref = "";
                 for (String tkey : item) {
                     queryvalue.append(pref);
-                    pref = " AND ";
-                    queryvalue.append(tkey.trim());
+                    pref = " OR ";
+                    queryvalue.append("\"" + tkey.trim() + "\"");
                 }
                 return queryvalue.toString();
             }
-        } else if (!userSession.getTrackKey().equals("0")) {
-            return userSession.getTrackKey();
+        } else if (!userSession.getTrackKey().isEmpty()) {
+            return "\"" + userSession.getTrackKey() + "\"";
         }
         return "";
-
     }
 
     public String query_sources(List<String> item) {
@@ -726,9 +727,9 @@ public class Utils {
         Collections.addAll(Constants.BSENTIMENT, stringtoArray(userSession.getSentiment_data()));
         Collections.addAll(Constants.BLANGUAGE, stringtoArray(userSession.getLang_data()));
         Collections.addAll(Constants.BLOCATION, stringtoArray(userSession.getLoc_data()));
+        Collections.addAll(Constants.BTRACKKEY, stringtoArray(userSession.getTrackKey()));
         Constants.BFROMDATE.add(userSession.getFROM_DATE());
         Constants.BTODATE.add(userSession.getTO_DATE());
-        Constants.BTRACKKEY.add(userSession.getTrackKey());
         Constants.BSEARCHKEY.add(userSession.gettTACK_SEARCH_KEY());
 
     }
@@ -1034,10 +1035,15 @@ public class Utils {
 
     public String setTitle() {
 
-        StringBuilder title = new StringBuilder();
-        title.append(userSession.getTrackKey());
-        title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
-        return title.toString();
+        if (context.getResources().getStringArray(R.array.track_keywords).length > 0) {
+            return context.getString(R.string.app_name);
+        } else {
+            StringBuilder title = new StringBuilder();
+            title.append(userSession.getTrackKey());
+            title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
+            return title.toString();
+        }
+
     }
 
     public int count_filter_sel() {
@@ -1257,6 +1263,19 @@ public class Utils {
 
         txtview.setTypeface(Typeface.createFromAsset(context.getAssets(), type));
     }
+
+
+    /*public void TwiiterInit(Context context) {
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig
+                (context.getString(R.string.twitter_consumer_key),
+                        context.getString(R.string.twitter_consumer_secret));
+
+
+        Twitter.initialize((context.getString(R.string.twitter_consumer_key),
+                context.getString(R.string.twitter_consumer_secret)));
+
+    }*/
 }
 
 

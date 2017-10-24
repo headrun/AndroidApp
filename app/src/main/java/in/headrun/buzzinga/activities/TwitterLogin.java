@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 
 import java.util.HashMap;
@@ -57,6 +58,7 @@ public class TwitterLogin extends Activity {
     UserSession mUserSession;
     String cookie;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,7 @@ public class TwitterLogin extends Activity {
         //webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

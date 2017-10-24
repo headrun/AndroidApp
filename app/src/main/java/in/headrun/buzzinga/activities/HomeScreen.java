@@ -354,8 +354,8 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     if (swipeRefreshLayout.isRefreshing()) {
                         Swipe_loading = true;
                         swipeRefreshLayout.setRefreshing(false);
-                    } else
-                        progressbar.setVisibility(View.GONE);
+                    }
+                    progressbar.setVisibility(View.GONE);
                     removeScrollProgess();
 
                 }
@@ -460,7 +460,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         try {
 
             jobj = new JSONObject(data);
-            utils.showLog(TAG, "jobj is " + jobj.toString(), Config.HOME_SCREEN);
+            //utils.showLog(TAG, "jobj is " + jobj.toString(), Config.HOME_SCREEN);
 
             if (jobj.getString("error").equals("0")) {
 
@@ -470,7 +470,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                 Constants.scroolid = jobj_result.optString("_scroll_id");
 
                 if (jobj_hits.length() > 0) {
-                    utils.showLog(TAG, "jobj_hits is " + jobj_hits.toString(), Config.HOME_SCREEN);
+                    // utils.showLog(TAG, "jobj_hits is " + jobj_hits.toString(), Config.HOME_SCREEN);
 
                     if (swipeRefreshLayout.isRefreshing() == true) {
                         searchArticleSwipe = new ArrayList<SearchArticles>();

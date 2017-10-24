@@ -111,12 +111,10 @@ public class Constants {
     public static List<String> BTODATE = new ArrayList<>();
     public static List<QueryData> QueryString = new ArrayList<QueryData>();
 
-
     public static List<Listitems> filterList;
 
     public static int NO_RECORD = 1;
     public static int NO_WIFI = 2;
-
 
     public static List<String> sel_loc_list = new ArrayList<>();
     public static List<String> sel_lang_list = new ArrayList<>();

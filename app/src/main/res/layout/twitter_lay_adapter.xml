@@ -14,6 +14,14 @@
     android:paddingTop="8dp"
     android:weightSum="1">
 
+    <LinearLayout
+        android:id="@+id/tweet_embedded"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

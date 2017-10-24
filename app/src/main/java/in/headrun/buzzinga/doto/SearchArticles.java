@@ -50,6 +50,21 @@ public class SearchArticles {
         public UserData user_data;
         @SerializedName("actor")
         public GoogleUserData google_user;
+        @SerializedName("id_str")
+        public String id_str;
+        @SerializedName("entities")
+        public Entite entities;
+    }
+
+    public class Entite {
+
+        public List<Urls> entite_urls;
+    }
+
+    public class Urls {
+        @SerializedName("expanded_url")
+        public String expanded_url;
+
     }
 
     public class GoogleUserData {

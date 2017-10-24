@@ -2,8 +2,7 @@
     <string name="app_name">Buzzinga</string>
 
     <string name="subtitle">Quantify the Social</string>
-
-
+    <string-array name="track_keywords" translatable="false"></string-array>
     <string name="title_section1">Search</string>
     <string name="title_section2">Facebook</string>
     <string name="title_section3">Google +</string>

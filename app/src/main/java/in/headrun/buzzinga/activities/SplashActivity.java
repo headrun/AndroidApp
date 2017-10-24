@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
@@ -60,7 +63,10 @@ public class SplashActivity extends Activity {
 
         utils = new Utils(SplashActivity.this);
         userSession = new UserSession(SplashActivity.this);
-        userSession.setTrackKey("Devineni Uma");
+
+        Constants.BTRACKKEY.addAll(Arrays.asList(getResources().getStringArray(R.array.track_keywords)));
+
+        userSession.setTrackKey(Constants.BTRACKKEY.toString());
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
 
@@ -114,7 +120,6 @@ public class SplashActivity extends Activity {
                 utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
                 utils.add_query_data();
 
-
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
@@ -132,7 +137,7 @@ public class SplashActivity extends Activity {
         if (loged.length() > 0) {
 
             String track_key = userSession.getTrackKey() == null ? "" : userSession.getTrackKey().trim();
-
+            track_key.replaceAll("\\[|\\]", "");
             if (track_key.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
             } else {
