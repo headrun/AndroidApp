@@ -42,13 +42,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUmaDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUmaDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUmaDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/DevineniUma/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/DevineniUma/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/assets" type="java-test-resource" />
@@ -56,6 +49,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUmaDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/DevineniUma/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/DevineniUma/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/DevineniUma/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/assets" type="java-resource" />
@@ -63,13 +63,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DevineniUma/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/assets" type="java-test-resource" />
@@ -77,6 +70,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDevineniUma/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDevineniUma/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -98,13 +98,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
@@ -112,6 +105,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
@@ -178,13 +178,5 @@
     <orderEntry type="library" exported="" name="twitter-text-1.14.3" level="project" />
     <orderEntry type="module" module-name="daterangepicker" exported="" />
     <orderEntry type="module" module-name="materialsearchview" exported="" />
-    <orderEntry type="library" exported="" name="support-v4-23.1.0" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-23.1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
   </component>
 </module>
