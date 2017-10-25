@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
 
@@ -96,7 +97,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
     LinearLayoutManager mLinearLayout;
     boolean scroll_loading = true;
     public static boolean Swipe_loading = true;
-    ArrayList<SearchArticles> searchArticleSwipe;
+    LinkedList<SearchArticles> searchArticleSwipe;
 
     // public static Parcelable state;
 
@@ -313,6 +314,9 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
                             //utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
 
+
+
+
                             article_loading(response, type_req);
 
                             if (swipeRefreshLayout.isRefreshing() == true) {
@@ -339,7 +343,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                                 setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-
 
                                     }
                                 }).show();
@@ -473,7 +476,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     // utils.showLog(TAG, "jobj_hits is " + jobj_hits.toString(), Config.HOME_SCREEN);
 
                     if (swipeRefreshLayout.isRefreshing() == true) {
-                        searchArticleSwipe = new ArrayList<SearchArticles>();
+                        searchArticleSwipe = new LinkedList<>();
                         addArticletoList(searchArticleSwipe, jobj_hits.toString());
                         Constants.SEARCHARTICLES.addAll(searchArticleSwipe);
                     } else {
@@ -501,10 +504,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     }
 
-    public void addArticletoList(ArrayList<SearchArticles> list, String response) {
+    public void addArticletoList(LinkedList<SearchArticles> list, String response) {
 
-        list.addAll((ArrayList<SearchArticles>) new Gson().fromJson(response,
-                new TypeToken<ArrayList<SearchArticles>>() {
+        list.addAll((LinkedList<SearchArticles>) new Gson().fromJson(response,
+                new TypeToken<LinkedList<SearchArticles>>() {
                 }.getType()));
 
     }

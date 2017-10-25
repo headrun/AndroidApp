@@ -3,9 +3,11 @@ package in.headrun.buzzinga.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -15,32 +17,40 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ConsoleMessage;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.StatusesService;
 import com.twitter.sdk.android.tweetui.CompactTweetView;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
 
-import java.net.URL;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -49,10 +59,12 @@ import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.core.BuzzingaNetowrkServices;
+import in.headrun.buzzinga.core.ResponseListener;
 import in.headrun.buzzinga.doto.SearchArticles;
 import in.headrun.buzzinga.utils.TimeAgo;
 import in.headrun.buzzinga.utils.Utils;
-import retrofit2.Call;
+
 
 /**
  * Created by headrun on 10/7/15.
@@ -62,7 +74,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     String TAG = SearchListDataAdapter.this.getClass().getSimpleName();
     Context context;
-    List<SearchArticles> listdata = new ArrayList<>();
+    LinkedList<SearchArticles> listdata = new LinkedList<>();
     LayoutInflater inflater;
     ViewItemHolder item_holder = null;
     Utils utils;
@@ -76,7 +88,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private Utils.setOnItemClickListner onitemclicklistner = null;
 
-    public SearchListDataAdapter(Context context, List<SearchArticles> listdata) {
+    public SearchListDataAdapter(Context context, LinkedList<SearchArticles> listdata) {
 
         Log.i(TAG, "search data adapter is" + listdata.size());
 
@@ -126,7 +138,12 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .inflate(R.layout.twitterembedded, parent, false);
             vh = new TwetterEmbedded(v);
 
-        } else if (viewType == VIEW_GOOGLE || viewType == VIEW_FACEBOOK || viewType == VIEW_ITEM) {
+        } else if (viewType == VIEW_FACEBOOK) {
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.webview_facebook, parent, false);
+            vh = new FacebookEmbedded(v);
+
+        } else if (viewType == VIEW_ITEM || viewType == VIEW_GOOGLE) {
 
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.twitter_lay_adapter, parent, false);
@@ -300,9 +317,20 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (item.source != null && item.source.original_data != null) {
                 List<SearchArticles.Urls> urls = item.source.original_data.entities.entite_urls;
                 String tweet_id = item.source.original_data.id_str;
+
+
                 showTwitterView(context, tweet_id, twitter_holder.tweet_view);
+
+
             }
 
+        } else if (holder instanceof FacebookEmbedded) {
+            final FacebookEmbedded fb_holder = ((FacebookEmbedded) holder);
+
+            if (source == Constants.FACEBOOK)
+                setfbdata(fb_holder.webview, item.source.URL);
+            else if (source == Constants.GOOGLEPLUS)
+                setGplusData(fb_holder.webview, item.source.URL);
         } else {
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
@@ -389,9 +417,9 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public class TwetterEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.tweet_view)
-        LinearLayout tweet_view;
-        @Bind(R.id.tweet_lay)
-        FrameLayout tweet_lay;
+        RelativeLayout tweet_view;
+        /*@Bind(R.id.tweet_lay)
+        RelativeLayout tweet_lay;*/
 
         public TwetterEmbedded(View itemView) {
             super(itemView);
@@ -405,6 +433,23 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (onitemclicklistner != null) {
                 onitemclicklistner.itemClicked(v, getAdapterPosition());
             }
+        }
+    }
+
+    public class FacebookEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @Bind(R.id.webview)
+        public WebView webview;
+
+        public FacebookEmbedded(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
@@ -613,9 +658,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return img;
     }
 
-
     private void showTwitterView(final Context context, String tweetId,
-                                 final LinearLayout tweet_embedded) {
+                                 final RelativeLayout tweet_embedded) {
         // Twitter.getInstance();
 
         TweetUtils.loadTweet(Long.parseLong(tweetId), new Callback<Tweet>() {
@@ -623,7 +667,14 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             public void success(Result<Tweet> result) {
                 // tweet_embedded.setTweet(result.data);
 
-                tweet_embedded.addView(new CompactTweetView(context, result.data));
+                CompactTweetView compact_vew = new CompactTweetView(context, result.data,
+                        R.style.tw__TweetLightStyle);
+
+                /*RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                compact_vew.setLayoutParams(params);*/
+
+                tweet_embedded.addView(compact_vew);
             }
 
             @Override
@@ -633,31 +684,139 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         });
     }
 
-    /*TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-    StatusesService statusesService = twitterApiClient.getStatusesService();
-    Call<Tweet> call = statusesService.show(Long.parseLong(tweetId), null, null, null);
-    call.enqueue(new Callback<Tweet>() {
+    public void setfbdata(WebView webview, String url) {
+
+        String html = "<!doctype html> <html> <head></head> <body> " +
+                "<div id=\"fb-root\"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script> " +
+                "<div class=\"fb-post\" data-href=\"" + url + "\" " +
+                ">" +
+                "</div> </body> </html>";
+
+        setwebdata(webview, url, html);
+    }
+
+    public void setGplusData(WebView webview, String url) {
+
+        new GetLinkData(webview, context, url);
+        /*        String html = "<!doctype html> <html> <head></head> <body> " +
+                "<script src=\"https://apis.google.com/js/platform.js\" async defer/> " +
+                "<div class=\"g-post\" data-href=\"" + url + "\"> " +
+                "</div> </body> </html>";
+
+        String g_html = "<html>\n" +
+                "  <head>\n" +
+                "    <script src=\"https://apis.google.com/js/platform.js\" async defer>\n" +
+                "    </script>\n" +
+                "    <script>\n" +
+                "      {\"parsetags\": \"explicit\"}\n" +
+                "      gapi.post.render(\"widget-div\", {\"href\" :" + url + "});\n" +
+                "    </script>\n" +
+                "  </head>\n" +
+                "  <body>\n" +
+                "    <div id=\"widget-div\"></div>\n" +
+                "  </body>\n" +
+                "</html>";
+
+        setwebdata(webview, url, g_html);*/
+    }
+
+    public void setwebdata(WebView webview, String url, String html) {
+        webview.getSettings().setLoadsImagesAutomatically(true);
+        webview.getSettings().setJavaScriptEnabled(true);
+        // webview.loadData(url, "text/html", "UTF-8");
+
+        webview.setWebViewClient(new UriWebViewClient());
+        webview.setWebChromeClient(new UriChromeClient());
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setAppCacheEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setSupportMultipleWindows(true);
+        webview.getSettings().setSupportZoom(false);
+        webview.getSettings().setBuiltInZoomControls(false);
+        CookieManager.getInstance().setAcceptCookie(true);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            webview.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webview, true);
+        }
+
+
+        webview.loadDataWithBaseURL(url, html, "text/html", "UTF-8", null);
+
+    }
+
+    class UriChromeClient extends WebChromeClient {
+
         @Override
-        public void success(Result<Tweet> result) {
-            tweet_embedded.setTweet(result.data);
-            *//*CompactTweetView compact_vew = new CompactTweetView(context, result.data);
+        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+            WebView mWebviewPop = new WebView(context);
+            mWebviewPop.setVerticalScrollBarEnabled(false);
+            mWebviewPop.setHorizontalScrollBarEnabled(false);
+            mWebviewPop.setWebViewClient(new UriWebViewClient());
+            mWebviewPop.setWebChromeClient(this);
+            mWebviewPop.getSettings().setJavaScriptEnabled(true);
+            mWebviewPop.getSettings().setDomStorageEnabled(true);
+            mWebviewPop.getSettings().setSupportZoom(false);
+            mWebviewPop.getSettings().setBuiltInZoomControls(false);
+            mWebviewPop.getSettings().setSupportMultipleWindows(true);
+            mWebviewPop.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+            //  mContainer.addView(mWebviewPop);
+            WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+            transport.setWebView(mWebviewPop);
+            resultMsg.sendToTarget();
 
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                compact_vew.setLayoutParams(params);
-                tweet_embedded.addView(compact_vew);*//*
-            }
+            return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+        }
 
-            public void failure(TwitterException exception) {
-                exception.printStackTrace();
-            }
-        });
+        @Override
+        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+            return super.onConsoleMessage(consoleMessage);
+        }
+
+        @Override
+        public void onCloseWindow(WebView window) {
+            super.onCloseWindow(window);
+        }
     }
-*/
-    public void shoWebLinkData() {
 
+    private class UriWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
+            String host = Uri.parse(url).getHost();
+
+            return !host.equals("m.facebook.com");
+
+        }
     }
 
+    class GetLinkData implements ResponseListener<String> {
+
+        View articl_view;
+
+        GetLinkData(View articl_view, Context mContext, String url) {
+            this.articl_view = articl_view;
+            new BuzzingaNetowrkServices().getwebLinkData(mContext, url, this);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+
+        @Override
+        public void onResponse(String response) {
+
+            Document doc = Jsoup.parse(response);
+            doc.title();
+            //get link meta data
+            Elements meta_elements = doc.select("meta");
+            String desc = doc.select("meta[name=description]").get(0).attr("content");
+
+        }
+    }
 }
 

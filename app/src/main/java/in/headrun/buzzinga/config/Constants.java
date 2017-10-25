@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class Constants {
     public static String rss_specific_xtags = "";
     public static String googleplus_specific_xtags = "";
 
-    public static ArrayList<SearchArticles> SEARCHARTICLES = new ArrayList<SearchArticles>();
+    public static LinkedList<SearchArticles> SEARCHARTICLES = new LinkedList<>();
 
     public static List<Listitems> FILTERSOURSOURE = new ArrayList<Listitems>();
     public static List<Listitems> FILTERSENTIMENT = new ArrayList<Listitems>();
