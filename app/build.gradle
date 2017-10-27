@@ -24,7 +24,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "in.headrun.buzzinga"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "0.9"
@@ -108,5 +108,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.2.0'
     compile 'org.jsoup:jsoup:1.10.3'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+
+    compile 'me.kaelaela:OpenGraphView:1.2.0@aar'
 }
 apply plugin: 'com.google.gms.google-services'

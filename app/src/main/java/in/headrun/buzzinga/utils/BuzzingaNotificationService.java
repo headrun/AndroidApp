@@ -14,7 +14,7 @@ public class BuzzingaNotificationService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        new Utils(BuzzingaNotificationService.this).serverCallnotificationCount();
+        Utils.serverCallnotificationCount(this);
         return false;
     }
 

@@ -2,7 +2,6 @@ package in.headrun.buzzinga.adapters;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
+
 import in.headrun.buzzinga.activities.Filtering;
-import in.headrun.buzzinga.config.Config;
-import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.utils.Utils;
 
 /**
@@ -30,7 +29,7 @@ public class FilterTitleAdapter extends BaseAdapter {
     public String[] titles;
     public TypedArray images;
     LayoutInflater inflater;
-    Utils utils;
+    
     TitleHolder holder = null;
 
 
@@ -39,7 +38,7 @@ public class FilterTitleAdapter extends BaseAdapter {
         this.context = context;
         this.titles = titles;
         this.images = images;
-        utils = new Utils(context);
+        
     }
 
     @Override
@@ -70,7 +69,7 @@ public class FilterTitleAdapter extends BaseAdapter {
         }
 
         holder.title.setText(titles[position]);
-        ///utils.showLog(TAG, "sel " + titles[position] + " item count is " + selCount(titles[position]), Config.FilterTitleAdapter);
+        ///Utils.showLog(TAG, "sel " + titles[position] + " item count is " + selCount(titles[position]), Config.FilterTitleAdapter);
         String count_is = selCount(titles[position]);
         if (!count_is.isEmpty()) {
             holder.sel_count.setVisibility(View.VISIBLE);
@@ -103,27 +102,27 @@ public class FilterTitleAdapter extends BaseAdapter {
                 case "sources":
                     count = sel_count(Filtering.sel_source_list);
                     if (count <= 0 && Filtering.first_source == 0)
-                        count = utils.countIS(utils.userSession.getSources_data());
+                        count = Utils.countIS(BuzzingaApplication.getUserSession().getSources_data());
                     break;
                 case "sentiment":
                     count = sel_count(Filtering.sel_sentiment_list);
                     if (count <= 0 && Filtering.first_sentiment == 0)
-                        count = utils.countIS(utils.userSession.getSentiment_data());
+                        count = Utils.countIS(BuzzingaApplication.getUserSession().getSentiment_data());
                     break;
                 case "gender":
                     count = sel_count(Filtering.sel_gender_list);
                     if (count <= 0 && Filtering.first_gender == 0)
-                        count = utils.countIS(utils.userSession.getGender_data());
+                        count = Utils.countIS(BuzzingaApplication.getUserSession().getGender_data());
                     break;
                 case "location":
                     count = sel_count(Filtering.sel_loc_list);
                     if (count <= 0 && Filtering.first_loc == 0)
-                        count = utils.countIS(utils.userSession.getLoc_data());
+                        count = Utils.countIS(BuzzingaApplication.getUserSession().getLoc_data());
                     break;
                 case "language":
                     count = sel_count(Filtering.sel_lang_list);
                     if (count <= 0 && Filtering.first_lang == 0)
-                        count = utils.countIS(utils.userSession.getLang_data());
+                        count = Utils.countIS(BuzzingaApplication.getUserSession().getLang_data());
                     break;
 
             }

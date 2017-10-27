@@ -26,6 +26,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Constants;
@@ -54,8 +55,7 @@ public class TwitterLogin extends Activity {
 
     private Button btnuserdetails;
     public String stoken, token, userid, username;
-    Utils utils;
-    UserSession mUserSession;
+
     String cookie;
 
 
@@ -65,8 +65,7 @@ public class TwitterLogin extends Activity {
         setContentView(R.layout.twitterlogin);
 
         ButterKnife.bind(this);
-        utils = new Utils(this);
-        mUserSession = new UserSession(this);
+
         twitter_btn.setVisibility(View.VISIBLE);
         twitter_auth_lay.setVisibility(View.GONE);
         btnuserdetails = (Button) findViewById(R.id.btnuserdetails);
@@ -86,7 +85,7 @@ public class TwitterLogin extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (utils.isNetwrokConnection()) {
+                if (Utils.isNetwrokConnection(TwitterLogin.this)) {
                     twitter_btn.setVisibility(View.GONE);
                     twitter_auth_lay.setVisibility(View.VISIBLE);
 
@@ -139,11 +138,11 @@ public class TwitterLogin extends Activity {
                         }
                     }
 
-                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0) {
-                        utils.callService();
+                    if (BuzzingaApplication.getUserSession().getTSESSION().length() > 0) {
+                        Utils.callService(TwitterLogin.this);
                         //startActivity(new Intent(TwitterLogin.this, MainActivity.class));
-                        Constants.BTRACKKEY.add(mUserSession.getTrackKey());
-                        utils.add_query_data();
+                        Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
+                        Utils.add_query_data();
                         startActivity(new Intent(getApplication(), MainActivity.class).
                                 putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 

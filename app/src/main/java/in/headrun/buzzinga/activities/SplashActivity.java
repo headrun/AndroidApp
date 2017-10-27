@@ -18,6 +18,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
@@ -44,8 +45,8 @@ public class SplashActivity extends Activity {
     @Bind(R.id.version_name)
     TextView version_name;
 
-    UserSession userSession;
-    Utils utils;
+
+
     Boolean action_type = false;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -61,12 +62,12 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.splashscren);
         ButterKnife.bind(this);
 
-        utils = new Utils(SplashActivity.this);
-        userSession = new UserSession(SplashActivity.this);
+
+
 
         Constants.BTRACKKEY.addAll(Arrays.asList(getResources().getStringArray(R.array.track_keywords)));
 
-        userSession.setTrackKey(Constants.BTRACKKEY.toString());
+        BuzzingaApplication.getUserSession().setTrackKey(Constants.BTRACKKEY.toString());
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
 
@@ -79,8 +80,8 @@ public class SplashActivity extends Activity {
 
         Bundle params = new Bundle();
         params.putString("Buzzinga", "opened");
-        utils.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, params);
-        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        BuzzingaApplication.getmFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.APP_OPEN, params);
+        BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -112,13 +113,13 @@ public class SplashActivity extends Activity {
             String search_data = data.substring(data.lastIndexOf("/") + 1).trim();
             String all_data = data.toString();
 
-            utils.showLog(TAG, "search data is" + all_data + "app indexing uri is" + search_data, Config.SPLASH);
+            Utils.showLog(TAG, "search data is" + all_data + "app indexing uri is" + search_data, Config.SPLASH);
 
             if (loged.length() > 0
                     && search_data != null && !search_data.isEmpty()) {
-                utils.userSession.setTrackKey(search_data);
-                utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
-                utils.add_query_data();
+                BuzzingaApplication.getUserSession().setTrackKey(search_data);
+                BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().TACK_SEARCH_KEY);
+                Utils.add_query_data();
 
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
@@ -136,13 +137,13 @@ public class SplashActivity extends Activity {
         Log.i("Log_tag", "loged session is" + loged);
         if (loged.length() > 0) {
 
-            String track_key = userSession.getTrackKey() == null ? "" : userSession.getTrackKey().trim();
+            String track_key = BuzzingaApplication.getUserSession().getTrackKey() == null ? "" : BuzzingaApplication.getUserSession().getTrackKey().trim();
             track_key.replaceAll("\\[|\\]", "");
             if (track_key.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
             } else {
-                Constants.BTRACKKEY.add(userSession.getTrackKey());
-                utils.add_query_data();
+                Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
+                Utils.add_query_data();
 
                 startActivity(new Intent(getApplication(), MainActivity.class).
                         putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));

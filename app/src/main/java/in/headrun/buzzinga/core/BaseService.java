@@ -32,9 +32,6 @@ public class BaseService {
         executeRequest(context, Request.Method.PUT, url, headers, params, typeToken, listener);
     }
 
-    protected void updateFlaunt(Context context, String url, Map<String, String> headers, Map<String, String> params, TypeToken typeToken, ResponseListener listener) {
-        executeRequest(context, Request.Method.DELETE, url, headers, params, typeToken, listener);
-    }
 
     protected void executeDeleteRequest(Context context, String url, Map<String, String> headers, Map<String, String> params, TypeToken typeToken, ResponseListener listener) {
         executeRequest(context, Request.Method.DELETE, url, headers, params, typeToken, listener);

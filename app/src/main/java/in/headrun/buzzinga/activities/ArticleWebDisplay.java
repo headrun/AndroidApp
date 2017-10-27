@@ -24,6 +24,7 @@ import java.net.URL;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchArticles;
@@ -44,7 +45,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
     String url = "", title = "";
     int pos;
     SearchArticles article_details;
-    Utils utils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         pos = data.getInt("pos");
-        utils = new Utils(this);
+
         if (Constants.SEARCHARTICLES.size() >= pos)
             article_details = Constants.SEARCHARTICLES.get(pos);
 
@@ -107,8 +108,8 @@ public class ArticleWebDisplay extends AppCompatActivity {
 */
         Bundle params = new Bundle();
         params.putString("open_link", url);
-        utils.mFirebaseAnalytics.logEvent("article_open", params);
-        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        BuzzingaApplication.getmFirebaseAnalytics().logEvent("article_open", params);
+        BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
     }
 
     private void webSettings(String url) {

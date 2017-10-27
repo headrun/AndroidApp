@@ -18,7 +18,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
+import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.utils.Utils;
 
@@ -37,7 +39,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     @Bind(R.id.track_progress)
     ProgressBar trak_progress;
 
-    Utils utils;
 
 
     @Override
@@ -45,14 +46,14 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackkeyword);
         ButterKnife.bind(this);
-        utils = new Utils(this);
 
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
-        if (utils.userSession.getTrackKey().length() > 0) {
-            Trackkeyword.setText(utils.userSession.getTrackKey());
-            Trackkeyword.setSelection(utils.userSession.getTrackKey().length());
+
+        if (BuzzingaApplication.getUserSession().getTrackKey().length() > 0) {
+            Trackkeyword.setText(BuzzingaApplication.getUserSession().getTrackKey());
+            Trackkeyword.setSelection(BuzzingaApplication.getUserSession().getTrackKey().length());
         }
 
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -74,7 +75,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.trackbtn:
 
-                utils.hideKeyboard(this.getCurrentFocus());
+                Utils.hideKeyboard(this.getCurrentFocus(),this);
                 trackkeyword();
                 break;
         }
@@ -83,7 +84,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     public void trackkeyword() {
 
 
-        if (utils.isNetwrokConnection()) {
+        if (Utils.isNetwrokConnection(this)) {
 
             String track = Trackkeyword.getText().toString().trim();
 
@@ -91,14 +92,14 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
                 // trak_progress.setVisibility(View.VISIBLE);
 
-                utils.userSession.setTrackKey(track);
-                utils.userSession.clearsession(utils.userSession.TACK_SEARCH_KEY);
-                utils.add_query_data();
+                BuzzingaApplication.getUserSession().setTrackKey(track);
+                BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().TACK_SEARCH_KEY);
+                Utils.add_query_data();
 
                 Bundle params = new Bundle();
                 params.putString(FirebaseAnalytics.Param.ITEM_NAME, track);
-                utils.mFirebaseAnalytics.logEvent("Track", params);
-                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                BuzzingaApplication.getmFirebaseAnalytics().logEvent("Track", params);
+                BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                 startActivity(new Intent(getApplication(), MainActivity.class)
                         .putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
@@ -117,7 +118,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.add_query_data();
+        Utils.add_query_data();
     }
 
     @Override

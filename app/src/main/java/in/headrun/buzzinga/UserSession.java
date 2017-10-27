@@ -76,7 +76,6 @@ public class UserSession {
     }
 
     public void clearsession(String data) {
-
         editor.remove(data);
         editor.commit();
 

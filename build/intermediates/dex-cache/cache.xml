@@ -66,6 +66,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/sujith/.android/build-cache/4d8216c90def0562093df9fb585b0b2b6fa450b8/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8ebbbf3fb97be02b0b613b93264f6bfd0e238721">
+        <dex dex="/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/build/intermediates/transforms/dex/DevineniUma/debug/folders/1000/10/classes_40675c95fe4c74b377f4c7a45c843381222ef4e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/sujith/.gradle/caches/modules-2/files-2.1/com.twitter/twitter-text/1.14.3/71218d7dd9435e8b43e5ccf117bec37cb78fa2eb/twitter-text-1.14.3.jar"
         jumboMode="false"
         optimize="true"

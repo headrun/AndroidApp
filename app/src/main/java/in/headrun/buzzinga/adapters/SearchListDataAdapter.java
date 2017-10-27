@@ -14,7 +14,9 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
@@ -40,12 +42,11 @@ import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.CompactTweetView;
+import com.twitter.sdk.android.tweetui.TweetLinkClickListener;
 import com.twitter.sdk.android.tweetui.TweetUtils;
-import com.twitter.sdk.android.tweetui.TweetView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ import java.util.Set;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
+
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.core.BuzzingaNetowrkServices;
@@ -64,6 +66,7 @@ import in.headrun.buzzinga.core.ResponseListener;
 import in.headrun.buzzinga.doto.SearchArticles;
 import in.headrun.buzzinga.utils.TimeAgo;
 import in.headrun.buzzinga.utils.Utils;
+import me.kaelaela.opengraphview.OpenGraphView;
 
 
 /**
@@ -77,7 +80,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     LinkedList<SearchArticles> listdata = new LinkedList<>();
     LayoutInflater inflater;
     ViewItemHolder item_holder = null;
-    Utils utils;
     TimeAgo time_ago;
 
     private final int VIEW_PROG = 0;
@@ -94,7 +96,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         this.context = context;
         this.listdata = listdata;
-        utils = new Utils(context);
+
         time_ago = new TimeAgo(context);
 
         Twitter.initialize(context);
@@ -143,11 +145,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .inflate(R.layout.webview_facebook, parent, false);
             vh = new FacebookEmbedded(v);
 
-        } else if (viewType == VIEW_ITEM || viewType == VIEW_GOOGLE) {
+        } else if (viewType == VIEW_GOOGLE || viewType == VIEW_ITEM) {
 
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.twitter_lay_adapter, parent, false);
-            vh = new TwitterViewItemHolder(v);
+                    .inflate(R.layout.genral_article_view, parent, false);
+            vh = new GenralArticleViewHolder(v);
+
+        } else if (viewType == VIEW_ITEM) {
+
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.article_lay_adapter, parent, false);
+            vh = new ArticleViewItemHolder(v);
 
         } else if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext())
@@ -209,7 +217,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 item_holder.item1.setVisibility(View.VISIBLE);
             } else {
                 item_holder.item1.setVisibility(View.GONE);
-                utils.showLog(TAG, position + " title is empty ", Config.SearchListDataAdapter);
+                Utils.showLog(TAG, position + " title is empty ", Config.SearchListDataAdapter);
             }
 
             if (text != null) {
@@ -217,17 +225,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 item_holder.item2.setVisibility(View.VISIBLE);
             }
 
-            utils.showLog(TAG, "\nxtags 1  is \t" + item.source.XTAGS.toString(), Config.SearchListDataAdapter);
+            Utils.showLog(TAG, "\nxtags 1  is \t" + item.source.XTAGS.toString(), Config.SearchListDataAdapter);
 
             item_holder.author.setText("By - " + source);
             item_holder.article_lay.setBackgroundResource(color);
             item_holder.articledate.setText("" + time);
 
-        } else if (holder instanceof TwitterViewItemHolder) {
+        } else if (holder instanceof ArticleViewItemHolder) {
 
 
-            final TwitterViewItemHolder twitter_holder = ((TwitterViewItemHolder) holder);
-            twitter_holder.tweet_embedded.setVisibility(View.GONE);
+            final ArticleViewItemHolder twitter_holder = ((ArticleViewItemHolder) holder);
+
             twitter_holder.article_time.setText("" + time);
             twitter_holder.source_icon.setImageResource(source_icon);
 
@@ -301,7 +309,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         twitter_holder.display_name.setText(author);
                         twitter_holder.article_name.setVisibility(View.GONE);
                         twitter_holder.article_img.setImageResource(source_icon);
-                        twitter_holder.source_icon.setVisibility(View.GONE);
+                        twitter_holder.source_icon.setVisibility(View.INVISIBLE);
 
                     }
                 } catch (Exception e) {
@@ -317,9 +325,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (item.source != null && item.source.original_data != null) {
                 List<SearchArticles.Urls> urls = item.source.original_data.entities.entite_urls;
                 String tweet_id = item.source.original_data.id_str;
-
-
-                showTwitterView(context, tweet_id, twitter_holder.tweet_view);
+                showTwitterView(context, tweet_id, twitter_holder.tweet_view, position);
 
 
             }
@@ -329,8 +335,18 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             if (source == Constants.FACEBOOK)
                 setfbdata(fb_holder.webview, item.source.URL);
-            else if (source == Constants.GOOGLEPLUS)
-                setGplusData(fb_holder.webview, item.source.URL);
+           /* else if (source == Constants.GOOGLEPLUS)
+                setGplusData(fb_holder.webview, item.source.URL);*/
+
+        } else if (holder instanceof GenralArticleViewHolder) {
+
+            final GenralArticleViewHolder article_view = ((GenralArticleViewHolder) holder);
+
+            try {
+                article_view.genral_view.loadFrom(item.source.URL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
@@ -372,7 +388,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public class TwitterViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ArticleViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.article_img)
         public ImageView article_img;
@@ -390,10 +406,9 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public ImageView source_icon;
         @Bind(R.id.sentiment_type)
         public ImageView sentiment_type;
-        @Bind(R.id.tweet_embedded)
-        public LinearLayout tweet_embedded;
 
-        public TwitterViewItemHolder(View view) {
+
+        public ArticleViewItemHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             twitter_article_lay.setOnClickListener(this);
@@ -424,7 +439,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public TwetterEmbedded(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            tweet_view.setOnClickListener(this);
         }
 
         @Override
@@ -436,7 +451,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public class FacebookEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class FacebookEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener {
 
         @Bind(R.id.webview)
         public WebView webview;
@@ -444,12 +459,29 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public FacebookEmbedded(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            webview.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
 
+            if (onitemclicklistner != null) {
+                onitemclicklistner.itemClicked(v, getAdapterPosition());
+            }
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+
+                if (onitemclicklistner != null) {
+                    onitemclicklistner.itemClicked(v, getAdapterPosition());
+                }
+                return true;
+            }
+
+            return false;
         }
     }
 
@@ -470,10 +502,32 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
+    public class GenralArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @Bind(R.id.genral_view)
+        OpenGraphView genral_view;
+
+        public GenralArticleViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            if (onitemclicklistner != null) {
+                onitemclicklistner.itemClicked(v, getAdapterPosition());
+            }
+        }
+
+
+    }
+
     public String sourType(List<String> xtag) {
 
         if (xtag != null && xtag.size() > 0) {
-            utils.source_xtags();
+            Utils.source_xtags();
             Set<String> source_keys = Constants.source_map.keySet();
 
             for (String key : source_keys) {
@@ -487,7 +541,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }
             }
         } else {
-            utils.showLog(TAG, " source items  are empty list ", Config.SearchListDataAdapter);
+            Utils.showLog(TAG, " source items  are empty list ", Config.SearchListDataAdapter);
         }
         return "";
     }
@@ -495,7 +549,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public String genderType(List<String> xtag) {
 
         if (xtag.size() > 0) {
-            utils.genter_xtags();
+            Utils.genter_xtags();
             Set<String> gender_keys = Constants.gender_map.keySet();
             for (String gender_key : gender_keys)
                 if (xtag.contains(gender_key))
@@ -507,7 +561,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public String sentimentType(List<String> xtag) {
 
         if (xtag != null && xtag.size() > 0) {
-            utils.sentiment_xtags();
+            Utils.sentiment_xtags();
             Set<String> sentiment_keys = Constants.sentiment_map.keySet();
             /*for (String sentiment_key : sentiment_keys)
                 if (xtag.contains(sentiment_key))
@@ -569,7 +623,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private int sourceicon(String type) {
 
         if (type != null) {
-            utils.showLog(TAG, " source icon type " + type, Config.SearchListDataAdapter);
+            Utils.showLog(TAG, " source icon type " + type, Config.SearchListDataAdapter);
             switch (type) {
                 case Constants.FACEBOOK:
                     return R.drawable.ic_facebook;
@@ -598,7 +652,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
             return 0;
         } else {
-            utils.showLog(TAG, " source icon type is null ", Config.SearchListDataAdapter);
+            Utils.showLog(TAG, " source icon type is null ", Config.SearchListDataAdapter);
         }
         return 0;
     }
@@ -659,22 +713,34 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     private void showTwitterView(final Context context, String tweetId,
-                                 final RelativeLayout tweet_embedded) {
+                                 final RelativeLayout tweet_embedded, final int pos) {
         // Twitter.getInstance();
 
         TweetUtils.loadTweet(Long.parseLong(tweetId), new Callback<Tweet>() {
             @Override
             public void success(Result<Tweet> result) {
-                // tweet_embedded.setTweet(result.data);
-
-                CompactTweetView compact_vew = new CompactTweetView(context, result.data,
+                final CompactTweetView compact_vew = new CompactTweetView(context, result.data,
                         R.style.tw__TweetLightStyle);
 
-                /*RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                compact_vew.setLayoutParams(params);*/
+                compact_vew.setTweetLinkClickListener(new TweetLinkClickListener() {
+                    @Override
+                    public void onLinkClick(Tweet tweet, String url) {
 
+                        if (onitemclicklistner != null) {
+                            onitemclicklistner.itemClicked(compact_vew, pos);
+                        }
+                    }
+                });
+                compact_vew.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (onitemclicklistner != null) {
+                            onitemclicklistner.itemClicked(v, pos);
+                        }
+                    }
+                });
                 tweet_embedded.addView(compact_vew);
+
             }
 
             @Override

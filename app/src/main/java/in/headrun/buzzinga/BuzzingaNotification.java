@@ -29,16 +29,12 @@ public class BuzzingaNotification extends BroadcastReceiver {
 
     String TAG = BuzzingaNotification.this.getClass().getSimpleName();
 
-    UserSession userSession;
-    Utils utils;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        userSession = new UserSession(context);
-        utils = new Utils(context);
-        utils.add_query_data();
-        if (utils.isNetwrokConnection()) {
-            utils.serverCallnotificationCount();
+        Utils.add_query_data();
+        if (Utils.isNetwrokConnection(context)) {
+            Utils.serverCallnotificationCount(context);
 
         }
     }
