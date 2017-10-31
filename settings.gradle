@@ -1,1 +1,1 @@
-include ':app', ':daterangepicker', ':materialsearchview'
+include ':app', ':daterangepicker', ':materialsearchview', 'OpenGraphView-1.2.0'

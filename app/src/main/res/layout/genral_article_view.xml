@@ -15,7 +15,7 @@
         og:imagePlaceHolder="@color/white_smoke"
         og:imagePosition="left"
         og:separateImage="true"
-        og:strokeColor="@color/white"
+        og:strokeColor="@color/white_smoke"
         og:titleColor="@color/text_black"
         og:urlTextColor="@color/base_gray" />
 </LinearLayout>

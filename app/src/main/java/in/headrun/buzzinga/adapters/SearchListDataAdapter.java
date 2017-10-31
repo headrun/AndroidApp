@@ -343,7 +343,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             final GenralArticleViewHolder article_view = ((GenralArticleViewHolder) holder);
 
             try {
-                article_view.genral_view.loadFrom(item.source.URL);
+                article_view.genral_view.loadFrom(item.source.URL, time);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -460,6 +461,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             super(itemView);
             ButterKnife.bind(this, itemView);
             webview.setOnClickListener(this);
+            webview.setOnTouchListener(this);
         }
 
         @Override
@@ -473,13 +475,13 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public boolean onTouch(View v, MotionEvent event) {
 
-            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            /*if (event.getAction() == KeyEvent.ACTION_DOWN) {
 
                 if (onitemclicklistner != null) {
                     onitemclicklistner.itemClicked(v, getAdapterPosition());
                 }
                 return true;
-            }
+            }*/
 
             return false;
         }

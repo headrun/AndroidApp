@@ -29,7 +29,7 @@ public class TimeAgo {
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMM yy", Locale.getDefault());
-        SimpleDateFormat sdf2 = new SimpleDateFormat("MMM dd ", Locale.getDefault());
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM", Locale.getDefault());
         String local_time = sdf.format(date);
         Date local_date;
 

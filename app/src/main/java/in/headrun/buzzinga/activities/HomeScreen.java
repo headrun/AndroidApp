@@ -168,17 +168,20 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                         if (scroll_loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             if (swipeRefreshLayout.isRefreshing() == false && !Constants.scroolid.equals("1")) {
 
-                                scroll_loading = false;
-                                Utils.add_query_data();
+                                try {
+                                    scroll_loading = false;
+                                    Utils.add_query_data();
 
-                                Constants.SEARCHARTICLES.add(null);
-                                searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
+                                    Constants.SEARCHARTICLES.add(null);
+                                    searchAdapter.notifyItemInserted(Constants.SEARCHARTICLES.size() - 1);
 
-                                servercall(SCROLL);
+                                    servercall(SCROLL);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     } else {
-
                         network_error_snackbar();
                     }
                 }
@@ -315,8 +318,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                         @Override
                         public void onResponse(String response) {
 
-                            //utils.showLog(TAG, "resposne is " + response.toString(), Config.HOME_SCREEN);
-
+                            Utils.showLog(TAG, "resposne is " + "get data", Config.HOME_SCREEN);
 
                             article_loading(response, type_req);
 
