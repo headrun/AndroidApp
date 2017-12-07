@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity
                 Bundle params = new Bundle();
                 params.putString(FirebaseAnalytics.Param.ITEM_NAME, BuzzingaApplication.getUserSession().getTrackKey());
                 params.putString(FirebaseAnalytics.Param.SEARCH_TERM, BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY());
-                Utils.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, params);
-                Utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                BuzzingaApplication.getmFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.SEARCH, params);
+                BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                 searchview_text();
 
@@ -372,8 +372,8 @@ public class MainActivity extends AppCompatActivity
 
                 Bundle params = new Bundle();
                 params.putString("notify", sel_value[0]);
-                Utils.mFirebaseAnalytics.logEvent("Apply_notify", params);
-                Utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                BuzzingaApplication.getmFirebaseAnalytics().logEvent("Apply_notify", params);
+                BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                 Utils.callService(MainActivity.this);
             }
@@ -449,8 +449,8 @@ public class MainActivity extends AppCompatActivity
 
                                              Bundle params = new Bundle();
                                              params.putString("date", "apply_date");
-                                             Utils.mFirebaseAnalytics.logEvent("Apply_Date", params);
-                                             Utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                                             BuzzingaApplication.getmFirebaseAnalytics().logEvent("Apply_Date", params);
+                                             BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                                              call_homeFragment(Constants.Intent_TRACK);
                                          }
