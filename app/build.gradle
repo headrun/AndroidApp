@@ -82,7 +82,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(path: ':daterangepicker')
     compile project(path: ':materialsearchview')
-    compile project(path: ':OpenGraphView-1.2.0')
+
     compile "com.android.support:appcompat-v7:$SUPPORT_APP_COMPAT_VERSION"
     compile "com.android.support:design:$SUPPORT_APP_COMPAT_VERSION"
     compile "com.android.support:support-v4:$SUPPORT_APP_COMPAT_VERSION"

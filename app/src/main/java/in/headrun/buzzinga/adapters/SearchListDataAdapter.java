@@ -14,7 +14,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,8 +46,10 @@ import com.twitter.sdk.android.tweetui.TweetUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -58,22 +59,20 @@ import java.util.Set;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
-
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.core.BuzzingaNetowrkServices;
 import in.headrun.buzzinga.core.ResponseListener;
 import in.headrun.buzzinga.doto.SearchArticles;
 import in.headrun.buzzinga.utils.TimeAgo;
 import in.headrun.buzzinga.utils.Utils;
-import me.kaelaela.opengraphview.OpenGraphView;
 
 
 /**
  * Created by headrun on 10/7/15.
  */
 public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
 
     String TAG = SearchListDataAdapter.this.getClass().getSimpleName();
     Context context;
@@ -233,17 +232,14 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         } else if (holder instanceof ArticleViewItemHolder) {
 
-
             final ArticleViewItemHolder twitter_holder = ((ArticleViewItemHolder) holder);
 
             twitter_holder.article_time.setText("" + time);
             twitter_holder.source_icon.setImageResource(source_icon);
 
-
             if (text != null) {
                 twitter_holder.article_text.setText(text);
             }
-
 
             setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar), twitter_holder.article_img);
 
@@ -255,7 +251,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (item.source != null && item.source.original_data != null && item.source.original_data.user_data != null) {
 
                 SearchArticles.UserData data = item.source.original_data.user_data;
-
 
                 if (data.profile_image_url != null && !data.profile_image_url.isEmpty()) {
                     img_url = data.profile_image_url;
@@ -321,13 +316,10 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             final TwetterEmbedded twitter_holder = ((TwetterEmbedded) holder);
 
-
             if (item.source != null && item.source.original_data != null) {
                 List<SearchArticles.Urls> urls = item.source.original_data.entities.entite_urls;
                 String tweet_id = item.source.original_data.id_str;
                 showTwitterView(context, tweet_id, twitter_holder.tweet_view, position);
-
-
             }
 
         } else if (holder instanceof FacebookEmbedded) {
@@ -335,16 +327,49 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             if (source == Constants.FACEBOOK)
                 setfbdata(fb_holder.webview, item.source.URL);
-           /* else if (source == Constants.GOOGLEPLUS)
-                setGplusData(fb_holder.webview, item.source.URL);*/
+
 
         } else if (holder instanceof GenralArticleViewHolder) {
 
             final GenralArticleViewHolder article_view = ((GenralArticleViewHolder) holder);
 
             try {
-                article_view.genral_view.loadFrom(item.source.URL, time);
 
+                article_view.og_title.setText(""+item.source.TITLE);
+                article_view.og_description.setText(""+item.source.TEXT);
+                String text_url=item.source.URL;
+                String host_name="";
+
+                if(!text_url.isEmpty()){
+                    URL aURL = new URL(text_url);
+                    host_name=aURL.getHost();
+                    article_view.og_url.setText(""+host_name+" "+time);
+
+                    Glide.with(context).load(ServerConfig.FETCH_ICON+host_name).into(new SimpleTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                            setImage(((BitmapDrawable) resource).getBitmap(), article_view.favicon);
+
+                        }
+                    });
+
+                    if(item.source.IMAGE_LINK!=null){
+                        if(!item.source.IMAGE_LINK.isEmpty()) {
+                            article_view.og_image.setVisibility(View.VISIBLE);
+                            Glide.with(context).load(item.source.IMAGE_LINK).into(new SimpleTarget<Drawable>() {
+                                @Override
+                                public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                    setImage(((BitmapDrawable) resource).getBitmap(), article_view.og_image);
+
+                                }
+                            });
+                        }else{
+                            article_view.og_image.setVisibility(View.GONE);
+                        }
+                    }else {
+                        new GetLinkData(article_view.og_image, context, text_url, item,position);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -506,8 +531,16 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class GenralArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.genral_view)
-        OpenGraphView genral_view;
+        @Bind(R.id.og_image)
+        ImageView og_image;
+        @Bind(R.id.og_title)
+        TextView og_title;
+        @Bind(R.id.og_description)
+        TextView og_description;
+        @Bind(R.id.favicon)
+        ImageView favicon;
+        @Bind(R.id.og_url)
+        TextView og_url;
 
         public GenralArticleViewHolder(View itemView) {
             super(itemView);
@@ -664,7 +697,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (bitmap != null) {
             RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(context.getResources(),
                     Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true));
-            drawable.setCircular(true);
+           // drawable.setCircular(true);
             avatar_img.setImageDrawable(drawable);
 
         }
@@ -763,30 +796,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         setwebdata(webview, url, html);
     }
 
-    public void setGplusData(WebView webview, String url) {
 
-        new GetLinkData(webview, context, url);
-        /*        String html = "<!doctype html> <html> <head></head> <body> " +
-                "<script src=\"https://apis.google.com/js/platform.js\" async defer/> " +
-                "<div class=\"g-post\" data-href=\"" + url + "\"> " +
-                "</div> </body> </html>";
-
-        String g_html = "<html>\n" +
-                "  <head>\n" +
-                "    <script src=\"https://apis.google.com/js/platform.js\" async defer>\n" +
-                "    </script>\n" +
-                "    <script>\n" +
-                "      {\"parsetags\": \"explicit\"}\n" +
-                "      gapi.post.render(\"widget-div\", {\"href\" :" + url + "});\n" +
-                "    </script>\n" +
-                "  </head>\n" +
-                "  <body>\n" +
-                "    <div id=\"widget-div\"></div>\n" +
-                "  </body>\n" +
-                "</html>";
-
-        setwebdata(webview, url, g_html);*/
-    }
 
     public void setwebdata(WebView webview, String url, String html) {
         webview.getSettings().setLoadsImagesAutomatically(true);
@@ -864,9 +874,12 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     class GetLinkData implements ResponseListener<String> {
 
         View articl_view;
-
-        GetLinkData(View articl_view, Context mContext, String url) {
+        SearchArticles article;
+        int pos;
+        GetLinkData(View articl_view, Context mContext, String url,SearchArticles article,int pos) {
             this.articl_view = articl_view;
+            this.article=article;
+            this.pos=pos;
             new BuzzingaNetowrkServices().getwebLinkData(mContext, url, this);
         }
 
@@ -880,9 +893,33 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             Document doc = Jsoup.parse(response);
             doc.title();
-            //get link meta data
-            Elements meta_elements = doc.select("meta");
-            String desc = doc.select("meta[name=description]").get(0).attr("content");
+
+            String image_link="";
+            Elements ele_img=null;
+            ele_img=doc.select("meta[property="+Constants.IMAGE+"]");
+            if(ele_img==null)
+                ele_img=doc.select("meta[property="+Constants.IMAGE_1+"]");
+                if(ele_img==null)
+                    ele_img=doc.select("meta[property="+Constants.TWITTER_IMAGE+"]");
+
+
+                image_link=ele_img.attr("content");
+                article.source.setIMAGE_LINK(image_link);
+                listdata.set(pos,article);
+
+             if(!image_link.isEmpty()){
+                 articl_view.setVisibility(View.VISIBLE);
+                 Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
+
+                    }
+                });
+            }else{
+                articl_view.setVisibility(View.GONE);
+            }
+
 
         }
     }

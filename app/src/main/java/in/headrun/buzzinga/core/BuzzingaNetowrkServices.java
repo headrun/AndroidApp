@@ -37,7 +37,6 @@ public class BuzzingaNetowrkServices extends BaseService {
         return headers;
     }
 
-
     public void getwebLinkData(Context mContext, String url, ResponseListener<String> listener) {
         executeGetRequest(mContext, url, null, null, new TypeToken<String>() {
         }, listener);

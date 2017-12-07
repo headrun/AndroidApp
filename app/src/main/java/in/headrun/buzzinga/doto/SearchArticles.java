@@ -39,8 +39,16 @@ public class SearchArticles {
         @SerializedName("title")
         public String TITLE;
 
+        @SerializedName("image")
+        public String IMAGE_LINK;
+
         @SerializedName("original_data")
         public OriginalData original_data;
+
+
+        public void setIMAGE_LINK(String IMAGE_LINK) {
+            this.IMAGE_LINK = IMAGE_LINK;
+        }
 
     }
 

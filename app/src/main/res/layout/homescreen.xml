@@ -14,7 +14,6 @@
 
         <TextView
             android:id="@+id/sel_date"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -41,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/horizontal_recycler_view"
-            android:background="@android:color/transparent">
+            android:background="@color/white_smoke">
 
             <RelativeLayout
                 android:id="@+id/content_lay"

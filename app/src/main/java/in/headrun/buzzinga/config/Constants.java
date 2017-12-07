@@ -20,6 +20,10 @@ import in.headrun.buzzinga.doto.SearchArticles;
  */
 public class Constants {
 
+    public static final String IMAGE = "og:image";
+    public static final String IMAGE_1="image";
+    public static final String TWITTER_IMAGE = "twitter:image";
+
     public static final String DEEP_LINK_URL = "http://buzzinga.com/track/";
     public static final String APP_INDEXING_URL = "android-app://in.headrun.buzzinga/http/buzzinga.com/track/";
     public static final String BUZZINGA_URI = "http://buzzinga.com/track/";

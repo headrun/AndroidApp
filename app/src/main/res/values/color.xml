@@ -13,4 +13,8 @@
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>
     <color name="light_grey">#7f8c8d</color>
+    <color name="text_black">#333333</color>
+    <color name="base_gray">#999999</color>
+    <color name="light_gray">#dddddd</color>
+    <color name="ripple_black">#80000000</color>
 </resources>

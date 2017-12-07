@@ -61,8 +61,11 @@ public class BaseRequest<T> extends Request<T> {
 
             Log.i(TAG, "url is" + getUrl() + " repsonse is " + jsonResponse);
 
-            response = gson.fromJson(jsonResponse, typeToken.getType());
-
+            try {
+                response = gson.fromJson(jsonResponse, typeToken.getType());
+            }catch (Exception e){
+                response= (T) jsonResponse;
+            }
             return Response.success(response, HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
