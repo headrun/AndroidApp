@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/article_lay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/source_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="13dp"
+        android:layout_toRightOf="@+id/source_icon"
+        android:textColor="#4baad3" />
+
+    <TextView
+        android:id="@+id/url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/source_icon"
+        android:layout_alignStart="@+id/source_icon"
+        android:layout_below="@+id/title"
+        android:layout_marginRight="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#287742" />
+
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/url"
+        android:layout_alignStart="@+id/url"
+        android:layout_below="@+id/url"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="2dp"
+        android:maxLines="3"
+        android:paddingTop="10dp"
+
+        android:textColor="#666" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text"
+        android:layout_alignStart="@+id/text"
+        android:layout_below="@+id/text"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:textColor="#f0ad4e" />
+
+    <TextView
+        android:id="@+id/articledate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/author"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#000000" />
+
+
+</RelativeLayout>
+
+<!-- From: file:/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/res/layout/search_data.xml -->

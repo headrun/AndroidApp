@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:shape="rectangle">
+
+    <corners android:radius="5dp" />
+
+    <stroke
+        android:width="1dp"
+        android:color="#da434343" />
+    <solid
+        android:color="#ffffff"/>
+
+    <padding
+        android:bottom="3dp"
+        android:left="15dp"
+        android:right="3dp"
+        android:top="3dp" />
+</shape>
+
+<!-- From: file:/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/res/drawable/roundborder.xml -->

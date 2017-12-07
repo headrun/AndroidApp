@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/filerlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/sourcelistview"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="#d62a2a2a">
+
+            <ListView
+                android:id="@+id/filter_titles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:dividerHeight="5dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sourcelistview">
+
+
+            <EditText
+                android:id="@+id/autosearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/roundborder"
+                android:hint="Search"
+                android:visibility="gone" />
+
+
+            <ListView
+                android:id="@+id/filter_sourceslist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"></ListView>
+
+            <ListView
+                android:id="@+id/filter_sentiment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"></ListView>
+
+            <ListView
+                android:id="@+id/filter_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"></ListView>
+
+
+            <ListView
+                android:id="@+id/filter_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/autosearch"
+                android:visibility="gone"></ListView>
+
+            <ListView
+                android:id="@+id/filter_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/autosearch"
+                android:visibility="gone"></ListView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/filterbtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/clearfilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:text="@string/clearfilter" />
+
+        <Button
+            android:id="@+id/applyfilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#f48f1f"
+            android:text="@string/applyfilter"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+</RelativeLayout>
+<!-- From: file:/home/sujith/Documents/androidprojects/BuzzingaApp/AndroidApp/app/src/main/res/layout/sourcefilterlay.xml -->
