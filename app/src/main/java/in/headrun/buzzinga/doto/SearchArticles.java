@@ -45,9 +45,16 @@ public class SearchArticles {
         @SerializedName("original_data")
         public OriginalData original_data;
 
+        @SerializedName("fb_data")
+        public String FB_DATA;
+
 
         public void setIMAGE_LINK(String IMAGE_LINK) {
             this.IMAGE_LINK = IMAGE_LINK;
+        }
+
+        public void setFB_DATA(String FB_DATA){
+            this.FB_DATA=FB_DATA;
         }
 
     }

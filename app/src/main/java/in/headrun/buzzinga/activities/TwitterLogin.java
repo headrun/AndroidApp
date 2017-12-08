@@ -100,7 +100,6 @@ public class TwitterLogin extends Activity {
 
     }
 
-
     private class MyBrowser extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -46,7 +46,6 @@ import com.twitter.sdk.android.tweetui.TweetUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.net.URL;
@@ -325,8 +324,15 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else if (holder instanceof FacebookEmbedded) {
             final FacebookEmbedded fb_holder = ((FacebookEmbedded) holder);
 
-            if (source == Constants.FACEBOOK)
-                setfbdata(fb_holder.webview, item.source.URL);
+            if (source == Constants.FACEBOOK) {
+                /*if (item.source.FB_DATA == null) {
+                    new GetLinkData(fb_holder.webview, context, item.source.URL, item, position, VIEW_FACEBOOK);
+                } else {
+                    setwebdata(fb_holder.webview, "", item.source.FB_DATA);
+                }*/
+
+                 setfbdata(fb_holder.webview, item.source.URL);
+            }
 
 
         } else if (holder instanceof GenralArticleViewHolder) {
@@ -335,17 +341,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             try {
 
-                article_view.og_title.setText(""+item.source.TITLE);
-                article_view.og_description.setText(""+item.source.TEXT);
-                String text_url=item.source.URL;
-                String host_name="";
+                article_view.og_title.setText("" + item.source.TITLE);
+                article_view.og_description.setText("" + item.source.TEXT);
+                String text_url = item.source.URL;
+                String host_name = "";
 
-                if(!text_url.isEmpty()){
+                if (!text_url.isEmpty()) {
                     URL aURL = new URL(text_url);
-                    host_name=aURL.getHost();
-                    article_view.og_url.setText(""+host_name+" "+time);
+                    host_name = aURL.getHost();
+                    article_view.og_url.setText("" + host_name + " " + time);
 
-                    Glide.with(context).load(ServerConfig.FETCH_ICON+host_name).into(new SimpleTarget<Drawable>() {
+                    Glide.with(context).load(ServerConfig.FETCH_ICON + host_name).into(new SimpleTarget<Drawable>() {
                         @Override
                         public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
                             setImage(((BitmapDrawable) resource).getBitmap(), article_view.favicon);
@@ -353,8 +359,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         }
                     });
 
-                    if(item.source.IMAGE_LINK!=null){
-                        if(!item.source.IMAGE_LINK.isEmpty()) {
+                    if (item.source.IMAGE_LINK != null) {
+                        if (!item.source.IMAGE_LINK.isEmpty()) {
                             article_view.og_image.setVisibility(View.VISIBLE);
                             Glide.with(context).load(item.source.IMAGE_LINK).into(new SimpleTarget<Drawable>() {
                                 @Override
@@ -363,11 +369,11 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                                 }
                             });
-                        }else{
+                        } else {
                             article_view.og_image.setVisibility(View.GONE);
                         }
-                    }else {
-                        new GetLinkData(article_view.og_image, context, text_url, item,position);
+                    } else {
+                        new GetLinkData(article_view.og_image, context, text_url, item, position, VIEW_ITEM);
                     }
                 }
             } catch (Exception e) {
@@ -697,14 +703,13 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (bitmap != null) {
             RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(context.getResources(),
                     Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true));
-           // drawable.setCircular(true);
+            // drawable.setCircular(true);
             avatar_img.setImageDrawable(drawable);
 
         }
     }
 
     private String TwitterImage(String img) {
-
 
         if (img != null && !TextUtils.isEmpty(img)) {
 
@@ -797,7 +802,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
-
     public void setwebdata(WebView webview, String url, String html) {
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
@@ -805,6 +809,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         webview.setWebViewClient(new UriWebViewClient());
         webview.setWebChromeClient(new UriChromeClient());
+
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setAppCacheEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
@@ -820,8 +825,10 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             CookieManager.getInstance().setAcceptThirdPartyCookies(webview, true);
         }
 
-
-        webview.loadDataWithBaseURL(url, html, "text/html", "UTF-8", null);
+        if (!url.isEmpty())
+            webview.loadDataWithBaseURL(url, html, "text/html", "UTF-8", null);
+        else
+            webview.loadData(html, "text/html; charset=utf-8", "UTF-8");
 
     }
 
@@ -861,6 +868,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     private class UriWebViewClient extends WebViewClient {
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
@@ -869,17 +877,29 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return !host.equals("m.facebook.com");
 
         }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            Log.i(TAG, "url " + url + " view " + view);
+
+            view.loadUrl("javascript:window.HtmlViewer.showHTML" +
+                    "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
+
+        }
     }
 
     class GetLinkData implements ResponseListener<String> {
 
         View articl_view;
         SearchArticles article;
-        int pos;
-        GetLinkData(View articl_view, Context mContext, String url,SearchArticles article,int pos) {
+        int pos, display_type;
+
+        GetLinkData(View articl_view, Context mContext, String url, SearchArticles article, int pos, int display_type) {
             this.articl_view = articl_view;
-            this.article=article;
-            this.pos=pos;
+            this.article = article;
+            this.pos = pos;
+            this.display_type = display_type;
             new BuzzingaNetowrkServices().getwebLinkData(mContext, url, this);
         }
 
@@ -891,37 +911,46 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public void onResponse(String response) {
 
-            Document doc = Jsoup.parse(response);
-            doc.title();
+            if (display_type == VIEW_ITEM) {
+                Document doc = Jsoup.parse(response);
+                doc.title();
 
-            String image_link="";
-            Elements ele_img=null;
-            ele_img=doc.select("meta[property="+Constants.IMAGE+"]");
-            if(ele_img==null)
-                ele_img=doc.select("meta[property="+Constants.IMAGE_1+"]");
-                if(ele_img==null)
-                    ele_img=doc.select("meta[property="+Constants.TWITTER_IMAGE+"]");
+                String image_link = "";
+                Elements ele_img = null;
+                ele_img = doc.select("meta[property=" + Constants.IMAGE + "]");
+                if (ele_img == null)
+                    ele_img = doc.select("meta[property=" + Constants.IMAGE_1 + "]");
+                if (ele_img == null)
+                    ele_img = doc.select("meta[property=" + Constants.TWITTER_IMAGE + "]");
 
 
-                image_link=ele_img.attr("content");
+                image_link = ele_img.attr("content");
                 article.source.setIMAGE_LINK(image_link);
-                listdata.set(pos,article);
+                listdata.set(pos, article);
 
-             if(!image_link.isEmpty()){
-                 articl_view.setVisibility(View.VISIBLE);
-                 Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
+                if (!image_link.isEmpty()) {
+                    articl_view.setVisibility(View.VISIBLE);
+                    Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                            setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
 
-                    }
-                });
-            }else{
-                articl_view.setVisibility(View.GONE);
+                        }
+                    });
+                } else {
+                    articl_view.setVisibility(View.GONE);
+                }
+
+            } else if (display_type == VIEW_FACEBOOK) {
+
+                article.source.setFB_DATA(response);
+                listdata.set(pos, article);
+
+                setwebdata((WebView) articl_view, "", response);
+
             }
-
-
         }
     }
+
 }
 
