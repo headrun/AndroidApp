@@ -22,7 +22,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -37,9 +38,9 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
     public String TAG = ArticleWebDisplay.this.getClass().getSimpleName();
 
-    @Bind(R.id.article_webview)
+    @BindView(R.id.article_webview)
     WebView article_webview;
-    @Bind(R.id.article_browser_progress)
+    @BindView(R.id.article_browser_progress)
     ProgressBar article_progress;
 
     String url = "", title = "";

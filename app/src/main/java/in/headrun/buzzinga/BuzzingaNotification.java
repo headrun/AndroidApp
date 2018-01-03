@@ -29,7 +29,6 @@ public class BuzzingaNotification extends BroadcastReceiver {
 
     String TAG = BuzzingaNotification.this.getClass().getSimpleName();
 
-
     @Override
     public void onReceive(final Context context, Intent intent) {
         Utils.add_query_data();

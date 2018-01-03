@@ -15,7 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
@@ -23,15 +24,15 @@ import in.headrun.buzzinga.utils.Utils;
 
 public class Contact_Activiy extends AppCompatActivity {
 
-    @Bind(R.id.mobile_lay)
+    @BindView(R.id.mobile_lay)
     RelativeLayout mobile_lay;
-    @Bind(R.id.mobile_value)
+    @BindView(R.id.mobile_value)
     TextView mobile_value;
-    @Bind(R.id.email_value)
+    @BindView(R.id.email_value)
     TextView email_value;
-    @Bind(R.id.email_lay)
+    @BindView(R.id.email_lay)
     RelativeLayout email_lay;
-    @Bind(R.id.collapse_toolbar_layout)
+    @BindView(R.id.collapse_toolbar_layout)
     CollapsingToolbarLayout collapse_toolbar_layout;
 
 

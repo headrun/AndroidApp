@@ -23,7 +23,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -43,17 +44,17 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public String TAG = Filtering.this.getClass().getSimpleName();
 
-    @Bind(R.id.filter_titles)
+    @BindView(R.id.filter_titles)
     ListView filter_titles;
-    @Bind(R.id.filter_items)
+    @BindView(R.id.filter_items)
     ListView filter_items;
 
-    @Bind(R.id.clearfilter)
+    @BindView(R.id.clearfilter)
     Button clearfilter;
-    @Bind(R.id.applyfilter)
+    @BindView(R.id.applyfilter)
     Button applyfilter;
 
-    @Bind(R.id.autosearch)
+    @BindView(R.id.autosearch)
     EditText autosearch;
 
     String Sourcestatus = "";

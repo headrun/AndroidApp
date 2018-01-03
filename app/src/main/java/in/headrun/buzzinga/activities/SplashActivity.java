@@ -16,7 +16,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -38,11 +39,11 @@ public class SplashActivity extends Activity {
 
     public static String TAG = SplashActivity.class.getClass().getSimpleName();
     public String loged;
-    @Bind(R.id.splash_progress)
+    @BindView(R.id.splash_progress)
     ProgressBar splash_progress;
-    @Bind(R.id.splashscreen)
+    @BindView(R.id.splashscreen)
     ImageView splashscreen;
-    @Bind(R.id.version_name)
+    @BindView(R.id.version_name)
     TextView version_name;
 
 
@@ -61,9 +62,6 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscren);
         ButterKnife.bind(this);
-
-
-
 
         Constants.BTRACKKEY.addAll(Arrays.asList(getResources().getStringArray(R.array.track_keywords)));
 
@@ -142,12 +140,14 @@ public class SplashActivity extends Activity {
             if (track_key.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
             } else {
+
                 Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
+                BuzzingaApplication.getUserSession().setFROM_DATE("");
+                BuzzingaApplication.getUserSession().setTO_DATE("");
                 Utils.add_query_data();
 
                 startActivity(new Intent(getApplication(), MainActivity.class).
                         putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
-
             }
         } else {
             startActivity(new Intent(this, TwitterLogin.class));

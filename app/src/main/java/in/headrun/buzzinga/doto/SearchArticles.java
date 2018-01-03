@@ -69,6 +69,18 @@ public class SearchArticles {
         public String id_str;
         @SerializedName("entities")
         public Entite entities;
+
+        @SerializedName("retweeted_status")
+        public RetweetStatus retweeted_status;
+
+
+    }
+
+    public class RetweetStatus{
+
+        @SerializedName("text")
+        public String text;
+
     }
 
     public class Entite {

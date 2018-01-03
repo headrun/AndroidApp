@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -83,9 +84,9 @@ public class FilterTitleAdapter extends BaseAdapter {
     public class TitleHolder {
 
         //  public ImageView titleimage;
-        @Bind(R.id.texttilte)
+        @BindView(R.id.texttilte)
         public TextView title;
-        @Bind(R.id.sel_count)
+        @BindView(R.id.sel_count)
         public TextView sel_count;
 
         public TitleHolder(View v) {

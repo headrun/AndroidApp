@@ -18,9 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
@@ -42,7 +44,8 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaApplication;
@@ -58,27 +61,31 @@ import in.headrun.buzzinga.utils.Utils;
 /**
  * Created by headrun on 7/7/15.
  */
-public class HomeScreen extends Fragment implements View.OnClickListener, Utils.setOnItemClickListner, Utils.setOnItemDateSelClickListner {
+public class HomeScreen extends Fragment
+        implements View.OnClickListener,
+        Utils.setOnItemClickListner,
+        Utils.progressBarListner,
+        Utils.setOnItemDateSelClickListner {
 
     public String TAG = HomeScreen.this.getClass().getSimpleName();
 
-    @Bind(R.id.newarticle)
+    @BindView(R.id.newarticle)
     TextView newarticle;
-    @Bind(R.id.sel_date)
+    @BindView(R.id.sel_date)
     TextView sel_date;
 
-    @Bind(R.id.txt_info)
+    @BindView(R.id.txt_info)
     TextView txt_info;
 
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar progressbar;
 
-    @Bind(R.id.swipe_refresh_layout)
+    @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @Bind(R.id.result_listview)
+    @BindView(R.id.result_listview)
     RecyclerView display_data;
-    @Bind(R.id.horizontal_recycler_view)
+    @BindView(R.id.horizontal_recycler_view)
     RecyclerView horizontal_recycler_view;
 
     public String Intent_opt = "";
@@ -142,7 +149,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         display_data.setLayoutManager(mLinearLayout);
         searchAdapter = new SearchListDataAdapter(getActivity(), Constants.SEARCHARTICLES);
         display_data.setAdapter(searchAdapter);
-        searchAdapter.setClickListener(this);
+        searchAdapter.setClickListener(this, this);
 
         newarticle.setOnClickListener(this);
         sel_date.setOnClickListener(this);
@@ -308,7 +315,6 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
             else
                 progressbar.setVisibility(View.VISIBLE);
 
-
             BuzzingaApplication.getUserSession().setSETUP(Constants.SETUP);
             BuzzingaApplication.getUserSession().setTIMEZONE(Utils.timezone());
 
@@ -317,16 +323,18 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-
-                            Utils.showLog(TAG, "resposne is " + "get data", Config.HOME_SCREEN);
-
-                            article_loading(response, type_req);
-
-                            if (swipeRefreshLayout.isRefreshing() == true) {
-                                Swipe_loading = true;
-                                swipeRefreshLayout.setRefreshing(false);
-                            } else
-                                progressbar.setVisibility(View.GONE);
+                            try {
+                                jobj = new JSONObject(response);
+                                if (jobj.getString("error").equals("0")) {
+                                    Utils.showLog(TAG, "resposne is " + "get data", Config.HOME_SCREEN);
+                                    article_loading(jobj, type_req);
+                                } else {
+                                    Toast.makeText(getActivity(), "Buzzinga get an some error", Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                Utils.RedirectLoginPage(getContext());
+                            }
+                            hideProgressBar();
                         }
 
                     }, new Response.ErrorListener() {
@@ -390,6 +398,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                         builder.append("sessionid");
                         builder.append("=");
                         builder.append(sessionid);
+                        //builder.append("");
                         if (headers.containsKey("Cookie")) {
                             builder.append("; ");
                             builder.append(headers.get("Cookie"));
@@ -400,6 +409,31 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
                     Utils.showLog(TAG, "headers are " + headers, Config.HOME_SCREEN);
                     return headers;
                 }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    Log.i(TAG, "data " + new String(response.data));
+                    return super.parseNetworkResponse(response);
+                }
+
+                @Override
+                protected void deliverResponse(String response) {
+                    super.deliverResponse(response);
+                }
+
+                @Override
+                public String getUrl() {
+                    Log.i(TAG, "url is " + super.getUrl());
+                    return super.getUrl();
+                }
+
+                @Override
+                public String getOriginUrl() {
+                    Log.i(TAG, " original url is " + super.getOriginUrl());
+                    return super.getOriginUrl();
+                }
+
+
             };
             serverRequest.setRetryPolicy(new DefaultRetryPolicy(
                     30 * 1000,
@@ -423,7 +457,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     }
 
-    public void article_loading(String response, int req_type) {
+    public void article_loading(JSONObject response, int req_type) {
 
         removeScrollProgess();
         if (swipeRefreshLayout.isRefreshing() || SEARCH == req_type)
@@ -434,6 +468,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         Constants.state = display_data.getLayoutManager().onSaveInstanceState();
         // articleDetails();
         searchAdapter.notifyDataSetChanged();
+
         if (Constants.SEARCHARTICLES.size() > 0) {
             BuzzingaApplication.getUserSession().setLatestDate(Constants.SEARCHARTICLES.get(0).source.DATE_ADDED);
         }
@@ -461,11 +496,10 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
     }
 
-    public void getJsonData(String data) {
+    public void getJsonData(JSONObject jobj) {
 
         try {
 
-            jobj = new JSONObject(data);
             //utils.showLog(TAG, "jobj is " + jobj.toString(), Config.HOME_SCREEN);
 
             if (jobj.getString("error").equals("0")) {
@@ -488,6 +522,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
                 } else {
                     Constants.scroolid = "1";
+
                 }
 
                 if (Constants.SEARCHARTICLES.size() <= 0) {
@@ -503,6 +538,7 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
         } catch (JSONException e) {
             Log.i(TAG, "exception" + e);
             e.printStackTrace();
+
         }
 
     }
@@ -640,5 +676,21 @@ public class HomeScreen extends Fragment implements View.OnClickListener, Utils.
 
         sel_date.setText(Utils.dispalyDateFormate(BuzzingaApplication.getUserSession().getFROM_DATE()) + " TO " +
                 Utils.dispalyDateFormate(BuzzingaApplication.getUserSession().getTO_DATE()));
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+        if (swipeRefreshLayout.isRefreshing() == true) {
+            Swipe_loading = true;
+            swipeRefreshLayout.setRefreshing(false);
+        }
+        progressbar.setVisibility(View.GONE);
+
     }
 }

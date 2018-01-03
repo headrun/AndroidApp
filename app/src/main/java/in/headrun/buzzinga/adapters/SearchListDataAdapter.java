@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -37,7 +38,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.CompactTweetView;
@@ -48,6 +48,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +56,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Config;
@@ -87,21 +89,21 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final int VIEW_FACEBOOK = 4;
 
     private Utils.setOnItemClickListner onitemclicklistner = null;
+    private Utils.progressBarListner mprogressBarListner = null;
 
     public SearchListDataAdapter(Context context, LinkedList<SearchArticles> listdata) {
 
         Log.i(TAG, "search data adapter is" + listdata.size());
-
         this.context = context;
         this.listdata = listdata;
-
         time_ago = new TimeAgo(context);
 
-        Twitter.initialize(context);
     }
 
-    public void setClickListener(Utils.setOnItemClickListner onitemclicklistner) {
+    public void setClickListener(Utils.setOnItemClickListner onitemclicklistner,
+                                 Utils.progressBarListner mprogressBarListner) {
         this.onitemclicklistner = onitemclicklistner;
+        this.mprogressBarListner = mprogressBarListner;
     }
 
     @Override
@@ -246,7 +248,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (sentiment_type != null)
                 twitter_holder.sentiment_type.setImageDrawable(ContextCompat.getDrawable(context, getEmoji(sentiment_type)));
 
-
             if (item.source != null && item.source.original_data != null && item.source.original_data.user_data != null) {
 
                 SearchArticles.UserData data = item.source.original_data.user_data;
@@ -318,7 +319,9 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (item.source != null && item.source.original_data != null) {
                 List<SearchArticles.Urls> urls = item.source.original_data.entities.entite_urls;
                 String tweet_id = item.source.original_data.id_str;
-                showTwitterView(context, tweet_id, twitter_holder.tweet_view, position);
+                // showTwitterView(context, tweet_id, twitter_holder.tweet_view, position);
+
+                new ShowTweet(context, tweet_id, twitter_holder.tweet_view, position);
             }
 
         } else if (holder instanceof FacebookEmbedded) {
@@ -331,7 +334,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     setwebdata(fb_holder.webview, "", item.source.FB_DATA);
                 }*/
 
-                 setfbdata(fb_holder.webview, item.source.URL);
+                setfbdata(fb_holder.webview, item.source.URL);
             }
 
 
@@ -382,6 +385,13 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
+
+
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     @Override
@@ -391,17 +401,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class ViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.item1)
+        @BindView(R.id.item1)
         public TextView item1;
-        @Bind(R.id.item2)
+        @BindView(R.id.item2)
         public TextView item2;
-        /*@Bind(R.id.item3)
+        /*@BindView(R.id.item3)
         public TextView item3;*/
-        @Bind(R.id.author)
+        @BindView(R.id.author)
         public TextView author;
-        @Bind(R.id.articledate)
+        @BindView(R.id.articledate)
         public TextView articledate;
-        @Bind(R.id.article_lay)
+        @BindView(R.id.article_lay)
         public RelativeLayout article_lay;
 
         public ViewItemHolder(View view) {
@@ -422,21 +432,21 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class ArticleViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.article_img)
+        @BindView(R.id.article_img)
         public ImageView article_img;
-        @Bind(R.id.display_name)
+        @BindView(R.id.display_name)
         public TextView display_name;
-        @Bind(R.id.article_name)
+        @BindView(R.id.article_name)
         public TextView article_name;
-        @Bind(R.id.article_time)
+        @BindView(R.id.article_time)
         public TextView article_time;
-        @Bind(R.id.article_text)
+        @BindView(R.id.article_text)
         public TextView article_text;
-        @Bind(R.id.twitter_article_lay)
+        @BindView(R.id.twitter_article_lay)
         public LinearLayout twitter_article_lay;
-        @Bind(R.id.source_icon)
+        @BindView(R.id.source_icon)
         public ImageView source_icon;
-        @Bind(R.id.sentiment_type)
+        @BindView(R.id.sentiment_type)
         public ImageView sentiment_type;
 
 
@@ -463,9 +473,9 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class TwetterEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.tweet_view)
+        @BindView(R.id.tweet_view)
         RelativeLayout tweet_view;
-        /*@Bind(R.id.tweet_lay)
+        /*@BindView(R.id.tweet_lay)
         RelativeLayout tweet_lay;*/
 
         public TwetterEmbedded(View itemView) {
@@ -485,7 +495,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class FacebookEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener {
 
-        @Bind(R.id.webview)
+        @BindView(R.id.webview)
         public WebView webview;
 
         public FacebookEmbedded(View itemView) {
@@ -520,7 +530,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class ProgrssHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.progres)
+        @BindView(R.id.progres)
         public ProgressBar progress;
 
         public ProgrssHolder(View itemView) {
@@ -537,15 +547,15 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class GenralArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.og_image)
+        @BindView(R.id.og_image)
         ImageView og_image;
-        @Bind(R.id.og_title)
+        @BindView(R.id.og_title)
         TextView og_title;
-        @Bind(R.id.og_description)
+        @BindView(R.id.og_description)
         TextView og_description;
-        @Bind(R.id.favicon)
+        @BindView(R.id.favicon)
         ImageView favicon;
-        @Bind(R.id.og_url)
+        @BindView(R.id.og_url)
         TextView og_url;
 
         public GenralArticleViewHolder(View itemView) {
@@ -752,9 +762,11 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return img;
     }
 
-    private void showTwitterView(final Context context, String tweetId,
+    private void showTwitterView(final Context context, final String tweetId,
                                  final RelativeLayout tweet_embedded, final int pos) {
         // Twitter.getInstance();
+
+        final WeakReference<RelativeLayout> mWeakReference = new WeakReference<RelativeLayout>(tweet_embedded);
 
         TweetUtils.loadTweet(Long.parseLong(tweetId), new Callback<Tweet>() {
             @Override
@@ -771,6 +783,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         }
                     }
                 });
+
                 compact_vew.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -779,7 +792,12 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         }
                     }
                 });
-                tweet_embedded.addView(compact_vew);
+
+                if (mWeakReference != null) {
+                    RelativeLayout mtweetview = mWeakReference.get();
+                    if (mtweetview != null)
+                        mtweetview.addView(compact_vew);
+                }
 
             }
 
@@ -788,6 +806,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 exception.printStackTrace();
             }
         });
+
     }
 
     public void setfbdata(WebView webview, String url) {
@@ -949,6 +968,57 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 setwebdata((WebView) articl_view, "", response);
 
             }
+        }
+    }
+
+    class ShowTweet extends Callback<Tweet> {
+
+        final WeakReference<RelativeLayout> mWeakReference;
+        int pos;
+
+        ShowTweet(final Context context, final String tweetId,
+                  final RelativeLayout tweet_embedded, final int pos) {
+
+            this.pos = pos;
+            mWeakReference = new WeakReference<RelativeLayout>(tweet_embedded);
+            TweetUtils.loadTweet(Long.parseLong(tweetId), this);
+        }
+
+        @Override
+        public void success(Result<Tweet> result) {
+            final CompactTweetView compact_vew = new CompactTweetView(context, result.data,
+                    R.style.tw__TweetLightStyle);
+
+            compact_vew.setTweetLinkClickListener(new TweetLinkClickListener() {
+                @Override
+                public void onLinkClick(Tweet tweet, String url) {
+
+                    if (onitemclicklistner != null) {
+                        onitemclicklistner.itemClicked(compact_vew, pos);
+                    }
+                }
+            });
+
+            compact_vew.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onitemclicklistner != null) {
+                        onitemclicklistner.itemClicked(v, pos);
+                    }
+                }
+            });
+
+            if (mWeakReference != null) {
+                RelativeLayout mtweetview = mWeakReference.get();
+                if (mtweetview != null)
+                    mtweetview.addView(compact_vew);
+            }
+
+        }
+
+        @Override
+        public void failure(TwitterException exception) {
+            exception.printStackTrace();
         }
     }
 

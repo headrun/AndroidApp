@@ -1,5 +1,6 @@
 package in.headrun.buzzinga.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
@@ -10,12 +11,14 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
@@ -63,6 +66,7 @@ import in.headrun.buzzinga.BuzzingaNotification;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.activities.MainActivity;
 import in.headrun.buzzinga.activities.Pager;
+import in.headrun.buzzinga.activities.TwitterLogin;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
@@ -157,9 +161,9 @@ public class Utils {
     public static String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
 
         setupdate(fromdate, todate);
-        String search_key = "(" + trackkey + "" +
+        String search_key = "(" + trackkey + ")" +
                 (!check_query_value(searckkey).isEmpty() ?
-                        " AND \"" + check_query_value(searckkey) + "\"" : "") + ")";
+                        " AND (\"" + searckkey + "\")" : "");
 
         String query = search_key + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) +
@@ -802,7 +806,15 @@ public class Utils {
 
         public void itemClicked(View view, int position);
 
+
     }
+
+    public interface progressBarListner{
+        public void showProgressBar();
+        public void hideProgressBar();
+
+    }
+
 
     public interface setOnItemDateSelClickListner {
 
@@ -956,7 +968,6 @@ public class Utils {
                             try {
                                 JSONObject jobj_reult = new JSONObject(response);
 
-
                                 if (jobj_reult.optInt("error") == 0) {
                                     JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
                                     long article_count = json_result.optInt("count");
@@ -1109,7 +1120,11 @@ public class Utils {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + mobile_number));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+            if (ActivityCompat.checkSelfPermission(context,
+                    Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                context.startActivity(intent);
+            }
+
         }
 
     }
@@ -1263,6 +1278,17 @@ public class Utils {
                 context.getString(R.string.twitter_consumer_secret)));
 
     }*/
+
+    //redirect to login page
+    public static void RedirectLoginPage(Context context) {
+        Utils.clearSessionData();
+        context.startActivity(new Intent(context, TwitterLogin.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK));
+        ((Activity) context).finish();
+        ((Activity) context).overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+    }
 }
 
 

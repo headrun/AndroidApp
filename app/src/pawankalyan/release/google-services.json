@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "157334602621",
+    "firebase_url": "https://pspk-buzz.firebaseio.com",
+    "project_id": "pspk-buzz",
+    "storage_bucket": "pspk-buzz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157334602621:android:53b4054b69856702",
+        "android_client_info": {
+          "package_name": "in.headrun.buzzinga.pspk_buzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157334602621-l6t2hr13k9ejgpqtpipolvmeof3ci74c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.headrun.buzzinga.pspk_buzz",
+            "certificate_hash": "bb85a0e536a94464a6f1dbe69a3c31a240a8924b"
+          }
+        },
+        {
+          "client_id": "157334602621-p0rmvc8bac22o5610q054hn8cc8sgjrd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI-5TKOarWPvnZTYqwoFaNbTmqOxj-n8g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157334602621-p0rmvc8bac22o5610q054hn8cc8sgjrd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

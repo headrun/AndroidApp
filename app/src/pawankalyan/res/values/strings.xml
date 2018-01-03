@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PSPK BUZZ</string>
+
+    <string name="subtitle"></string>
+    <string name="nav_header_title">@string/app_name</string>
+    <string-array name="track_keywords" translatable="false">
+        <item>pawan kalyan</item>
+        <item>pawankalyan</item>
+        <item>పవన్ కళ్యాణ్</item>
+        <item>pspk</item>
+        <item>Powerstar</item>
+        <item>పవర్ స్టార్</item>
+        <item>pavan kalyan</item>
+        <item>pavankalyan</item>
+        <item>TrendPSPK</item>
+        <item>Jai_Pawanism</item>
+        <item>Jai_Pawanism</item>
+    </string-array>
+</resources>

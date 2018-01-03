@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "650244395322",
+    "firebase_url": "https://janasena-buzz.firebaseio.com",
+    "project_id": "janasena-buzz",
+    "storage_bucket": "janasena-buzz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650244395322:android:dac4c0263b7abb88",
+        "android_client_info": {
+          "package_name": "in.headrun.buzzinga.janasena_buzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650244395322-iu9qmecptfho2bsg2s530g6ns9clqb2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.headrun.buzzinga.janasena_buzz",
+            "certificate_hash": "12ad5d741d60c665e0efe67e21d25dd77223f8af"
+          }
+        },
+        {
+          "client_id": "650244395322-kais4fv3vgrm9k3jjpjk65b19n9ccr1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBziN02ZjtvdbjO-__B3RVr1hR-7nnOW6Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650244395322-kais4fv3vgrm9k3jjpjk65b19n9ccr1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

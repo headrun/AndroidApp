@@ -42,7 +42,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import in.headrun.buzzinga.BuzzingaApplication;
@@ -59,21 +60,21 @@ public class MainActivity extends AppCompatActivity
 
     public String TAG = MainActivity.class.getSimpleName();
 
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
-    @Bind(R.id.nav_view)
+    @BindView(R.id.nav_view)
     NavigationView navigationView;
-    @Bind(R.id.openMenu)
+    @BindView(R.id.openMenu)
     ImageView openMenu;
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView title;
-    @Bind(R.id.badger)
+    @BindView(R.id.badger)
     TextView badger;
-    @Bind(R.id.search_view)
+    @BindView(R.id.search_view)
     MaterialSearchView searchView;
 
     ActionBarDrawerToggle toggle;
@@ -178,10 +179,6 @@ public class MainActivity extends AppCompatActivity
         });
 
         call_homeFragment(Intent_opt);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //  client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
 
     }
 
@@ -284,13 +281,7 @@ public class MainActivity extends AppCompatActivity
 
                             Log.d(TAG, "string response is" + response);
 
-                            Utils.clearSessionData();
-                            startActivity(new Intent(MainActivity.this, TwitterLogin.class)
-                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                                            Intent.FLAG_ACTIVITY_NEW_TASK));
-                            finish();
-                            overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+                            Utils.RedirectLoginPage(MainActivity.this);
                             progress_bar.setVisibility(View.GONE);
 
                         }
@@ -320,7 +311,11 @@ public class MainActivity extends AppCompatActivity
 
         if (Utils.isNetwrokConnection(this)) {
 
-            title.setText(Utils.setTitle(this));
+            String search_key = "";
+            if (!Constants.SEARCHSTRING.isEmpty()) {
+                search_key = " AND " + Constants.SEARCHSTRING;
+            }
+            title.setText(Utils.setTitle(this) + search_key);
             Utils.add_query_data();
             Intent_opt = Constants.Intent_TRACK;
             call_homeFragment(Intent_opt);
@@ -399,7 +394,7 @@ public class MainActivity extends AppCompatActivity
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
-        String from_date = Utils.query_fromdate(Arrays.asList(BuzzingaApplication.getUserSession().getFROM_DATE()),this);
+        String from_date = Utils.query_fromdate(Arrays.asList(BuzzingaApplication.getUserSession().getFROM_DATE()), this);
 
         String to_date = Utils.query_todate(Arrays.asList(BuzzingaApplication.getUserSession().getTO_DATE()));
 

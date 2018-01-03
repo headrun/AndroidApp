@@ -24,7 +24,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -41,15 +42,15 @@ public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
 
-    @Bind(R.id.twitter_login_button1)
+    @BindView(R.id.twitter_login_button1)
     ImageView loginButton;
-    @Bind(R.id.progressbar)
+    @BindView(R.id.progressbar)
     ProgressBar progressbar;
-    @Bind(R.id.twitter_btn)
+    @BindView(R.id.twitter_btn)
     View twitter_btn;
-    @Bind(R.id.twitter_auth_lay)
+    @BindView(R.id.twitter_auth_lay)
     View twitter_auth_lay;
-    @Bind(R.id.webview)
+    @BindView(R.id.webview)
     WebView webview;
 
 

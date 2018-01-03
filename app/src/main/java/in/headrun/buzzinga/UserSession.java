@@ -259,4 +259,10 @@ public class UserSession {
     public String getNotifyHour() {
         return pref.getString(NOTIFY_HOUR, "1 hour");
     }
+
+    //clear all the data
+    public void clearSharedPrefData() {
+        if (editor != null)
+            editor.clear();
+    }
 }

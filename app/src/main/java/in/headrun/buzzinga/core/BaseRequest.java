@@ -43,7 +43,7 @@ public class BaseRequest<T> extends Request<T> {
         this.typeToken = typeToken;
         this.listener = listener;
         this.mContext = mContext;
-        Log.i("Base request", url + "\nparams " + params + "\nheaders" + headers);
+        //Log.i("Base request", url + "\nparams " + params + "\nheaders" + headers);
 
         setRetryPolicy(new DefaultRetryPolicy(50000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
@@ -59,7 +59,7 @@ public class BaseRequest<T> extends Request<T> {
             jsonResponse = new String(networkResponse.data,
                     HttpHeaderParser.parseCharset(networkResponse.headers));
 
-            Log.i(TAG, "url is" + getUrl() + " repsonse is " + jsonResponse);
+            //Log.i(TAG, "url is" + getUrl() + " repsonse is " + jsonResponse);
 
             try {
                 response = gson.fromJson(jsonResponse, typeToken.getType());

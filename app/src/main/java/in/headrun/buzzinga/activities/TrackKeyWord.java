@@ -16,7 +16,8 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
@@ -32,11 +33,11 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
     public String TAG = TrackKeyWord.this.getClass().getSimpleName();
 
-    @Bind(R.id.keyword)
+    @BindView(R.id.keyword)
     EditText Trackkeyword;
-    @Bind(R.id.trackbtn)
+    @BindView(R.id.trackbtn)
     Button trackbtn;
-    @Bind(R.id.track_progress)
+    @BindView(R.id.track_progress)
     ProgressBar trak_progress;
 
 

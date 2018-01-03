@@ -49,6 +49,8 @@ public class BuzzingaApplication extends Application {
         instance = this;
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
+
+
         imageLoader = new ImageLoader(requestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
@@ -81,7 +83,7 @@ public class BuzzingaApplication extends Application {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-
+       // Twitter.initialize(instance);
 
     }
 
