@@ -31,7 +31,7 @@ public class SearchActivity extends Activity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            new Utils(this).showLog(TAG, "search string is " + query, Config.SearchActivity);
+            Utils.showLog(TAG, "search string is " + query, Config.SearchActivity);
         }
     }
 }

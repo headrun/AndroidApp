@@ -22,8 +22,10 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.SearchArticles;
@@ -36,15 +38,15 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
     public String TAG = ArticleWebDisplay.this.getClass().getSimpleName();
 
-    @Bind(R.id.article_webview)
+    @BindView(R.id.article_webview)
     WebView article_webview;
-    @Bind(R.id.article_browser_progress)
+    @BindView(R.id.article_browser_progress)
     ProgressBar article_progress;
 
     String url = "", title = "";
     int pos;
     SearchArticles article_details;
-    Utils utils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ArticleWebDisplay extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         pos = data.getInt("pos");
-        utils = new Utils(this);
+
         if (Constants.SEARCHARTICLES.size() >= pos)
             article_details = Constants.SEARCHARTICLES.get(pos);
 
@@ -107,8 +109,8 @@ public class ArticleWebDisplay extends AppCompatActivity {
 */
         Bundle params = new Bundle();
         params.putString("open_link", url);
-        utils.mFirebaseAnalytics.logEvent("article_open", params);
-        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        BuzzingaApplication.getmFirebaseAnalytics().logEvent("article_open", params);
+        BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
     }
 
     private void webSettings(String url) {
@@ -188,11 +190,11 @@ public class ArticleWebDisplay extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class).
+        /*startActivity(new Intent(this, MainActivity.class).
                 putExtra(Constants.Intent_OPERATION, Constants.Intent_NOTHING).
                 setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                        Intent.FLAG_ACTIVITY_NEW_TASK));
+                        Intent.FLAG_ACTIVITY_NEW_TASK));*/
         overridePendingTransition(R.anim.move_right_out_activity, R.anim.move_left_in_activity);
     }
 }

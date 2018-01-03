@@ -76,7 +76,6 @@ public class UserSession {
     }
 
     public void clearsession(String data) {
-
         editor.remove(data);
         editor.commit();
 
@@ -108,8 +107,6 @@ public class UserSession {
         editor.putString(search_CLUBBEDQUERY, clubbedquery);
         editor.commit();
         String query = pref.getString(search_CLUBBEDQUERY, "");
-
-
     }
 
     public boolean isBUZZ_NOTIFY_SEL() {
@@ -122,7 +119,6 @@ public class UserSession {
         editor.putBoolean("BUZZ_NOTIFY_SEL", notifysel);
         editor.commit();
     }
-
 
     public String getTIMEZONE() {
         String timezone = pref.getString(TIMEZONE, "null");
@@ -152,7 +148,6 @@ public class UserSession {
 
     }
 
-
     public String getLatestDate() {
         String getLastestDate = pref.getString(LATEST_DATE, "0");
 
@@ -177,7 +172,7 @@ public class UserSession {
 
         editor.putString(TRACK_KEY, trackKey);
         editor.commit();
-        String query = pref.getString(TRACK_KEY, "");
+
     }
 
     public void setTACK_SEARCH_KEY(String search_key) {
@@ -263,5 +258,11 @@ public class UserSession {
     ////get the notify value
     public String getNotifyHour() {
         return pref.getString(NOTIFY_HOUR, "1 hour");
+    }
+
+    //clear all the data
+    public void clearSharedPrefData() {
+        if (editor != null)
+            editor.clear();
     }
 }

@@ -1,5 +1,6 @@
 package in.headrun.buzzinga.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
@@ -10,11 +11,14 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
@@ -33,6 +37,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,11 +62,11 @@ import java.util.concurrent.TimeUnit;
 import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.BuzzingaNotification;
-import in.headrun.buzzinga.BuzzingaRequest;
+
 import in.headrun.buzzinga.R;
-import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.activities.MainActivity;
 import in.headrun.buzzinga.activities.Pager;
+import in.headrun.buzzinga.activities.TwitterLogin;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
@@ -72,21 +78,17 @@ import in.headrun.buzzinga.doto.QueryData;
 public class Utils {
 
     public static String trackkey_query, search_query, source_query, gender_query, sentiment_query, location_query, language_query, scrollid_query, fromdate_query, todate_queruy;
-    public String TAG = Utils.this.getClass().getSimpleName();
-    static Context context;
-    ArrayList<QueryData> query = new ArrayList<QueryData>();
-    StringBuilder queryvalue = new StringBuilder();
-    public UserSession userSession;
+    public static String TAG = "Utils";
 
-    BuzzingaApplication buzzapp = new BuzzingaApplication();
-    JobScheduler job_scheduler;
-    AlarmManager alarmManager;
-    public FirebaseAnalytics mFirebaseAnalytics;
+    ArrayList<QueryData> query = new ArrayList<QueryData>();
+    static StringBuilder queryvalue = new StringBuilder();
+    static JobScheduler job_scheduler;
+    static AlarmManager alarmManager;
+    public static FirebaseAnalytics mFirebaseAnalytics;
 
     public Utils(Context context) {
-        this.context = context;
-        userSession = new UserSession(context);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+
+
     }
 
     public static String timezone() {
@@ -102,7 +104,7 @@ public class Utils {
             return String.valueOf(Math.abs(tz));
     }
 
-    public String getquerydata(List<QueryData> data) {
+    public static String getquerydata(List<QueryData> data, Context context) {
 
         Log.i(TAG, "Array query data size is" + data.size());
         if (data.size() > 0) {
@@ -113,7 +115,6 @@ public class Utils {
                     case Constants.TRACKKEY:
                         trackkey_query = query_trackkey(i.getBvalue());
                         Log.i(TAG, "Track key is " + trackkey_query);
-
                         break;
                     case Constants.SEARCHKEY:
                         search_query = query_searchkey(i.getBvalue());
@@ -141,7 +142,7 @@ public class Utils {
                         Log.i(TAG, "lang is" + language_query);
                         break;
                     case Constants.FROMDATE:
-                        fromdate_query = query_fromdate(i.getBvalue());
+                        fromdate_query = query_fromdate(i.getBvalue(), context);
                         Log.i(TAG, "from date is" + fromdate_query);
                         break;
                     case Constants.TODATE:
@@ -157,20 +158,20 @@ public class Utils {
         return "";
     }
 
-    public String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
+    public static String formquery(String trackkey, String searckkey, String source, String sentiment, String gender, String loc, String lang, String fromdate, String todate) {
 
         setupdate(fromdate, todate);
-        String search_key = "(\"" + trackkey + "\"" +
+        String search_key = "(" + trackkey + ")" +
                 (!check_query_value(searckkey).isEmpty() ?
-                        " AND \"" + check_query_value(searckkey) + "\"" : "") + ")";
+                        " AND (\"" + searckkey + "\")" : "");
 
         String query = search_key + check_query_value(source)
                 + check_query_value(sentiment) + check_query_value(gender) +
                 check_query_value(loc) + check_query_value(lang);
 
-        userSession.setClubbedquery(query);
+        BuzzingaApplication.getUserSession().setClubbedquery(query);
 
-        String query_date = userSession.getClubbedquery() + " AND dt_added:[" + fromdate + " TO " + todate + "]";
+        String query_date = BuzzingaApplication.getUserSession().getClubbedquery() + " AND dt_added:[" + fromdate + " TO " + todate + "]";
 
         Log.i(TAG, "query_date" + query_date);
 
@@ -178,14 +179,14 @@ public class Utils {
 
     }
 
-    public String check_query_value(String query_value) {
+    public static String check_query_value(String query_value) {
         if (query_value != null)
             return query_value.toString();
         else
             return "";
     }
 
-    public String query_searchkey(List<String> item) {
+    public static String query_searchkey(List<String> item) {
         queryvalue.setLength(0);
         Log.i(TAG, "search key size is" + item.size());
         if (item.size() > 1) {
@@ -199,31 +200,30 @@ public class Utils {
                 return queryvalue.toString();
             }
         } else
-            return userSession.gettTACK_SEARCH_KEY();
+            return BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY();
 
         return "";
     }
 
-    public String query_trackkey(List<String> item) {
+    public static String query_trackkey(List<String> item) {
         queryvalue.setLength(0);
-        if (item.size() > 1) {
+        if (item.size() > 0) {
             if (item.get(0) != null) {
                 String pref = "";
                 for (String tkey : item) {
                     queryvalue.append(pref);
-                    pref = " AND ";
-                    queryvalue.append(tkey.trim());
+                    pref = " OR ";
+                    queryvalue.append("\"" + tkey.trim() + "\"");
                 }
                 return queryvalue.toString();
             }
-        } else if (!userSession.getTrackKey().equals("0")) {
-            return userSession.getTrackKey();
+        } else if (!BuzzingaApplication.getUserSession().getTrackKey().isEmpty()) {
+            return "\"" + BuzzingaApplication.getUserSession().getTrackKey() + "\"";
         }
         return "";
-
     }
 
-    public String query_sources(List<String> item) {
+    public static String query_sources(List<String> item) {
         queryvalue.setLength(0);
         String pref = "";
         query_loc_source();
@@ -264,7 +264,7 @@ public class Utils {
         }
     }
 
-    public String get_source_xtag(String sourcetype) {
+    public static String get_source_xtag(String sourcetype) {
         if (!sourcetype.isEmpty()) {
             sourcetype = sourcetype.trim().toLowerCase();
             if (Constants.source_map.containsKey(sourcetype)) {
@@ -305,7 +305,7 @@ public class Utils {
         return "";
     }
 
-    public void query_loc_source() {
+    public static void query_loc_source() {
 
         String pref = "";
 
@@ -356,7 +356,7 @@ public class Utils {
                 "\nConstants.facebook_specific_xtags" + Constants.facebook_specific_xtags);
     }
 
-    public String query_gender(List<String> item) {
+    public static String query_gender(List<String> item) {
         queryvalue.setLength(0);
         String pref = "";
         String value = "";
@@ -392,7 +392,7 @@ public class Utils {
         return queryvalue.toString();
     }
 
-    public String query_sentiment(List<String> item) {
+    public static String query_sentiment(List<String> item) {
         queryvalue.setLength(0);
         String pref = "";
         if (item.size() >= 1) {
@@ -410,7 +410,7 @@ public class Utils {
 
     }
 
-    public String query_fromdate(List<String> item) {
+    public static String query_fromdate(List<String> item, Context context) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -429,15 +429,15 @@ public class Utils {
         }
 
         if (from_date.isEmpty()) {
-            now.add(Calendar.DATE, -30);
+            now.add(Calendar.DATE, context.getResources().getInteger(R.integer.default_from_day));
             from_date = sdf2.format(now.getTime());
-            userSession.setFROM_DATE(sdf2.format(now.getTime()));
+            BuzzingaApplication.getUserSession().setFROM_DATE(sdf2.format(now.getTime()));
         }
 
         return from_date + "T00:00:00";
     }
 
-    public String query_todate(List<String> item) {
+    public static String query_todate(List<String> item) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat sdf1 = new SimpleDateFormat("'T'HH:mm:ss", Locale.getDefault());
         Calendar now = Calendar.getInstance();
@@ -458,7 +458,7 @@ public class Utils {
 
         if (todate.isEmpty()) {
             todate = sdf.format(now.getTime()) + sdf1.format(now.getTime());
-            userSession.setTO_DATE(sdf.format(now.getTime()));
+            BuzzingaApplication.getUserSession().setTO_DATE(sdf.format(now.getTime()));
         }
         /*try {
             Date sel_date = sdf.parse(todate);
@@ -481,7 +481,7 @@ public class Utils {
         return todate;
     }
 
-    public String query_language(List<String> item) {
+    public static String query_language(List<String> item) {
         Log.i(TAG, "lang size is" + item.size());
         queryvalue.setLength(0);
         String pref = "";
@@ -499,7 +499,7 @@ public class Utils {
         return queryvalue.toString().isEmpty() ? "" : " AND (" + queryvalue.toString() + ")";
     }
 
-    public String query_location(List<String> item) {
+    public static String query_location(List<String> item) {
         Log.i(TAG, "loc size is" + item.size());
         queryvalue.setLength(0);
         String pref = "";
@@ -518,7 +518,7 @@ public class Utils {
         return queryvalue.toString().isEmpty() ? "" : " AND (" + queryvalue.toString() + ")";
     }
 
-    public String queryform(String query_data) {
+    public static String queryform(String query_data) {
 
 
         JSONObject main = new JSONObject();
@@ -574,7 +574,7 @@ public class Utils {
         return main.toString();
     }
 
-    public String count_query() {
+    public static String count_query() {
         JSONObject main = new JSONObject();
         JSONObject dataquery = new JSONObject();
         JSONObject query_string = new JSONObject();
@@ -603,11 +603,11 @@ public class Utils {
             e.printStackTrace();
         }
 
-        Log.i(TAG, "count_clubbed_query is" + main.toString());
+
         return main.toString();
     }
 
-    public void setupdate(String fromdate, String todate) {
+    public static void setupdate(String fromdate, String todate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date FromDate = new Date();
         Date ToDate = new Date();
@@ -629,17 +629,17 @@ public class Utils {
 
     }
 
-    public void Buzz_notification(long article_count) throws Exception {
+    public static void Buzz_notification(long article_count, Context context) throws Exception {
 
         /*if (screendisplay()) {
             // HomeScreen.newarticle.setText(article_count + " New Articles");
             // HomeScreen.newarticle.setVisibility(View.VISIBLE);
             Log.i(TAG, "article count" + article_count);
         } else {*/
-        Log.i(TAG, "Buzz Notification article count" + article_count);
 
-        String context_text = article_count + "new articles found for your keyword \t" + userSession.getTrackKey() +
-                (!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
+
+        String context_text = article_count + "new articles found for your keyword \t" + BuzzingaApplication.getUserSession().getTrackKey() +
+                (!BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY().isEmpty() ? " and " + BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY() : "");
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
@@ -668,7 +668,7 @@ public class Utils {
         //}
     }
 
-    public String timestamp(long ecpoch_value) {
+    public static String timestamp(long ecpoch_value) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         if (ecpoch_value != 0) {
             long millis = ecpoch_value * 1000;
@@ -687,16 +687,16 @@ public class Utils {
         }
     }
 
-    public String Date_added_toquery() {
+    public static String Date_added_toquery() {
 
-        String from_date = timestamp(Long.parseLong(userSession.getLatestDate()));
+        String from_date = timestamp(Long.parseLong(BuzzingaApplication.getUserSession().getLatestDate()));
         String to_date = timestamp(0);
-        String count_clubbed_query = userSession.getClubbedquery() + " AND dt_added:[" + from_date + " TO " + to_date + "]";
+        String count_clubbed_query = BuzzingaApplication.getUserSession().getClubbedquery() + " AND dt_added:[" + from_date + " TO " + to_date + "]";
         setupdate(from_date, to_date);
         return count_clubbed_query;
     }
 
-    public void clear_all_data() {
+    public static void clear_all_data() {
         Constants.SEARCHSTRING = "";
         Constants.BTRACKKEY.clear();
         Constants.BSEARCHKEY.clear();
@@ -709,35 +709,29 @@ public class Utils {
         Constants.BSENTIMENT.clear();
     }
 
-    public void add_filtering_data() {
+    public static void add_filtering_data() {
         clear_all_data();
 
-        Log.i(TAG, "sel data are sources " + userSession.getSources_data() + " \ngender " + userSession.getGender_data() +
-                "\n language " + userSession.getLang_data() + "\n location " + userSession.getLoc_data());
+
+        Constants.BSOURCES.addAll(Arrays.asList(stringtoArray(BuzzingaApplication.getUserSession().getSources_data())));
 
 
-        Constants.BSOURCES.addAll(Arrays.asList(stringtoArray(userSession.getSources_data())));
-
-        for (String item : Constants.BSOURCES) {
-            Log.i(TAG, "copy sel sources data is " + item.toString() + "len is " + Constants.BSOURCES.size());
-        }
-
-        Collections.addAll(Constants.BGENDER, stringtoArray(userSession.getGender_data()));
-        Collections.addAll(Constants.BSENTIMENT, stringtoArray(userSession.getSentiment_data()));
-        Collections.addAll(Constants.BLANGUAGE, stringtoArray(userSession.getLang_data()));
-        Collections.addAll(Constants.BLOCATION, stringtoArray(userSession.getLoc_data()));
-        Constants.BFROMDATE.add(userSession.getFROM_DATE());
-        Constants.BTODATE.add(userSession.getTO_DATE());
-        Constants.BTRACKKEY.add(userSession.getTrackKey());
-        Constants.BSEARCHKEY.add(userSession.gettTACK_SEARCH_KEY());
+        Collections.addAll(Constants.BGENDER, stringtoArray(BuzzingaApplication.getUserSession().getGender_data()));
+        Collections.addAll(Constants.BSENTIMENT, stringtoArray(BuzzingaApplication.getUserSession().getSentiment_data()));
+        Collections.addAll(Constants.BLANGUAGE, stringtoArray(BuzzingaApplication.getUserSession().getLang_data()));
+        Collections.addAll(Constants.BLOCATION, stringtoArray(BuzzingaApplication.getUserSession().getLoc_data()));
+        Collections.addAll(Constants.BTRACKKEY, stringtoArray(BuzzingaApplication.getUserSession().getTrackKey()));
+        Constants.BFROMDATE.add(BuzzingaApplication.getUserSession().getFROM_DATE());
+        Constants.BTODATE.add(BuzzingaApplication.getUserSession().getTO_DATE());
+        Constants.BSEARCHKEY.add(BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY());
 
     }
 
-    public String[] stringtoArray(String value) {
+    public static String[] stringtoArray(String value) {
         return value.replaceAll("\\[|\\]", "").split(",");
     }
 
-    public int countIS(String val) {
+    public static int countIS(String val) {
 
         val = val.replaceAll("\\[|\\]", "");
         if (!val.isEmpty())
@@ -745,10 +739,10 @@ public class Utils {
         return 0;
     }
 
-    public void add_query_data() {
+    public static void add_query_data() {
         add_filtering_data();
         Constants.QueryString.clear();
-        Log.i(TAG, "Constants.BLANGUAGE " + Constants.BLANGUAGE.toString());
+
         Constants.QueryString.add(new QueryData(Constants.TRACKKEY, Constants.BTRACKKEY));
         Constants.QueryString.add(new QueryData(Constants.FROMDATE, Constants.BFROMDATE));
         Constants.QueryString.add(new QueryData(Constants.TODATE, Constants.BTODATE));
@@ -759,11 +753,10 @@ public class Utils {
         Constants.QueryString.add(new QueryData(Constants.GENDER, Constants.BGENDER));
         Constants.QueryString.add(new QueryData(Constants.SENTIMENT, Constants.BSENTIMENT));
 
-        for (QueryData item : Constants.QueryString)
-            Log.i(TAG, " key is " + item.getBkey() + "\n value " + item.getBvalue());
+
     }
 
-    public boolean screendisplay() {
+    public boolean screendisplay(Context context) {
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -785,36 +778,43 @@ public class Utils {
         return isActivityFound;
     }
 
-    public String searchQuery() {
-        Log.i(TAG, "search");
-        userSession.set_search_Clubbedquery(getquerydata(Constants.QueryString));
-        return userSession.get_search_Clubbedquery();
+    public static String searchQuery(Context context) {
+        BuzzingaApplication.getUserSession().set_search_Clubbedquery(getquerydata(Constants.QueryString, context));
+        return BuzzingaApplication.getUserSession().get_search_Clubbedquery();
     }
 
-    public String refreshSearchQuery() {
+    public String refreshSearchQuery(Context context) {
         Log.i(TAG, "search");
         Constants.BFROMDATE.clear();
         Constants.BTODATE.clear();
-        Constants.BFROMDATE.add(userSession.getLatestDate());
+        Constants.BFROMDATE.add(BuzzingaApplication.getUserSession().getLatestDate());
         Constants.BTODATE.add(timestamp(0));
-        userSession.set_search_Clubbedquery(getquerydata(Constants.QueryString));
-        return userSession.get_search_Clubbedquery();
+        BuzzingaApplication.getUserSession().set_search_Clubbedquery(getquerydata(Constants.QueryString, context));
+        return BuzzingaApplication.getUserSession().get_search_Clubbedquery();
     }
 
-    public String scrollQuery() {
+    public static String scrollQuery() {
         return "{\"scroll_id\":\"" + Constants.scroolid + "\",\"scroll_timeout\":\"10m\"}";
     }
 
-    public void clearSessionData() {
-        userSession.editor.clear();
-        userSession.editor.commit();
+    public static void clearSessionData() {
+        BuzzingaApplication.getUserSession().editor.clear();
+        BuzzingaApplication.getUserSession().editor.commit();
     }
 
     public interface setOnItemClickListner {
 
         public void itemClicked(View view, int position);
 
+
     }
+
+    public interface progressBarListner{
+        public void showProgressBar();
+        public void hideProgressBar();
+
+    }
+
 
     public interface setOnItemDateSelClickListner {
 
@@ -823,14 +823,14 @@ public class Utils {
     }
 
 
-    public void showLog(String TAG, String msg, boolean value) {
+    public static void showLog(String TAG, String msg, boolean value) {
 
         if (value && BuildConfig.DEBUG == true) {
             Log.wtf(TAG, msg);
         }
     }
 
-    public static boolean isNetwrokConnection() {
+    public static boolean isNetwrokConnection(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         try {
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -841,7 +841,7 @@ public class Utils {
         return false;
     }
 
-    public static void warning_info(TextView text_view, int msg_type) {
+    public static void warning_info(TextView text_view, int msg_type, Context context) {
 
         if (msg_type == Constants.NO_RECORD) {
             text_view.setText(context.getString(R.string.norecord));
@@ -850,13 +850,13 @@ public class Utils {
     }
 
     ////update listview items
-    public void updateListviewItem(ListView listview, int pos) {
+    public static void updateListviewItem(ListView listview, int pos) {
         int visiblePosition = listview.getFirstVisiblePosition();
         View view = listview.getChildAt(pos - visiblePosition);
         listview.getAdapter().getView(pos, view, listview);
     }
 
-    public void callService() {
+    public static void callService(Context context) {
 
         int is_hour = getNotify_IntervellMills();
 
@@ -870,7 +870,7 @@ public class Utils {
 
                 job_scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
-                stopService();
+                stopService(context);
 
                 JobInfo job = new JobInfo.Builder(Constants.JOBID, new ComponentName(context,
                         BuzzingaNotificationService.class))
@@ -903,11 +903,11 @@ public class Utils {
 
             }
         } else {
-            stopService();
+            stopService(context);
         }
     }
 
-    public void stopService() {
+    public static void stopService(Context context) {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
@@ -936,9 +936,9 @@ public class Utils {
 
     }
 
-    public int getNotify_IntervellMills() {
+    public static int getNotify_IntervellMills() {
 
-        String item_hour = userSession.getNotifyHour();
+        String item_hour = BuzzingaApplication.getUserSession().getNotifyHour();
         int hour_is = 1;
 
         if (!item_hour.isEmpty()) {
@@ -949,15 +949,15 @@ public class Utils {
             }
             showLog(TAG, "notify hour is" + hour_is, Config.Utils);
         } else {
-            userSession.setNotifyHour("1 hour");
+            BuzzingaApplication.getUserSession().setNotifyHour("1 hour");
         }
         return hour_is;
     }
 
-    public void serverCallnotificationCount() {
+    public static void serverCallnotificationCount(final Context context) {
 
         showLog(TAG, "start count call ", Config.Utils);
-        if (!userSession.getTrackKey().isEmpty()) {
+        if (!BuzzingaApplication.getUserSession().getTrackKey().isEmpty()) {
             showLog(TAG, "call count call " + ServerConfig.SERVER_ENDPOINT + ServerConfig.count, Config.Utils);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerConfig.SERVER_ENDPOINT + ServerConfig.count,
                     new Response.Listener<String>() {
@@ -968,14 +968,13 @@ public class Utils {
                             try {
                                 JSONObject jobj_reult = new JSONObject(response);
 
-
                                 if (jobj_reult.optInt("error") == 0) {
                                     JSONObject json_result = new JSONObject(jobj_reult.optString("result"));
                                     long article_count = json_result.optInt("count");
 
                                     if (article_count > 0) {
                                         try {
-                                            Buzz_notification(article_count);
+                                            Buzz_notification(article_count, context);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -999,8 +998,8 @@ public class Utils {
                 protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("clubbed_query", count_query());
-                    params.put("tz", userSession.getTIMEZONE());
-                    params.put("setup", userSession.getSETUP());
+                    params.put("tz", BuzzingaApplication.getUserSession().getTIMEZONE());
+                    params.put("setup", BuzzingaApplication.getUserSession().getSETUP());
 
                     showLog(TAG, "params are " + params, Config.BuzzingaNotification);
                     return params;
@@ -1009,7 +1008,7 @@ public class Utils {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<String, String>();
-                    String sessionid = new UserSession(context).getTSESSION();
+                    String sessionid = BuzzingaApplication.getUserSession().getTSESSION();
                     if (sessionid.length() > 0) {
                         Log.i(TAG, "session id is" + sessionid);
                         StringBuilder builder = new StringBuilder();
@@ -1028,19 +1027,24 @@ public class Utils {
 
             };
             stringRequest.setTag(TAG);
-            BuzzingaRequest.getInstance(context).addToRequestQueue(stringRequest);
+            BuzzingaApplication.get().addToRequestQueue(stringRequest);
         }
     }
 
-    public String setTitle() {
+    public static String setTitle(Context context) {
 
-        StringBuilder title = new StringBuilder();
-        title.append(userSession.getTrackKey());
-        title.append(!userSession.gettTACK_SEARCH_KEY().isEmpty() ? " and " + userSession.gettTACK_SEARCH_KEY() : "");
-        return title.toString();
+        if (context.getResources().getStringArray(R.array.track_keywords).length > 0) {
+            return context.getString(R.string.app_name);
+        } else {
+            StringBuilder title = new StringBuilder();
+            title.append(BuzzingaApplication.getUserSession().getTrackKey());
+            title.append(!BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY().isEmpty() ? " and " + BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY() : "");
+            return title.toString();
+        }
+
     }
 
-    public int count_filter_sel() {
+    public static int count_filter_sel() {
 
         int count = 0;
 
@@ -1082,7 +1086,7 @@ public class Utils {
         return count;
     }
 
-    public int count_sel_notifyme() {
+    public static int count_sel_notifyme() {
         int count = 0;
         if (getNotify_IntervellMills() != 0) {
             count++;
@@ -1090,38 +1094,42 @@ public class Utils {
         return count;
     }
 
-    public void source_xtags() {
+    public static void source_xtags() {
         if (Constants.sources_list.size() <= 0)
             Constants.sourse_xtags();
     }
 
-    public void sentiment_xtags() {
+    public static void sentiment_xtags() {
         if (Constants.sentiment_map.size() <= 0)
             Constants.sentiment_xtags();
     }
 
-    public void genter_xtags() {
+    public static void genter_xtags() {
         if (Constants.gender_map.size() <= 0)
             Constants.gender_xtags();
     }
 
-    public static void hideKeyboard(View view) {
+    public static void hideKeyboard(View view, Context context) {
         if (view != null) {
             InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
         }
     }
 
-    public static void callToMobile(String mobile_number) {
+    public static void callToMobile(String mobile_number, Context context) {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + mobile_number));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+            if (ActivityCompat.checkSelfPermission(context,
+                    Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                context.startActivity(intent);
+            }
+
         }
 
     }
 
-    public void composeEmail(String[] addresses) {
+    public static void composeEmail(String[] addresses, Context context) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
@@ -1132,7 +1140,7 @@ public class Utils {
     }
 
 
-    public void getdate() {
+    public static void getdate(final Context context) {
 
 /*
         FragmentManager fm = getFragmentManager();
@@ -1142,9 +1150,9 @@ public class Utils {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
-        String from_date = query_fromdate(Arrays.asList(userSession.getFROM_DATE()));
+        String from_date = query_fromdate(Arrays.asList(BuzzingaApplication.getUserSession().getFROM_DATE()), context);
 
-        String to_date = query_todate(Arrays.asList(userSession.getTO_DATE()));
+        String to_date = query_todate(Arrays.asList(BuzzingaApplication.getUserSession().getTO_DATE()));
 
         showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.Utils);
 
@@ -1181,11 +1189,11 @@ public class Utils {
                                                      + "/" + yearStart + " To " + dayEnd + "/"
                                                      + (++monthEnd) + "/" + yearEnd;
 
-                                             userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
-                                             userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
+                                             BuzzingaApplication.getUserSession().setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                             BuzzingaApplication.getUserSession().setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
 
-                                             showLog(TAG, "date is " + userSession.getFROM_DATE() + "  to  " +
-                                                     userSession.getTO_DATE(), Config.HOME_SCREEN);
+                                             showLog(TAG, "date is " + BuzzingaApplication.getUserSession().getFROM_DATE() + "  to  " +
+                                                     BuzzingaApplication.getUserSession().getTO_DATE(), Config.HOME_SCREEN);
 
                                              // setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
                                              add_query_data();
@@ -1195,7 +1203,7 @@ public class Utils {
                                              mFirebaseAnalytics.logEvent("Apply_Date", params);
                                              mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
 */
-                                             call_homeFragment(Constants.Intent_TRACK);
+                                             call_homeFragment(Constants.Intent_TRACK, context);
                                          }
                                      },
                                 from_cal.get(Calendar.YEAR), from_cal.get(Calendar.MONTH), from_cal.get(Calendar.DATE),
@@ -1217,7 +1225,7 @@ public class Utils {
         }
     }
 
-    public void call_homeFragment(String value) {
+    public static void call_homeFragment(String value, Context context) {
 
         Bundle bundle = new Bundle();
         if (value == null)
@@ -1229,13 +1237,13 @@ public class Utils {
 
     }
 
-    public String dispalyDateFormate(String sel_date) {
+    public static String dispalyDateFormate(String sel_date) {
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMM,yy ");
         Date date;
-        String dsp_date="";
+        String dsp_date = "";
         if (!sel_date.isEmpty()) {
             try {
                 date = sdf.parse(sel_date);
@@ -1246,10 +1254,40 @@ public class Utils {
 
             }
 
-        }else{
+        } else {
             dsp_date = sdf1.format(cal.getTime());
         }
         return dsp_date;
+    }
+
+
+    public static void changeFontFace(TextView txtview, String type, Context context) {
+
+        txtview.setTypeface(Typeface.createFromAsset(context.getAssets(), type));
+    }
+
+
+    /*public void TwiiterInit(Context context) {
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig
+                (context.getString(R.string.twitter_consumer_key),
+                        context.getString(R.string.twitter_consumer_secret));
+
+
+        Twitter.initialize((context.getString(R.string.twitter_consumer_key),
+                context.getString(R.string.twitter_consumer_secret)));
+
+    }*/
+
+    //redirect to login page
+    public static void RedirectLoginPage(Context context) {
+        Utils.clearSessionData();
+        context.startActivity(new Intent(context, TwitterLogin.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK));
+        ((Activity) context).finish();
+        ((Activity) context).overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
     }
 }
 

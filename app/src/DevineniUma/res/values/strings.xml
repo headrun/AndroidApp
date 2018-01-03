@@ -4,5 +4,13 @@
     <string name="app_name">Devineni Uma</string>
 
     <string name="subtitle"></string>
-    <string name="nav_header_title">Devineni Uma</string>
+    <string name="nav_header_title">@string/app_name</string>
+    <string-array name="track_keywords" translatable="false">
+        <item>Devineni uma</item>
+        <item>Devineniuma</item>
+        <item>దేవినేనిఉమా</item>
+        <item>దేవినేని ఉమా</item>
+        <item>देवीनेनी उमा</item>
+        <item>देवीनेनीउमा</item>
+    </string-array>
 </resources>

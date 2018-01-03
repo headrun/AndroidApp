@@ -42,14 +42,17 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.headrun.buzzinga.BuzzingaRequest;
+
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
+
 import in.headrun.buzzinga.utils.Utils;
 
 public class MainActivity extends AppCompatActivity
@@ -57,26 +60,26 @@ public class MainActivity extends AppCompatActivity
 
     public String TAG = MainActivity.class.getSimpleName();
 
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
-    @Bind(R.id.nav_view)
+    @BindView(R.id.nav_view)
     NavigationView navigationView;
-    @Bind(R.id.openMenu)
+    @BindView(R.id.openMenu)
     ImageView openMenu;
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView title;
-    @Bind(R.id.badger)
+    @BindView(R.id.badger)
     TextView badger;
-    @Bind(R.id.search_view)
+    @BindView(R.id.search_view)
     MaterialSearchView searchView;
 
     ActionBarDrawerToggle toggle;
 
-    Utils utils;
+
     String Intent_opt;
 
     @Override
@@ -87,7 +90,6 @@ public class MainActivity extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
-        utils = new Utils(this);
 
         Bundle bundle = getIntent().getExtras();
         try {
@@ -105,11 +107,11 @@ public class MainActivity extends AppCompatActivity
 
         setbadge();
 
-        setMenuCounter(R.id.filter, R.drawable.count_bg, utils.count_filter_sel());
-        setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
+        setMenuCounter(R.id.filter, R.drawable.count_bg, Utils.count_filter_sel());
+        setMenuCounter(R.id.notify_me, R.drawable.count_bg, Utils.getNotify_IntervellMills());
 
         getSupportActionBar().setTitle("");
-        title.setText(utils.setTitle());
+        title.setText(Utils.setTitle(this));
 
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
         navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(false);
@@ -133,18 +135,18 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                utils.showLog(TAG, "submit query is " + query, Config.MainActivity);
+                Utils.showLog(TAG, "submit query is " + query, Config.MainActivity);
                 Constants.SEARCHSTRING = query;
 
-                utils.userSession.setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
+                BuzzingaApplication.getUserSession().setTACK_SEARCH_KEY(Constants.SEARCHSTRING);
                 searchView.closeSearch();
 
                      /*Track key send to firebase*/
                 Bundle params = new Bundle();
-                params.putString(FirebaseAnalytics.Param.ITEM_NAME, utils.userSession.getTrackKey());
-                params.putString(FirebaseAnalytics.Param.SEARCH_TERM, utils.userSession.gettTACK_SEARCH_KEY());
-                utils.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, params);
-                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                params.putString(FirebaseAnalytics.Param.ITEM_NAME, BuzzingaApplication.getUserSession().getTrackKey());
+                params.putString(FirebaseAnalytics.Param.SEARCH_TERM, BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY());
+                BuzzingaApplication.getmFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.SEARCH, params);
+                BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                 searchview_text();
 
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Do some magic
-                utils.showLog(TAG, "searchview text change" + newText, Config.MainActivity);
+                Utils.showLog(TAG, "searchview text change" + newText, Config.MainActivity);
                 return true;
             }
         });
@@ -162,8 +164,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onSearchViewShown() {
 
-                utils.showLog(TAG, "itemis expanded", Config.MainActivity);
-                String search_key = utils.userSession.gettTACK_SEARCH_KEY();
+                Utils.showLog(TAG, "itemis expanded", Config.MainActivity);
+                String search_key = BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY();
                 searchView.setQuery(search_key, false);
 
             }
@@ -171,16 +173,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onSearchViewClosed() {
 
-                utils.showLog(TAG, "itemis closed", Config.MainActivity);
+                Utils.showLog(TAG, "itemis closed", Config.MainActivity);
 
             }
         });
 
         call_homeFragment(Intent_opt);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //  client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
 
     }
 
@@ -254,9 +252,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, Filtering.class));
             this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.date_filter) {
-            utils.getdate();
+            Utils.getdate(this);
         } else if (id == R.id.notify_me) {
-            notimyme(utils.userSession.getNotifyHour());
+            notimyme(BuzzingaApplication.getUserSession().getNotifyHour());
         } else if (id == R.id.invite) {
             // final Uri deepLink = buildDeepLink(Uri.parse(Constants.DEEP_LINK_URL), 0, false);
             shareDeepLink(Constants.DEEP_LINK_URL);
@@ -274,7 +272,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void stringrequest() {
-        if (utils.isNetwrokConnection()) {
+        if (Utils.isNetwrokConnection(this)) {
             progress_bar.setVisibility(View.VISIBLE);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, ServerConfig.SERVER_ENDPOINT + ServerConfig.logout,
                     new Response.Listener<String>() {
@@ -283,13 +281,7 @@ public class MainActivity extends AppCompatActivity
 
                             Log.d(TAG, "string response is" + response);
 
-                            utils.clearSessionData();
-                            startActivity(new Intent(MainActivity.this, TwitterLogin.class)
-                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                                            Intent.FLAG_ACTIVITY_NEW_TASK));
-                            finish();
-                            overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+                            Utils.RedirectLoginPage(MainActivity.this);
                             progress_bar.setVisibility(View.GONE);
 
                         }
@@ -309,7 +301,7 @@ public class MainActivity extends AppCompatActivity
             };
             stringRequest.setTag(TAG);
 
-            BuzzingaRequest.getInstance(getApplication()).addToRequestQueue(stringRequest);
+            BuzzingaApplication.get().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
         }
@@ -317,10 +309,14 @@ public class MainActivity extends AppCompatActivity
 
     private void searchview_text() {
 
-        if (utils.isNetwrokConnection()) {
+        if (Utils.isNetwrokConnection(this)) {
 
-            title.setText(utils.setTitle());
-            utils.add_query_data();
+            String search_key = "";
+            if (!Constants.SEARCHSTRING.isEmpty()) {
+                search_key = " AND " + Constants.SEARCHSTRING;
+            }
+            title.setText(Utils.setTitle(this) + search_key);
+            Utils.add_query_data();
             Intent_opt = Constants.Intent_TRACK;
             call_homeFragment(Intent_opt);
         } else {
@@ -340,12 +336,12 @@ public class MainActivity extends AppCompatActivity
 
         int pos = -1;
 
-        utils.showLog(TAG, "sel item is" + sel_item, Config.Utils);
+        Utils.showLog(TAG, "sel item is" + sel_item, Config.Utils);
 
         if (!sel_item.toString().isEmpty())
             pos = Arrays.asList(items).indexOf(sel_item);
 
-        utils.showLog(TAG, "sel item pos is " + pos, Config.Utils);
+        Utils.showLog(TAG, "sel item pos is " + pos, Config.Utils);
         final String[] sel_value = {""};
         if (pos != -1)
             sel_value[0] = Arrays.asList(items).get(pos);
@@ -365,16 +361,16 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                utils.userSession.setNotifyHour(sel_value[0]);
-                setMenuCounter(R.id.notify_me, R.drawable.count_bg, utils.getNotify_IntervellMills());
+                BuzzingaApplication.getUserSession().setNotifyHour(sel_value[0]);
+                setMenuCounter(R.id.notify_me, R.drawable.count_bg, Utils.getNotify_IntervellMills());
                 setbadge();
 
                 Bundle params = new Bundle();
                 params.putString("notify", sel_value[0]);
-                utils.mFirebaseAnalytics.logEvent("Apply_notify", params);
-                utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                BuzzingaApplication.getmFirebaseAnalytics().logEvent("Apply_notify", params);
+                BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
-                utils.callService();
+                Utils.callService(MainActivity.this);
             }
         });
 
@@ -398,11 +394,11 @@ public class MainActivity extends AppCompatActivity
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
-        String from_date = utils.query_fromdate(Arrays.asList(utils.userSession.getFROM_DATE()));
+        String from_date = Utils.query_fromdate(Arrays.asList(BuzzingaApplication.getUserSession().getFROM_DATE()), this);
 
-        String to_date = utils.query_todate(Arrays.asList(utils.userSession.getTO_DATE()));
+        String to_date = Utils.query_todate(Arrays.asList(BuzzingaApplication.getUserSession().getTO_DATE()));
 
-        utils.showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.MainActivity);
+        Utils.showLog(TAG, "calendar from date is " + from_date + " to date is " + to_date, Config.MainActivity);
 
         Calendar from_cal = Calendar.getInstance();
         Calendar to_cal = Calendar.getInstance();
@@ -421,7 +417,7 @@ public class MainActivity extends AppCompatActivity
             to_cal.setTime(new Date());
         }
 
-        utils.showLog(TAG, "calendar from mnth is " + from_cal.get(Calendar.MONTH) +
+        Utils.showLog(TAG, "calendar from mnth is " + from_cal.get(Calendar.MONTH) +
                 " to mnth is " + to_cal.get(Calendar.MONTH), Config.MainActivity);
 
         SmoothDateRangePickerFragment smoothDateRangePickerFragment =
@@ -437,19 +433,19 @@ public class MainActivity extends AppCompatActivity
                                                      + "/" + yearStart + " To " + dayEnd + "/"
                                                      + (++monthEnd) + "/" + yearEnd;
 
-                                             utils.userSession.setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
-                                             utils.userSession.setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
+                                             BuzzingaApplication.getUserSession().setFROM_DATE(yearStart + "-" + monthStart + "-" + dayStart);
+                                             BuzzingaApplication.getUserSession().setTO_DATE(yearEnd + "-" + monthEnd + "-" + dayEnd);
 
-                                             utils.showLog(TAG, "date is " + utils.userSession.getFROM_DATE() + "  to  " +
-                                                     utils.userSession.getTO_DATE(), Config.HOME_SCREEN);
+                                             Utils.showLog(TAG, "date is " + BuzzingaApplication.getUserSession().getFROM_DATE() + "  to  " +
+                                                     BuzzingaApplication.getUserSession().getTO_DATE(), Config.HOME_SCREEN);
 
                                              // setMenuCounter(R.id.date_filter, R.drawable.count_bg, 1);
-                                             utils.add_query_data();
+                                             Utils.add_query_data();
 
                                              Bundle params = new Bundle();
                                              params.putString("date", "apply_date");
-                                             utils.mFirebaseAnalytics.logEvent("Apply_Date", params);
-                                             utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+                                             BuzzingaApplication.getmFirebaseAnalytics().logEvent("Apply_Date", params);
+                                             BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
                                              call_homeFragment(Constants.Intent_TRACK);
                                          }
@@ -459,7 +455,7 @@ public class MainActivity extends AppCompatActivity
 
         Calendar cal_max = Calendar.getInstance();
         // cal.add(Calendar.DATE, 1);
-        utils.showLog(TAG, "set max date calendar is " + cal_max.get(Calendar.MONTH) + " date " +
+        Utils.showLog(TAG, "set max date calendar is " + cal_max.get(Calendar.MONTH) + " date " +
                 cal_max.get(Calendar.DATE), Config.MainActivity);
 
         smoothDateRangePickerFragment.setMaxDate(cal_max);
@@ -483,7 +479,7 @@ public class MainActivity extends AppCompatActivity
 
     public void setbadge() {
 
-        if (utils.count_filter_sel() != 0 || utils.count_sel_notifyme() != 0) {
+        if (Utils.count_filter_sel() != 0 || Utils.count_sel_notifyme() != 0) {
             badger.setText("");
             badger.setVisibility(View.VISIBLE);
         } else {
@@ -494,7 +490,7 @@ public class MainActivity extends AppCompatActivity
 
     private void shareDeepLink(String deeplink) {
 
-        utils.showLog(TAG, "deep  link is" + deeplink, Config.SPLASH);
+        Utils.showLog(TAG, "deep  link is" + deeplink, Config.SPLASH);
         ShareCompat.IntentBuilder
                 .from(this) // getActivity() or activity field if within Fragment
                 .setText("https://play.google.com/store/apps/details?id=in.headrun.buzzinga")

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,10 @@ import in.headrun.buzzinga.doto.SearchArticles;
  * Created by headrun on 30/7/15.
  */
 public class Constants {
+
+    public static final String IMAGE = "og:image";
+    public static final String IMAGE_1="image";
+    public static final String TWITTER_IMAGE = "twitter:image";
 
     public static final String DEEP_LINK_URL = "http://buzzinga.com/track/";
     public static final String APP_INDEXING_URL = "android-app://in.headrun.buzzinga/http/buzzinga.com/track/";
@@ -92,7 +97,7 @@ public class Constants {
     public static String rss_specific_xtags = "";
     public static String googleplus_specific_xtags = "";
 
-    public static ArrayList<SearchArticles> SEARCHARTICLES = new ArrayList<SearchArticles>();
+    public static LinkedList<SearchArticles> SEARCHARTICLES = new LinkedList<>();
 
     public static List<Listitems> FILTERSOURSOURE = new ArrayList<Listitems>();
     public static List<Listitems> FILTERSENTIMENT = new ArrayList<Listitems>();
@@ -111,12 +116,10 @@ public class Constants {
     public static List<String> BTODATE = new ArrayList<>();
     public static List<QueryData> QueryString = new ArrayList<QueryData>();
 
-
     public static List<Listitems> filterList;
 
     public static int NO_RECORD = 1;
     public static int NO_WIFI = 2;
-
 
     public static List<String> sel_loc_list = new ArrayList<>();
     public static List<String> sel_lang_list = new ArrayList<>();

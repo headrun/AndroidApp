@@ -18,13 +18,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.config.Constants;
@@ -39,23 +42,23 @@ public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
 
-    @Bind(R.id.twitter_login_button1)
+    @BindView(R.id.twitter_login_button1)
     ImageView loginButton;
-    @Bind(R.id.progressbar)
+    @BindView(R.id.progressbar)
     ProgressBar progressbar;
-    @Bind(R.id.twitter_btn)
+    @BindView(R.id.twitter_btn)
     View twitter_btn;
-    @Bind(R.id.twitter_auth_lay)
+    @BindView(R.id.twitter_auth_lay)
     View twitter_auth_lay;
-    @Bind(R.id.webview)
+    @BindView(R.id.webview)
     WebView webview;
 
 
     private Button btnuserdetails;
     public String stoken, token, userid, username;
-    Utils utils;
-    UserSession mUserSession;
+
     String cookie;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +66,7 @@ public class TwitterLogin extends Activity {
         setContentView(R.layout.twitterlogin);
 
         ButterKnife.bind(this);
-        utils = new Utils(this);
-        mUserSession = new UserSession(this);
+
         twitter_btn.setVisibility(View.VISIBLE);
         twitter_auth_lay.setVisibility(View.GONE);
         btnuserdetails = (Button) findViewById(R.id.btnuserdetails);
@@ -79,11 +81,12 @@ public class TwitterLogin extends Activity {
 
         Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (utils.isNetwrokConnection()) {
+                if (Utils.isNetwrokConnection(TwitterLogin.this)) {
                     twitter_btn.setVisibility(View.GONE);
                     twitter_auth_lay.setVisibility(View.VISIBLE);
 
@@ -97,7 +100,6 @@ public class TwitterLogin extends Activity {
 
 
     }
-
 
     private class MyBrowser extends WebViewClient {
         @Override
@@ -136,11 +138,11 @@ public class TwitterLogin extends Activity {
                         }
                     }
 
-                    if (new UserSession(TwitterLogin.this).getTSESSION().length() > 0) {
-                        utils.callService();
+                    if (BuzzingaApplication.getUserSession().getTSESSION().length() > 0) {
+                        Utils.callService(TwitterLogin.this);
                         //startActivity(new Intent(TwitterLogin.this, MainActivity.class));
-                        Constants.BTRACKKEY.add(mUserSession.getTrackKey());
-                        utils.add_query_data();
+                        Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
+                        Utils.add_query_data();
                         startActivity(new Intent(getApplication(), MainActivity.class).
                                 putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 

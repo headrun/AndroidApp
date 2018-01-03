@@ -45,3 +45,32 @@
 
  ##---------------End: proguard configuration for Gson  ----------
 
+
+ -keep public class * implements com.bumptech.glide.module.GlideModule
+ -keep public class * extends com.bumptech.glide.module.AppGlideModule
+ -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+   **[] $VALUES;
+   public *;
+ }
+
+ -ignorewarnings
+ -keep class * {
+     public private *;
+ }
+
+ # for DexGuard only
+ #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+ ### OKHTTP
+
+ # Platform calls Class.forName on types which do not exist on Android to determine platform.
+ -dontnote okhttp3.internal.Platform
+
+
+ ### OKIO
+
+ # java.nio.file.* usage which cannot be used at runtime. Animal sniffer annotation.
+ -dontwarn okio.Okio
+ # JDK 7-only method which is @hide on Android. Animal sniffer annotation.
+ -dontwarn okio.DeflaterSink
+

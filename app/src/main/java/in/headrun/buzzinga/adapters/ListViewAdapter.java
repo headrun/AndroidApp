@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Config;
@@ -113,16 +114,16 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     class ViewHolder implements View.OnClickListener {
-        /*@Bind(R.id.filtertext)
+        /*@BindView(R.id.filtertext)
         TextView filtertext;
 
-        @Bind(R.id.filtercheckbox)
+        @BindView(R.id.filtercheckbox)
         CheckBox filtercheckbox;*/
 
-        @Bind(R.id.item_view)
+        @BindView(R.id.item_view)
         CheckedTextView item_view;
 
-        @Bind(R.id.filter_item_lay)
+        @BindView(R.id.filter_item_lay)
         RelativeLayout filter_item_lay;
 
         public ViewHolder(View v) {

@@ -12,13 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,16 +23,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
-import in.headrun.buzzinga.UserSession;
 import in.headrun.buzzinga.adapters.FilterTitleAdapter;
 import in.headrun.buzzinga.adapters.ListViewAdapter;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.doto.Listitems;
 import in.headrun.buzzinga.utils.Utils;
+
+
 
 /**
  * Created by headrun on 6/8/15.
@@ -44,29 +44,25 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public String TAG = Filtering.this.getClass().getSimpleName();
 
-    @Bind(R.id.filter_titles)
+    @BindView(R.id.filter_titles)
     ListView filter_titles;
-    @Bind(R.id.filter_items)
+    @BindView(R.id.filter_items)
     ListView filter_items;
 
-    @Bind(R.id.clearfilter)
+    @BindView(R.id.clearfilter)
     Button clearfilter;
-    @Bind(R.id.applyfilter)
+    @BindView(R.id.applyfilter)
     Button applyfilter;
 
-    @Bind(R.id.autosearch)
+    @BindView(R.id.autosearch)
     EditText autosearch;
 
     String Sourcestatus = "";
     FilterStatus sel_source_items;
-    List<String> list_items;
-    ArrayAdapter<String> array_adpter;
-    List<String> adapter_items = new ArrayList<>();
+
     ListViewAdapter list_adapter;
 
     FilterTitleAdapter titleadapter;
-    UserSession usersession;
-    Utils utils;
     int sel_title_pos = -1;
 
     public static List<String> sel_source_list;
@@ -94,13 +90,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().setTitle("Filters");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        utils = new Utils(Filtering.this);
-        usersession = new UserSession(getApplication());
-
+        
         Bundle params = new Bundle();
         params.putString("Open_Filter", "Filter");
-        utils.mFirebaseAnalytics.logEvent("open_filter_event", params);
-        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        BuzzingaApplication.getmFirebaseAnalytics().logEvent("open_filter_event", params);
+        BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
         first_source = first_sentiment = first_gender = first_loc = first_lang = 0;
 
@@ -119,7 +113,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         filtertitles = getResources().getStringArray(R.array.filtertitles);
         final TypedArray filtertitleimages = getResources().obtainTypedArray(R.array.titleimages);
 
-        utils.add_query_data();
+        Utils.add_query_data();
         titleadapter = new FilterTitleAdapter(Filtering.this, filtertitles, filtertitleimages);
         filter_titles.setAdapter(titleadapter);
         titleadapter.notifyDataSetChanged();
@@ -326,16 +320,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             if (first_lang != 0)
                 langquery();
 
-            Log.i(TAG, "filtering sel data sources " + usersession.getSources_data() +
-                    " \nsentiment " + usersession.getSentiment_data() +
-                    " \ngender " + usersession.getGender_data() +
-                    "\n language " + usersession.getLang_data() +
-                    "\n location " + usersession.getLoc_data());
 
             Bundle params = new Bundle();
             params.putString("apply_filter", "filter");
-            utils.mFirebaseAnalytics.logEvent("apply_filter_event", params);
-            utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+            BuzzingaApplication.getmFirebaseAnalytics().logEvent("apply_filter_event", params);
+            BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
             Intent i = new Intent(Filtering.this, MainActivity.class);
             i.putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK);
@@ -351,7 +340,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     public void listOfFilterSources() {
         Constants.FILTERSOURSOURE.clear();
 
-        utils.source_xtags();
+        Utils.source_xtags();
 
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
             String value = entry.getKey().toUpperCase();
@@ -370,7 +359,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         Log.i(TAG, "get filter sentiment data");
 
-        utils.sentiment_xtags();
+        Utils.sentiment_xtags();
 
         for (Map.Entry<String, String> entry : Constants.sentiment_map.entrySet()) {
             String value = entry.getKey().toUpperCase();
@@ -387,7 +376,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     public void listOfFilterGender() {
         Constants.FILTERGENDER.clear();
 
-        utils.genter_xtags();
+        Utils.genter_xtags();
 
         for (Map.Entry<String, String> gendervalue : Constants.gender_map.entrySet()) {
             String value = gendervalue.getKey().toUpperCase();
@@ -846,16 +835,16 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         Constants.BLANGUAGE.clear();
         Constants.BLOCATION.clear();
 
-        utils.userSession.clearsession(utils.userSession.Sources_data);
-        utils.userSession.clearsession(utils.userSession.Sentiment_data);
-        utils.userSession.clearsession(utils.userSession.Gender_data);
-        utils.userSession.clearsession(utils.userSession.Loc_data);
-        utils.userSession.clearsession(utils.userSession.Lang_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Sources_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Sentiment_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Gender_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Loc_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Lang_data);
 
         Bundle params = new Bundle();
         params.putString("clear_Filter", "filter");
-        utils.mFirebaseAnalytics.logEvent("clear_Filter_event", params);
-        utils.mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        BuzzingaApplication.getmFirebaseAnalytics().logEvent("clear_Filter_event", params);
+        BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
 
         Intent i = new Intent(Filtering.this, MainActivity.class);
@@ -880,69 +869,69 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     ////prepare the Sentiment Query
     public void sentimentquery() {
         Constants.BSENTIMENT.clear();
-        usersession.clearsession(usersession.Sentiment_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Sentiment_data);
 
         Constants.BSENTIMENT.addAll(sel_sentiment_list);
 
         String sentiment = Constants.BSENTIMENT.toString();
-        usersession.setSentiment_data(sentiment);
+        BuzzingaApplication.getUserSession().setSentiment_data(sentiment);
 
-        Log.i(TAG, "selected session sentimentquery is" + usersession.getSentiment_data());
+        Log.i(TAG, "selected session sentimentquery is" + BuzzingaApplication.getUserSession().getSentiment_data());
     }
 
     ////prepare the  Gender Query
     public void genderquery() {
-        usersession.clearsession(usersession.Gender_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Gender_data);
         Constants.BGENDER.clear();
 
         Constants.BGENDER.addAll(sel_gender_list);
         String gender = Constants.BGENDER.toString();
-        usersession.setGender_data(gender);
+        BuzzingaApplication.getUserSession().setGender_data(gender);
 
-        Log.i(TAG, "selected session genderquery is" + usersession.getGender_data());
+        Log.i(TAG, "selected session genderquery is" + BuzzingaApplication.getUserSession().getGender_data());
     }
 
     ////prepare the Location Query
     public void locquery() {
-        usersession.clearsession(usersession.Loc_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Loc_data);
         Constants.BLOCATION.clear();
 
-        utils.showLog(TAG, "selected session locquery is" + sel_loc_list.toString(), Config.Filtering);
+        Utils.showLog(TAG, "selected session locquery is" + sel_loc_list.toString(), Config.Filtering);
 
         Constants.BLOCATION.addAll(sel_loc_list);
         String loc = Constants.BLOCATION.toString();
-        usersession.setLoc_data(loc);
+        BuzzingaApplication.getUserSession().setLoc_data(loc);
 
-        Log.i(TAG, "selected session locquery is" + usersession.getLoc_data());
+        Log.i(TAG, "selected session locquery is" + BuzzingaApplication.getUserSession().getLoc_data());
 
     }
 
     ////prepare the Language Query
     public void langquery() {
-        usersession.clearsession(usersession.Lang_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Lang_data);
         Constants.BLANGUAGE.clear();
 
-        utils.showLog(TAG, "selected session lang is" + sel_lang_list.toString(), Config.Filtering);
+        Utils.showLog(TAG, "selected session lang is" + sel_lang_list.toString(), Config.Filtering);
 
         Constants.BLANGUAGE.addAll(sel_lang_list);
 
         String lang = Constants.BLANGUAGE.toString();
-        usersession.setLang_data(lang);
+        BuzzingaApplication.getUserSession().setLang_data(lang);
 
-        Log.i(TAG, "selected session langquery is" + usersession.getLang_data());
+        Log.i(TAG, "selected session langquery is" + BuzzingaApplication.getUserSession().getLang_data());
     }
 
     ////prepare the Source Query
     public void sourcequery() {
 
 
-        usersession.clearsession(usersession.Sources_data);
+        BuzzingaApplication.getUserSession().clearsession(BuzzingaApplication.getUserSession().Sources_data);
         Constants.BSOURCES.clear();
 
         Constants.BSOURCES.addAll(sel_source_list);
         String source = Constants.BSOURCES.toString();
-        usersession.setSources_data(source);
-        Log.i(TAG, "selected session sourcequery is" + usersession.getSources_data());
+        BuzzingaApplication.getUserSession().setSources_data(source);
+        Log.i(TAG, "selected session sourcequery is" + BuzzingaApplication.getUserSession().getSources_data());
 
     }
 
@@ -962,7 +951,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         else
             item.setSelectd(true);
 
-        utils.showLog(TAG, "item is " + item.isSelectd(), Config.Filtering);
+        Utils.showLog(TAG, "item is " + item.isSelectd(), Config.Filtering);
 
         if (sel_source_items == FilterStatus.LANGUAGE) {
             if (pos != -1)
@@ -973,7 +962,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
         selSourceItem(sel_source_items);
 
-        utils.updateListviewItem(filter_items, position);
+        Utils.updateListviewItem(filter_items, position);
 
     }
 
@@ -1041,7 +1030,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     public void updateListview(int sel_pos) {
 
         if (sel_pos != -1)
-            utils.updateListviewItem(filter_titles, sel_pos);
+            Utils.updateListviewItem(filter_titles, sel_pos);
     }
 
     /****
@@ -1052,14 +1041,14 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
      ****/
     public void sel_itemList(List<String> sel_item_list, List<Listitems> list_items) {
 
-        utils.showLog(TAG, "sel items before clear " + sel_item_list.toString(), Config.Filtering);
+        Utils.showLog(TAG, "sel items before clear " + sel_item_list.toString(), Config.Filtering);
         sel_item_list.clear();
 
         for (Listitems item : list_items) {
             if (item.isSelectd())
                 sel_item_list.add(item.getXtag());
         }
-        utils.showLog(TAG, "to items are " + sel_item_list.toString(), Config.Filtering);
+        Utils.showLog(TAG, "to items are " + sel_item_list.toString(), Config.Filtering);
         updateListview(sel_title_pos);
     }
 

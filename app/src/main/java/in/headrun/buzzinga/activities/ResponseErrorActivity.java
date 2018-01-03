@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.headrun.buzzinga.R;
 
@@ -13,7 +14,7 @@ import in.headrun.buzzinga.R;
  */
 public class ResponseErrorActivity extends Activity {
 
-    @Bind(R.id.webview)
+    @BindView(R.id.webview)
     WebView webview;
 
     @Override
