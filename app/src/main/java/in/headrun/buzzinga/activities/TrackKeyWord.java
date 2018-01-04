@@ -40,8 +40,6 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     @BindView(R.id.track_progress)
     ProgressBar trak_progress;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +48,10 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
 
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-
-
-        if (BuzzingaApplication.getUserSession().getTrackKey().length() > 0) {
-            Trackkeyword.setText(BuzzingaApplication.getUserSession().getTrackKey());
-            Trackkeyword.setSelection(BuzzingaApplication.getUserSession().getTrackKey().length());
+        String data = BuzzingaApplication.getUserSession().getTrackKey().trim().replaceAll("\\[|\\]","");
+        if (data.length() > 0) {
+            Trackkeyword.setText(data);
+            Trackkeyword.setSelection(data.length());
         }
 
         Trackkeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -76,7 +73,7 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.trackbtn:
 
-                Utils.hideKeyboard(this.getCurrentFocus(),this);
+                Utils.hideKeyboard(this.getCurrentFocus(), this);
                 trackkeyword();
                 break;
         }

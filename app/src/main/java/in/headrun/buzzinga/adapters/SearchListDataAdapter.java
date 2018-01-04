@@ -913,60 +913,70 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         View articl_view;
         SearchArticles article;
         int pos, display_type;
+        String url;
 
         GetLinkData(View articl_view, Context mContext, String url, SearchArticles article, int pos, int display_type) {
             this.articl_view = articl_view;
             this.article = article;
             this.pos = pos;
+            this.url = url;
             this.display_type = display_type;
             new BuzzingaNetowrkServices().getwebLinkData(mContext, url, this);
         }
 
         @Override
         public void onErrorResponse(VolleyError error) {
-
+            error.printStackTrace();
+            article.source.setIMAGE_LINK("");
+            listdata.set(pos, article);
+            articl_view.setVisibility(View.GONE);
         }
 
         @Override
         public void onResponse(String response) {
+            try {
+                if (display_type == VIEW_ITEM) {
+                    Document doc = Jsoup.parse(response);
+                    doc.title();
 
-            if (display_type == VIEW_ITEM) {
-                Document doc = Jsoup.parse(response);
-                doc.title();
-
-                String image_link = "";
-                Elements ele_img = null;
-                ele_img = doc.select("meta[property=" + Constants.IMAGE + "]");
-                if (ele_img == null)
-                    ele_img = doc.select("meta[property=" + Constants.IMAGE_1 + "]");
-                if (ele_img == null)
-                    ele_img = doc.select("meta[property=" + Constants.TWITTER_IMAGE + "]");
+                    String image_link = "";
+                    Elements ele_img = null;
+                    ele_img = doc.select("meta[property=" + Constants.IMAGE + "]");
+                    if (ele_img == null)
+                        ele_img = doc.select("meta[property=" + Constants.IMAGE_1 + "]");
+                    if (ele_img == null)
+                        ele_img = doc.select("meta[property=" + Constants.TWITTER_IMAGE + "]");
 
 
-                image_link = ele_img.attr("content");
-                article.source.setIMAGE_LINK(image_link);
-                listdata.set(pos, article);
+                    image_link = ele_img.attr("content");
+                    article.source.setIMAGE_LINK(image_link);
+                    listdata.set(pos, article);
 
-                if (!image_link.isEmpty()) {
-                    articl_view.setVisibility(View.VISIBLE);
-                    Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                            setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
+                    if (!image_link.isEmpty()) {
+                        articl_view.setVisibility(View.VISIBLE);
+                        Log.i(TAG, "pos " + pos + " img" + image_link);
+                        Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
 
-                        }
-                    });
-                } else {
-                    articl_view.setVisibility(View.GONE);
+                            @Override
+                            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
+                            }
+
+                        });
+                    } else {
+                        articl_view.setVisibility(View.GONE);
+                    }
+
+                } else if (display_type == VIEW_FACEBOOK) {
+
+                    article.source.setFB_DATA(response);
+                    listdata.set(pos, article);
+
+                    setwebdata((WebView) articl_view, "", response);
+
                 }
-
-            } else if (display_type == VIEW_FACEBOOK) {
-
-                article.source.setFB_DATA(response);
-                listdata.set(pos, article);
-
-                setwebdata((WebView) articl_view, "", response);
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

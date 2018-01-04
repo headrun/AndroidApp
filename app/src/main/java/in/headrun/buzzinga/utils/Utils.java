@@ -37,8 +37,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.tweetui.TweetUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -809,8 +814,9 @@ public class Utils {
 
     }
 
-    public interface progressBarListner{
+    public interface progressBarListner {
         public void showProgressBar();
+
         public void hideProgressBar();
 
     }
@@ -1033,16 +1039,17 @@ public class Utils {
 
     public static String setTitle(Context context) {
 
+        StringBuilder title = new StringBuilder();
         if (context.getResources().getStringArray(R.array.track_keywords).length > 0) {
-            return context.getString(R.string.app_name);
+            title.append(context.getString(R.string.app_name));
         } else {
-            StringBuilder title = new StringBuilder();
-            title.append(BuzzingaApplication.getUserSession().getTrackKey());
-            title.append(!BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY().isEmpty() ? " and " + BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY() : "");
-            return title.toString();
+            String track = BuzzingaApplication.getUserSession().getTrackKey();
+            title.append(track.replaceAll("\\]|\\[", ""));
         }
-
+        title.append(!BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY().isEmpty() ? " and " + BuzzingaApplication.getUserSession().gettTACK_SEARCH_KEY() : "");
+        return title.toString();
     }
+
 
     public static int count_filter_sel() {
 
@@ -1266,19 +1273,6 @@ public class Utils {
         txtview.setTypeface(Typeface.createFromAsset(context.getAssets(), type));
     }
 
-
-    /*public void TwiiterInit(Context context) {
-
-        TwitterAuthConfig authConfig = new TwitterAuthConfig
-                (context.getString(R.string.twitter_consumer_key),
-                        context.getString(R.string.twitter_consumer_secret));
-
-
-        Twitter.initialize((context.getString(R.string.twitter_consumer_key),
-                context.getString(R.string.twitter_consumer_secret)));
-
-    }*/
-
     //redirect to login page
     public static void RedirectLoginPage(Context context) {
         Utils.clearSessionData();
@@ -1289,7 +1283,43 @@ public class Utils {
         ((Activity) context).finish();
         ((Activity) context).overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
     }
+
+    public static void loadTweetDefault() {
+        TweetUtils.loadTweet(0, new Callback<Tweet>() {
+            @Override
+            public void success(Result<Tweet> result) {
+                Log.i(TAG, "load tweet successfully");
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                Log.i(TAG, "load tweet exception" + exception.getMessage());
+            }
+        });
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

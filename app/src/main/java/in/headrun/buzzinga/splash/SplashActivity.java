@@ -1,4 +1,4 @@
-package in.headrun.buzzinga.activities;
+package in.headrun.buzzinga.splash;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 import butterknife.BindView;
@@ -22,8 +20,12 @@ import butterknife.ButterKnife;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
+import in.headrun.buzzinga.activities.MainActivity;
+import in.headrun.buzzinga.activities.TrackKeyWord;
+import in.headrun.buzzinga.activities.TwitterLogin;
 import in.headrun.buzzinga.config.Config;
 import in.headrun.buzzinga.config.Constants;
+import in.headrun.buzzinga.services.TweetLoadService;
 import in.headrun.buzzinga.utils.Utils;
 
 
@@ -31,11 +33,6 @@ import in.headrun.buzzinga.utils.Utils;
  * Created by headrun on 7/7/15.
  */
 public class SplashActivity extends Activity {
-
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-
-
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
 
     public static String TAG = SplashActivity.class.getClass().getSimpleName();
     public String loged;
@@ -46,16 +43,7 @@ public class SplashActivity extends Activity {
     @BindView(R.id.version_name)
     TextView version_name;
 
-
-
     Boolean action_type = false;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-    private GoogleApiClient mGoogleApiClient;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +53,8 @@ public class SplashActivity extends Activity {
 
         Constants.BTRACKKEY.addAll(Arrays.asList(getResources().getStringArray(R.array.track_keywords)));
 
-        BuzzingaApplication.getUserSession().setTrackKey(Constants.BTRACKKEY.toString());
+        if (Constants.BTRACKKEY.size() > 0)
+            BuzzingaApplication.getUserSession().setTrackKey(Constants.BTRACKKEY.toString());
 
         loged = new UserSession(SplashActivity.this).getTSESSION();
 
@@ -81,10 +70,11 @@ public class SplashActivity extends Activity {
         BuzzingaApplication.getmFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.APP_OPEN, params);
         BuzzingaApplication.getmFirebaseAnalytics().setAnalyticsCollectionEnabled(true);
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                startService(new Intent(SplashActivity.this, TweetLoadService.class));
 
                 if (action_type == false)
                     checkSession();
@@ -92,6 +82,7 @@ public class SplashActivity extends Activity {
 
             }
         }, Config.SPLASH_DISPLAY_LENGTH);
+
         onNewIntent(getIntent());
 
         try {
@@ -134,13 +125,11 @@ public class SplashActivity extends Activity {
 
         Log.i("Log_tag", "loged session is" + loged);
         if (loged.length() > 0) {
-
             String track_key = BuzzingaApplication.getUserSession().getTrackKey() == null ? "" : BuzzingaApplication.getUserSession().getTrackKey().trim();
-            track_key.replaceAll("\\[|\\]", "");
-            if (track_key.isEmpty()) {
+            String data = track_key.replaceAll("\\[|\\]", "");
+            if (data.isEmpty()) {
                 startActivity(new Intent(this, TrackKeyWord.class));
             } else {
-
                 Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
                 BuzzingaApplication.getUserSession().setFROM_DATE("");
                 BuzzingaApplication.getUserSession().setTO_DATE("");

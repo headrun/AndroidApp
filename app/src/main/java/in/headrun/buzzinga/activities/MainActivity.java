@@ -46,6 +46,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import in.headrun.buzzinga.BuildConfig;
 import in.headrun.buzzinga.BuzzingaApplication;
 import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.UserSession;
@@ -114,8 +115,11 @@ public class MainActivity extends AppCompatActivity
         title.setText(Utils.setTitle(this));
 
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
-        navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(false);
-
+        if (getResources().getBoolean(R.bool.show_edit_keyword) == true) {
+            navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(true);
+        } else {
+            navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(false);
+        }
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -315,7 +319,7 @@ public class MainActivity extends AppCompatActivity
             if (!Constants.SEARCHSTRING.isEmpty()) {
                 search_key = " AND " + Constants.SEARCHSTRING;
             }
-            title.setText(Utils.setTitle(this) + search_key);
+            title.setText(Utils.setTitle(this));
             Utils.add_query_data();
             Intent_opt = Constants.Intent_TRACK;
             call_homeFragment(Intent_opt);
@@ -493,9 +497,9 @@ public class MainActivity extends AppCompatActivity
         Utils.showLog(TAG, "deep  link is" + deeplink, Config.SPLASH);
         ShareCompat.IntentBuilder
                 .from(this) // getActivity() or activity field if within Fragment
-                .setText("https://play.google.com/store/apps/details?id=in.headrun.buzzinga")
+                .setText("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)
                 .setType("text/plain") // most general text sharing MIME type
-                .setChooserTitle("Buzzinga Analytics")
+                .setChooserTitle(getResources().getString(R.string.app_name) + " Invites")
                 .startChooser();
     }
 }
