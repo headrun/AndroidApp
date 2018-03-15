@@ -966,6 +966,11 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    @Override
+    public void itemClicked(View view, int position, String article_type) {
+
+    }
+
     //// filter Status
     public enum FilterStatus {
         SOURCES,

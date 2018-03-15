@@ -1,0 +1,124 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:toolbarId="@+id/toolbar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            >
+
+            <ImageView
+                android:id="@+id/article_img"
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:src="@android:drawable/sym_def_app_icon"
+                android:scaleType="centerCrop"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:layout_collapseMode="pin"
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/white"
+        android:elevation="8dp"
+        android:id="@+id/fab_share"
+        app:fabSize="normal"
+        android:src="@drawable/share_24dp"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_overlapTop="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+    <RelativeLayout
+        android:id="@+id/article_info_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/article_img"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <ImageView
+            android:id="@+id/article_source_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            tools:srcCompat="@drawable/ic_blog" />
+
+        <TextView
+            android:id="@+id/article_source_txt"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/article_source_img"
+            tools:text="Andhra jothi" />
+
+        <TextView
+            android:id="@+id/article_text"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/article_source_img"
+            android:layout_below="@+id/article_source_img"
+            android:layout_marginTop="8dp"
+            android:text="@string/artilce_title" />
+
+        <TextView
+            android:id="@+id/article_date"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/article_text"
+            android:layout_marginTop="8dp"
+            android:text="12 Mar 2018 12:23 PM" />
+
+        <TextView
+            android:id="@+id/article_desc"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/article_date"
+            android:layout_marginTop="8dp"
+            tools:text="@string/artilce_desc"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="1sp"
+            />
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+
+

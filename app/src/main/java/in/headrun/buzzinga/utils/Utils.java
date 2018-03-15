@@ -810,8 +810,7 @@ public class Utils {
     public interface setOnItemClickListner {
 
         public void itemClicked(View view, int position);
-
-
+        public void itemClicked(View view, int position,String article_type);
     }
 
     public interface progressBarListner {
@@ -870,6 +869,7 @@ public class Utils {
 
             Long mills = Long.valueOf(is_hour * 60 * 60 * 1000);
 
+
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
                 showLog(TAG, "worked on lollipop and above ", Config.Utils);
@@ -881,12 +881,11 @@ public class Utils {
                 JobInfo job = new JobInfo.Builder(Constants.JOBID, new ComponentName(context,
                         BuzzingaNotificationService.class))
                         .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                        .setRequiresCharging(true)
                         .setPeriodic(mills)
                         .build();
 
                 int jobId = job_scheduler.schedule(job);
-                if (job_scheduler.schedule(job) > 0) {
+                if (jobId ==job_scheduler.RESULT_SUCCESS) {
                     showLog(TAG,
                             "Successfully scheduled job: " + jobId,
                             Config.Utils);

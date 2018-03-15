@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.twitter.sdk.android.core.Callback;
@@ -78,8 +79,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     String TAG = SearchListDataAdapter.this.getClass().getSimpleName();
     Context context;
     LinkedList<SearchArticles> listdata = new LinkedList<>();
-    LayoutInflater inflater;
-    ViewItemHolder item_holder = null;
+
     TimeAgo time_ago;
 
     private final int VIEW_PROG = 0;
@@ -151,17 +151,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .inflate(R.layout.genral_article_view, parent, false);
             vh = new GenralArticleViewHolder(v);
 
-        } else if (viewType == VIEW_ITEM) {
-
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.article_lay_adapter, parent, false);
-            vh = new ArticleViewItemHolder(v);
-
-        } else if (viewType == VIEW_ITEM) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.search_new_lay, parent, false);
-            vh = new ViewItemHolder(v);
-
         } else {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.progess_layout, parent, false);
@@ -177,142 +166,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         SearchArticles item = listdata.get(position);
 
-        String author = null;
-        String text = null;
-        String img_url = null;
         String source = null;
         String time = null;
         String sentiment_type = null;
-        int color = 0;
-        int source_icon = -1;
 
         if (item != null && item.source != null) {
             source = sourType(item.source.XTAGS);
             sentiment_type = sentimentType(item.source.XTAGS);
-            color = applySentimentColor(sentiment_type);
             time = time_ago.timeAgo(Long.parseLong(item.source.DATE_ADDED));
-            text = item.source.TEXT;
-            if (item.source.AUTHOR != null)
-                author = item.source.AUTHOR.NAME;
-            if (source != null)
-                source_icon = sourceicon(source);
         }
 
-        if (holder instanceof ViewItemHolder) {
-
-            item_holder = ((ViewItemHolder) holder);
-
-            try {
-                if (item.source.AUTHOR.NAME != null)
-                    author = item.source.AUTHOR.NAME;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (item.source.TITLE != null && item.source.TITLE.length() > 0) {
-                item_holder.item1.setText(item.source.TITLE);
-                item_holder.item1.setVisibility(View.VISIBLE);
-            } else if (author != null) {
-                item_holder.item1.setText("@" + author);
-                item_holder.item1.setVisibility(View.VISIBLE);
-            } else {
-                item_holder.item1.setVisibility(View.GONE);
-                Utils.showLog(TAG, position + " title is empty ", Config.SearchListDataAdapter);
-            }
-
-            if (text != null) {
-                item_holder.item2.setText(text);
-                item_holder.item2.setVisibility(View.VISIBLE);
-            }
-
-            Utils.showLog(TAG, "\nxtags 1  is \t" + item.source.XTAGS.toString(), Config.SearchListDataAdapter);
-
-            item_holder.author.setText("By - " + source);
-            item_holder.article_lay.setBackgroundResource(color);
-            item_holder.articledate.setText("" + time);
-
-        } else if (holder instanceof ArticleViewItemHolder) {
-
-            final ArticleViewItemHolder twitter_holder = ((ArticleViewItemHolder) holder);
-
-            twitter_holder.article_time.setText("" + time);
-            twitter_holder.source_icon.setImageResource(source_icon);
-
-            if (text != null) {
-                twitter_holder.article_text.setText(text);
-            }
-
-            setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar), twitter_holder.article_img);
-
-            //twitter_holder.twitter_article_lay.setBackgroundResource(color);
-            if (sentiment_type != null)
-                twitter_holder.sentiment_type.setImageDrawable(ContextCompat.getDrawable(context, getEmoji(sentiment_type)));
-
-            if (item.source != null && item.source.original_data != null && item.source.original_data.user_data != null) {
-
-                SearchArticles.UserData data = item.source.original_data.user_data;
-
-                if (data.profile_image_url != null && !data.profile_image_url.isEmpty()) {
-                    img_url = data.profile_image_url;
-                } else if (data.profile_image_url_https != null && !data.profile_image_url_https.isEmpty()) {
-                    img_url = data.profile_image_url_https;
-                }
-
-                img_url = TwitterImage(img_url);
-
-                if (img_url != null)
-                    Glide.with(context).load(img_url).into(new SimpleTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                            setImage(((BitmapDrawable) resource).getBitmap(), twitter_holder.article_img);
-
-                        }
-                    });
-
-                if (data.name != null)
-                    twitter_holder.display_name.setText(data.name);
-                else
-                    twitter_holder.display_name.setVisibility(View.GONE);
-
-                if (data.screen_name != null)
-                    twitter_holder.article_name.setText("@" + data.screen_name);
-                else
-                    twitter_holder.article_name.setVisibility(View.GONE);
-
-            } else if (item.source.original_data != null && item.source.original_data.google_user != null &&
-                    item.source.original_data.google_user.google_img != null) {
-
-                img_url = item.source.original_data.google_user.google_img.img_url;
-                img_url = GoogleImage(img_url);
-                if (img_url != null) {
-                    Glide.with(context).load(img_url).into(new SimpleTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                            setImage(((BitmapDrawable) resource).getBitmap(), twitter_holder.article_img);
-
-                        }
-                    });
-                }
-
-                if (author != null)
-                    twitter_holder.display_name.setText(author);
-                twitter_holder.article_name.setVisibility(View.GONE);
-            } else {
-                try {
-                    if (author != null) {
-                        author = item.source.AUTHOR.NAME;
-                        twitter_holder.display_name.setText(author);
-                        twitter_holder.article_name.setVisibility(View.GONE);
-                        twitter_holder.article_img.setImageResource(source_icon);
-                        twitter_holder.source_icon.setVisibility(View.INVISIBLE);
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } else if (holder instanceof TwetterEmbedded) {
+        if (holder instanceof TwetterEmbedded) {
 
             final TwetterEmbedded twitter_holder = ((TwetterEmbedded) holder);
 
@@ -328,12 +192,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             final FacebookEmbedded fb_holder = ((FacebookEmbedded) holder);
 
             if (source == Constants.FACEBOOK) {
-                /*if (item.source.FB_DATA == null) {
-                    new GetLinkData(fb_holder.webview, context, item.source.URL, item, position, VIEW_FACEBOOK);
-                } else {
-                    setwebdata(fb_holder.webview, "", item.source.FB_DATA);
-                }*/
-
                 setfbdata(fb_holder.webview, item.source.URL);
             }
 
@@ -368,6 +226,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                             Glide.with(context).load(item.source.IMAGE_LINK).into(new SimpleTarget<Drawable>() {
                                 @Override
                                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                    if(resource instanceof BitmapDrawable)
                                     setImage(((BitmapDrawable) resource).getBitmap(), article_view.og_image);
 
                                 }
@@ -385,8 +244,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             ((ProgrssHolder) holder).progress.setIndeterminate(true);
         }
-
-
     }
 
     @Override
@@ -399,77 +256,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return listdata.size();
     }
 
-    public class ViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.item1)
-        public TextView item1;
-        @BindView(R.id.item2)
-        public TextView item2;
-        /*@BindView(R.id.item3)
-        public TextView item3;*/
-        @BindView(R.id.author)
-        public TextView author;
-        @BindView(R.id.articledate)
-        public TextView articledate;
-        @BindView(R.id.article_lay)
-        public RelativeLayout article_lay;
-
-        public ViewItemHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if (onitemclicklistner != null) {
-                onitemclicklistner.itemClicked(v, getAdapterPosition());
-            }
-
-        }
-    }
-
-    public class ArticleViewItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.article_img)
-        public ImageView article_img;
-        @BindView(R.id.display_name)
-        public TextView display_name;
-        @BindView(R.id.article_name)
-        public TextView article_name;
-        @BindView(R.id.article_time)
-        public TextView article_time;
-        @BindView(R.id.article_text)
-        public TextView article_text;
-        @BindView(R.id.twitter_article_lay)
-        public LinearLayout twitter_article_lay;
-        @BindView(R.id.source_icon)
-        public ImageView source_icon;
-        @BindView(R.id.sentiment_type)
-        public ImageView sentiment_type;
-
-
-        public ArticleViewItemHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            twitter_article_lay.setOnClickListener(this);
-
-            Utils.changeFontFace(display_name, "fonts/MuseoSans-700.otf", context);
-            //Utils.changeFontFace(article_name,"fonts/MuseoSans-500.otf",context);
-            Utils.changeFontFace(article_time, "fonts/MuseoSans-500.otf", context);
-            Utils.changeFontFace(article_text, "fonts/MuseoSans-300.otf", context);
-
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if (onitemclicklistner != null) {
-                onitemclicklistner.itemClicked(v, getAdapterPosition());
-            }
-        }
-    }
 
     public class TwetterEmbedded extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -488,7 +274,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public void onClick(View v) {
 
             if (onitemclicklistner != null) {
-                onitemclicklistner.itemClicked(v, getAdapterPosition());
+                onitemclicklistner.itemClicked(v, getAdapterPosition(),Constants.TWITTER);
             }
         }
     }
@@ -509,7 +295,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public void onClick(View v) {
 
             if (onitemclicklistner != null) {
-                onitemclicklistner.itemClicked(v, getAdapterPosition());
+                onitemclicklistner.itemClicked(v, getAdapterPosition(),Constants.FACEBOOK);
             }
         }
 
@@ -568,7 +354,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public void onClick(View v) {
 
             if (onitemclicklistner != null) {
-                onitemclicklistner.itemClicked(v, getAdapterPosition());
+                onitemclicklistner.itemClicked(v, getAdapterPosition(),Constants.BLOGS);
             }
         }
 
@@ -613,10 +399,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         if (xtag != null && xtag.size() > 0) {
             Utils.sentiment_xtags();
-            Set<String> sentiment_keys = Constants.sentiment_map.keySet();
-            /*for (String sentiment_key : sentiment_keys)
-                if (xtag.contains(sentiment_key))
-                    return sentiment_key;*/
 
             for (String tag : xtag) {
                 if (tag.contains(Constants.NEGATIVE))
@@ -655,21 +437,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         return R.drawable.neutral1;
     }
-
-
-    private int applySentimentemoji(String sentimet) {
-
-        if (sentimet != null)
-            if (sentimet.contains(Constants.POSITIVE)) {
-                return 0x1F642;
-            } else if (sentimet.contains(Constants.NEGATIVE)) {
-                return 0x2639;
-            } else
-                return 0x1F610;
-
-        return 0x1F610;
-    }
-
 
     private int sourceicon(String type) {
 
@@ -715,7 +482,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true));
             // drawable.setCircular(true);
             avatar_img.setImageDrawable(drawable);
-
+        }else{
+            avatar_img.setVisibility(View.GONE);
         }
     }
 
@@ -762,52 +530,6 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return img;
     }
 
-    private void showTwitterView(final Context context, final String tweetId,
-                                 final RelativeLayout tweet_embedded, final int pos) {
-        // Twitter.getInstance();
-
-        final WeakReference<RelativeLayout> mWeakReference = new WeakReference<RelativeLayout>(tweet_embedded);
-
-        TweetUtils.loadTweet(Long.parseLong(tweetId), new Callback<Tweet>() {
-            @Override
-            public void success(Result<Tweet> result) {
-                final CompactTweetView compact_vew = new CompactTweetView(context, result.data,
-                        R.style.tw__TweetLightStyle);
-
-                compact_vew.setTweetLinkClickListener(new TweetLinkClickListener() {
-                    @Override
-                    public void onLinkClick(Tweet tweet, String url) {
-
-                        if (onitemclicklistner != null) {
-                            onitemclicklistner.itemClicked(compact_vew, pos);
-                        }
-                    }
-                });
-
-                compact_vew.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (onitemclicklistner != null) {
-                            onitemclicklistner.itemClicked(v, pos);
-                        }
-                    }
-                });
-
-                if (mWeakReference != null) {
-                    RelativeLayout mtweetview = mWeakReference.get();
-                    if (mtweetview != null)
-                        mtweetview.addView(compact_vew);
-                }
-
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                exception.printStackTrace();
-            }
-        });
-
-    }
 
     public void setfbdata(WebView webview, String url) {
 
@@ -955,14 +677,21 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     if (!image_link.isEmpty()) {
                         articl_view.setVisibility(View.VISIBLE);
                         Log.i(TAG, "pos " + pos + " img" + image_link);
+
                         Glide.with(context).load(image_link).into(new SimpleTarget<Drawable>() {
 
                             @Override
                             public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                try{
                                 setImage(((BitmapDrawable) resource).getBitmap(), (ImageView) articl_view);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                    setImage(null, (ImageView) articl_view);
+                                }
                             }
 
                         });
+
                     } else {
                         articl_view.setVisibility(View.GONE);
                     }
@@ -1004,7 +733,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 public void onLinkClick(Tweet tweet, String url) {
 
                     if (onitemclicklistner != null) {
-                        onitemclicklistner.itemClicked(compact_vew, pos);
+                        onitemclicklistner.itemClicked(compact_vew, pos,Constants.TWITTER);
                     }
                 }
             });
@@ -1013,7 +742,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View v) {
                     if (onitemclicklistner != null) {
-                        onitemclicklistner.itemClicked(v, pos);
+                        onitemclicklistner.itemClicked(v, pos,Constants.TWITTER);
                     }
                 }
             });

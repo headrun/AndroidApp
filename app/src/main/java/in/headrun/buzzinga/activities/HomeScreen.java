@@ -486,7 +486,7 @@ public class HomeScreen extends Fragment
 
 
         if (Utils.isNetwrokConnection(getActivity())) {
-            Intent i = new Intent(getActivity(), ArticleWebDisplay.class);
+            Intent i = new Intent(getActivity(), ArticleDetialView.class);
             i.putExtra("pos", position);
             startActivity(i);
             getActivity().overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
@@ -494,6 +494,27 @@ public class HomeScreen extends Fragment
             network_error_snackbar();
         }
 
+    }
+
+    @Override
+    public void itemClicked(View view, int position, String article_type) {
+
+        if (Utils.isNetwrokConnection(getActivity())) {
+            if(article_type.contains(Constants.BLOGS)){
+                Intent i = new Intent(getActivity(), ArticleDetialView.class);
+                i.putExtra("pos", position);
+                startActivity(i);
+                getActivity().overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+            }else{
+                Intent i = new Intent(getActivity(), ArticleWebDisplay.class);
+                i.putExtra("pos", position);
+                startActivity(i);
+                getActivity().overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+            }
+
+        } else {
+            network_error_snackbar();
+        }
     }
 
     public void getJsonData(JSONObject jobj) {

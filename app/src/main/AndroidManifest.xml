@@ -121,6 +121,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".services.TweetLoadService" />
+        <activity android:name=".activities.ArticleDetialView"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

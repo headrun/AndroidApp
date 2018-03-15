@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/invite"
+        android:visible="false"
         android:icon="@drawable/share_24dp"
         android:title="Share"
         app:itemIconTint="@color/blue"
         app:showAsAction="always" />
-
-
 </menu>
