@@ -44,11 +44,11 @@
     </string-array>
 
     <string-array name="titleimages">
-        <item>@drawable/s1</item>
+        <!--<item>@drawable/s1</item>
         <item>@drawable/sentiment</item>
         <item>@drawable/gender</item>
         <item>@drawable/location</item>
-        <item>@drawable/language</item>
+        <item>@drawable/language</item>-->
     </string-array>
 
 

@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="1dp"
+    android:background="@color/white">
+
+    <WebView
     android:id="@+id/webview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp"
-    android:layout_marginTop="1dp" />
+    android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_below="@id/webview"
+        android:id="@+id/sentiment_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        tools:src="@drawable/positive1"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

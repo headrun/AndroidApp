@@ -1,15 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tweet_lay"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/grey">-->
+<?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tweet_view"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
+    android:padding="8dp"
+    android:background="@color/white"
     android:layout_marginTop="1dp">
 
-
-</RelativeLayout><!--</RelativeLayout>-->
+    <RelativeLayout
+        android:id="@+id/tweet_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:layout_below="@id/tweet_view"
+        android:id="@+id/sentiment_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        tools:src="@drawable/positive1"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

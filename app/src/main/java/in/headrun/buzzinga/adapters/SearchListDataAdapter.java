@@ -172,7 +172,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         if (item != null && item.source != null) {
             source = sourType(item.source.XTAGS);
-            sentiment_type = sentimentType(item.source.XTAGS);
+            sentiment_type =Utils.sentimentType(item.source.XTAGS);
             time = time_ago.timeAgo(Long.parseLong(item.source.DATE_ADDED));
         }
 
@@ -185,11 +185,17 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 String tweet_id = item.source.original_data.id_str;
                 // showTwitterView(context, tweet_id, twitter_holder.tweet_view, position);
 
+                twitter_holder.sentiment_img.setImageResource(Utils.getEmoji(sentiment_type));
+
                 new ShowTweet(context, tweet_id, twitter_holder.tweet_view, position);
             }
 
         } else if (holder instanceof FacebookEmbedded) {
             final FacebookEmbedded fb_holder = ((FacebookEmbedded) holder);
+
+
+                fb_holder.sentiment_img.setImageResource(Utils.getEmoji(sentiment_type));
+
 
             if (source == Constants.FACEBOOK) {
                 setfbdata(fb_holder.webview, item.source.URL);
@@ -210,7 +216,10 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 if (!text_url.isEmpty()) {
                     URL aURL = new URL(text_url);
                     host_name = aURL.getHost();
-                    article_view.og_url.setText("" + host_name + " " + time);
+                    article_view.og_url.setText("" + host_name + "\n" + time);
+
+
+                        article_view.og_sentiment.setImageResource(Utils.getEmoji(sentiment_type));
 
                     Glide.with(context).load(ServerConfig.FETCH_ICON + host_name).into(new SimpleTarget<Drawable>() {
                         @Override
@@ -261,8 +270,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @BindView(R.id.tweet_view)
         RelativeLayout tweet_view;
-        /*@BindView(R.id.tweet_lay)
-        RelativeLayout tweet_lay;*/
+        @BindView(R.id.sentiment_img)
+        ImageView sentiment_img;
 
         public TwetterEmbedded(View itemView) {
             super(itemView);
@@ -283,6 +292,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @BindView(R.id.webview)
         public WebView webview;
+        @BindView(R.id.sentiment_img)
+        ImageView sentiment_img;
 
         public FacebookEmbedded(View itemView) {
             super(itemView);
@@ -341,6 +352,8 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView og_description;
         @BindView(R.id.favicon)
         ImageView favicon;
+        @BindView(R.id.og_sentiment)
+        ImageView og_sentiment;
         @BindView(R.id.og_url)
         TextView og_url;
 
@@ -395,22 +408,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return "";
     }
 
-    public String sentimentType(List<String> xtag) {
 
-        if (xtag != null && xtag.size() > 0) {
-            Utils.sentiment_xtags();
-
-            for (String tag : xtag) {
-                if (tag.contains(Constants.NEGATIVE))
-                    return Constants.NEGATIVE;
-                else if (tag.contains(Constants.POSITIVE))
-                    return Constants.POSITIVE;
-                else if (tag.contains(Constants.NEUTRAL))
-                    return Constants.NEUTRAL;
-            }
-        }
-        return "";
-    }
 
     private int applySentimentColor(String sentimet) {
 
@@ -425,20 +423,9 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return R.drawable.neu_sentiment;
     }
 
-    private int getEmoji(String sentimet) {
 
-        if (sentimet != null)
-            if (sentimet.contains(Constants.POSITIVE)) {
-                return R.drawable.positive1;
-            } else if (sentimet.contains(Constants.NEGATIVE)) {
-                return R.drawable.negative1;
-            } else
-                return R.drawable.neutral1;
 
-        return R.drawable.neutral1;
-    }
-
-    private int sourceicon(String type) {
+   /* private int sourceicon(String type) {
 
         if (type != null) {
             Utils.showLog(TAG, " source icon type " + type, Config.SearchListDataAdapter);
@@ -473,7 +460,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             Utils.showLog(TAG, " source icon type is null ", Config.SearchListDataAdapter);
         }
         return 0;
-    }
+    }*/
 
     public void setImage(Bitmap bitmap, ImageView avatar_img) {
 

@@ -143,11 +143,18 @@ public class TwitterLogin extends Activity {
                         //startActivity(new Intent(TwitterLogin.this, MainActivity.class));
                         Constants.BTRACKKEY.add(BuzzingaApplication.getUserSession().getTrackKey());
                         Utils.add_query_data();
-                        startActivity(new Intent(getApplication(), MainActivity.class).
-                                putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
 
-                        overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
-                        finish();
+                        String track_key = BuzzingaApplication.getUserSession().getTrackKey() == null ? "" : BuzzingaApplication.getUserSession().getTrackKey().trim();
+                        String data = track_key.replaceAll("\\[|\\]", "");
+                        if (data.isEmpty()) {
+                            startActivity(new Intent(TwitterLogin.this, TrackKeyWord.class));
+                        }else {
+                            startActivity(new Intent(getApplication(), MainActivity.class).
+                                    putExtra(Constants.Intent_OPERATION, Constants.Intent_TRACK));
+
+                            overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+                            finish();
+                        }
                     }
                 }
             }

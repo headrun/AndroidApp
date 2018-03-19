@@ -68,10 +68,13 @@ android {
             dimension "app"
             applicationId "in.headrun.buzzinga.devineniuma"
             signingConfig signingConfigs.devineniuma
+
         }
         buzzinga {
             dimension "app"
             signingConfig signingConfigs.config
+            versionCode BUZZINGA_VERSION_CODE as int
+            versionName BUZZINGA_VERSION_NAME
         }
         pawankalyan {
             dimension "app"
@@ -82,7 +85,6 @@ android {
             dimension "app"
             applicationId 'in.headrun.buzzinga.janasena_buzz'
             signingConfig signingConfigs.janasena_buzz
-
         }
     }
     lintOptions {
@@ -120,9 +122,9 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:9.4.0'
     //compile 'com.google.firebase:firebase-auth:9.4.0'
     //Twitter Login
-    compile('com.twitter.sdk.android:twitter-core:3.2.0@aar') {
+    /*compile('com.twitter.sdk.android:twitter-core:3.2.0@aar') {
         transitive = true
-    }
+    }*/
     compile('com.twitter.sdk.android:twitter:3.2.0@aar') {
         transitive = true
     }
@@ -133,6 +135,6 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.3'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
 
-    compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+    //compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
 }
 apply plugin: 'com.google.gms.google-services'

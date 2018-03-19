@@ -869,7 +869,6 @@ public class Utils {
 
             Long mills = Long.valueOf(is_hour * 60 * 60 * 1000);
 
-
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
                 showLog(TAG, "worked on lollipop and above ", Config.Utils);
@@ -1295,6 +1294,35 @@ public class Utils {
                 Log.i(TAG, "load tweet exception" + exception.getMessage());
             }
         });
+    }
+
+    public static int getEmoji(String sentimet) {
+
+        if (sentimet != null)
+            if (sentimet.contains(Constants.POSITIVE)) {
+                return R.drawable.positive1;
+            } else if (sentimet.contains(Constants.NEGATIVE)) {
+                return R.drawable.negative1;
+            } else
+                return R.drawable.neutral1;
+
+        return R.drawable.neutral1;
+    }
+    public static String sentimentType(List<String> xtag) {
+
+        if (xtag != null && xtag.size() > 0) {
+            Utils.sentiment_xtags();
+
+            for (String tag : xtag) {
+                if (tag.contains(Constants.NEGATIVE))
+                    return Constants.NEGATIVE;
+                else if (tag.contains(Constants.POSITIVE))
+                    return Constants.POSITIVE;
+                else if (tag.contains(Constants.NEUTRAL))
+                    return Constants.NEUTRAL;
+            }
+        }
+        return "";
     }
 }
 

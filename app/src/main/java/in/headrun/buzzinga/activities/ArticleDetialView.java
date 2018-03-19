@@ -31,6 +31,7 @@ import in.headrun.buzzinga.R;
 import in.headrun.buzzinga.config.Constants;
 import in.headrun.buzzinga.config.ServerConfig;
 import in.headrun.buzzinga.doto.SearchArticles;
+import in.headrun.buzzinga.utils.Utils;
 
 /**
  * Created by hedarun on 14/3/18.
@@ -48,6 +49,9 @@ public class ArticleDetialView extends AppCompatActivity {
     ImageView article_source_img;
     @BindView(R.id.fab_share)
     FloatingActionButton fab_share;
+   // @BindView(R.id.fab_sentiment)
+   // FloatingActionButton fab_sentiment;
+
     @BindView(R.id.article_source_txt)
     TextView article_source_txt;
     @BindView(R.id.article_date)
@@ -89,6 +93,8 @@ public class ArticleDetialView extends AppCompatActivity {
         if (Constants.SEARCHARTICLES.size() >= pos)
             article_details = Constants.SEARCHARTICLES.get(pos);
         if(article_details!=null && article_details.source!=null){
+            //set sentiment
+            //fab_sentiment.setImageResource(Utils.getEmoji(Utils.sentimentType(article_details.source.XTAGS)));
             //article img
             if (article_details.source.IMAGE_LINK != null && !article_details.source.IMAGE_LINK.isEmpty()){
             Glide.with(this).

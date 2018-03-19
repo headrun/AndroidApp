@@ -19,6 +19,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
             android:fitsSystemWindows="true"
+            android:id="@+id/collapsing_toolbar"
             >
 
             <ImageView
@@ -38,7 +39,20 @@
                 app:layout_collapseMode="pin"
                 />
         </android.support.design.widget.CollapsingToolbarLayout>
+
+
     </android.support.design.widget.AppBarLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/white"
+        android:elevation="8dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        android:id="@+id/fab_sentiment"
+        />-->
 
 
     <android.support.design.widget.FloatingActionButton
@@ -93,7 +107,7 @@
             android:layout_alignStart="@+id/article_source_img"
             android:layout_below="@+id/article_source_img"
             android:layout_marginTop="8dp"
-            android:text="@string/artilce_title" />
+             />
 
         <TextView
             android:id="@+id/article_date"
@@ -111,7 +125,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/article_date"
             android:layout_marginTop="8dp"
-            tools:text="@string/artilce_desc"
             android:textColor="@color/black"
             android:lineSpacingExtra="1sp"
             />

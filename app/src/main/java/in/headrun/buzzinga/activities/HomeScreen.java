@@ -225,6 +225,7 @@ public class HomeScreen extends Fragment
         setSate();
 
         setDisplayDate();
+        Utils.callService(getActivity());
         return v;
     }
 
