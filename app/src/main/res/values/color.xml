@@ -17,4 +17,6 @@
     <color name="base_gray">#999999</color>
     <color name="light_gray">#dddddd</color>
     <color name="ripple_black">#80000000</color>
+    <color name="twitter_bg">#1DA1F2</color>
+    <color name="blue_">#2E86C1</color>
 </resources>

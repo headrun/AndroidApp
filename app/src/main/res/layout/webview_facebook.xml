@@ -7,19 +7,39 @@
     android:layout_marginTop="1dp"
     android:background="@color/white">
 
-    <WebView
-    android:id="@+id/webview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="4dp"
+        android:layout_margin="4dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="4dp"
+        app:cardElevation="2dp">
 
-    <ImageView
-        android:layout_below="@id/webview"
-        android:id="@+id/sentiment_img"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        tools:src="@drawable/positive1"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_below="@id/webview"
+                android:id="@+id/sentiment_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                tools:src="@drawable/positive1"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
@@ -36,12 +37,10 @@ public class SplashActivity extends Activity {
 
     public static String TAG = SplashActivity.class.getClass().getSimpleName();
     public String loged;
-    @BindView(R.id.splash_progress)
-    ProgressBar splash_progress;
-    @BindView(R.id.splashscreen)
-    ImageView splashscreen;
-    @BindView(R.id.version_name)
-    TextView version_name;
+
+
+    @BindView(R.id.lottie)
+    LottieAnimationView lottie;
 
     Boolean action_type = false;
 
@@ -50,6 +49,10 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscren);
         ButterKnife.bind(this);
+
+        lottie.setAnimation("ripple_loading_animation.json");
+        lottie.loop(true);
+        lottie.playAnimation();
 
         Constants.BTRACKKEY.addAll(Arrays.asList(getResources().getStringArray(R.array.track_keywords)));
 
@@ -88,7 +91,6 @@ public class SplashActivity extends Activity {
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
-            version_name.setText("Version " + version);
         } catch (Exception e) {
             e.printStackTrace();
         }

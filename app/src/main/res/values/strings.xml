@@ -76,7 +76,7 @@
 
     <string name="time_ago_prefix"></string>
     <string name="time_ago_suffix">ago</string>
-    <string name="time_ago_seconds">%d sec</string>
+    <string name="time_ago_seconds">%f sec</string>
     <string name="time_ago_minute">about a minute</string>
     <string name="time_ago_minutes">%d m</string>
     <string name="time_ago_hour">about an hour</string>
@@ -115,6 +115,8 @@
 
     <string name="call_permission_error">Call Permission Denied</string>
     <string name="nav_header_title">Buzzinga</string>
+
+    <string name="login_text"><font color="#1DA1F2">Monitor </font><b>+</b><font color="#1DA1F2"> Analyze </font><b>=</b><font color="#1DA1F2"> Report</font></string>
 
 
 </resources>

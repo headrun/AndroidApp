@@ -14,14 +14,17 @@
             android:id="@+id/sourcelistview"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:background="@color/grey">
+            android:background="@color/twitter_bg">
 
             <ListView
                 android:id="@+id/filter_titles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:divider="@color/white"
+                android:dividerHeight="1px"
                 android:layout_gravity="top|right"
                 android:choiceMode="singleChoice" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -34,6 +37,7 @@
                 android:id="@+id/autosearch"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:maxLines="1"
                 android:background="@drawable/roundborder"
                 android:hint="Search" />
 
@@ -41,6 +45,8 @@
                 android:id="@+id/filter_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:dividerHeight="1px"
+                android:divider="@color/twitter_bg"
                 android:layout_below="@+id/autosearch"
                 android:choiceMode="multipleChoice" />
 

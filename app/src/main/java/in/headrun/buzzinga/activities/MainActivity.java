@@ -1,8 +1,12 @@
 package in.headrun.buzzinga.activities;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -120,15 +124,12 @@ public class MainActivity extends AppCompatActivity
         } else {
             navigationView.getMenu().findItem(R.id.edit_keyword).setVisible(false);
         }
-        openMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        openMenu.setOnClickListener(v -> {
 
-                if (drawer.isDrawerOpen(navigationView)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    drawer.openDrawer(GravityCompat.START);
-                }
+            if (drawer.isDrawerOpen(navigationView)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                drawer.openDrawer(GravityCompat.START);
             }
         });
 
@@ -268,11 +269,37 @@ public class MainActivity extends AppCompatActivity
             this.overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         } else if (id == R.id.logout) {
             stringrequest();
+        } else if (id == R.id.rate_us){
+
+            rateApp();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void rateApp() {
+        try {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        } catch (ActivityNotFoundException e) {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
+
+    private  Intent rateIntentForUrl(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21) {
+            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+        } else {
+            //noinspection deprecation
+            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+        }
+        intent.addFlags(flags);
+        return intent;
     }
 
     public void stringrequest() {

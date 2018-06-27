@@ -78,7 +78,7 @@ public class SearchListDataAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     String TAG = SearchListDataAdapter.this.getClass().getSimpleName();
     Context context;
-    LinkedList<SearchArticles> listdata = new LinkedList<>();
+    LinkedList<SearchArticles> listdata;
 
     TimeAgo time_ago;
 

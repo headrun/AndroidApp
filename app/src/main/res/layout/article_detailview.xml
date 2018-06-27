@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:toolbarId="@+id/toolbar"
+            app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
             android:fitsSystemWindows="true"
@@ -126,10 +127,10 @@
             android:layout_below="@+id/article_date"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
-            android:lineSpacingExtra="1sp"
-            />
+            android:lineSpacingExtra="1sp" />
 
     </RelativeLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

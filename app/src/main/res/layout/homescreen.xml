@@ -18,9 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:drawableLeft="@drawable/date_range"
+            android:drawableLeft="@drawable/ic_calendar"
             android:drawablePadding="5dp"
             android:elevation="5sp"
+            android:textColor="@color/twitter_bg"
             android:gravity="center_horizontal|center"
             android:padding="5dp"
             android:paddingBottom="0dp"
@@ -31,6 +32,7 @@
             android:id="@+id/horizontal_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:overScrollMode="never"
             android:layout_below="@+id/sel_date"
             android:background="#fff"
             android:visibility="gone" />
@@ -55,9 +57,11 @@
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/result_listview"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:overScrollMode="never"
                         android:scrollingCache="true" />
+
                 </android.support.v4.widget.SwipeRefreshLayout>
 
             </RelativeLayout>
@@ -88,4 +92,5 @@
             android:visibility="gone" />
 
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

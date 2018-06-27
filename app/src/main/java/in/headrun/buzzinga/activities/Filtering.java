@@ -11,17 +11,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 import butterknife.BindView;
@@ -44,24 +48,15 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
 
     public String TAG = Filtering.this.getClass().getSimpleName();
 
-    @BindView(R.id.filter_titles)
-    ListView filter_titles;
-    @BindView(R.id.filter_items)
-    ListView filter_items;
-
-    @BindView(R.id.clearfilter)
-    Button clearfilter;
-    @BindView(R.id.applyfilter)
-    Button applyfilter;
-
-    @BindView(R.id.autosearch)
-    EditText autosearch;
+    @BindView(R.id.filter_titles) ListView filter_titles;
+    @BindView(R.id.filter_items) ListView filter_items;
+    @BindView(R.id.clearfilter) Button clearfilter;
+    @BindView(R.id.applyfilter) Button applyfilter;
+    @BindView(R.id.autosearch) EditText autosearch;
 
     String Sourcestatus = "";
     FilterStatus sel_source_items;
-
     ListViewAdapter list_adapter;
-
     FilterTitleAdapter titleadapter;
     int sel_title_pos = -1;
 
@@ -84,7 +79,7 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.sourcefilterlay);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.buzz_logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Filters");
@@ -298,6 +293,13 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.clearfilter) {
 
@@ -345,9 +347,12 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
         for (Map.Entry<String, String> entry : Constants.sources_list.entrySet()) {
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSOURSOURE.add(new Listitems(entry.getKey(), value, source_check(value)));
+
+            LogUtils.e("VALUE ->"+value);
         }
 
-        sortlist(Constants.FILTERSOURSOURE);
+
+//        sortlist(Constants.FILTERSOURSOURE);
 
     }
 
@@ -365,7 +370,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             String value = entry.getKey().toUpperCase();
             Constants.FILTERSENTIMENT.add(new Listitems(entry.getKey(), value, sentiment_check(value)));
         }
-        sortlist(Constants.FILTERSENTIMENT);
+//        Collections.reverse(Constants.FILTERSENTIMENT);
+//        sortlist(Constants.FILTERSENTIMENT);
 
 
     }
@@ -382,7 +388,8 @@ public class Filtering extends AppCompatActivity implements View.OnClickListener
             String value = gendervalue.getKey().toUpperCase();
             Constants.FILTERGENDER.add(new Listitems(gendervalue.getKey(), value, gender_check(value)));
         }
-        sortlist(Constants.FILTERGENDER);
+//        Collections.rotate(Constants.FILTERGENDER, -1);
+//        sortlist(Constants.FILTERGENDER);
 
 
     }

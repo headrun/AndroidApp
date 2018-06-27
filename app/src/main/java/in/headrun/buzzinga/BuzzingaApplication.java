@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.blankj.utilcode.util.Utils;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -45,6 +46,8 @@ public class BuzzingaApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+
+        Utils.init(this);
 
         instance = this;
         requestQueue = Volley.newRequestQueue(getApplicationContext());

@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -140,9 +141,13 @@ public class HomeScreen extends Fragment
             Constants.state = null;
         }
 
-        horizontal_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        horizontal_recycler_view.setLayoutManager(linearLayoutManager);
         dateSelAdapter = new DateSelection_AdapterView(getActivity(), Constants.DATE_SEL_LIST);
         horizontal_recycler_view.setAdapter(dateSelAdapter);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(horizontal_recycler_view.getContext(),
+//                linearLayoutManager.getOrientation());
+//        horizontal_recycler_view.addItemDecoration(dividerItemDecoration);
         dateSelAdapter.setClickListener(this);
 
         display_data.setHasFixedSize(true);
@@ -696,7 +701,7 @@ public class HomeScreen extends Fragment
 
     public void setDisplayDate() {
 
-        sel_date.setText(Utils.dispalyDateFormate(BuzzingaApplication.getUserSession().getFROM_DATE()) + " TO " +
+        sel_date.setText(Utils.dispalyDateFormate(BuzzingaApplication.getUserSession().getFROM_DATE()) + " - " +
                 Utils.dispalyDateFormate(BuzzingaApplication.getUserSession().getTO_DATE()));
     }
 

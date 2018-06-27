@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -86,11 +87,11 @@ public class Constants {
             "Week", "This Month", "Last Month"
     );
 
-    public static Map<String, String> sources_list = new HashMap<>();
-    public static Map<String, String> source_map = new HashMap<>();
-    public static Map<String, String> gender_map = new HashMap<>();
-    public static Map<String, Integer> gender_map_values = new HashMap<>();
-    public static Map<String, String> sentiment_map = new HashMap<>();
+    public static Map<String, String> sources_list = new LinkedHashMap<>();
+    public static Map<String, String> source_map = new LinkedHashMap<>();
+    public static Map<String, String> gender_map = new LinkedHashMap<>();
+    public static Map<String, Integer> gender_map_values = new LinkedHashMap<>();
+    public static Map<String, String> sentiment_map = new LinkedHashMap<>();
 
     public static String facebook_specific_xtags = "";
     public static String twitter_specific_xtags = "";
@@ -128,32 +129,36 @@ public class Constants {
 
         sources_list.put(FACEBOOK, FACEBOOK);
         sources_list.put(TWITTER, TWITTER);
+        sources_list.put(INSTAGRAM, INSTAGRAM);
+        sources_list.put(YOUTUBE, YOUTUBE);
+        sources_list.put(LINKDIN, LINKDIN);
+        sources_list.put(GOOGLEPLUS, GOOGLEPLUS);
+        sources_list.put(QUORA, QUORA);
         sources_list.put(NEWS, NEWS);
         sources_list.put(BLOGS, BLOGS);
         sources_list.put(FORUMS, FORUMS);
-        sources_list.put(GOOGLEPLUS, GOOGLEPLUS);
-        sources_list.put(YOUTUBE, YOUTUBE);
         sources_list.put(FLICKR, FLICKR);
-        sources_list.put(INSTAGRAM, INSTAGRAM);
         sources_list.put(TUMBLR, TUMBLR);
-        sources_list.put(LINKDIN, LINKDIN);
-        sources_list.put(QUORA, QUORA);
 
         source_map.put(FACEBOOK, "(xtags:facebook_search_sourcetype_manual OR xtags:facebook_search_sourcetype_manual_parent OR xtags:fbpages_sourcetype_manual OR xtags:facebook_comments_sourcetype_manual)");
 
         source_map.put(TWITTER, "(xtags:twitter_search_sourcetype_manual OR xtags:twitter_streaming_sourcetype_manual)");
+
+        source_map.put(YOUTUBE, "(xtags:youtube_search_sourcetype_manual)");
+
+        source_map.put(INSTAGRAM, "(xtags:instagram_search_sourcetype_manual)");
+
+        source_map.put(LINKDIN, "(xtags:linkedin_search_sourcetype_manual)");
+
+        source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
 
         source_map.put(NEWS, "(xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:news_sourcetype_manual_parent");
 
         source_map.put(BLOGS, "(xtags:blogs_sourcetype_manual_parent OR xtags:wordpress_search_sourcetype_manual)");
         source_map.put(FORUMS, "(xtags:focused_crawlers_sourcetype_manual OR xtags:rss_sourcetype_manual) AND xtags:forums_sourcetype_manual_parent");
 
-        source_map.put(GOOGLEPLUS, "(xtags:googleplus_search_sourcetype_manual)");
-        source_map.put(YOUTUBE, "(xtags:youtube_search_sourcetype_manual)");
         source_map.put(FLICKR, "(xtags:flickr_search_sourcetype_manual)");
-        source_map.put(INSTAGRAM, "(xtags:instagram_search_sourcetype_manual)");
         source_map.put(TUMBLR, "(xtags:tumblr_search_sourcetype_manual)");
-        source_map.put(LINKDIN, "(xtags:linkedin_search_sourcetype_manual)");
         source_map.put(QUORA, "(xtags:quora_sourcetype_manual_parent)");
 
     }
@@ -171,8 +176,8 @@ public class Constants {
     }
 
     public static void sentiment_xtags() {
+        sentiment_map.put(POSITIVE, "xtags:positive_sentiment_final");
         sentiment_map.put(NEUTRAL, "xtags:neutral_sentiment_final");
         sentiment_map.put(NEGATIVE, "xtags:negative_sentiment_final");
-        sentiment_map.put(POSITIVE, "xtags:positive_sentiment_final");
     }
 }

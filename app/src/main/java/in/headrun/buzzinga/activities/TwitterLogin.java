@@ -18,7 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.bumptech.glide.Glide;
+import com.flaviofaria.kenburnsview.KenBurnsView;
 
 
 import java.util.HashMap;
@@ -42,8 +43,7 @@ public class TwitterLogin extends Activity {
 
     String TAG = TwitterLogin.this.getClass().getSimpleName();
 
-    @BindView(R.id.twitter_login_button1)
-    ImageView loginButton;
+    @BindView(R.id.twitter_login_button1) Button loginButton;
     @BindView(R.id.progressbar)
     ProgressBar progressbar;
     @BindView(R.id.twitter_btn)
@@ -52,6 +52,8 @@ public class TwitterLogin extends Activity {
     View twitter_auth_lay;
     @BindView(R.id.webview)
     WebView webview;
+    @BindView(R.id.BlurImageView)
+    KenBurnsView blurImageView;
 
 
     private Button btnuserdetails;
@@ -66,6 +68,8 @@ public class TwitterLogin extends Activity {
         setContentView(R.layout.twitterlogin);
 
         ButterKnife.bind(this);
+
+        Glide.with(this).load(R.drawable.buzz_bg).into(blurImageView);
 
         twitter_btn.setVisibility(View.VISIBLE);
         twitter_auth_lay.setVisibility(View.GONE);
@@ -82,19 +86,16 @@ public class TwitterLogin extends Activity {
         Log.d(TAG, "loading urls is" + ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
 
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        loginButton.setOnClickListener(v -> {
 
-                if (Utils.isNetwrokConnection(TwitterLogin.this)) {
-                    twitter_btn.setVisibility(View.GONE);
-                    twitter_auth_lay.setVisibility(View.VISIBLE);
+            if (Utils.isNetwrokConnection(TwitterLogin.this)) {
+                twitter_btn.setVisibility(View.GONE);
+                twitter_auth_lay.setVisibility(View.VISIBLE);
 
-                    webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
+                webview.loadUrl(ServerConfig.SERVER_ENDPOINT + ServerConfig.login);
 
-                } else {
-                    Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
-                }
+            } else {
+                Toast.makeText(getApplication(), "Network error", Toast.LENGTH_LONG).show();
             }
         });
 

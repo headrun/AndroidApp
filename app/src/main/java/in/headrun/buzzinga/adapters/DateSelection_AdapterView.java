@@ -44,12 +44,6 @@ public class DateSelection_AdapterView extends RecyclerView.Adapter<DateSelectio
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.txtView.setText(horizontalList.get(position));
 
-        /*holder.txtView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mcontext, holder.txtView.getText().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
     @Override

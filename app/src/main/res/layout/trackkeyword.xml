@@ -3,39 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_track"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"/>
+
     <ImageView
+        android:layout_below="@+id/lottie_track"
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/track_progress"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="20dp"
+        android:paddingBottom="30dp"
         android:src="@drawable/login_logo" />
 
     <EditText
+        android:layout_below="@+id/imageView"
         android:id="@+id/keyword"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/roundborder"
         android:hint="@string/keyword"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
         android:lines="1"
-        android:paddingLeft="5dp" />
+        android:drawableRight="@drawable/ic_track"
+        android:imeOptions="actionSearch"
+        android:layout_centerInParent="true"
+        android:focusableInTouchMode="true"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:background="@drawable/blue_border"/>
 
     <Button
         android:id="@+id/trackbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/keyword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:background="#4baadf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/track"
-        android:textColor="#ffffff" />
+        android:layout_below="@+id/keyword"
+        android:textAllCaps="false"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/btn_solid_border"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <ProgressBar
         android:id="@+id/track_progress"

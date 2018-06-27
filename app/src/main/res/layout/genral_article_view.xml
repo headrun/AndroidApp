@@ -4,96 +4,111 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/og_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:adjustViewBounds="true" />
-
-    <RelativeLayout
-        android:id="@+id/og_contents"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_toEndOf="@id/og_image"
-        android:layout_toRightOf="@id/og_image"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/og_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/text_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_below="@id/og_title"
-            android:id="@+id/og_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/text_black"
-            android:textColorLink="@color/text_black"
-            android:textSize="12sp" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="4dp"
+        android:layout_margin="4dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="4dp"
+        app:cardElevation="2dp">
 
         <RelativeLayout
-            android:layout_below="@id/og_description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/favicon"
-                android:layout_width="15dp"
-                android:layout_centerVertical="true"
-                android:layout_height="15dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@color/light_gray" />
+                android:id="@+id/og_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:adjustViewBounds="true" />
 
-            <TextView
-                android:id="@+id/og_url"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/og_contents"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-               android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:layout_toRightOf="@+id/favicon"
-                android:layout_toLeftOf="@id/og_sentiment"
-                tools:text="sdfghyjui7654ewsdfghjk7u6yrertuioi765rgjkloiytfgh"
-                android:textColor="@color/base_gray"
-                android:textSize="12sp" />
-            <ImageView
-                android:id="@+id/og_sentiment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                tools:src="@drawable/positive1"
-                />
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@id/og_image"
+                android:layout_toRightOf="@id/og_image"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/og_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_below="@id/og_title"
+                    android:id="@+id/og_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/text_black"
+                    android:textColorLink="@color/text_black"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_below="@id/og_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/favicon"
+                        android:layout_width="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="15dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@color/light_gray" />
+
+                    <TextView
+                        android:id="@+id/og_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:layout_toRightOf="@+id/favicon"
+                        android:layout_toLeftOf="@id/og_sentiment"
+                        tools:text="sdfghyjui7654ewsdfghjk7u6yrertuioi765rgjkloiytfgh"
+                        android:textColor="@color/base_gray"
+                        android:textSize="12sp" />
+                    <ImageView
+                        android:id="@+id/og_sentiment"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        tools:src="@drawable/positive1"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
-
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
 

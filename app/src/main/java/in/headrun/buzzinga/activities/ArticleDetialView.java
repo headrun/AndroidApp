@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -39,8 +40,9 @@ import in.headrun.buzzinga.utils.Utils;
 
 public class ArticleDetialView extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.appbar)
     AppBarLayout appbar;
     @BindView(R.id.article_img)
@@ -84,7 +86,27 @@ public class ArticleDetialView extends AppCompatActivity {
                 "fonts/MuseoSans-300.otf"));
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle("Details");
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
+
+        getSupportActionBar().setTitle("Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_grey);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

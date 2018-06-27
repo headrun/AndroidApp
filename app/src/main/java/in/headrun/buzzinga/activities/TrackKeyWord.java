@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 
@@ -39,12 +40,18 @@ public class TrackKeyWord extends Activity implements View.OnClickListener {
     Button trackbtn;
     @BindView(R.id.track_progress)
     ProgressBar trak_progress;
+    @BindView(R.id.lottie_track)
+    LottieAnimationView lottie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackkeyword);
         ButterKnife.bind(this);
+
+        lottie.setAnimation("swing.json");
+        lottie.loop(true);
+        lottie.playAnimation();
 
         trackbtn.setOnClickListener(this);
         Trackkeyword.setImeOptions(EditorInfo.IME_ACTION_SEARCH);

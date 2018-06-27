@@ -10,48 +10,62 @@
                 android:title="Search Result" />
     -->
 
-    <item
-        android:id="@+id/edit_keyword"
-        android:icon="@drawable/edit_article"
-        android:title="Edit Keyword" />
+    <group android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/filter"
-        android:icon="@drawable/article_filter"
-        android:title="Filter"
-        app:actionLayout="@layout/menu_counter" />
+        <item
+            android:id="@+id/edit_keyword"
+            android:icon="@drawable/edit_article"
+            android:title="Edit Keyword" />
 
-    <item
-        android:id="@+id/date_filter"
-        android:icon="@drawable/date_range"
-        android:title="Date Filter"
-        app:actionLayout="@layout/menu_counter" />
+        <item
+            android:id="@+id/filter"
+            android:icon="@drawable/article_filter"
+            android:title="Filter"
+            app:actionLayout="@layout/menu_counter" />
 
-
-    <item
-        android:id="@+id/notify_me"
-        android:icon="@drawable/notify_me"
-        android:title="Notify Me"
-        app:actionLayout="@layout/menu_counter" />
+        <item
+            android:id="@+id/date_filter"
+            android:icon="@drawable/date_range"
+            android:title="Date Filter"
+            app:actionLayout="@layout/menu_counter" />
 
 
-    <item
-        android:id="@+id/contact_us"
-        android:icon="@drawable/chat"
-        android:title="Contact Us"
-        app:actionLayout="@layout/menu_counter" />
+        <item
+            android:id="@+id/notify_me"
+            android:icon="@drawable/notify_me"
+            android:title="Notify Me"
+            app:actionLayout="@layout/menu_counter" />
 
-    <item
-        android:id="@+id/invite"
-        android:icon="@drawable/invite"
-        android:title="Share"
-        app:actionLayout="@layout/menu_counter" />
+    </group>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/contact_us"
+                android:icon="@drawable/chat"
+                android:title="Contact Us"
+                app:actionLayout="@layout/menu_counter" />
+
+            <item
+                android:id="@+id/rate_us"
+                android:icon="@drawable/ic_rate_us"
+                android:title="Rate Us"
+                app:actionLayout="@layout/menu_counter" />
+
+            <item
+                android:id="@+id/invite"
+                android:icon="@drawable/invite"
+                android:title="Share"
+                app:actionLayout="@layout/menu_counter" />
 
 
-    <item
-        android:id="@+id/logout"
-        android:icon="@drawable/exit"
-        android:title="Log Out" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/exit"
+                android:title="Log Out" />
+        </menu>
+
+    </item>
 
     <!--</group>-->
 
