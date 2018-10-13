@@ -5,8 +5,9 @@ package in.headrun.buzzinga.config;
  */
 public class ServerConfig {
 
-    public static final String SERVER_ENDPOINT = "http://beta.buzzinga.com";
-    public static final String login = "/login/twitter";
+    //public static final String SERVER_ENDPOINT = "http://beta.buzzinga.com";
+    public static final String SERVER_ENDPOINT = "https://dashboard.buzzinga.com";
+    public static final String login = "/associate/twitter/login/?process=connect&next=/profile/#accounts";
     public static String logout = "/accounts/logout?next=/";
     public static String search = "/search/";
     public static String count = "/count/";
